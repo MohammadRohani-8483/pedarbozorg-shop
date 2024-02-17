@@ -120,10 +120,15 @@ const Header: React.FC = () => {
                 </div>
                 <div className="flex gap-4 items-center h-20 w-auto">
                     <button
-                        onClick={() => setIsHoverLogin(prev => !prev)}
+                        onClick={() => {
+                            setIsFormOpen(true)
+                            document.documentElement.classList.add('overflow-hidden')
+                            setIsHoverLogin(true)
+                            setTimeout(() => setIsHoverLogin(false), 800)
+                        }}
                         onMouseOver={() => setIsHoverLogin(true)}
                         onMouseOut={() => setIsHoverLogin(false)}
-                        className="w-[162px] border-base-100 hover:border-base-200 flex items-center gap-3 bg-base-300 hover:bg-base-400 text-base-100  text-sm md:text-base md:py-2 md:px-4 px-3 py-1.5 border-4 rounded-xl"
+                        className="w-[162px] border-base-100 hover:border-base-200 flex items-center gap-3 bg-base-300 hover:bg-base-400 text-base-100 text-sm md:text-base md:py-2 md:px-4 px-3 py-1.5 border-4 rounded-xl"
                     >
                         <div className='flex w-[20px] gap-1 h-[20px] overflow-hidden bg-[url("/iconSax/login-bg-btn.svg")] bg-contain bg-no-repeat bg-right'>
                             <motion.img
@@ -158,6 +163,7 @@ const Header: React.FC = () => {
                             /> */}
                         </div>
                         ورود/ثبت نام
+                        {isFormOpen && <SignUpSignIn setIsFormOpen={setIsFormOpen} />}
                     </button>
                     <button className="w-[38px] relative outline-btn square-btn"
                         onMouseOver={() => {
@@ -236,20 +242,48 @@ const Header: React.FC = () => {
                         />
                     </div>
                 </Link>
-                <div className='flex items-center gap-2'>
+                <div className='flex items-center gap-1'>
                     <button
-                        className='square-btn solid-btn'
+                        onClick={() => {
+                            setIsFormOpen(true)
+                            document.documentElement.classList.add('overflow-hidden')
+                            setIsHoverLogin(true)
+                            setTimeout(() => setIsHoverLogin(false), 800)
+                        }}
+                        className='border-base-100 hover:border-base-200 flex items-center gap-3 bg-base-300 hover:bg-base-400 text-base-100 text-sm md:text-base md:p-2 p-2 border-4 rounded-xl'
                     >
-                        <Image
-                            src='/iconSax/right-arrow.svg'
-                            width={23}
-                            height={23}
-                            alt="login"
-                            onClick={() => {
-                                setIsFormOpen(true)
-                                document.documentElement.classList.add('overflow-hidden')
-                            }}
-                        />
+                        <div className='flex w-[20px] gap-1 h-[20px] overflow-hidden bg-[url("/iconSax/login-bg-btn.svg")] bg-contain bg-no-repeat bg-right'>
+                            <motion.img
+                                animate={isHoverLogin ? { x: 24 } : { x: 0 }}
+                                transition={{ duration: 0.2 }}
+                                src="/iconSax/right-arrow.svg"
+                                width={16}
+                                height={24}
+                                alt="login"
+                                loading='lazy'
+                                decoding='async'
+                                data-nimg={1}
+                                style={{ color: 'transparent' }}
+                            />
+                            <motion.img
+                                animate={isHoverLogin ? { x: 20 } : { x: 0 }}
+                                transition={{ duration: 0.2 }}
+                                src="/iconSax/right-arrow.svg"
+                                width={16}
+                                height={24}
+                                alt="login"
+                                loading='lazy'
+                                decoding='async'
+                                data-nimg={1}
+                                style={{ color: 'transparent' }}
+                            />
+                            {/* <Image
+                                src="/iconSax/right-arrow.svg"
+                                width={24}
+                                height={24}
+                                alt="login"
+                            /> */}
+                        </div>
                         {isFormOpen && <SignUpSignIn setIsFormOpen={setIsFormOpen} />}
                     </button>
                     <button className='square-btn outline-btn'
