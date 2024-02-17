@@ -1,0 +1,125 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'IranYekan';
+  src: url("/Font/IRANYekanXFaNum-Regular.woff2");
+  format: "woff2"
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.ltr {
+  direction: ltr;
+}
+
+.solid-btn {
+  @apply bg-base-300 hover:bg-base-400 text-base-100 rounded-lg text-sm md:text-base cursor-pointer
+}
+
+.outline-btn {
+  @apply bg-base-100 text-base-300 border border-base-300 hover:bg-base-200 rounded-lg text-sm md:text-base cursor-pointer
+}
+
+.rectangle-btn {
+  @apply md:py-2 md:px-4 px-3 py-1.5
+}
+
+.square-btn {
+  @apply md:p-2 p-1.5
+}
+
+* {
+  font-family: 'IranYekan';
+  direction: rtl;
+}
+
+.active {
+  @apply flex flex-col
+}
+
+@keyframes widthAnimation {
+  0%   {
+    width: 0;
+      opacity: 0;
+}
+  100% {
+    width: 100%;
+      opacity: 1;
+}
+}
+
+.active::after {
+  content: url("../public/Image/active-menu.svg");
+  margin: -5px auto 0 auto;
+  /* opacity: 0; */
+}
+
+.menu-item:hover{
+  @apply active
+}
+
+.bg-group{
+  background-image: url(/Image/group-products/background.svg);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+.bg-red-200{
+  background-color: #faeeed;
+}
+.bg-blue-200{
+  background-color: #e5edff;
+}
+.bg-orange-200{
+  background-color: #f5eee7;
+}
+.bg-red-300{
+  background-color: #c15248;
+}
+.bg-blue-300{
+  background-color: #5375c2;
+}
+.bg-orange-300{
+  background-color: #db7a18;
+}
+.text-red-300{
+  color: #c15248;
+}
+.text-blue-300{
+  color: #5375c2;
+}
+.text-orange-300{
+  color: #db7a18;
+}
+
+::-webkit-scrollbar {
+  @apply w-[8px] bg-base-200
+}
+
+/* قسمت ثابت */
+/* ::-webkit-scrollbar-track {
+  border-radius: 10px;
+} */
+
+/* قسمت متحرک */
+::-webkit-scrollbar-thumb {
+  @apply bg-base-300 rounded-3xl
+}
+
+#shoping-card::-webkit-scrollbar {
+  position: absolute;
+  right: 0;
+  left: 100%;
+  width: 5px;
+  background-color: rgba(216, 216, 216, 0.623);
+  border-radius: 8px;
+}
+
+#shoping-card::-webkit-scrollbar-thumb {
+  background-color: rgba(77, 77, 77, 0.795);
+  border-radius: 12px;
+}
