@@ -7,9 +7,9 @@ import { motion } from "framer-motion";
 const SignUpSignIn = ({ setIsFormOpen }: { setIsFormOpen: (par: boolean) => void }) => {
     const [phoneNumber, setPhoneNumber] = useState<number>()
     const [inputValue, setInputValue] = useState(phoneNumber)
-    // useEffect(() => {
-    //     setInputValue(phoneNumber)
-    // }, [phoneNumber])
+    useEffect(() => {
+        setInputValue(phoneNumber)
+    }, [phoneNumber])
 
     const [isAnimate, setIsAnimate] = useState(true)
 
