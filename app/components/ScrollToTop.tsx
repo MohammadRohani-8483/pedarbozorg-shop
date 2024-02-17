@@ -33,7 +33,7 @@ const ScrollToTop = () => {
 
     return (
         <button
-            className={`bg-[#E0F1E9] fixed bottom-0 left-4 rounded-lg p-1.5 md:p-2 mb-16 z-50 items-center text-base-300 text-xl md:text-2xl hover:bg-[#C1E2D2] ${isVisible ? 'opacity-1' : 'opacity-0'}`}
+            className={`bg-[#E0F1E9] fixed bottom-0 left-4 rounded-lg p-1.5 md:p-2 mb-16 z-20 items-center text-base-300 text-xl md:text-2xl hover:bg-[#C1E2D2] ${isVisible ? 'opacity-1' : 'opacity-0'}`}
             onClick={scrollToTop}
         >
             <PiCaretUp />
