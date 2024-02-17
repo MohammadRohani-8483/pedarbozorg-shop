@@ -40,7 +40,7 @@ const SignUpSignIn = ({ setIsFormOpen }: { setIsFormOpen: (par: boolean) => void
 
     return (
         <motion.div
-            onClick={(e: any) => e.target.className === "fixed inset-0 bg-black bg-opacity-50 w-screen h-screen z-50 flex justify-center items-center" && handleClose()}
+            onClick={(e: any) => e.target.className === "fixed inset-0 bg-black bg-opacity-50 w-screen h-screen z-[2000] flex justify-center items-center" && handleClose()}
             animate={isAnimate ? "bgVisible" : "bgHidden"}
             initial={isAnimate ? "bgHidden" : "bgVisible"}
             variants={variants}
