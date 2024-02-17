@@ -7,9 +7,9 @@ import { motion } from "framer-motion";
 const SignUpSignIn = ({ setIsFormOpen }: { setIsFormOpen: (par: boolean) => void }) => {
     const [phoneNumber, setPhoneNumber] = useState<number>()
     const [inputValue, setInputValue] = useState(phoneNumber)
-    useEffect(() => {
-        setInputValue(phoneNumber)
-    }, [phoneNumber])
+    // useEffect(() => {
+    //     setInputValue(phoneNumber)
+    // }, [phoneNumber])
 
     const [isAnimate, setIsAnimate] = useState(true)
 
@@ -68,16 +68,16 @@ const SignUpSignIn = ({ setIsFormOpen }: { setIsFormOpen: (par: boolean) => void
                     <div className='flex flex-col w-full gap-6'>
                         <div className='w-full flex flex-col justify-center items-center gap-4'>
                             <h2 className="text-sm text-[#757575]">شماره همراه خود را وارد کنید</h2>
-                            <input maxLength={11} type="tel" pattern="09[0-9]{9}" placeholder="شماره همراه"
+                            <input maxLength={11} type="tel" placeholder="شماره همراه"
                                 value={inputValue}
                                 onChange={(e: any) => {
                                     setInputValue(e.nativeEvent.target.value)
                                     setPhoneNumber(e.nativeEvent.target.value)
                                 }}
-                                className='w-full h-10 placeholder:text-[#757575] placeholder:text-base p-2 focus:outline-none border border-[#CBCBCB] rounded-lg'
+                                className='w-full h-10 placeholder:text-base p-2 focus:outline-none border border-[#CBCBCB] rounded-lg text-black'
                             />
                         </div>
-                        <button className='solid-btn rectangle-btn w-full'>ورود</button>
+                        <div className='solid-btn rectangle-btn w-full'>ورود</div>
                     </div>
                 </div>
             </motion.div>

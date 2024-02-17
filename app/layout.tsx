@@ -3,7 +3,6 @@ import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
 import Header from "./components/Header";
 import "./globals.css";
-import SignUpSignIn from "./components/signUp_signIn/signUpSignIn";
 
 export const metadata: Metadata = {
   title: "پدربزرگ",
