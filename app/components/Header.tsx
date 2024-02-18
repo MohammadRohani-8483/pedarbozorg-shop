@@ -57,9 +57,9 @@ const Header: React.FC = () => {
 
     const visibleCard = () => {
         setIsHover(true)
-        // setTimeout(() => {
-        //     setIsVisible(true)
-        // }, 200)
+        setTimeout(() => {
+            setIsVisible(true)
+        }, 200)
     }
 
     // useEffect(() => {
@@ -72,10 +72,10 @@ const Header: React.FC = () => {
 
 
     const hiddenCard = () => {
-        // setIsVisible(false)
-        // setTimeout(() => {
-        setIsHover(false)
-        // }, 200)
+        setIsVisible(false)
+        setTimeout(() => {
+            setIsHover(false)
+        }, 200)
     }
 
     return (
@@ -165,25 +165,29 @@ const Header: React.FC = () => {
                         ورود/ثبت نام
                         {isFormOpen && <SignUpSignIn setIsFormOpen={setIsFormOpen} />}
                     </button>
-                    <button className="w-[38px] relative outline-btn square-btn"
+                    <div className='py-3'
                         onMouseOver={() => {
+                            // !isHover && visibleCard()
                             setIsHover(true)
                             document.documentElement.classList.add('overflow-hidden')
                         }}
                         onMouseOut={() => {
+                            // isVisible && hiddenCard()
                             setIsHover(false)
                             document.documentElement.classList.remove('overflow-hidden')
                         }}
                     >
-                        <Image
-                            src='/iconSax/shopping-cart.svg'
-                            width={22}
-                            height={22}
-                            alt="shoping cart"
-                            className='w-[22px] h-[22px] w-full'
-                        />
-                        {isHover && <ShopingCard />}
-                    </button>
+                        <button className="w-[38px] relative outline-btn square-btn">
+                            <Image
+                                src='/iconSax/shopping-cart.svg'
+                                width={22}
+                                height={22}
+                                alt="shoping cart"
+                                className='w-[22px] h-[22px] w-full'
+                            />
+                            {isHover && <ShopingCard isVisible={isVisible} />}
+                        </button>
+                    </div>
                 </div>
             </header>
 

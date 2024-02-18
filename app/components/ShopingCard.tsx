@@ -4,7 +4,7 @@ import React from 'react'
 import ShopingCardItem from './ShopingCardItem'
 import { motion } from 'framer-motion';
 
-const ShopingCard = () => {
+const ShopingCard = ({ isVisible }: any) => {
     const variants = {
         vsisble: {
             opacity: 1,
@@ -17,11 +17,11 @@ const ShopingCard = () => {
     return (
         <motion.div
             className={`hidden  lg:flex  flex-col rtl w-[492px] h-[354px] justify-center items-center bg-white rounded-lg absolute top-12 -left-0.5 z-[100] p-4`}
-            // animate={{ opacity: 1 }}
+            animate={true ? "vsisble" : 'hidden'}
+            // initial={isVisible ? "hidden" : "vsisble"}
             // initial={{ opacity: 0 }}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            // variants={variants}
+            // animate={{ opacity: 1 }}
+            variants={variants}
             transition={{ duration: 0.3 }}
         >
             {
