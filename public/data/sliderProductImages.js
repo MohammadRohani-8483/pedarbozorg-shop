@@ -46,49 +46,49 @@ export const icon6 = [
 ];
 
 export const styleImage1 = [
-  { bottom: "25px", left: "250px" },
-  { top: "220px", left: "380px" },
-  { bottom: "40px", left: "230px", height: "180px" },
+  { bottom: "12%", left: "50%", height: "35%" },
+  { top: "59%", left: "74%" },
+  { bottom: "11%", left: "45%", height: "48%" },
 ];
 export const styleImage2 = [
-  { top: "70px", left: "150px" },
-  { top: "40px", left: "170px", height: "320px" },
-  { top: "88px", left: "140px", height: "240px" },
+  { top: "26%", left: "33%", height: "64%" },
+  { top: "11%", left: "33.2%", height: "86%" },
+  { top: "23.5%", left: "27%", height: "64%" },
 ];
 export const styleImage3 = [
-  { top: "130px", left: "60px" },
-  { top: "220px", left: "100px" },
-  { top: "220px", left: "140px", height: "119px" },
+  { top: "42%", left: "21%", height: "48%" },
+  { top: "59%", left: "19.5%" },
+  { top: "59%", left: "27.3%", height: "32%" },
 ];
 export const styleIcon1 = [
-  { top: "90px", right: "60px" },
-  { top: "50px", right: "90px" },
-  { top: "50px", right: "10px" },
+  { top: "55%", right: "10%" },
+  { top: "13.4%", right: "17.5%" },
+  { top: "13.4%", right: "1.9%" },
 ];
 export const styleIcon2 = [
-  { top: "190px", right: "40px" },
-  { top: "130px", right: "20px" },
-  { top: "240px" },
+  { top: "22%", right: "12%" },
+  { top: "34.8%", right: "3.9%" },
+  { top: "64.3%", right:'0' },
 ];
 export const styleIcon3 = [
-  { top: "280px", right: "80px" },
-  { top: "290px", right: "120px" },
-  { top: "350px", right: "150px" },
+  { top: "75%", right: "19%" },
+  { top: "77.7%", right: "23.4%" },
+  { top: "93.8%", right: "29.2%" },
 ];
 export const styleIcon4 = [
-  { top: "90px", left: "60px" },
-  { top: "50px", left: "90px" },
-  { top: "70px", left: "100px" },
+  { top: "24.1%", left: "11.7%" },
+  { top: "13.4%", left: "17.5%" },
+  { top: "18.7%", left: "19.5%" },
 ];
 export const styleIcon5 = [
-  { top: "290px", left: "100px" },
-  { top: "130px", left: "120px" },
-  { top: "150px", left: "40px" },
+  { top: "77.7%", left: "19.7%" },
+  { top: "34.8%", left: "23.4%" },
+  { top: "40.2%", left: "7.8%" },
 ];
 export const styleIcon6 = [
-  { top: "300px", left: "220px" },
-  { top: "300px", left: "50px" },
-  { top: "330px", left: "60px" },
+  { top: "75%", left: "42.9%" },
+  { top: "78.4%", left: "9.7%" },
+  { top: "88.4%", left: "11.7%" },
 ];
 
 export const titles = [
