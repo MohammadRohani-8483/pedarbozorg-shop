@@ -163,8 +163,8 @@ const Header: React.FC = () => {
                             /> */}
                         </div>
                         ورود/ثبت نام
-                        {isFormOpen && <SignUpSignIn setIsFormOpen={setIsFormOpen} />}
                     </button>
+                    {isFormOpen && <SignUpSignIn setIsFormOpen={setIsFormOpen} />}
                     <div className='py-3'
                         onMouseOver={() => {
                             // !isHover && visibleCard()
