@@ -1,7 +1,5 @@
 'use client'
 import React, { useEffect, useState } from 'react'
-import { IoIosClose } from "react-icons/io";
-import Image from 'next/image';
 import { motion } from "framer-motion";
 import EnterPhoneNumberForm from './EnterPhoneNumberForm';
 import CodeVerificationForm from './CodeVerificationForm';
@@ -36,6 +34,13 @@ const SignUpSignIn = ({ setIsFormOpen }: { setIsFormOpen: (par: boolean) => void
         }, 200)
     }
 
+    const verificationCode = Math.floor((Math.random() * 89999) + 10000)
+
+    useEffect(() => {
+        console.log(verificationCode);
+    }, [])
+
+
     return (
         <motion.div
             onClick={(e: any) => e.target.className === "fixed inset-0 bg-black bg-opacity-50 w-screen h-screen z-[2000] flex justify-center items-center" && handleClose()}
@@ -51,10 +56,19 @@ const SignUpSignIn = ({ setIsFormOpen }: { setIsFormOpen: (par: boolean) => void
                 variants={variants}
                 transition={{ duration: 0.4 }}
             >
-                {false ?
-                    <EnterPhoneNumberForm handleClose={handleClose} inputValue={inputValue} setInputValue={setInputValue} />
+                {!isEnterNumber ?
+                    <EnterPhoneNumberForm
+                        handleClose={handleClose}
+                        inputValue={inputValue}
+                        setInputValue={setInputValue}
+                        setIsEnterNumber={setIsEnterNumber}
+                    />
                     :
-                    <CodeVerificationForm handleClose={handleClose} phoneNumber={inputValue} />
+                    <CodeVerificationForm
+                        handleClose={handleClose}
+                        phoneNumber={inputValue}
+                        verificationCode={verificationCode}
+                    />
                 }
             </motion.div>
         </motion.div>

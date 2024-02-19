@@ -5,9 +5,21 @@ type props = {
     handleClose: () => void
     inputValue: string
     setInputValue: (par: string) => void
+    setIsEnterNumber: (val: boolean) => void
 }
 
-const EnterPhoneNumberForm = ({ handleClose, inputValue, setInputValue }: props) => {
+const EnterPhoneNumberForm = ({ handleClose, inputValue, setInputValue, setIsEnterNumber }: props) => {
+    const handleSubmit = () => {
+        validateMobileNumber() ? setIsEnterNumber(true) : alert("شماره موبایل وارد شده معتبر نیست.");
+    }
+
+    function validateMobileNumber() {
+        var regex = /^09[0-9]{9}$/;
+
+        if (regex.test(inputValue)) return true
+        else return false;
+    }
+
     return (
         <>
             <div className='flex justify-between items-center text-base-300 text-xl font-bold w-full'>
@@ -25,7 +37,9 @@ const EnterPhoneNumberForm = ({ handleClose, inputValue, setInputValue }: props)
                 <div className='flex flex-col w-full gap-6'>
                     <div className='w-full flex flex-col justify-center items-center gap-4'>
                         <h2 className="text-sm text-[#757575]">شماره همراه خود را وارد کنید</h2>
-                        <input maxLength={11} type="tel" placeholder="شماره همراه"
+                        <input maxLength={11} type="tel"
+                            placeholder="شماره همراه"
+                            required
                             value={inputValue}
                             onChange={(e: any) => {
                                 setInputValue(e.nativeEvent.target.value)
@@ -33,7 +47,7 @@ const EnterPhoneNumberForm = ({ handleClose, inputValue, setInputValue }: props)
                             className='w-full h-10 placeholder:text-base p-2 focus:outline-none border border-[#CBCBCB] rounded-lg text-black'
                         />
                     </div>
-                    <button className='flex justify-center solid-btn rectangle-btn w-full'>ورود</button>
+                    <button onClick={handleSubmit} className='flex justify-center solid-btn rectangle-btn w-full'>ورود</button>
                 </div>
             </div>
         </>

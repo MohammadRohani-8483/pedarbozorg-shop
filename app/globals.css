@@ -12,6 +12,23 @@ html {
   scroll-behavior: smooth;
 }
 
+@keyframes reverse-spin {
+  from {
+      transform: rotate(450deg);
+  }
+  to {
+      transform: rotate(90deg);
+  }
+}
+@keyframes rereverse-spin {
+  from {
+      transform: rotate(270deg);
+  }
+  to {
+      transform: rotate(630deg);
+  }
+}
+
 .ltr {
   direction: ltr;
 }

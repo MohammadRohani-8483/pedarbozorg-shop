@@ -1,12 +1,38 @@
+'use client'
 import Image from 'next/image'
+import { useState } from 'react';
 import { IoIosClose } from "react-icons/io";
+import OTPInputGroup from './OTP';
 
 type props = {
     handleClose: () => void
     phoneNumber: string
+    verificationCode: number
 }
 
-const CodeVerificationForm = ({ handleClose, phoneNumber }: props) => {
+const CodeVerificationForm = ({ handleClose, phoneNumber, verificationCode }: props) => {
+    const [isLoading, setIsLoading] = useState(false)
+
+    const [inputValues, setInputValues] = useState({
+        input1: '',
+        input2: '',
+        input3: '',
+        input4: '',
+        input5: '',
+    });
+    let inputValuesString = Object.values(inputValues).join('');
+    let inputValuesNumber = Number(inputValuesString);
+
+    const handleSubmit = () => {
+        setIsLoading(true)
+        setTimeout(() => {
+            setIsLoading(false)
+            console.log("inputNumber", inputValuesNumber);
+            console.log("verificationCode", verificationCode);
+            (inputValuesNumber > 9999 && (verificationCode == inputValuesNumber)) ? alert('yes') : alert('no')
+        }, 700)
+    }
+
     return (
         <>
             <div className='flex justify-between items-center text-base-300 text-xl font-bold w-full'>
@@ -24,25 +50,29 @@ const CodeVerificationForm = ({ handleClose, phoneNumber }: props) => {
                 <div className='flex flex-col w-full gap-6'>
                     <div className='w-full flex flex-col justify-center items-center gap-4'>
                         <h2 className="text-sm text-[#757575]">کد ارسال شده به شماره {phoneNumber} را وارد کنید</h2>
-                        <div className='w-full ltr flex justify-between items-center'>
-                            <input maxLength={1} type="tel"
-                                className='text-center w-[47px] h-10 focus:outline-none border border-[#CBCBCB] rounded-lg text-black'
-                            />
-                            <input maxLength={1} type="tel"
-                                className='text-center w-[47px] h-10 focus:outline-none border border-[#CBCBCB] rounded-lg text-black'
-                            />
-                            <input maxLength={1} type="tel"
-                                className='text-center w-[47px] h-10 focus:outline-none border border-[#CBCBCB] rounded-lg text-black'
-                            />
-                            <input maxLength={1} type="tel"
-                                className='text-center w-[47px] h-10 focus:outline-none border border-[#CBCBCB] rounded-lg text-black'
-                            />
-                            <input maxLength={1} type="tel"
-                                className='text-center w-[47px] h-10 focus:outline-none border border-[#CBCBCB] rounded-lg text-black'
-                            />
-                        </div>
+                        <OTPInputGroup
+                            setInputValues={setInputValues}
+                            inputValuesNumber={inputValuesNumber}
+                            inputValues={inputValues}
+                            handleSubmit={handleSubmit}
+                        />
                     </div>
-                    <button className='flex justify-center solid-btn rectangle-btn w-full'>ورود</button>
+                    {isLoading ?
+                        <button className='relative flex justify-center solid-btn rectangle-btn w-full h-10'>
+                            <div className="absolute right-1/2 bottom-1/2 transform translate-x-1/2 translate-y-1/2">
+                                <div className="relative border-t-transparent border-solid animate-[rereverse-spin_1s_ease-in-out_infinite] rounded-full border-white border-2 h-6 w-6">
+                                </div>
+                            </div>
+                            <div className="absolute right-1/2 bottom-1/2 transform translate-x-1/2 translate-y-1/2">
+                                <div className="right-1/2 bottom-1/2 transform translate-x-1/2 translate-y-1/2 border-t-transparent border-solid animate-[reverse-spin_1s_ease-in-out_infinite] rounded-full border-white border-2 h-3 w-3">
+                                </div>
+                            </div>
+                        </button>
+                        :
+                        <button onClick={handleSubmit} className='flex justify-center solid-btn rectangle-btn w-full'>
+                            ورود
+                        </button>
+                    }
                 </div>
             </div>
         </>
