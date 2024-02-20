@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 "use client"
 import React, { useState, useEffect } from 'react';
 import SearchBar from "./SearchBar";
@@ -62,15 +61,6 @@ const Header: React.FC = () => {
         }, 200)
     }
 
-    // useEffect(() => {
-    //     hovering ? 
-    //     setIsVisible(true) 
-    //     :
-    //     setIsVisible(false)
-
-    // }, [hovering])
-
-
     const hiddenCard = () => {
         setIsVisible(false)
         setTimeout(() => {
@@ -82,7 +72,7 @@ const Header: React.FC = () => {
         <>
             <header
                 id="header"
-                className={`w-screen fixed z-50 bg-base-100 hidden lg:flex justify-between px-14 transition-all duration-500 border-b ${openSearchBar ? "h-[117px]" : "h-20"} ${isTop ? 'border-base-100' : "border-base-200"}`}
+                className={`w-screen fixed z-50  hidden lg:flex justify-between px-14 transition-all duration-500  ${openSearchBar ? "h-[117px]" : "h-20"} ${isTop ? 'border-base-100' : "border-base-200 bg-base-100 border-b"}`}
             >
                 <Link className={`h-14 ${openSearchBar ? "mt-5" : "mt-3"} w-14 relative pl-16`}
                     href={"/"}

@@ -7,8 +7,20 @@ import BlogsDemo from "./BlogsDemo"
 const PedarBozorgInLife = () => {
     return (
         <div className='flex flex-col gap-8 mx-auto justify-center items-center mt-10 lg:mt-20'>
-            <div className='flex'>
+            <div className='flex items-center justify-center gap-4'>
+                <Image
+                    src="/Image/title-vecors/right.svg"
+                    alt="right"
+                    width={69}
+                    height={69}
+                />
                 <h1 className='font-bold text-2xl text-base-300'>پدربزرگ در زندگی</h1>
+                <Image
+                    src="/Image/title-vecors/left.svg"
+                    alt="left"
+                    width={69}
+                    height={69}
+                />
             </div>
             <div
                 className='flex max-w-[1136px] justify-center w-[90%] flex-wrap items-center gap-4'

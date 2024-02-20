@@ -15,6 +15,7 @@ import { offersList } from "public/data/offersList"
 
 import { useMediaQuery } from 'react-responsive'
 import ProductCardInSlider from './ProductCardInSlider';
+import Image from 'next/image';
 
 export default function OffersSlider() {
     const isSmallWidth = useMediaQuery({
@@ -31,7 +32,21 @@ export default function OffersSlider() {
 
     return (
         <div className='text-center max-w-[1136px] mx-auto w-[90%] p-6 bg-base-300 mt-10 rounded-3xl'>
-            <div className='text-white font-bold text-2xl '>بیشترین تخفیف ها</div>
+            <div className='flex items-center justify-center gap-4'>
+                <Image
+                    src="/Image/title-vecors/right-white.svg"
+                    alt="right"
+                    width={69}
+                    height={69}
+                />
+                <h1 className='font-bold text-2xl text-white'>بیشترین تخفیف ها</h1>
+                <Image
+                    src="/Image/title-vecors/left-white.svg"
+                    alt="left"
+                    width={69}
+                    height={69}
+                />
+            </div>
             <div className='justify-center flex gap-6 text-right mt-6 items-center mx-auto'>
                 <SliderBtn prev
                     className='prev-offer-btn'

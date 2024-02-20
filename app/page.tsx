@@ -14,7 +14,7 @@ import { WhyPedarBozorg } from "./components/WhyPedarBozorg";
 
 export default function Home() {
   return (
-    <main className="lg:pt-20 pt-16">
+    <main className="lg:pt-48 pt-16">
       <SliderProduct />
       <GroupProducts />
       <SpecialProducts />

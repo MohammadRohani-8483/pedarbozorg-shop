@@ -17,7 +17,21 @@ import { specialProductsSlider } from '@/public/data/specialProducts';
 export default function SpecialProductsSlider() {
     return (
         <div className='mt-20 text-center max-w-[1136px] w-[90%] flex flex-col mx-auto lg:gap-8 gap-4'>
-            <h1 className='lg:text-2xl font-bold text-base-300'>محصولات ویژه</h1>
+            <div className='flex items-center justify-center gap-4'>
+                <Image
+                    src="/Image/title-vecors/right.svg"
+                    alt="right"
+                    width={69}
+                    height={69}
+                />
+                <h1 className='font-bold text-2xl text-base-300'>محصولات ویژه</h1>
+                <Image
+                    src="/Image/title-vecors/left.svg"
+                    alt="left"
+                    width={69}
+                    height={69}
+                />
+            </div>
             <div className='justify-between flex mt-6 items-center w-full gap-4 md:gap-8 lg:gap-16'>
                 <SliderBtn prev className='prev-special-btn' />
                 <Swiper
