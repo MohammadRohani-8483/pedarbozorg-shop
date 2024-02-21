@@ -1,3 +1,4 @@
+import BackgroundVectors from "./components/BackgroundVectors";
 import { BannerHomePage } from "./components/BannerHomePage";
 import BestSellingProducts from "./components/BestSellingProducts";
 import CommentsSlider from "./components/commentsSlider";
@@ -15,10 +16,11 @@ import { WhyPedarBozorg } from "./components/WhyPedarBozorg";
 export default function Home() {
   return (
     <main className="lg:pt-48 pt-16">
+      <BackgroundVectors />
       <SliderProduct />
       <GroupProducts />
       <SpecialProducts />
-      <OffersSlider /> 
+      <OffersSlider />
       <SpecialProductsSlider />
       <VideoCategory />
       <WhyPedarBozorg />

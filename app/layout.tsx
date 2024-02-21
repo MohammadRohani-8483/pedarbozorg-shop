@@ -24,7 +24,6 @@ export default function RootLayout({
       <body>
         <Header />
         <ScrollToTop />
-        <BackgroundVectors />
         {children}
         <Footer />
       </body>

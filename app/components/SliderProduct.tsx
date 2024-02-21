@@ -47,7 +47,7 @@ export default function SliderProduct() {
     }
 
     return (
-        <div className="lg:max-w-[1136px] w-[90%] mx-auto flex flex-col lg:flex-row justify-between lg:h-[431px] items-center ltr gap-6">
+        <div className="lg:max-w-[1136px] w-[90%] mx-auto flex flex-col lg:flex-row justify-between lg:h-[431px] items-center ltr gap-6 overflow-hidden">
             <div className='bg-[url("/Image/background/bg-slide-product.png")] bg-cover bg-no-repeat min-w-[270px] aspect-[836/609] w-[90%] lg:max-w-lg max-w-xl relative'>
                 <SliderProductItems
                     imageIndex={imageIndex}

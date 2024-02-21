@@ -54,8 +54,7 @@ const SearchMobile: React.FC<searchProps> = ({ setOpenSearchBar }) => {
                     onChange={(e: any) => {
                         setInputValue(e.nativeEvent.target.value)
                     }}
-                >
-                </input>
+                />
                 <Image
                     src="/iconSax/search-normal.svg"
                     width={24}
