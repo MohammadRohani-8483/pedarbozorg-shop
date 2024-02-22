@@ -9,8 +9,10 @@ import formatNumber from '@/public/Functions/formatNumber';
 import { product } from '@/public/types/productType';
 import { motion } from 'framer-motion';
 
-export const ProductCardInSlider: React.FC<product> = ({ price, link, image, name, offerPresent = 0, score }) => {
-    const priceWithOffer = Math.floor((price * ((100 - offerPresent) / 100)) / 1000) * 1000
+export const ProductCardInSlider: React.FC<product> = ({ price, link, image, name, priceWithOffer , score }) => {
+    // const priceWithOffer = Math.floor((price * ((100 - offerPresent) / 100)) / 1000) * 1000
+
+    const present = (price - priceWithOffer) / price * 100
 
     const [isHover, setIsHover] = useState(false)
     const [isLike, setIsLike] = useState(false)
@@ -67,7 +69,7 @@ export const ProductCardInSlider: React.FC<product> = ({ price, link, image, nam
             <div className='flex justify-between items-center ltr'>
                 <div className='flex gap-2 items-center'>
                     <p className='font-bold text-xl'>
-                        {priceWithOffer === 0 ? "رایگان" : (offerPresent !== 0 ? formatNumber(priceWithOffer) : formatNumber(price))}
+                        {priceWithOffer === 0 ? "رایگان" : (present !== 0 ? formatNumber(priceWithOffer) : formatNumber(price))}
                     </p>
                     {priceWithOffer !== 0 &&
                         <Image
@@ -79,9 +81,9 @@ export const ProductCardInSlider: React.FC<product> = ({ price, link, image, nam
                         />
                     }
                 </div>
-                {offerPresent !== 0 ?
+                {present !== 0 ?
                     <div className='bg-red-500 text-white rounded-full px-2 h-[20px] flex items-center text-xs'>
-                        {offerPresent}%
+                        {present}%
                     </div>
                     :
                     (score &&
@@ -92,7 +94,7 @@ export const ProductCardInSlider: React.FC<product> = ({ price, link, image, nam
                 }
             </div>
             <div className='flex justify-between items-center ltr'>
-                {offerPresent !== 0 &&
+                {present !== 0 &&
                     <>
                         <p className='line-through text-gray-400'>{formatNumber(price)}</p>
                         {score &&

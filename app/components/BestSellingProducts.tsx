@@ -1,9 +1,20 @@
-import React from 'react'
+'use client'
+import React, { useEffect, useState } from 'react'
 import { bestSellingProducts } from "public/data/bestSellingProducts"
 import BestSellingCard from './BestSellingCard'
 import Image from 'next/image'
+import axios from 'axios'
 
 const BestSellingProducts = () => {
+    const [products, setProducts] = useState([])
+    const url = "/api/core-api/site/landing/"
+    useEffect(() => {
+        axios.get(url)
+            .then(res => {
+                setProducts(res.data.best_seller_products)
+            })
+    }, [])
+
     return (
         <div className='max-w-[1136px] w-[90%] mx-auto mt-20 flex flex-col gap-8 justify-between items-center'>
             <div className='flex items-center justify-center gap-4'>
@@ -22,12 +33,13 @@ const BestSellingProducts = () => {
                 />
             </div>
             <div className='flex flex-wrap justify-center gap-4'>
-                {bestSellingProducts.map((product) => (
+                {products.map((product: any, i: number) => (
                     <BestSellingCard
                         name={product.name}
                         key={product.id}
-                        num={product.num}
-                        image={product.image}
+                        num={i + 1}
+                        image={product.featured_image}
+                        link={product.slug}
                     />
                 ))}
             </div>

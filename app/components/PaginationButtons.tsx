@@ -1,10 +1,12 @@
+'use client'
 import ReactPaginate from "react-paginate";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 import { motion } from "framer-motion";
 
-const PaginationButtons = ({ setCurrentPage, currentPage, totalPages }: any) => {
+const PaginationButtons = ({ productsCount, setCurrentPage }: { productsCount: number, setCurrentPage: any }) => {
+    const pageCount = Math.ceil(productsCount /12)
     const handlePageClick = ({ selected }: any) => {
-        setCurrentPage(selected);
+        setCurrentPage(selected + 1);
     };
     const paginationVariants = {
         hidden: {
@@ -39,7 +41,7 @@ const PaginationButtons = ({ setCurrentPage, currentPage, totalPages }: any) => 
                 onPageChange={handlePageClick}
                 pageRangeDisplayed={3}
                 marginPagesDisplayed={1}
-                pageCount={totalPages}
+                pageCount={pageCount}
                 previousLabel={
                     <span className="w-10 h-10 flex items-center justify-center bg-lightGray rounded-md mr-4 text-base-300">
                         <BsChevronRight />

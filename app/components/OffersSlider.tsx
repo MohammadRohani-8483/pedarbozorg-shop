@@ -16,8 +16,19 @@ import { offersList } from "public/data/offersList"
 import { useMediaQuery } from 'react-responsive'
 import ProductCardInSlider from './ProductCardInSlider';
 import Image from 'next/image';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 export default function OffersSlider() {
+    const [products, setProducts] = useState([])
+    const url = "/api/core-api/site/landing/"
+    useEffect(() => {
+        axios.get(url)
+            .then(res => {
+                setProducts(res.data.most_discount_products)
+            })
+    }, [])
+
     const isSmallWidth = useMediaQuery({
         query: "(min-width: 640px)"
     })
@@ -60,20 +71,22 @@ export default function OffersSlider() {
                     modules={[Navigation]}
                     className="mySwiper flex justify-center "
                 >
-                    {offersList.map((product, i) => {
+                    {products.map((product: any) => {
                         return (
                             <SwiperSlide
-                                key={i}
+                                key={product.id}
                                 className="px-4"
                             >
                                 <ProductCardInSlider
                                     name={product.name}
-                                    price={product.price}
-                                    image={product.image}
-                                    offerPresent={product.offerPresent}
-                                    link={product.link}
+                                    price={product.min_price}
+                                    image={product.featured_image}
+                                    priceWithOffer={product.min_price}
+                                    link={product.slug}
+                                    score={product.avg_rate}
                                 />
-                            </SwiperSlide>)
+                            </SwiperSlide>
+                        )
                     })}
                 </Swiper>
                 <SliderBtn next

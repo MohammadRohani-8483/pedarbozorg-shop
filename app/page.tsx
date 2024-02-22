@@ -25,9 +25,9 @@ export default function Home() {
       <VideoCategory />
       <WhyPedarBozorg />
       <BannerHomePage />
-      <SpecialOffers />
-      <PedarBozorgInLife />
-      <CommentsSlider />
+      {/* <SpecialOffers /> */}
+      {/* <PedarBozorgInLife /> */}
+      {/* <CommentsSlider /> */}
       <BestSellingProducts />
       <Cooperations />
     </main>

@@ -5,5 +5,5 @@ export type product = {
     price: number,
     link: string,
     score?: number,
-    offerPresent?: number | undefined,
+    priceWithOffer: number ,
 }

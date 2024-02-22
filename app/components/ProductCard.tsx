@@ -9,8 +9,8 @@ import formatNumber from '@/public/Functions/formatNumber';
 import { product } from '@/public/types/productType';
 import { motion } from 'framer-motion';
 
-const ProductCard = ({ price, link, image, name, offerPresent = 0, score }: product) => {
-    const priceWithOffer = Math.floor((price * ((100 - offerPresent) / 100)) / 1000) * 1000;
+const ProductCard = ({ price, link, image, name, priceWithOffer, score }: product) => {
+    const present = (price - priceWithOffer) / price * 100
 
     const [isLike, setIsLike] = useState(false)
     const [isShopingCard, setIsShopingCard] = useState(false)
@@ -85,7 +85,7 @@ const ProductCard = ({ price, link, image, name, offerPresent = 0, score }: prod
                     <div className='flex justify-between w-full items-center ltr gap-2'>
                         <div className='flex gap-2 items-center justify-start lg:justify-end w-full'>
                             <p className='font-bold text-base lg:text-xl gap-2'>
-                                {priceWithOffer === 0 ? "رایگان" : (offerPresent !== 0 ? formatNumber(priceWithOffer) : formatNumber(price))}
+                                {priceWithOffer === 0 ? "رایگان" : (present !== 0 ? formatNumber(priceWithOffer) : formatNumber(price))}
                             </p>
                             {priceWithOffer !== 0 &&
                                 <Image
@@ -97,9 +97,9 @@ const ProductCard = ({ price, link, image, name, offerPresent = 0, score }: prod
                                 />
                             }
                         </div>
-                        {offerPresent !== 0 ?
+                        {present !== 0 ?
                             <div className='bg-red-500 text-white rounded-full px-2 h-[18px] lg:h-[20px] flex items-center text-[10px] lg:text-xs'>
-                                {offerPresent}%
+                                {present}%
                             </div>
                             :
                             (score &&
@@ -110,7 +110,7 @@ const ProductCard = ({ price, link, image, name, offerPresent = 0, score }: prod
                         }
                     </div>
                     <div className='flex justify-between items-center ltr'>
-                        {offerPresent !== 0 &&
+                        {present !== 0 &&
                             <>
                                 <p className='line-through text-gray-400 text-sm lg:text-base'>{formatNumber(price)}</p>
                                 {score &&

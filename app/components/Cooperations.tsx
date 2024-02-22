@@ -12,7 +12,7 @@ const Cooperations: React.FC = () => {
                     width={69}
                     height={69}
                 />
-                <h1 className='font-bold text-2xl text-base-300'>همکاری‌های داخلی و خارجی پدربزرگ</h1>
+                <h1 className='font-bold text-lg md:text-xl lg:text-2xl text-base-300'>همکاری‌های داخلی و خارجی پدربزرگ</h1>
                 <Image
                     src="/Image/title-vecors/left.svg"
                     alt="left"
