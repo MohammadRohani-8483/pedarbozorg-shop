@@ -22,6 +22,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "public/data/specialOffers.js", "public/data/products.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "public/data/specialOffers.js", "public/data/products.js", "app/components/products/category"],
   "exclude": ["node_modules"]
 }

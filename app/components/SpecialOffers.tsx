@@ -20,7 +20,7 @@ const SpecialOffers = () => {
                     height={69}
                 />
             </div>
-            <div className="grid lg:grid-cols-4 lg:grid-rows-2 sm:grid-cols-2 gfid-cols-1 justify-items-center gap-4 lg:gap-8 w-full">
+            <div className="grid lg:grid-cols-4 sm:grid-cols-2 grid-cols-1 justify-items-center gap-4 lg:gap-8 w-full">
                 {
                     specialOffers.map((product) => (
                         <ProductCard
@@ -29,7 +29,7 @@ const SpecialOffers = () => {
                             image={product.image}
                             link={product.link}
                             score={product.score}
-                            offerPresent={product.offerPresent}
+                            priceWithOffer={product.price}
                             name={product.name}
                         />
                     ))

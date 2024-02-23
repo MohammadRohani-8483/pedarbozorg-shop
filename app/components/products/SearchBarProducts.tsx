@@ -2,7 +2,7 @@ import Image from 'next/image'
 
 const SearchBarProducts = ({ searchValue, setSearchValue }: any) => {
     return (
-        <div className='border-gray-200 border text-gray-400 rounded-2xl bg-white flex pr-3 py-2 pl-2 justify-between items-center w-full h-10'>
+        <div className='border-gray-200 border text-gray-400 rounded-2xl bg-white flex pr-3 py-2 pl-2 justify-between items-center w-full lg:w-1/2 h-10'>
             <input
                 value={searchValue}
                 type="text"
