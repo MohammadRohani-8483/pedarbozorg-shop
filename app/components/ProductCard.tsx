@@ -19,9 +19,11 @@ const ProductCard = ({ price, link, image, name, priceWithOffer, score }: produc
     const variants = {
         hover: {
             scale: 1,
+            width: 0
         },
         unHover: {
             scale: 1.5,
+            width:'180px'
         }
     }
 

@@ -117,11 +117,6 @@ html {
   @apply w-[8px] bg-base-200
 }
 
-/* قسمت ثابت */
-/* ::-webkit-scrollbar-track {
-  border-radius: 10px;
-} */
-
 /* قسمت متحرک */
 ::-webkit-scrollbar-thumb {
   @apply bg-base-300 rounded-3xl
@@ -139,4 +134,38 @@ html {
 #shoping-card::-webkit-scrollbar-thumb {
   background-color: rgba(77, 77, 77, 0.795);
   border-radius: 12px;
+}
+
+#toggle {
+  display: none;
+}
+
+#label_toggle {
+  display: inline-block;;
+  width: 40px;
+  height: 20px;
+  background-color: #ccc;
+  border-radius: 10px;
+  position: relative;
+  cursor: pointer;
+}
+
+#label_toggle::before {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  background-color: white;
+  border-radius: 50%;
+  transition: transform 0.3s;
+}
+
+#toggle:checked + label {
+  background-color: #3D8361;
+}
+
+#toggle:checked + label::before {
+  transform: translateX(20px);
 }

@@ -14,32 +14,45 @@ const Products = () => {
   const [products, setProducts] = useState([])
   const [productsCount, setproductsCount] = useState(0)
   const [activeOrder, setActiveOrder] = useState("-view_count")
-  const [categories, setCategories] = useState<number[]>()
+  const [categories, setCategories] = useState<number[]>([])
+  const [isAvailable, setIsAvailable] = useState(false)
+  const [maxPrice, setMaxPrice] = useState(0)
+  const [maxPriceIpnut, setmaxPriceIpnut] = useState(maxPrice)
+  const [minPriceIpnut, setMinPriceIpnut] = useState(0)
   const Router = useRouter()
 
   const api = '/api/store-api/products-public/'
   useEffect(() => {
-    axios.get(api)
-      .then(res => {
-        setProducts(res.data.results)
-        setproductsCount(res.data.count)
-      })
-  }, [])
+    setmaxPriceIpnut(maxPrice)
+  }, [maxPrice])
 
   const [currPage, setCurrPage] = useState(1)
   useEffect(() => {
     const categoryParams = categories?.map((category) => `categories=${category}`).join('&');
+    console.log(`${api}?page=${currPage}&ordering=${activeOrder}${isAvailable ? '&available=true' : ''}&${categoryParams}`)
 
-    axios.get(`${api}?page=${currPage}&ordering=${activeOrder}&${categoryParams}`)
+    axios.get(`${api}?page=${currPage}&ordering=${activeOrder}${isAvailable ? '&available=true' : ''}&min_price=${minPriceIpnut}&max_price=${maxPriceIpnut}&${categoryParams}`)
       .then(res => {
         setProducts(res.data.results)
         setproductsCount(res.data.count)
+        setMaxPrice(res.data.max_price)
+        // setmaxPriceIpnut(maxPrice)
       })
-  }, [currPage, activeOrder, categories]);
+  }, [currPage, activeOrder, categories, isAvailable, minPriceIpnut, maxPriceIpnut]);
 
   return (
     <main className='w-[90%] max-w-[1136px] mx-auto pt-16 md:pt-[117px] flex gap-4'>
-      <Filters setCategory={setCategories} />
+      <Filters
+        max={maxPrice}
+        inputFrom={minPriceIpnut}
+        setInputFrom={setMinPriceIpnut}
+        inputTo={maxPriceIpnut}
+        setInputTo={setmaxPriceIpnut}
+        categories={categories}
+        setCategory={setCategories}
+        setIsAvailable={setIsAvailable}
+        isAvailable={isAvailable}
+      />
       <div className='grid grid-cols-1 gap-4 w-full'>
         <div className='flex justify-start items-center w-full gap-2'>
           <SearchBarProducts searchValue={searchValue} setSearchValue={setSearchValue} />
@@ -75,7 +88,7 @@ const Products = () => {
                 price={product.min_price}
                 image={product.featured_image}
                 score={product.avg_rate}
-                priceWithOffer={product.min_price}
+                priceWithOffer={product.min_sell_price}
               />
             ))}
           </div>
