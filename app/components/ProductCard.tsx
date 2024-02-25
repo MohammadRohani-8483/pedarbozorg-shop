@@ -19,17 +19,16 @@ const ProductCard = ({ price, link, image, name, priceWithOffer, score }: produc
     const variants = {
         hover: {
             scale: 1,
-            width: 0
         },
         unHover: {
             scale: 1.5,
-            width:'180px'
         }
     }
 
     return (
-        <div
-            className='w-full bg-white gap-3.5 justify-center rounded-3xl p-2  lg:p-4 flex flex-col h-36 lg:h-72 hover:shadow-hover hover:transition-shadow hover:duration-300'
+        <motion.div
+            whileHover={{ boxShadow: "0px 0px 18.6px 0px rgba(61, 131, 97, 0.22)" }}
+            className='w-full bg-white gap-3.5 justify-center rounded-3xl p-2  lg:p-4 flex flex-col h-36 lg:h-72'
             onMouseOver={() => setIsHover(true)}
             onMouseOut={() => setIsHover(false)}
         >
@@ -49,23 +48,33 @@ const ProductCard = ({ price, link, image, name, priceWithOffer, score }: produc
                                 <FiCameraOff />
                             </div>
                         }
-                        <motion.div
+                        <div
                             className='w-full absolute top-0.5 left-0 flex justify-between items-center px-2'
-                            animate={isHover ? "hover" : "unHover"}
-                            variants={variants}
-                            transition={{ duration: 0.5 }}
+                        // animate={isHover ? "hover" : "unHover"}
+                        // variants={variants}
+                        // transition={{ duration: 0.5 }}
                         >
-                            {isLike ?
-                                <Image onClick={() => setIsLike(false)} src='/iconSax/is-like.svg' alt="like" width={20} height={20} className='cursor-pointer' />
-                                :
-                                <Image onClick={() => setIsLike(true)} src='/iconSax/like.png' alt="like" width={20} height={20} className='cursor-pointer' />
-                            }
-                            {isShopingCard ?
-                                <Image onClick={() => setIsShopingCard(false)} src='/iconSax/is-shopping-cart-product.svg' alt="shoping cart" width={20} height={20} className='cursor-pointer' />
-                                :
-                                <Image onClick={() => setIsShopingCard(true)} src='/iconSax/shopping-cart-product.svg' alt="shoping cart" width={20} height={20} className='cursor-pointer' />
-                            }
-                        </motion.div>
+                            <motion.div
+                                animate={isHover ? { x: 0 } : { x: '30px' }}
+                                transition={{ duration: 0.3 }}
+                            >
+                                {isLike ?
+                                    <Image onClick={() => setIsLike(false)} src='/iconSax/is-like.svg' alt="like" width={20} height={20} className='cursor-pointer' />
+                                    :
+                                    <Image onClick={() => setIsLike(true)} src='/iconSax/like.png' alt="like" width={20} height={20} className='cursor-pointer' />
+                                }
+                            </motion.div>
+                            <motion.div
+                                animate={isHover ? { x: 0 } : { x: "-30px" }}
+                                transition={{ duration: 0.3 }}
+                            >
+                                {isShopingCard ?
+                                    <Image onClick={() => setIsShopingCard(false)} src='/iconSax/is-shopping-cart-product.svg' alt="shoping cart" width={20} height={20} className='cursor-pointer' />
+                                    :
+                                    <Image onClick={() => setIsShopingCard(true)} src='/iconSax/shopping-cart-product.svg' alt="shoping cart" width={20} height={20} className='cursor-pointer' />
+                                }
+                            </motion.div>
+                        </div>
                     </div>
                     <Link href={link} className='overflow-hidden relative min-w-[85px] lg:w-full aspect-square rounded-xl flex lg:hidden items-center justify-center'>
                         {image ?
@@ -137,7 +146,7 @@ const ProductCard = ({ price, link, image, name, priceWithOffer, score }: produc
                     <Image onClick={() => setIsShopingCard(true)} src='/iconSax/shopping-cart-product.svg' alt="shoping cart" width={20} height={20} className='cursor-pointer' />
                 }
             </div>
-        </div>
+        </motion.div>
     )
 }
 
