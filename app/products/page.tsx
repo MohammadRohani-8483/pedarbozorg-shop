@@ -6,8 +6,10 @@ import { useRouter } from 'next/navigation'
 import axios from 'axios'
 import Image from 'next/image'
 import ProductCard from '../components/productCard'
-import Filters from '../components/products/Filters'
-import Ordering from '../components/products/Ordering'
+import Filters from '../components/products/filters/Filters'
+import Ordering from '../components/products/ordering/Ordering'
+import FiltersMobile from '../components/products/filters/FiltersMobile'
+import OrderingMobile from '../components/products/ordering/OrderingMobile'
 
 const Products = () => {
   const [searchValue, setSearchValue] = useState('')
@@ -19,6 +21,8 @@ const Products = () => {
   const [maxPrice, setMaxPrice] = useState(0)
   const [maxPriceIpnut, setmaxPriceIpnut] = useState(maxPrice)
   const [minPriceIpnut, setMinPriceIpnut] = useState(0)
+  const [isFiltersOpen, setIsFiltersOpen] = useState(false)
+  const [isOrderingOpen, setIsOrderingOpen] = useState(false)
   const Router = useRouter()
 
   const api = '/api/store-api/products-public/'
@@ -36,7 +40,6 @@ const Products = () => {
         setProducts(res.data.results)
         setproductsCount(res.data.count)
         setMaxPrice(res.data.max_price)
-        // setmaxPriceIpnut(maxPrice)
       })
   }, [currPage, activeOrder, categories, isAvailable, minPriceIpnut, maxPriceIpnut]);
 
@@ -56,11 +59,20 @@ const Products = () => {
       <div className='grid grid-cols-1 gap-4 w-full'>
         <div className='flex justify-start items-center w-full gap-2'>
           <SearchBarProducts searchValue={searchValue} setSearchValue={setSearchValue} />
-          <Ordering setActiveOrder={setActiveOrder} activeOrder={activeOrder} />
+          <Ordering
+            setActiveOrder={setActiveOrder}
+            activeOrder={activeOrder}
+          />
         </div>
         <div className='flex flex-col gap-2 items-start justify-center'>
-          <div className='flex justify-center items-center text-sm text-base-300 lg:hidden'>
-            <div className='flex gap-2 justify-center items-center px-3 py-1.5'>
+          <div className='flex justify-center items-center lg:hidden'>
+            <div
+              className='flex gap-2 justify-center items-center text-sm text-base-300 px-3 py-1.5 cursor-pointer'
+              onClick={() => {
+                setIsFiltersOpen(true)
+                document.documentElement.classList.add('overflow-hidden')
+              }}
+            >
               <Image
                 src='/iconSax/filter.svg'
                 alt='filter'
@@ -69,7 +81,26 @@ const Products = () => {
               />
               <h2>فیلترها</h2>
             </div>
-            <div className='flex gap-2 justify-center items-center px-3 py-1.5'>
+            {isFiltersOpen &&
+              <FiltersMobile
+                setIsFiltersOpen={setIsFiltersOpen} max={maxPrice}
+                inputFrom={minPriceIpnut}
+                setInputFrom={setMinPriceIpnut}
+                inputTo={maxPriceIpnut}
+                setInputTo={setmaxPriceIpnut}
+                categories={categories}
+                setCategory={setCategories}
+                setIsAvailable={setIsAvailable}
+                isAvailable={isAvailable}
+              />
+            }
+            <div
+              onClick={() => {
+                setIsOrderingOpen(true)
+                document.documentElement.classList.add('overflow-hidden')
+              }}
+              className='flex gap-2 justify-center items-center text-sm text-base-300 px-3 py-1.5 cursor-pointer'
+            >
               <Image
                 src='/iconSax/sort.svg'
                 alt='sort'
@@ -78,6 +109,13 @@ const Products = () => {
               />
               <h2>مرتب سازی</h2>
             </div>
+            {isOrderingOpen &&
+              <OrderingMobile
+              setIsOrderingOpen={setIsOrderingOpen}
+                setActiveOrder={setActiveOrder}
+                activeOrder={activeOrder}
+              />
+            }
           </div>
           <div className="grid lg:grid-cols-3 xl:grid-cols-4 sm:grid-cols-2 grid-cols-1 justify-items-center gap-4 lg:gap-8 w-full">
             {products?.map((product: any) => (

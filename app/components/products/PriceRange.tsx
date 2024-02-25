@@ -46,7 +46,7 @@ const PriceRange = ({ max, inputFrom, setInputFrom, inputTo, setInputTo }: any) 
                         <span className='absolute text-xs text-black font-bold -top-2 right-4 w-5 bg-white flex justify-center'>
                             از
                         </span>
-                        <input type="text" name="From" className='outline-none text-sm text-black w-full' defaultValue={formatNumber(inputFrom)} readOnly />
+                        <input type="text" name="From" className='outline-none text-sm text-black w-full' value={formatNumber(inputFrom)} readOnly />
                         <Image
                             src='/Image/gray-Tooman.svg'
                             alt="تومان"
@@ -58,7 +58,7 @@ const PriceRange = ({ max, inputFrom, setInputFrom, inputTo, setInputTo }: any) 
                         <span className='absolute text-xs text-black font-bold -top-2 right-4 w-5 bg-white flex justify-center'>
                             تا
                         </span>
-                        <input type="text" name="To" className='outline-none text-sm text-black w-full' defaultValue={formatNumber(inputTo)} readOnly />
+                        <input type="text" name="To" className='outline-none text-sm text-black w-full' value={formatNumber(inputTo)} readOnly />
                         <Image
                             src='/Image/gray-Tooman.svg'
                             alt="تومان"

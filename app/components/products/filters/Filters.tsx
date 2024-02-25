@@ -1,9 +1,9 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
-import AvailableProductsToggle from './AvailableProductsToggle'
-import Category from './category/Category'
-import PriceRange from './PriceRange'
+import AvailableProductsToggle from '../AvailableProductsToggle'
+import Category from '../Category'
+import PriceRange from '../PriceRange'
 
 const Filters = ({ categories, isAvailable, setCategory, setIsAvailable, max, inputFrom, setInputFrom, inputTo, setInputTo }: any) => {
     return (
