@@ -12,7 +12,7 @@ export const menuItems = [
   {
     id: crypto.randomUUID(),
     item: "مجله",
-    link: "/blog",
+    link: "/blog/",
   },
   {
     id: crypto.randomUUID(),
