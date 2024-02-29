@@ -1,8 +1,8 @@
 import { pedarBozorgInLifeImages } from "public/data/pedarBozorgInLifeImage"
 import Image from "@/node_modules/next/image"
 import Link from "@/node_modules/next/link"
-import BlogSlider from "./blogSlider"
-import BlogsDemo from "./BlogsDemo"
+import BlogSlider from "./blogsDesktop/blogSlider"
+import BlogsDemo from "./blogsMobile/BlogsDemo"
 
 const PedarBozorgInLife = () => {
     return (

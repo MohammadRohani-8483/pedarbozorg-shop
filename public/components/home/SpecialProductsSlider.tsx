@@ -11,7 +11,7 @@ import { Navigation } from 'swiper/modules';
 
 import Image from '@/node_modules/next/image';
 import Link from '@/node_modules/next/link';
-import SliderBtn from './SliderBtn';
+import SliderBtn from '../SliderBtn';
 import { specialProductsSlider } from '@/public/data/specialProducts';
 
 export default function SpecialProductsSlider() {

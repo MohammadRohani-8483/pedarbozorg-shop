@@ -1,5 +1,5 @@
 import { pedarBozorgInLifeImages } from "public/data/pedarBozorgInLifeImage"
-import CommentsSlider from "./commentsSlider"
+import CommentsSlider from "./home/commentSlider/CommentsSlider"
 
 const UsersComments = () => {
     return (

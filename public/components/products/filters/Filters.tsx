@@ -18,19 +18,24 @@ const Filters = ({ categories, isAvailable, setCategory, setIsAvailable, max, in
                     />
                     <h2>فیلترها</h2>
                 </div>
-                <div
-                    className='px-3 py-1.5 text-[#C62020] text-sm whitespace-nowrap cursor-pointer'
-                    onClick={() => {
-                        setCategory([])
-                        setIsAvailable(false)
-                        setInputFrom(0)
-                        setInputTo(max)
-                    }}
-                >
-                    حذف فیلترها
-                </div>
+                {(categories.length > 0 || isAvailable || inputFrom > 0 || inputTo < max) &&
+                    <div
+                        className='px-3 py-1.5 text-[#C62020] text-sm whitespace-nowrap cursor-pointer'
+                        onClick={() => {
+                            setCategory([])
+                            setIsAvailable(false)
+                            setInputFrom(0)
+                            setInputTo(max)
+                        }}
+                    >
+                        حذف فیلترها
+                    </div>
+                }
             </div>
-            <Category categoryState={categories} setCategory={setCategory} />
+            <Category
+                categoryState={categories}
+                setCategory={setCategory}
+            />
             <PriceRange
                 max={max}
                 inputFrom={inputFrom}

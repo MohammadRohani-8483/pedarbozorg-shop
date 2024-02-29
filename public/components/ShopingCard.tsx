@@ -1,10 +1,16 @@
+'use client'
 import formatNumber from '@/public/Functions/formatNumber'
 import Image from 'next/image'
 import React from 'react'
 import ShopingCardItem from './ShopingCardItem'
 import { motion } from 'framer-motion';
+import { useDispatch, useSelector } from 'react-redux';
 
 const ShopingCard = ({ isVisible }: any) => {
+
+    const cart = useSelector((state: any) => state.cart.cart)
+    console.log(cart);
+
     const variants = {
         vsisble: {
             opacity: 1,
@@ -25,25 +31,25 @@ const ShopingCard = ({ isVisible }: any) => {
             transition={{ duration: 0.3 }}
         >
             {
-                true ?
+                cart.length > 0 ?
                     <>
-                        <div className='w-full h-[266px] overflow-auto overflow-x-hidden flex flex-col gap-2 ltr' id='shoping-card'>
-                            {Array.from({ length: 4 }, (_, i) => {
+                        <div className='w-full h-[266px] overflow-auto overflow-x-hidden flex flex-col gap-2 ltr' id='scroll'>
+                            {cart.map((cartItem: any, i: any, array: any) => {
                                 return (
                                     <div
                                         className='gap-2 flex flex-col justify-center items-center'
-                                        key={i}
+                                        key={cartItem.id}
                                     >
                                         <ShopingCardItem
-                                            price={200000}
-                                            offerPresent={20}
-                                            image='/Image/offer-products/ard-nokhodchi.png'
-                                            link='/'
-                                            weight={130}
-                                            name='آرد نخودچی'
-                                            count={2}
+                                            price={cartItem.shatootInfo.finalPrice}
+                                            priceWithOffer={cartItem.shatootInfo.finalPrice}
+                                            image={cartItem.product.featuredImage}
+                                            link={cartItem.product.slug}
+                                            // weight={130}
+                                            name={cartItem.product.name}
+                                            count={cartItem.quantity}
                                         />
-                                        {i < 3 && <div className='w-[432px] h-[1px] bg-[#E3E3E3]'></div>}
+                                        {i < array.length - 1 && <div className='w-[432px] h-[1px] bg-[#E3E3E3]'></div>}
                                     </div>
                                 )
                             })}

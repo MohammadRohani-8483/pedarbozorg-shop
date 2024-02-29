@@ -39,7 +39,7 @@ const BestSellingProducts = () => {
                         key={product.id}
                         num={i + 1}
                         image={product.featured_image}
-                        link={product.slug}
+                        link={`products/${product.slug}`}
                     />
                 ))}
             </div>

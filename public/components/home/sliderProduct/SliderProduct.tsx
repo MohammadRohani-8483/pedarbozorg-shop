@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 'use client'
-import SliderBtn from "./SliderBtn";
+import SliderBtn from "../../SliderBtn";
 import { useEffect, useRef, useState } from "react";
 import SliderProductItems from "./SliderProductItems";
 

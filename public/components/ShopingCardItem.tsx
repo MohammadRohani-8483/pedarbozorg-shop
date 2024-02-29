@@ -3,8 +3,9 @@ import Image from 'next/image'
 import formatNumber from 'public/Functions/formatNumber'
 import Link from 'next/link'
 
-const ShopingCardItem = ({ image, link, price, offerPresent = 0, weight, name, count }: any) => {
-    const present = price * (offerPresent) / 100
+const ShopingCardItem = ({ image, link, price, priceWithOffer , weight, name, count }: any) => {
+    const offerPresent = (price - priceWithOffer) / price * 100
+    const present = price * offerPresent / 100
     return (
         <div
             className='flex justify-between h-[131px] w-[455px] items-center'
@@ -20,8 +21,8 @@ const ShopingCardItem = ({ image, link, price, offerPresent = 0, weight, name, c
                 <div className='flex flex-col gap-2 items-start justify-center'>
                     <h2 className='text-[#353535] text-xl font-bold'>{name}</h2>
                     <div className='flex items-center justify-start gap-2'>
-                        <div className='bg-[#626262] aspect-square w-[6px] rounded-full'></div>
-                        <h3 className='text-sm text-[#626262]'>{weight} گرم</h3>
+                        {/* <div className='bg-[#626262] aspect-square w-[6px] rounded-full'></div> */}
+                        {/* <h3 className='text-sm text-[#626262]'>{weight} گرم</h3> */}
                     </div>
                 </div>
             </Link>

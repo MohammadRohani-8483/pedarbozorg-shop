@@ -9,7 +9,7 @@ import 'swiper/css/pagination';
 // import required modules
 import { Navigation } from 'swiper/modules';
 
-import SliderBtn from './SliderBtn';
+import SliderBtn from '../../SliderBtn';
 
 import { comments } from "public/data/comments"
 import CommentCard from './commentCard';

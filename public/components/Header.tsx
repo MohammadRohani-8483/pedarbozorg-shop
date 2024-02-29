@@ -19,7 +19,8 @@ const Header: React.FC = () => {
     const [isVisible, setIsVisible] = useState(true)
     const [isHoverLogin, setIsHoverLogin] = useState(false)
     const [isFormOpen, setIsFormOpen] = useState(false)
-
+    const [searchValue, setSearchValue] = useState("")
+    const [focus, setFocus] = useState(false)
 
     const handleScroll = () => {
         if (window.scrollY > 80) {
@@ -31,18 +32,18 @@ const Header: React.FC = () => {
 
     useEffect(() => {
         window.addEventListener('scroll', handleScroll);
-
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-        }
     }, []);
 
-    const [searchValue, setSearchValue] = useState("")
-    const [focus, setFocus] = useState(false)
+    useEffect(() => {
+        focus ?
+            document.documentElement.classList.add('overflow-hidden')
+            :
+            document.documentElement.classList.remove('overflow-hidden')
+    }, [focus])
+
 
     useEffect(() => {
-        !isTop && !focus && setOpenSearchBar(false)
-
+        !focus && setOpenSearchBar(isTop)
     }, [focus, isTop])
 
     const variants = {
@@ -53,6 +54,10 @@ const Header: React.FC = () => {
             y: "-50px"
         }
     }
+    useEffect(() => {
+        setFocus(searchValue.length > 0)
+    }, [searchValue])
+
 
     const visibleCard = () => {
         setIsHover(true)
@@ -72,7 +77,7 @@ const Header: React.FC = () => {
         <>
             <header
                 id="header"
-                className={`w-screen fixed z-50  hidden lg:flex justify-between px-14 transition-all duration-500  ${openSearchBar ? "h-[117px]" : "h-20"} ${isTop ? 'border-base-100' : "border-base-200 bg-base-100 border-b"}`}
+                className={`w-screen fixed z-50  hidden lg:flex justify-between px-14 transition-all duration-800  ${openSearchBar ? "h-[117px]" : "h-20"} ${isTop ? 'border-base-100' : "border-base-200 bg-base-100 border-b"}`}
             >
                 <Link className={`h-14 ${openSearchBar ? "mt-5" : "mt-3"} w-14 relative pl-16`}
                     href={"/"}
@@ -87,16 +92,21 @@ const Header: React.FC = () => {
                 <div className={`${openSearchBar && "mt-5"} mt-5 mr-28 flex flex-col justidy-center items-center w-[calc(100%-420px)] ltr`}>
                     <div className={`flex ${openSearchBar ? "justidy-center ltr" : "justify-end"} w-full`}>
                         <SearchBar
-                            handleOpenSearch={() => setOpenSearchBar(true)}
-                            handleCloseSearch={() => {
-                                setOpenSearchBar(false)
-                                setSearchValue('')
+                            handleOpenSearch={() => {
+                                setOpenSearchBar(true)
                                 setFocus(true)
+                            }}
+                            handleCloseSearch={() => {
+                                !isTop && setOpenSearchBar(false)
+                                setSearchValue('')
+                                setFocus(false)
+                                // setIsTop(false)
                             }}
                             openSearchBar={openSearchBar}
                             searchValue={searchValue}
                             setSearchValue={setSearchValue}
                             setFocus={setFocus}
+                            focus={focus}
                         />
                     </div>
                     <motion.div

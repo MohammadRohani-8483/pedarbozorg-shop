@@ -122,7 +122,7 @@ html {
   @apply bg-base-300 rounded-3xl
 }
 
-#shoping-card::-webkit-scrollbar {
+#scroll::-webkit-scrollbar {
   position: absolute;
   right: 0;
   left: 100%;
@@ -131,7 +131,7 @@ html {
   border-radius: 8px;
 }
 
-#shoping-card::-webkit-scrollbar-thumb {
+#scroll::-webkit-scrollbar-thumb {
   background-color: rgba(77, 77, 77, 0.795);
   border-radius: 12px;
 }

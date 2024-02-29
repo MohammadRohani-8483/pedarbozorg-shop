@@ -9,7 +9,7 @@ import 'swiper/css/pagination';
 // import required modules
 import { Navigation } from 'swiper/modules';
 
-import SliderBtn from './SliderBtn';
+import SliderBtn from '../../SliderBtn';
 
 import { offersList } from "public/data/offersList"
 
@@ -82,7 +82,7 @@ export default function OffersSlider() {
                                     price={product.min_price}
                                     image={product.featured_image}
                                     priceWithOffer={product.min_price}
-                                    link={product.slug}
+                                    link={`products/${product.slug}`}
                                     score={product.avg_rate}
                                 />
                             </SwiperSlide>

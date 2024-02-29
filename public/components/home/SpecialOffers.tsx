@@ -1,6 +1,6 @@
 import Image from "next/image"
 import { specialOffers } from "public/data/specialOffers"
-import ProductCard from "./productCard"
+import ProductCard from "../productCard"
 
 const SpecialOffers = () => {
     return (

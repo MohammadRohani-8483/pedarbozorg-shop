@@ -6,29 +6,43 @@ import { FiCameraOff } from "@/node_modules/react-icons/fi/index";
 import { FaStar } from "@/node_modules/react-icons/fa/index";
 import tooman from "@/public/Image/tooman.svg";
 import formatNumber from '@/public/Functions/formatNumber';
-import { product } from '@/public/types/productType';
 import { motion } from 'framer-motion';
+import { useDispatch, useSelector } from 'react-redux';
+import { addToCart } from '@/public/redux/store/cart';
 
-const ProductCard = ({ price, link, image, name, priceWithOffer, score }: product) => {
-    const present = (price - priceWithOffer) / price * 100
+const ProductCard = ({ price, link, image, name, priceWithOffer, score, product }: any) => {
+    const offerPresent = (price - priceWithOffer) / price * 100
 
     const [isLike, setIsLike] = useState(false)
     const [isShopingCard, setIsShopingCard] = useState(false)
     const [isHover, setIsHover] = useState(false)
 
-    const variants = {
-        hover: {
-            scale: 1,
+
+    // console.log('yes');
+
+    const cartItem = {
+        id: product.cheapest_variant_id,
+        shatootInfo: {
+            sellPrice: product.min_sell_price,
+            finalPrice: product.min_price,
+            discount: product.min_price - product.min_sell_price,
         },
-        unHover: {
-            scale: 1.5,
-        }
+        product: {
+            id: product.id,
+            featuredImage: product.featured_image,
+            name: product.name,
+            slug: product.slug,
+        },
     }
 
+    const dispatch = useDispatch()
+    const handleAddToCart = () => {
+        dispatch(addToCart(cartItem))
+    }
     return (
         <motion.div
             whileHover={{ boxShadow: "0px 0px 18.6px 0px rgba(61, 131, 97, 0.22)" }}
-            className='w-full bg-white gap-3.5 justify-center rounded-3xl p-2  lg:p-4 flex flex-col h-36 lg:h-72'
+            className='w-full bg-white gap-3.5 justify-center rounded-3xl p-2 lg:p-4 flex flex-col h-36 lg:h-72'
             onMouseOver={() => setIsHover(true)}
             onMouseOut={() => setIsHover(false)}
         >
@@ -59,9 +73,25 @@ const ProductCard = ({ price, link, image, name, priceWithOffer, score }: produc
                                 transition={{ duration: 0.3 }}
                             >
                                 {isLike ?
-                                    <Image onClick={() => setIsLike(false)} src='/iconSax/is-like.svg' alt="like" width={20} height={20} className='cursor-pointer' />
+                                    <Image
+                                        // onClick={() => setIsLike(false)}
+                                        src='/iconSax/is-like.svg'
+                                        alt="like"
+                                        width={20}
+                                        height={20}
+                                        className='cursor-pointer'
+                                    />
                                     :
-                                    <Image onClick={() => setIsLike(true)} src='/iconSax/like.png' alt="like" width={20} height={20} className='cursor-pointer' />
+                                    <Image
+                                        onClick={() => {
+                                            handleAddToCart()
+                                        }}
+                                        src='/iconSax/like.png'
+                                        alt="like"
+                                        width={20}
+                                        height={20}
+                                        className='cursor-pointer'
+                                    />
                                 }
                             </motion.div>
                             <motion.div
@@ -69,9 +99,22 @@ const ProductCard = ({ price, link, image, name, priceWithOffer, score }: produc
                                 transition={{ duration: 0.3 }}
                             >
                                 {isShopingCard ?
-                                    <Image onClick={() => setIsShopingCard(false)} src='/iconSax/is-shopping-cart-product.svg' alt="shoping cart" width={20} height={20} className='cursor-pointer' />
+                                    <Image
+                                        // onClick={() => setIsShopingCard(false)}
+                                        src='/iconSax/is-shopping-cart-product.svg'
+                                        alt="shoping cart" width={20} height={20}
+                                        className='cursor-pointer'
+                                    />
                                     :
-                                    <Image onClick={() => setIsShopingCard(true)} src='/iconSax/shopping-cart-product.svg' alt="shoping cart" width={20} height={20} className='cursor-pointer' />
+                                    <Image
+                                        onClick={() => {
+                                            handleAddToCart()
+                                            setIsShopingCard(true)
+                                        }}
+                                        src='/iconSax/shopping-cart-product.svg'
+                                        alt="shoping cart" width={20} height={20}
+                                        className='cursor-pointer'
+                                    />
                                 }
                             </motion.div>
                         </div>
@@ -83,7 +126,8 @@ const ProductCard = ({ price, link, image, name, priceWithOffer, score }: produc
                                 fill
                                 alt={name}
                                 className="object-cover"
-                            /> :
+                            />
+                            :
                             <div className='flex w-full justify-center items-center bg-gray-200 text-3xl h-full text-gray-600'>
                                 <FiCameraOff />
                             </div>
@@ -96,7 +140,7 @@ const ProductCard = ({ price, link, image, name, priceWithOffer, score }: produc
                     <div className='flex justify-between w-full items-center ltr gap-2'>
                         <div className='flex gap-2 items-center justify-start lg:justify-end w-full'>
                             <p className='font-bold text-base lg:text-xl gap-2'>
-                                {priceWithOffer === 0 ? "رایگان" : (present !== 0 ? formatNumber(priceWithOffer) : formatNumber(price))}
+                                {priceWithOffer === 0 ? "رایگان" : (offerPresent !== 0 ? formatNumber(priceWithOffer) : formatNumber(price))}
                             </p>
                             {priceWithOffer !== 0 &&
                                 <Image
@@ -108,9 +152,9 @@ const ProductCard = ({ price, link, image, name, priceWithOffer, score }: produc
                                 />
                             }
                         </div>
-                        {present !== 0 ?
+                        {offerPresent !== 0 ?
                             <div className='bg-red-500 text-white rounded-full px-2 h-[18px] lg:h-[20px] flex items-center text-[10px] lg:text-xs'>
-                                {present}%
+                                {offerPresent}%
                             </div>
                             :
                             (score &&
@@ -121,7 +165,7 @@ const ProductCard = ({ price, link, image, name, priceWithOffer, score }: produc
                         }
                     </div>
                     <div className='flex justify-between items-center ltr'>
-                        {present !== 0 &&
+                        {offerPresent !== 0 &&
                             <>
                                 <p className='line-through text-gray-400 text-sm lg:text-base'>{formatNumber(price)}</p>
                                 {score &&

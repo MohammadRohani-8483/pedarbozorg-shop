@@ -1,17 +1,17 @@
-import BackgroundVectors from "./components/BackgroundVectors";
-import { BannerHomePage } from "./components/BannerHomePage";
-import BestSellingProducts from "./components/BestSellingProducts";
-import CommentsSlider from "./components/commentsSlider";
-import Cooperations from "./components/Cooperations";
-import GroupProducts from "./components/GroupProducts";
-import OffersSlider from "./components/OffersSlider";
-import PedarBozorgInLife from "./components/PedarBozorgInLife";
-import SliderProduct from "./components/SliderProduct";
-import SpecialOffers from "./components/SpecialOffers";
-import SpecialProducts from "./components/SpecialProducts";
-import SpecialProductsSlider from "./components/SpecialProductsSlider";
-import VideoCategory from "./components/VideoCategory";
-import { WhyPedarBozorg } from "./components/WhyPedarBozorg";
+import BackgroundVectors from "public/components/home/BackgroundVectors";
+import { BannerHomePage } from "public/components/home/BannerHomePage";
+import BestSellingProducts from "public/components/home/bestSellingProducts/BestSellingProducts";
+import CommentsSlider from "public/components/home/commentSlider/CommentsSlider";
+import Cooperations from "public/components/home/Cooperations";
+import GroupProducts from "public/components/home/groupProduct/GroupProducts";
+import OffersSlider from "public/components/home/offersSlider/OffersSlider";
+import PedarBozorgInLife from "public/components/home/pedarBozorgInLife/PedarBozorgInLife";
+import SliderProduct from "public/components/home/sliderProduct/SliderProduct";
+import SpecialOffers from "public/components/home/SpecialOffers";
+import SpecialProducts from "public/components/home/SpecialProducts";
+import SpecialProductsSlider from "public/components/home/SpecialProductsSlider";
+import VideoCategory from "public/components/home/VideoCategory";
+import { WhyPedarBozorg } from "public/components/home/whyPedarbozorg/WhyPedarBozorg";
 
 export default function Home() {
   return (
