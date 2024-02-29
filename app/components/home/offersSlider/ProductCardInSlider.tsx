@@ -88,7 +88,7 @@ export const ProductCardInSlider: React.FC<product> = ({ price, link, image, nam
                     :
                     (score &&
                         <div className='flex items-center justify-center gap-1'>
-                            <FaStar className='text-yellow-600' /><p className='text-gray-600'>{score}</p>
+                            <FaStar className='text-yellow-600' /><p className='text-gray-600'>{score.toFixed(1)}</p>
                         </div>
                     )
                 }

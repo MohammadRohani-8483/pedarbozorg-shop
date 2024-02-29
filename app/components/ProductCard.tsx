@@ -159,7 +159,8 @@ const ProductCard = ({ price, link, image, name, priceWithOffer, score, product 
                             :
                             (score &&
                                 <div className='flex items-center justify-center gap-1'>
-                                    <FaStar className='text-[#FFC436]' /><p className='text-gray-600 text-xs lg:text-base'>{score}</p>
+                                    <FaStar className='text-[#FFC436]' />
+                                    <p className='text-gray-600 text-xs lg:text-base'>{score.toFixed(1)}</p>
                                 </div>
                             )
                         }
@@ -170,7 +171,8 @@ const ProductCard = ({ price, link, image, name, priceWithOffer, score, product 
                                 <p className='line-through text-gray-400 text-sm lg:text-base'>{formatNumber(price)}</p>
                                 {score &&
                                     <div className='flex items-center justify-center gap-1'>
-                                        <FaStar className='text-[#FFC436]' /><p className='text-gray-600 text-xs lg:text-base'>{score}</p>
+                                        <FaStar className='text-[#FFC436]' />
+                                        <p className='text-gray-600 text-xs lg:text-base'>{score.toFixed(1)}</p>
                                     </div>
                                 }
                             </>
