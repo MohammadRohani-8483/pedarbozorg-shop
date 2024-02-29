@@ -1,0 +1,10 @@
+.box_container {
+    width: 100px;
+    height: 100px;
+    border: 1px solid black;
+    text-align: center;
+}
+
+.box_container:nth-child(10) {
+    grid-column: 2 / 3;
+}

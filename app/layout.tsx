@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import Footer from "./components/Footer";
-import ScrollToTop from "./components/ScrollToTop";
-import Header from "./components/Header";
 import "./globals.css";
-import BackgroundVectors from "./components/BackgroundVectors";
+import StoreProvider from "public/redux/StoreProvider";
+import Header from "./components/Header";
+import ScrollToTop from "./components/ScrollToTop";
+import Footer from "./components/Footer";
 
 export const metadata: Metadata = {
   title: "پدربزرگ",
@@ -22,11 +22,13 @@ export default function RootLayout({
   return (
     <html lang="fa" className='bg-base-100 overflow-x-hidden'>
       <body>
-        <Header />
-        <ScrollToTop />
-        {children}
-        <Footer />
+        <StoreProvider>
+          <Header />
+          <ScrollToTop />
+          {children}
+          <Footer />
+        </StoreProvider>
       </body>
-    </html>
+    </html >
   );
 }

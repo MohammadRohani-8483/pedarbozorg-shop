@@ -4,7 +4,7 @@ import SliderBtn from "../../SliderBtn";
 import { useEffect, useRef, useState } from "react";
 import SliderProductItems from "./SliderProductItems";
 
-import '../pagination-slider-product.css'
+import 'app/pagination-slider-product.css'
 
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';

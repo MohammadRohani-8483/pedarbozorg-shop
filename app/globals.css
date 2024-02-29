@@ -169,3 +169,7 @@ html {
 #toggle:checked + label::before {
   transform: translateX(20px);
 }
+
+.box_container:nth-child(10){
+  @apply lg:col-start-2
+}

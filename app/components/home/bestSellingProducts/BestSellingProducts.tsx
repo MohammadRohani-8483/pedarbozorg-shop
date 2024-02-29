@@ -32,7 +32,7 @@ const BestSellingProducts = () => {
                     height={69}
                 />
             </div>
-            <div className='flex flex-wrap justify-center gap-4'>
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-items-center gap-4 w-full'>
                 {products.map((product: any, i: number) => (
                     <BestSellingCard
                         name={product.name}
