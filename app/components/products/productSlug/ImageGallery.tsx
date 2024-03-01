@@ -3,7 +3,7 @@ import React from 'react'
 
 const ImageGallery = () => {
     return (
-        <div className='flex flex-col gap-2 justify-center items-center w-full'>
+        <div className='flex flex-col gap-2 justify-center items-center w-full md:max-w-[312px]'>
             <div className='relative w-full aspect-square rounded-3xl overflow-hidden  border-2 border-[#E3E3E3]'>
                 <Image
                     src="/Image/offer-products/ard-nokhodchi.png"

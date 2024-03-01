@@ -58,7 +58,7 @@ const Products = () => {
   }, [currPage, activeOrder, categories, isAvailable, minPriceInput, maxPriceInput, searchValue]);
 
   return (
-    <main className='w-[90%] max-w-[1136px] mx-auto pt-16 md:pt-[117px] flex gap-4'>
+    <main className='w-[90%] max-w-[1136px] mx-auto py-16 md:py-[117px] flex gap-4'>
       <Filters
         max={maxPrice}
         inputFrom={minPriceInput}
@@ -164,7 +164,7 @@ const Products = () => {
           </div>
         </div>
         {Math.ceil(productsCount / 12) > 1 && <PaginationButtons
-          productsCount={productsCount}
+          pageCount={Math.ceil(productsCount / 12)}
           setCurrentPage={setCurrPage}
         />}
       </div>

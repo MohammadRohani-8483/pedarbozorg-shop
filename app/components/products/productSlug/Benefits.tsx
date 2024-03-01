@@ -7,7 +7,7 @@ const Benefits = () => {
             <h3 className='text-xl font-bold text-base-300'>
                 فواید
             </h3>
-            <div className='flex flex-col gap-4 w-full'>
+            <div className='grid grid-cols-1 md:grid-cols-2 gap-4 w-full'>
                 <BenefitItem />
                 <BenefitItem />
                 <BenefitItem />

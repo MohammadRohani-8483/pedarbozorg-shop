@@ -20,25 +20,25 @@ const ProductCard = ({ price, link, image, name, priceWithOffer, score, product 
 
     // console.log('yes');
 
-    const cartItem = {
-        id: product.cheapest_variant_id,
-        shatootInfo: {
-            sellPrice: product.min_sell_price,
-            finalPrice: product.min_price,
-            discount: product.min_price - product.min_sell_price,
-        },
-        product: {
-            id: product.id,
-            featuredImage: product.featured_image,
-            name: product.name,
-            slug: product.slug,
-        },
-    }
+    // const cartItem = {
+    //     id: product.cheapest_variant_id,
+    //     shatootInfo: {
+    //         sellPrice: product.min_sell_price,
+    //         finalPrice: product.min_price,
+    //         discount: product.min_price - product.min_sell_price,
+    //     },
+    //     product: {
+    //         id: product.id,
+    //         featuredImage: product.featured_image,
+    //         name: product.name,
+    //         slug: product.slug,
+    //     },
+    // }
 
     const dispatch = useDispatch()
-    const handleAddToCart = () => {
-        dispatch(addToCart(cartItem))
-    }
+    // const handleAddToCart = () => {
+    //     dispatch(addToCart(cartItem))
+    // }
     return (
         <motion.div
             whileHover={{ boxShadow: "0px 0px 18.6px 0px rgba(61, 131, 97, 0.22)" }}
@@ -49,7 +49,7 @@ const ProductCard = ({ price, link, image, name, priceWithOffer, score, product 
             <div className='flex flex justify-center lg:justify-between lg:flex-col items-center w-full lg:h-full gap-2'>
                 {<>
                     <div
-                        className='overflow-hidden relative min-w-[85px] lg:w-full aspect-square rounded-xl hidden lg:flex items-center justify-center'
+                        className='overflow-hidden relative min-w-[85px] lg:w-full h-auto aspect-square rounded-xl hidden lg:flex items-center justify-center'
                     >
                         {image ?
                             <Image
@@ -83,9 +83,9 @@ const ProductCard = ({ price, link, image, name, priceWithOffer, score, product 
                                     />
                                     :
                                     <Image
-                                        onClick={() => {
-                                            handleAddToCart()
-                                        }}
+                                        // onClick={() => {
+                                        //     handleAddToCart()
+                                        // }}
                                         src='/iconSax/like.png'
                                         alt="like"
                                         width={20}
@@ -102,24 +102,28 @@ const ProductCard = ({ price, link, image, name, priceWithOffer, score, product 
                                     <Image
                                         // onClick={() => setIsShopingCard(false)}
                                         src='/iconSax/is-shopping-cart-product.svg'
-                                        alt="shoping cart" width={20} height={20}
+                                        alt="shoping cart"
+                                        width={20}
+                                        height={20}
                                         className='cursor-pointer'
                                     />
                                     :
                                     <Image
                                         onClick={() => {
-                                            handleAddToCart()
+                                            // handleAddToCart()
                                             setIsShopingCard(true)
                                         }}
                                         src='/iconSax/shopping-cart-product.svg'
-                                        alt="shoping cart" width={20} height={20}
+                                        alt="shoping cart"
+                                        width={20}
+                                        height={20}
                                         className='cursor-pointer'
                                     />
                                 }
                             </motion.div>
                         </div>
                     </div>
-                    <Link href={link} className='overflow-hidden relative min-w-[85px] lg:w-full aspect-square rounded-xl flex lg:hidden items-center justify-center'>
+                    <Link href={link} className='overflow-hidden relative min-w-[85px] lg:w-full h-auto aspect-square rounded-xl flex lg:hidden items-center justify-center'>
                         {image ?
                             <Image
                                 src={image}

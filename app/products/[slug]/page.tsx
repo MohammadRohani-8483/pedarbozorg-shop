@@ -7,7 +7,12 @@ import ImageGallery from '@/app/components/products/productSlug/ImageGallery';
 import Features from '@/app/components/products/productSlug/Features';
 import ShortInfo from '@/app/components/products/productSlug/ShortInfo';
 import LongInfo from '@/app/components/products/productSlug/LongInfo';
-import Star from '@/app/components/products/productSlug/Star';
+import Comment from '@/app/components/products/productSlug/Comment';
+import PaginationButtons from '@/app/components/PaginationButtons';
+import RelatedProducts from '@/app/components/products/productSlug/RelatedProducts';
+import Link from 'next/link';
+import AvgRateBox from '@/app/components/products/productSlug/AvgRateBox';
+import CommentSection from '@/app/components/products/productSlug/CommentSection';
 
 export default function ProductsSlug() {
     const { slug } = useParams()
@@ -21,41 +26,45 @@ export default function ProductsSlug() {
     //         })
     // }, [slug]);
 
-    const avgRate = 3.5
-    const roundRate = Math.floor(avgRate)
-
     return (
-        <main className='w-full mx-auto max-w-[1136px] flex flex-col gap-4 py-20'>
-            <div className='flex w-[90%] mx-auto justify-start items-center text-[#ADADAD] text-sm'>
-                <div className='px-3 py-2 text-base-300'>
+        <main className='w-full mx-auto max-w-[1136px] flex flex-col gap-4 py-20 md:py-[117px]'>
+            <Image
+                src="/Image/background/vectors/tree-2.svg"
+                alt="tree 2"
+                width={400}
+                height={400}
+                className='top-2 left-0 absolute z-[-1]'
+            />
+            <div className='flex w-[90%] lg:w-full mx-auto justify-start items-center text-[#ADADAD] text-sm'>
+                <Link href='/' className='px-3 py-2 text-base-300'>
                     پدربزرگ
-                </div>
+                </Link>
                 /
-                <div className='px-3 py-2 text-base-300'>
+                <Link href={`/products/?categories=${2}`} className='px-3 py-2 text-base-300'>
                     ادویه جات
-                </div>
+                </Link>
                 /
-                <div className='px-3 py-2 text-base-300'>
+                <Link href={`/products/${slug}`} className='px-3 py-2 text-base-300'>
                     آرد نخودچی
-                </div>
+                </Link>
             </div>
-            <div className='w-[90%] mx-auto flex flex-col gap-4 justify-center items-center'>
-                <div className='flex w-full justify-end items-center gap-2'>
-                    <div className='relative w-10 h-10'>
+            <div className='w-[90%] lg:w-full mx-auto flex flex-col md:flex-row gap-4 justify-center items-center md:items-start'>
+                <div className='flex flex-row md:flex-col w-full md:w-auto justify-end items-center gap-2'>
+                    <div className='relative w-10 h-10 cursor-pointer'>
                         <Image
                             src='/iconSax/bell.svg'
                             alt='Bell icon'
                             fill
                         />
                     </div>
-                    <div className='relative w-10 h-10'>
+                    <div className='relative w-10 h-10 cursor-pointer'>
                         <Image
                             src='/iconSax/share-green.svg'
                             alt='Share icon'
                             fill
                         />
                     </div>
-                    <div className='relative w-10 h-10'>
+                    <div className='relative w-10 h-10 cursor-pointer'>
                         <Image
                             src='/iconSax/love-green.svg'
                             alt='Love icon'
@@ -68,67 +77,33 @@ export default function ProductsSlug() {
                     <ShortInfo />
                     <Features />
                 </div>
-            </div>
-            <LongInfo />
-            <div className='w-[90%] mx-auto flex flex-col gap-4 justify-center items-center'>
-                <div className='bg-white rounded-3xl w-full h-auto border border-[#E3E3E3] p-4 flex flex-col justify-center items-center gap-4'>
-                    <div className='text-[#ADADAD] text-base font-bold'>
-                        <span className='text-base-300 text-lg'>{avgRate}</span> از 5
-                    </div>
-                    <div className='flex gap-4 justify-center items-center'>
-                        {Array.from({ length: roundRate }, (_, i) => {
-                            return (
-                                <Image key={i}
-                                    src='/iconSax/like-yellow.svg'
-                                    alt="love"
-                                    width={18}
-                                    height={18}
-                                />
-                            )
-                        })}
-                        <Star present={(avgRate - roundRate) * 100} />
-                        {Array.from({ length: 4 - roundRate }, (_, i) => {
-                            return (
-                                <Image key={i}
-                                    src='/iconSax/like-yellow-regular.svg'
-                                    alt="love"
-                                    width={18}
-                                    height={18}
-                                />
-                            )
-                        })}
-                    </div>
-                    <h5 className='text-[#757575] text-xs'>
-                        از مجموع {13} امتیاز
-                    </h5>
-                    <button
-                        className='border border-base-300 rounded-md text-base-300 text-base rectangle-btn w-full transition-all duration-300 hover:bg-base-200 py-2'
-                    >
-                        افزودن نظر
+                <div className='hidden lg:flex flex-col p-4 items-center justify-center gap-5 w-full max-w-[465px] bg-white bg-opacity-75 rounded-3xl border border-[#E3E3E3]'>
+                    <Image
+                        src="/Image/Logo-mobile.svg"
+                        alt="logo"
+                        width={60}
+                        height={56}
+                    />
+                    <h2 className='text-[#ADADAD] font-bold text-2xl'>
+                        ناموجود
+                    </h2>
+                    <button className='w-full bg-base-200 text-base-300 text-base py-2 rounded-lg flex gap-2 justify-center items-center'>
+                        <Image
+                            src="/iconSax/alarm.svg"
+                            alt="logo"
+                            width={24}
+                            height={24}
+                        />
+                        موجود شد اطلاع بده
                     </button>
                 </div>
-                <div className='flex flex-col gap-4 justify-center items-start w-full py-2'>
-                    <h2 className='text-xl font-bold text-base-300'>
-                        نظرات کاربران
-                    </h2>
-                    <div
-                        // onClick={() => {
-                        //     setIsOrderingOpen(true)
-                        //     document.documentElement.classList.add('overflow-hidden')
-                        // }}
-                        className='flex gap-2 justify-center items-center text-sm text-base-300 px-3 py-1.5 cursor-pointer'
-                    >
-                        <Image
-                            src='/iconSax/sort.svg'
-                            alt='sort'
-                            width={20}
-                            height={20}
-                        />
-                        <h2>مرتب سازی</h2>
-                    </div>
-                    <div className='border-t border-[#CBCBCB] w-full'></div>
-                </div>
             </div>
+            <LongInfo />
+            <div className='w-[90%] mx-auto flex flex-col md:flex-row gap-4 justify-center items-center md:items-start ltr'>
+                <AvgRateBox />
+                <CommentSection />
+            </div>
+            <RelatedProducts />
         </main>
     )
 }

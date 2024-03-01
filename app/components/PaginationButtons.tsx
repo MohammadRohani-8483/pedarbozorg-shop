@@ -3,8 +3,7 @@ import ReactPaginate from "react-paginate";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 import { motion } from "framer-motion";
 
-const PaginationButtons = ({ productsCount, setCurrentPage }: { productsCount: number, setCurrentPage: any }) => {
-    const pageCount = Math.ceil(productsCount /12)
+const PaginationButtons = ({ pageCount, setCurrentPage }: { pageCount: number, setCurrentPage?: any }) => {
     const handlePageClick = ({ selected }: any) => {
         setCurrentPage(selected + 1);
     };
@@ -47,7 +46,7 @@ const PaginationButtons = ({ productsCount, setCurrentPage }: { productsCount: n
                         <BsChevronRight />
                     </span>
                 }
-                containerClassName="flex items-center justify-center gap-2 h-10 text-base-300 mb-20"
+                containerClassName="flex items-center justify-center gap-2 h-10 text-base-300"
                 pageClassName="block hover:bg-lightGray w-10 h-10 flex items-center justify-center rounded-md m w-7"
                 activeClassName="bg-base-300 text-white"
             />

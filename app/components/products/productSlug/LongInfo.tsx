@@ -1,14 +1,76 @@
-import React from 'react'
+'use client'
+import React, { useEffect, useState } from 'react'
 import Benefits from './Benefits'
 
 const LongInfo = () => {
+    const [itemInfo, setItemInfo] = useState('معرفی')
+    const itemsInfo = [
+        {
+            name: "معرفی",
+            scrollFrom: 0,
+            scrollTo: 480,
+            endScroll: 480
+        },
+        {
+            name: "مشخصات",
+            scrollFrom: 481,
+            scrollTo: 760,
+            endScroll: 760
+        },
+        {
+            name: "فواید",
+            scrollFrom: 761,
+            scrollTo: 890,
+            endScroll: 890
+        },
+        {
+            name: "نظرات کاربران",
+            scrollFrom: 891,
+            scrollTo: 1120,
+            endScroll: 11000020
+        }
+    ]
+
+    const isBrowser = () => typeof window !== 'undefined';
+
+    const [scrollY, setScrollY] = useState(window.scrollY);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            setScrollY(window.scrollY);
+        };
+
+        window.addEventListener('scroll', handleScroll);
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
+
+    useEffect(() => {
+        for (let item of itemsInfo) {
+            if (scrollY >= item.scrollFrom && scrollY <= item.endScroll) {
+                setItemInfo(item.name);
+                break;
+            }
+        }
+    }, [scrollY]);
+
     return (
         <div className='w-full flex flex-col gap-7'>
-            <div className='w-full flex justify-between items-center'>
-                <div className='w-full text-center p-2 border-b-2 border-base-300 font-bold text-base-300 text-base cursor-pointer'>معرفی</div>
-                <div className='w-full text-center p-2 border-b-2 border-[#E3E3E3] font-bold text-[#ADADAD] text-base cursor-pointer'>مشخصات</div>
-                <div className='w-full text-center p-2 border-b-2 border-[#E3E3E3] font-bold text-[#ADADAD] text-base cursor-pointer'>مشخصات</div>
-                <div className='w-full text-center p-2 border-b-2 border-[#E3E3E3] font-bold text-[#ADADAD] text-base cursor-pointer'>مشخصات</div>
+            <div className='w-full max-w-[490px] flex justify-between items-center'>
+                {itemsInfo.map((item) => (
+                    <div key={item.name}
+                        className={`w-full text-center p-2 border-b-2 ${item.name === itemInfo ? "border-base-300 text-base-300" : "border-[#E3E3E3] text-[#ADADAD]"} font-bold text-base cursor-pointer`}
+                        onClick={() => {
+                            setItemInfo(item.name)
+                            if (!isBrowser()) return;
+                            window.scrollTo({ top: item.scrollTo, behavior: 'smooth' });
+                        }}
+                    >
+                        {item.name}
+                    </div>
+                ))}
             </div>
             <div className='w-[90%] mx-auto flex flex-col gap-4 justify-center items-center'>
                 <div className='w-full flex flex-col justify-center items-start gap-2 border-b-2 border-[#E3E3E3] py-2'>
