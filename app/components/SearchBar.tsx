@@ -36,7 +36,7 @@ export default function SearchBar({ handleOpenSearch, handleCloseSearch, openSea
             animate={openSearchBar ? "openSearch" : "closeSearch"}
             variants={variants}
             transition={{ duration: 0.3 }}
-            className={`${openSearchBar ? 'w-4/5' : 'w-40px]'} border-[#CBCBCB] ${focus ? "rounded-t-lg bg-white" : "rounded-lg"} border text-gray-400 h-10 flex items-center p-2 z-50 relative`}
+            className={`${openSearchBar ? 'w-4/5' : 'w-40px]'} border-[#CBCBCB] ${searchValue.length > 0 ? "rounded-t-lg bg-white" : "rounded-lg"} border text-gray-400 h-10 flex items-center p-2 z-50 relative`}
         >
             {openSearchBar &&
                 <>
@@ -68,8 +68,9 @@ export default function SearchBar({ handleOpenSearch, handleCloseSearch, openSea
                 onClick={handleOpenSearch}
                 className="cursor-pointer"
             />
-            {focus &&
-                <div className='absolute w-[calc(100%+2px)] h-[480px] bg-white -left-[1px] top-[38px] border-[#CBCBCB] border rounded-b-lg flex flex-col justify-center items-center'>
+            {focus && searchValue.length > 0 &&
+                <div className='absolute w-[calc(100%+2px)] h-[480px] bg-white -left-[1px] top-[38px] border-[#CBCBCB] border rounded-b-lg flex flex-col justify-center items-center'
+                >
                     {productsCount > 0 ?
                         <div className='w-full h-full'>
                             <div className='w-full h-[87.5%] overflow-auto ltr' id='scroll'>
@@ -90,6 +91,6 @@ export default function SearchBar({ handleOpenSearch, handleCloseSearch, openSea
                     }
                 </div>
             }
-        </motion.div>
+        </motion.div >
     )
 }

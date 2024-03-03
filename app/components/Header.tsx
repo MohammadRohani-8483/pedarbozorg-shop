@@ -35,7 +35,7 @@ const Header: React.FC = () => {
     }, []);
 
     useEffect(() => {
-        focus ?
+        focus && searchValue.length > 0 ?
             document.documentElement.classList.add('overflow-hidden')
             :
             document.documentElement.classList.remove('overflow-hidden')
@@ -94,7 +94,7 @@ const Header: React.FC = () => {
                         <SearchBar
                             handleOpenSearch={() => {
                                 setOpenSearchBar(true)
-                                setFocus(true)
+                                !isTop && setFocus(true)
                             }}
                             handleCloseSearch={() => {
                                 !isTop && setOpenSearchBar(false)
@@ -113,7 +113,7 @@ const Header: React.FC = () => {
                         className='w-full flex justify-center mt-1'
                         animate={openSearchBar ? "openSearch" : "closeSearch"}
                         variants={variants}
-                        transition={{ duration: 0.3 }}
+                        transition={{ duration: 0.3}}
                     >
                         <Menu />
                     </motion.div>
