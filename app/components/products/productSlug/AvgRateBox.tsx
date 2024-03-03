@@ -2,19 +2,21 @@ import Image from 'next/image'
 import React from 'react'
 import Star from './Star'
 
-const AvgRateBox = () => {
-    const avgRate = 3.5
-    const roundRate = Math.floor(avgRate)
+const AvgRateBox = ({ product }: any) => {
+    const roundRate = Math.floor(product.avg_rate)
 
     return (
         <div className='bg-white rounded-3xl w-full md:w-2/3 lg:max-w-[272px] h-auto border border-[#E3E3E3] p-4 flex flex-col justify-center items-center gap-4 md:mt-12'>
-            <div className='text-[#ADADAD] text-base font-bold'>
-                <span className='text-base-300 text-lg'>{avgRate}</span> از 5
-            </div>
+            {product.avg_rate > 0 &&
+                <div className='text-[#ADADAD] text-base font-bold'>
+                    <span className='text-base-300 text-lg'>{product.avg_rate}</span> از 5
+                </div>
+            }
             <div className='flex gap-4 justify-center items-center'>
                 {Array.from({ length: roundRate }, (_, i) => {
                     return (
-                        <Image key={i}
+                        <Image
+                            key={i}
                             src='/iconSax/like-yellow.svg'
                             alt="like"
                             width={18}
@@ -22,7 +24,7 @@ const AvgRateBox = () => {
                         />
                     )
                 })}
-                <Star present={(avgRate - roundRate) * 100} />
+                <Star present={(product.avg_rate - roundRate) * 100} />
                 {Array.from({ length: 4 - roundRate }, (_, i) => {
                     return (
                         <Image key={i}
@@ -34,9 +36,15 @@ const AvgRateBox = () => {
                     )
                 })}
             </div>
-            <h5 className='text-[#757575] text-xs'>
-                از مجموع {13} امتیاز
-            </h5>
+            {product.avg_rate > 0 ?
+                <h5 className='text-[#757575] text-xs'>
+                    از مجموع {product.rate_count} امتیاز
+                </h5>
+                :
+                <h5 className='text-[#757575] text-xs'>
+                    هنوز امتیازی ثبت نشده است.
+                </h5>
+            }
             <button
                 className='border border-base-300 rounded-md text-base-300 text-base rectangle-btn w-full transition-all duration-300 hover:bg-base-200 py-2'
             >

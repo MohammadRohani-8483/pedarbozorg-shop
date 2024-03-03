@@ -4,7 +4,7 @@ import Image from 'next/image'
 import ProductCard from '../../productCard'
 import Link from 'next/link'
 
-const RelatedProducts = () => {
+const RelatedProducts = ({ product }: any) => {
     return (
         <div className='flex w-[90%] mx-auto flex-col gap-8 items-center'>
             <div className='flex items-center justify-center gap-4'>

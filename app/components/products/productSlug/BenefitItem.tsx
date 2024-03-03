@@ -1,9 +1,9 @@
 import Image from 'next/image'
 import React from 'react'
 
-const BenefitItem = () => {
+const BenefitItem = ({ benefit }: { benefit: string }) => {
     return (
-        <div className='flex gap-4 w-full items-center justify-center'>
+        <div className='flex gap-4 w-full items-center justify-start'>
             <Image
                 src='/iconSax/tick-square-green.svg'
                 alt='Tick Icon'
@@ -11,7 +11,8 @@ const BenefitItem = () => {
                 height={24}
             />
             <p className='text-sm text-[#626262] text-justify leading-6'>
-                از ابزارهای کاربردی برای به پایان متخصصان شناخت ایجاد زیادی شناخت را
+                {benefit}
+                
             </p>
         </div>
     )

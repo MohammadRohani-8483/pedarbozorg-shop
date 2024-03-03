@@ -12,7 +12,7 @@ const ImageGallery = () => {
                 />
             </div>
             <div className='w-full grid grid-cols-4 gap-2'>
-                {Array.from({ length: 3 }, (_, i) => {
+                {[1, 1, ].slice(0,3).map((_, i) => {
                     return (
                         <div key={i} className='relative w-full aspect-square rounded-3xl overflow-hidden border-2 border-[#E3E3E3]'>
                             <Image

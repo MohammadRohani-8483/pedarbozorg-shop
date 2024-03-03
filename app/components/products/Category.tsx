@@ -55,7 +55,7 @@ const Category = ({ categoryState, setCategory }: any) => {
                             id={`my_option1${category.value}`}
                             style={{ accentColor: "#3D8361" }}
                             value={category.value}
-                            onClick={(e: any) => handleCheckboxChange(category.value)}
+                            onChange={(e: any) => handleCheckboxChange(category.value)}
                             checked={categoryState.includes(category.value)}
                             className='cursor-pointer'
                         />
