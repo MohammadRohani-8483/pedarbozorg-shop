@@ -1,16 +1,38 @@
 import Image from 'next/image'
 import React from 'react'
+import { comment } from './CommentSection'
+import moment from "moment-jalaali";
 
-const Comment = () => {
-    const commentRate = 5
+const Comment = ({ comment }: { comment: comment }) => {
+    const datePartsRegex = /(?<!\d)\d+(?!\d)/g;
+
+    const dateParts = comment.created_at.match(datePartsRegex)!;
+
+    // تبدیل آرایه به رشته
+    const commentDate = {
+        year: +dateParts[0],
+        month: +dateParts[1],
+        day: +dateParts[2],
+        fullDate: new Date(`${+dateParts[0]}/${+dateParts[1]}/${+dateParts[2]}`)
+    }
+    const now = new Date()
+    const isCommentForThisYear = now.getFullYear() - commentDate.year === 0
+    console.log(new Intl.DateTimeFormat('fa-IR-u-nu-latn', { month: 'short', day: 'numeric', year: 'numeric' }).format(commentDate.fullDate))
+    const shamsiDate = {
+        year: new Intl.DateTimeFormat('fa-IR-u-nu-latn', { year: 'numeric' }).format(commentDate.fullDate),
+        month: new Intl.DateTimeFormat('fa-IR-u-nu-latn', { month: 'short' }).format(commentDate.fullDate),
+        day: new Intl.DateTimeFormat('fa-IR-u-nu-latn', { day: 'numeric' }).format(commentDate.fullDate)
+    }
+    console.log(shamsiDate);
+
     return (
         <div className='flex flex-col gap-2 w-full justify-center items-center'>
             <div className='flex w-full h-6 justify-start items-center gap-6'>
                 <div
                     className='flex justify-center items-center rounded-full gap-1 px-3 py-1 text-base text-white font-bold'
-                    style={{ backgroundColor: commentRate === 5 ? "#3D8361" : commentRate === 4 ? "#4BA278" : commentRate === 3 ? "#DD9C00" : commentRate === 2 ? "#A9791C" : "#C62020" }}
+                    style={{ backgroundColor: comment.rate === 5 ? "#3D8361" : comment.rate === 4 ? "#4BA278" : comment.rate === 3 ? "#DD9C00" : comment.rate === 2 ? "#A9791C" : "#C62020" }}
                 >
-                    {commentRate}
+                    {comment.rate}
                     <Image
                         src='/iconSax/like-yellow.svg'
                         alt="like"
@@ -19,15 +41,15 @@ const Comment = () => {
                     />
                 </div>
                 <div className='text-sm text-[#ADADAD]'>
-                    23 مهر
+                    {isCommentForThisYear ? `${shamsiDate.day} ${shamsiDate.month}` : `${shamsiDate.day} ${shamsiDate.month} ${shamsiDate.year}`}
                 </div>
                 <div className='text-sm text-[#ADADAD]'>
-                    پروین مظفری
+                    {comment.user.full_name}
                 </div>
             </div>
             <div className='w-full h-[1px] bg-[#EDEDED]' />
-            <p className='text-base text-black leading-7 text-justify'>
-                اهل طراحان موجود امید شرایط و سطر از علی الخصوص  شرایط شناخت با، که، متنوع سخت که بهبود متن موجود ساختگی کتابهای طراحی جوابگوی که، و سطر گرافیک داشت لورم راهکارها متخصصان اصلی اهل از ابزارهای کاربردی کرد علی الخصوص  و فرهنگ پیشرو در نامفهوم، ارائه ایپسوم
+            <p className='w-full text-right text-base text-black leading-7 text-justify'>
+                {comment.text}
             </p>
             <div className='w-full h-[1px] bg-[#EDEDED]' />
             <div className='flex justify-between items-center w-full'>
@@ -39,7 +61,7 @@ const Comment = () => {
                 />
                 <div className='flex justify-center items-center gap-2 text-[#757575] text-base'>
                     <div className='flex justify-center items-center gap-1.5'>
-                        1
+                        {comment.feedback.dislike_count}
                         <Image
                             src='/iconSax/dislike-red-regular.png'
                             alt="dislike"
@@ -48,7 +70,7 @@ const Comment = () => {
                         />
                     </div>
                     <div className='flex justify-center items-center gap-1.5'>
-                        234
+                        {comment.feedback.like_count}
                         <Image
                             src='/iconSax/like-green-regular.svg'
                             alt="dislike"

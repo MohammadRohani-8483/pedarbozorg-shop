@@ -9,7 +9,7 @@ const AvgRateBox = ({ product }: any) => {
         <div className='bg-white rounded-3xl w-full md:w-2/3 lg:max-w-[272px] h-auto border border-[#E3E3E3] p-4 flex flex-col justify-center items-center gap-4 md:mt-12'>
             {product.avg_rate > 0 &&
                 <div className='text-[#ADADAD] text-base font-bold'>
-                    <span className='text-base-300 text-lg'>{product.avg_rate}</span> از 5
+                    <span className='text-base-300 text-lg'>{product.avg_rate.toFixed(1)}</span> از 5
                 </div>
             }
             <div className='flex gap-4 justify-center items-center'>

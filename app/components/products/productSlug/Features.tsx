@@ -3,7 +3,7 @@ import React from 'react'
 
 const Features = () => {
     return (
-        <div className='flex justify-between items-start w-full max-w-[412px]'>
+        <div className='flex justify-between items-start gap-2 w-full max-w-[412px]'>
             <div className='flex flex-col gap-2 items-center justify-center'>
                 <Image
                     src='/iconSax/moneys.svg'

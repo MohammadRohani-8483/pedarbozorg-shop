@@ -1,17 +1,51 @@
+import axios from 'axios'
 import Image from 'next/image'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import PaginationButtons from '../../PaginationButtons'
 import Comment from './Comment'
 
-const CommentSection = ({ itemsInfo }: any) => {
-    const commentCount = 7
+export type comment = {
+    id: number,
+    text: string,
+    user: {
+        id: string,
+        full_name: string
+    },
+    created_at: string,
+    topic_object_id: number,
+    feedback: {
+        like_count: number,
+        dislike_count: number,
+        has_liked: boolean,
+        has_disliked: boolean
+    },
+    is_anonymous: boolean,
+    featured_image: null | string,
+    rate: number
+}
+
+const CommentSection = ({ itemsInfo, commentsID }: any) => {
+    const [commentsCount, setCommentsCount] = useState(0)
+    const [comments, setComments] = useState<comment[]>([])
+    const api = '/api/store-api/products-public/'
+
+    useEffect(() => {
+        axios.get(`${api}${commentsID}/comments`)
+            .then(res => {
+                setCommentsCount(res.data.count)
+                setComments(res.data.results)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }, [commentsID]);
 
     return (
         <div ref={itemsInfo[3].ref} className='flex flex-col justify-center items-center gap-4 justify-center items-start w-full py-2'>
             <h2 className='text-xl font-bold text-base-300'>
                 نظرات کاربران
             </h2>
-            {false ?
+            {commentsCount > 0 ?
                 <>
                     <div
                         // onClick={() => {
@@ -30,17 +64,15 @@ const CommentSection = ({ itemsInfo }: any) => {
                     </div>
                     <div className='w-full flex flex-col gap-4 justify-center items-center'>
                         <div className='w-full h-[1px] bg-[#CBCBCB]' />
-                        <Comment />
-                        <div className='w-full h-[1px] bg-[#CBCBCB]' />
-                        <Comment />
-                        <div className='w-full h-[1px] bg-[#CBCBCB]' />
-                        <Comment />
-                        <div className='w-full h-[1px] bg-[#CBCBCB]' />
-                        <Comment />
-                        <div className='w-full h-[1px] bg-[#CBCBCB]' />
-                        <Comment />
-                        <div className='w-full h-[1px] bg-[#CBCBCB]' />
-                        {Math.ceil(commentCount / 5) > 1 && < PaginationButtons pageCount={Math.ceil((commentCount - 5) / 10) + 1} />}
+                        {
+                            comments.map(comment => (
+                                <React.Fragment key={comment.id}>
+                                    <Comment comment={comment} />
+                                    <div className='w-full h-[1px] bg-[#CBCBCB]' />
+                                </React.Fragment>
+                            ))
+                        }
+                        {Math.ceil(commentsCount / 5) > 1 && < PaginationButtons pageCount={Math.ceil((commentsCount - 5) / 10) + 1} />}
                     </div>
                 </>
                 :

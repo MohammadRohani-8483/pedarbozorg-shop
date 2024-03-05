@@ -19,7 +19,7 @@ const ShortInfo = ({ product }: any) => {
                     <div className='flex justify-center items-center gap-1'>
                         <FaStar className='text-[#FFC436]' />
                         <p className='text-[#757575] text-base '>
-                            {product.avg_rate}
+                            {product.avg_rate.toFixed(1)}
                         </p>
                         <p className='text-[#ADADAD] text-base'>
                             ({product.rate_count})
@@ -42,9 +42,9 @@ const ShortInfo = ({ product }: any) => {
                 </h3>
                 <div className='flex flex-col  gap-2 '>
                     {product.specifications?.map((specification: specification) => (
-                        <div key={specification.id} className='flex justify-center items-center gap-4'>
+                        <div key={specification.id} className='flex justify-start items-center gap-4'>
                             <p className='text-[#ADADAD] text-sm'>
-                                {specification.key}
+                                {specification.key}{!specification.key.includes(":") ? " :" : ''}
                             </p>
                             <h3 className='text-base text-[#626262] font-bold'>
                                 {specification.value}

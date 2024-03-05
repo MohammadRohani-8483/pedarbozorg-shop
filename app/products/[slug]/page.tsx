@@ -17,13 +17,6 @@ import formatNumber from '@/public/Functions/formatNumber';
 import AddToCartItem from '@/app/components/products/productSlug/AddToCartItem';
 import AddToCartBox from '@/app/components/products/productSlug/AddToCartBox';
 
-type itemsInfo = {
-    name: string;
-    scrollFrom: number;
-    scrollThere: number;
-    scrollTo: number;
-}[]
-
 export default function ProductsSlug() {
     const { slug } = useParams()
     const [product, setProduct] = useState<any>({})
@@ -155,7 +148,7 @@ export default function ProductsSlug() {
                     <LongInfo product={product} itemsInfo={itemsInfo} />
                     <div className='w-[90%] mx-auto flex flex-col md:flex-row gap-4 justify-center items-center md:items-start ltr'>
                         <AvgRateBox product={product} />
-                        <CommentSection itemsInfo={itemsInfo} />
+                        <CommentSection commentsID={product.id} itemsInfo={itemsInfo} />
                     </div>
                     {/* <RelatedProducts product={product.related_products} /> */}
                 </>

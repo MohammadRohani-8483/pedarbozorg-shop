@@ -37,7 +37,7 @@ const Products = () => {
   useEffect(() => {
     const categoryParams = categories?.map((category) => `categories=${category}`).join('&');
 
-    axios.get(`${api}?${currPage !== 1 ? `page=${currPage}` : ""}${searchValue ? `&search=${searchValue}` : ''}&ordering=${activeOrder}${isAvailable ? '&available=true' : ''}${minPriceInput > 0 ? `&min_price=${minPriceInput}` : ""}${maxPriceInput < maxPrice ? `&max_price=${maxPriceInput}` : ''}${categoryParams.length > 0 ? `&${categoryParams}` : ''}`)
+    axios.get(`${api}?${`page=${currPage}`}${searchValue ? `&search=${searchValue}` : ''}&ordering=${activeOrder}${isAvailable ? '&available=true' : ''}${minPriceInput > 0 ? `&min_price=${minPriceInput}` : ""}${maxPriceInput < maxPrice ? `&max_price=${maxPriceInput}` : ''}${categoryParams.length > 0 ? `&${categoryParams}` : ''}`)
       // axios.get(api, {
       //   params: {
       //     search:searchParams.get("search"),
