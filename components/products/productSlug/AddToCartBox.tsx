@@ -36,13 +36,15 @@ const AddToCartBox = ({ product }: any) => {
                         />
                     </h2>
                     <div className='h-[1px] w-full bg-[#E3E3E3]' />
-                    {product.variants?.sort((a: any, b: any) => a.shatoot_info.final_price - b.shatoot_info.final_price).map((product: any, i: number, array: Array<any>) => (
-                        <React.Fragment key={product.id}>
+                    {product.variants?.sort((a: any, b: any) => a.shatoot_info.final_price - b.shatoot_info.final_price).map((variant: any, i: number, array: Array<any>) => (
+                        <React.Fragment key={variant.id}>
                             <AddToCartItem
-                                image={product.image}
-                                name={product.shatoot_info.good_name}
-                                price={product.shatoot_info.sell_price}
-                                priceWithOffer={product.shatoot_info.final_price}
+                                product={variant}
+                                image={variant.image}
+                                name={variant.shatoot_info.good_name}
+                                price={variant.shatoot_info.sell_price}
+                                priceWithOffer={variant.shatoot_info.final_price}
+                                slug={product.slug}
                             />
                             {i < array.length - 1 && <div className='h-[1px] w-full bg-[#E3E3E3]' />}
                         </React.Fragment>

@@ -14,13 +14,9 @@ const ProductCard = ({ price, link, image, name, priceWithOffer, score, product 
     const offerPresent = (price - priceWithOffer) / price * 100
 
     const [isLike, setIsLike] = useState(false)
-    const [isShopingCard, setIsShopingCard] = useState(false)
     const [isHover, setIsHover] = useState(false)
 
     const cart = useSelector((state: any) => state.cart.cart)
-
-
-    // console.log('yes');
 
     const cartItem = {
         id: product.cheapest_variant_id,
@@ -42,12 +38,10 @@ const ProductCard = ({ price, link, image, name, priceWithOffer, score, product 
     const dispatch = useDispatch()
     const handleAddToCart = () => {
         dispatch(addToCart(cartItem))
-        setIsShopingCard(true)
     }
 
     const handleDeleteFromCart = () => {
         dispatch(removeFromCart(cartItem))
-        setIsShopingCard(false)
     }
     return (
         <motion.div
