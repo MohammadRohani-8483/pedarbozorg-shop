@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import StoreProvider from "public/redux/StoreProvider";
-import Header from "./components/Header";
-import ScrollToTop from "./components/ScrollToTop";
-import Footer from "./components/Footer";
+import Header from "@/components/Header";
+import ScrollToTop from "@/components/ScrollToTop";
+import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "پدربزرگ",

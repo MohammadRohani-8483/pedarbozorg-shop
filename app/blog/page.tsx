@@ -1,11 +1,11 @@
 'use client'
 import { blogs } from 'public/data/blogs'
 import React, { useState } from 'react'
-import Category from 'public/components/blog/Category'
-import BlogCard from '@/public/components/home/pedarBozorgInLife/blogsDesktop/BlogCard'
-import BlogCardMobile from '@/public/components/home/pedarBozorgInLife/blogsMobile/BlogCardMobile'
-import PaginationButtons from 'public/components/PaginationButtons'
-import SearchBarProducts from 'public/components/products/SearchBarProducts'
+import Category from '@/components/blog/Category'
+import BlogCard from '@/components/home/pedarBozorgInLife/blogsDesktop/BlogCard'
+import BlogCardMobile from '@/components/home/pedarBozorgInLife/blogsMobile/BlogCardMobile'
+import PaginationButtons from '@/components/PaginationButtons'
+import SearchBarProducts from '@/components/products/SearchBarProducts'
 
 const Blog = () => {
     const [currPage, setCurrPage] = useState(1)
@@ -57,7 +57,7 @@ const Blog = () => {
             </div>
             {Math.ceil(blogsCount / 12) > 1 &&
                 <PaginationButtons
-                    productsCount={blogsCount}
+                    pageCount={Math.ceil(blogsCount / 12)}
                     setCurrentPage={setCurrPage}
                 />
             }

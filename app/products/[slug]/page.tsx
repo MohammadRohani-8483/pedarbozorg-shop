@@ -3,14 +3,14 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useParams } from 'next/navigation'
 import axios from 'axios';
 import Image from 'next/image';
-import ImageGallery from '@/app/components/products/productSlug/ImageGallery';
-import Features from '@/app/components/products/productSlug/Features';
-import ShortInfo from '@/app/components/products/productSlug/ShortInfo';
-import LongInfo from '@/app/components/products/productSlug/LongInfo';
+import ImageGallery from '@/components/products/productSlug/ImageGallery';
+import Features from '@/components/products/productSlug/Features';
+import ShortInfo from '@/components/products/productSlug/ShortInfo';
+import LongInfo from '@/components/products/productSlug/LongInfo';
 import Link from 'next/link';
-import AvgRateBox from '@/app/components/products/productSlug/AvgRateBox';
-import CommentSection from '@/app/components/products/productSlug/CommentSection';
-import AddToCartBox from '@/app/components/products/productSlug/AddToCartBox';
+import AvgRateBox from '@/components/products/productSlug/AvgRateBox';
+import CommentSection from '@/components/products/productSlug/CommentSection';
+import AddToCartBox from '@/components/products/productSlug/AddToCartBox';
 
 export default function ProductsSlug() {
     const { slug } = useParams()
