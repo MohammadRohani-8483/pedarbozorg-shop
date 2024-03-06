@@ -76,7 +76,7 @@ const ShopingCardItem = ({ image, link, price, priceWithOffer, weight, name, cou
                     <div className='flex flex-col justify-center items-center gap-2'>
                         <div
                             onClick={handleIncrementQuantity}
-                            className='bg-[#E0F1E9] hover:bg-[#C1E2D2] rounded-lg text-[#3D8361] p-1.5 cursor-pointer'
+                            className='bg-[#E0F1E9] size-8 hover:bg-[#C1E2D2] rounded-lg text-[#3D8361] p-1.5 cursor-pointer'
                         >
                             <Image
                                 src='/iconSax/add.svg'
@@ -89,7 +89,7 @@ const ShopingCardItem = ({ image, link, price, priceWithOffer, weight, name, cou
                             {count > 1 ?
                                 <div
                                     onClick={handleDecrementQuantity}
-                                    className='bg-[#E0F1E9] hover:bg-[#C1E2D2] rounded-lg text-[#3D8361] p-1.5 cursor-pointer'>
+                                    className='bg-[#E0F1E9] size-8 hover:bg-[#C1E2D2] rounded-lg text-[#3D8361] p-1.5 cursor-pointer'>
                                     <Image
                                         src='/iconSax/minus.svg'
                                         alt='minus product count'
@@ -100,7 +100,7 @@ const ShopingCardItem = ({ image, link, price, priceWithOffer, weight, name, cou
                                 :
                                 <div
                                     onClick={handleDeleteFromCart}
-                                    className='bg-[#E0F1E9] hover:bg-[#C1E2D2] rounded-lg text-[#3D8361] p-1.5 cursor-pointer'
+                                    className='bg-[#E0F1E9] size-8 hover:bg-[#C1E2D2] rounded-lg text-[#3D8361] p-1.5 cursor-pointer'
                                 >
                                     <Image
                                         src='/iconSax/trash.svg'
