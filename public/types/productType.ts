@@ -5,5 +5,21 @@ export type product = {
     price: number,
     link: string,
     score?: number,
-    priceWithOffer: number ,
+    priceWithOffer: number,
+}
+
+export type shopCartItem = {
+    id: number,
+    shatootInfo: {
+        sellPrice: number,
+        finalPrice: number,
+        discount: number,
+    },
+    product: {
+        id: number,
+        featuredImage: string,
+        name: string,
+        slug: string,
+    },
+    quantity:number
 }

@@ -7,14 +7,9 @@ import ImageGallery from '@/app/components/products/productSlug/ImageGallery';
 import Features from '@/app/components/products/productSlug/Features';
 import ShortInfo from '@/app/components/products/productSlug/ShortInfo';
 import LongInfo from '@/app/components/products/productSlug/LongInfo';
-import Comment from '@/app/components/products/productSlug/Comment';
-import PaginationButtons from '@/app/components/PaginationButtons';
-import RelatedProducts from '@/app/components/products/productSlug/RelatedProducts';
 import Link from 'next/link';
 import AvgRateBox from '@/app/components/products/productSlug/AvgRateBox';
 import CommentSection from '@/app/components/products/productSlug/CommentSection';
-import formatNumber from '@/public/Functions/formatNumber';
-import AddToCartItem from '@/app/components/products/productSlug/AddToCartItem';
 import AddToCartBox from '@/app/components/products/productSlug/AddToCartBox';
 
 export default function ProductsSlug() {
@@ -57,38 +52,11 @@ export default function ProductsSlug() {
         }
     ]
 
-    // const [itemsInfo, setItemsInfo] = useState<any>([])
+    const TITLE = `قیمت و خرید ${product?.name}`
 
-    // const itemsInfoRefs = useRef(namesInfos.map(() => React.createRef()))
-
-    // useEffect(() => {
-    //     const calculateScrollPositions = () => {
-    //         const newItemsInfo: itemsInfo = [];
-    //         itemsInfoRefs.current.forEach((item: any, i, array) => {
-    //             const element = item;
-    //             if (element) {
-    //                 const rect = element.getBoundingClientRect();
-    //                 let scrollFrom = rect.top + 100;
-    //                 let scrollThere;
-    //                 i === 0 ? scrollThere = 0 : scrollThere = scrollFrom
-    //                 let scrollTo;
-    //                 i === array.length - 1 ? scrollTo = 120000 : scrollTo = rect.top + 100 + rect.height;
-
-    //                 newItemsInfo.push({
-    //                     name: namesInfos[i],
-    //                     scrollFrom,
-    //                     scrollThere,
-    //                     scrollTo,
-    //                 });
-    //                 setItemsInfo(newItemsInfo);
-    //             }
-
-    //         })
-    //     };
-    // }, [itemsInfoRefs])
-
-
-    // console.log(product.categories[0]?.title || 0)
+    useEffect(() => {
+        document.title = TITLE
+    }, [ product])
 
     return (
         <main className='w-full mx-auto max-w-[1136px] flex flex-col justify-center items-center gap-4 py-20 md:py-[117px]'>
@@ -138,7 +106,7 @@ export default function ProductsSlug() {
                                 />
                             </div>
                         </div>
-                        <ImageGallery />
+                        <ImageGallery image={product.featured_image}/>
                         <div className='flex flex-col w-full gap-4 justify-center items-center'>
                             <ShortInfo product={product} />
                             <Features />

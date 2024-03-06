@@ -8,7 +8,7 @@ import tooman from "@/public/Image/tooman.svg";
 import formatNumber from '@/public/Functions/formatNumber';
 import { motion } from 'framer-motion';
 import { useDispatch, useSelector } from 'react-redux';
-import { addToCart } from '@/public/redux/store/cart';
+import { addToCart, removeFromCart } from '@/public/redux/store/cart';
 
 const ProductCard = ({ price, link, image, name, priceWithOffer, score, product }: any) => {
     const offerPresent = (price - priceWithOffer) / price * 100
@@ -17,28 +17,38 @@ const ProductCard = ({ price, link, image, name, priceWithOffer, score, product 
     const [isShopingCard, setIsShopingCard] = useState(false)
     const [isHover, setIsHover] = useState(false)
 
+    const cart = useSelector((state: any) => state.cart.cart)
+
 
     // console.log('yes');
 
-    // const cartItem = {
-    //     id: product.cheapest_variant_id,
-    //     shatootInfo: {
-    //         sellPrice: product.min_sell_price,
-    //         finalPrice: product.min_price,
-    //         discount: product.min_price - product.min_sell_price,
-    //     },
-    //     product: {
-    //         id: product.id,
-    //         featuredImage: product.featured_image,
-    //         name: product.name,
-    //         slug: product.slug,
-    //     },
-    // }
+    const cartItem = {
+        id: product.cheapest_variant_id,
+        shatootInfo: {
+            sellPrice: product.min_sell_price,
+            finalPrice: product.min_price,
+            discount: product.min_price - product.min_sell_price,
+        },
+        product: {
+            id: product.id,
+            featuredImage: product.featured_image,
+            name: product.name,
+            slug: product.slug,
+        },
+    }
+
+    const isProductToCart = Boolean(Array(...cart).find((item: any) => item.id === cartItem.id))
 
     const dispatch = useDispatch()
-    // const handleAddToCart = () => {
-    //     dispatch(addToCart(cartItem))
-    // }
+    const handleAddToCart = () => {
+        dispatch(addToCart(cartItem))
+        setIsShopingCard(true)
+    }
+
+    const handleDeleteFromCart = () => {
+        dispatch(removeFromCart(cartItem))
+        setIsShopingCard(false)
+    }
     return (
         <motion.div
             whileHover={{ boxShadow: "0px 0px 18.6px 0px rgba(61, 131, 97, 0.22)" }}
@@ -98,9 +108,9 @@ const ProductCard = ({ price, link, image, name, priceWithOffer, score, product 
                                 animate={isHover ? { x: 0 } : { x: "-30px" }}
                                 transition={{ duration: 0.3 }}
                             >
-                                {isShopingCard ?
+                                {isProductToCart ?
                                     <Image
-                                        // onClick={() => setIsShopingCard(false)}
+                                        onClick={handleDeleteFromCart}
                                         src='/iconSax/is-shopping-cart-product.svg'
                                         alt="shoping cart"
                                         width={20}
@@ -109,10 +119,7 @@ const ProductCard = ({ price, link, image, name, priceWithOffer, score, product 
                                     />
                                     :
                                     <Image
-                                        onClick={() => {
-                                            // handleAddToCart()
-                                            setIsShopingCard(true)
-                                        }}
+                                        onClick={handleAddToCart}
                                         src='/iconSax/shopping-cart-product.svg'
                                         alt="shoping cart"
                                         width={20}
@@ -186,14 +193,42 @@ const ProductCard = ({ price, link, image, name, priceWithOffer, score, product 
             </div>
             <div className='lg:hidden w-full flex justify-between items-center px-2'>
                 {isLike ?
-                    <Image onClick={() => setIsLike(false)} src='/iconSax/is-like.svg' alt="like" width={20} height={20} className='cursor-pointer' />
+                    <Image
+                        // onClick={() => setIsLike(false)}
+                        src='/iconSax/is-like.svg'
+                        alt="like"
+                        width={20}
+                        height={20}
+                        className='cursor-pointer'
+                    />
                     :
-                    <Image onClick={() => setIsLike(true)} src='/iconSax/like.png' alt="like" width={20} height={20} className='cursor-pointer' />
+                    <Image
+                        // onClick={() => setIsLike(true)}
+                        src='/iconSax/like.png'
+                        alt="like"
+                        width={20}
+                        height={20}
+                        className='cursor-pointer'
+                    />
                 }
-                {isShopingCard ?
-                    <Image onClick={() => setIsShopingCard(false)} src='/iconSax/is-shopping-cart-product.svg' alt="shoping cart" width={20} height={20} className='cursor-pointer' />
+                {isProductToCart ?
+                    <Image
+                        onClick={handleDeleteFromCart}
+                        src='/iconSax/is-shopping-cart-product.svg'
+                        alt="shoping cart"
+                        width={20}
+                        height={20}
+                        className='cursor-pointer'
+                    />
                     :
-                    <Image onClick={() => setIsShopingCard(true)} src='/iconSax/shopping-cart-product.svg' alt="shoping cart" width={20} height={20} className='cursor-pointer' />
+                    <Image
+                        onClick={handleAddToCart}
+                        src='/iconSax/shopping-cart-product.svg'
+                        alt="shoping cart"
+                        width={20}
+                        height={20}
+                        className='cursor-pointer'
+                    />
                 }
             </div>
         </motion.div>

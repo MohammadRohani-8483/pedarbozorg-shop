@@ -1,15 +1,20 @@
 'use client'
 import formatNumber from '@/public/Functions/formatNumber'
 import Image from 'next/image'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import ShopingCardItem from './ShopingCardItem'
 import { motion } from 'framer-motion';
 import { useDispatch, useSelector } from 'react-redux';
+import { shopCartItem } from '@/public/types/productType'
 
 const ShopingCard = ({ isVisible }: any) => {
+    const [totalFinalPrice, setTotalFinalPrice] = useState(0)
 
     const cart = useSelector((state: any) => state.cart.cart)
-    console.log(cart);
+
+    useEffect(() => {
+        setTotalFinalPrice(cart.reduce((previous:any, current:any) => previous + current?.shatootInfo.finalPrice*current?.quantity, 0))
+    }, [cart])
 
     const variants = {
         vsisble: {
@@ -34,7 +39,7 @@ const ShopingCard = ({ isVisible }: any) => {
                 cart.length > 0 ?
                     <>
                         <div className='w-full h-[266px] overflow-auto overflow-x-hidden flex flex-col gap-2 ltr' id='scroll'>
-                            {cart.map((cartItem: any, i: any, array: any) => {
+                            {cart.map((cartItem: shopCartItem, i: number, array: shopCartItem[]) => {
                                 return (
                                     <div
                                         className='gap-2 flex flex-col justify-center items-center'
@@ -48,6 +53,7 @@ const ShopingCard = ({ isVisible }: any) => {
                                             // weight={130}
                                             name={cartItem.product.name}
                                             count={cartItem.quantity}
+                                            product={cartItem}
                                         />
                                         {i < array.length - 1 && <div className='w-[432px] h-[1px] bg-[#E3E3E3]'></div>}
                                     </div>
@@ -58,11 +64,11 @@ const ShopingCard = ({ isVisible }: any) => {
                             <div className='flex justify-center items-center gap-1 text-[#626262] text-[10px]'>
                                 مجموع قیمت
                                 <span className='text-base font-bold'>
-                                    {4}
+                                    {cart.length}
                                 </span>
                                 کالا:
                                 <span className='text-xl text-[#353535] font-bold'>
-                                    {formatNumber(255000)}
+                                    {formatNumber(+totalFinalPrice)}
                                 </span>
                                 <Image
                                     src='/Image/gray-Tooman.svg'

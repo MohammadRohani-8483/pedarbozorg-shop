@@ -1,7 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-// export const getCartFRomServer = createAsyncThunk()
-
 type cartItem = {
     id: number,
     shatootInfo: {
@@ -23,9 +21,11 @@ export interface CartState {
     cart: cartItem[];
 }
 
+const cartItems = typeof window !== 'undefined' && (localStorage?.getItem("shoping_cart") ? JSON.parse(localStorage?.getItem("shoping_cart")!) : [])
+
 const slice = createSlice({
     name: 'cart',
-    initialState: { cart: [] } as CartState,
+    initialState: { cart: cartItems } as CartState,
     reducers: {
         addToCart: (state, action) => {
             const itemInCart = state.cart.find(
@@ -41,14 +41,17 @@ const slice = createSlice({
                     quantity: 1,
                 });
             }
+            localStorage.setItem('shoping_cart', JSON.stringify(state.cart.map(item => item)))
         },
         removeFromCart: (state, action) => {
-            const cartWithoutItem = state.cart.filter((item) => item.id !== action.payload);
+            const cartWithoutItem = state.cart.filter((item) => item.id !== action.payload.id);
             state.cart = cartWithoutItem;
+            localStorage.setItem('shoping_cart', JSON.stringify(state.cart.map(item => item)))
         },
         incrementQuantity: (state, action) => {
             const item = state.cart.find((item) => item.id === action.payload.id);
             item!.quantity++;
+            localStorage.setItem('shoping_cart', JSON.stringify(state.cart.map(item => item)))
         },
         decrementQuantity: (state, action) => {
             const item = state.cart.find((item) => item.id === action.payload.id);
@@ -57,15 +60,14 @@ const slice = createSlice({
             } else {
                 item!.quantity--;
             }
+            localStorage.setItem('shoping_cart', JSON.stringify(state.cart.map(item => item)))
         },
-        getTotalFinalPrice: (state) => {
-            state.cart.reduce((prev, next): any => prev.totalFinalPrice() + next.totalFinalPrice())
-        },
-        getTotalSellPrice: (state) => {
-            state.cart.reduce((prev, next): any => prev.totalSellPrice() + next.totalSellPrice())
-        },
+        deleteAllItems: (state) => {
+            state.cart = []
+            localStorage.removeItem('shoping_cart')
+        }
     }
 })
 export default slice.reducer
-export const { addToCart, removeFromCart, incrementQuantity, decrementQuantity, getTotalFinalPrice,getTotalSellPrice } =
+export const { addToCart, removeFromCart, incrementQuantity, decrementQuantity } =
     slice.actions;

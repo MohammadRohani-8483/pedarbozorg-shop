@@ -17,13 +17,12 @@ const Comment = ({ comment }: { comment: comment }) => {
     }
     const now = new Date()
     const isCommentForThisYear = now.getFullYear() - commentDate.year === 0
-    console.log(new Intl.DateTimeFormat('fa-IR-u-nu-latn', { month: 'short', day: 'numeric', year: 'numeric' }).format(commentDate.fullDate))
+
     const shamsiDate = {
         year: new Intl.DateTimeFormat('fa-IR-u-nu-latn', { year: 'numeric' }).format(commentDate.fullDate),
         month: new Intl.DateTimeFormat('fa-IR-u-nu-latn', { month: 'short' }).format(commentDate.fullDate),
         day: new Intl.DateTimeFormat('fa-IR-u-nu-latn', { day: 'numeric' }).format(commentDate.fullDate)
     }
-    console.log(shamsiDate);
 
     return (
         <div className='flex flex-col gap-2 w-full justify-center items-center'>

@@ -10,6 +10,8 @@ import ProductCard from '../components/ProductCard'
 import PaginationButtons from '../components/PaginationButtons'
 import FiltersMobile from '../components/products/filters/FiltersMobile'
 import OrderingMobile from '../components/products/ordering/OrderingMobile'
+// import { Head } from 'next/document'
+import Head, { defaultHead } from 'next/head';
 
 const Products = () => {
   const [searchValue, setSearchValue] = useState('')
@@ -56,6 +58,14 @@ const Products = () => {
         setSearchValue(params.get("search") || "")
       })
   }, [currPage, activeOrder, categories, isAvailable, minPriceInput, maxPriceInput, searchValue]);
+
+  // const { title } = useHead
+  const TITLE = "پدربزرگ - محصولات"
+
+  useEffect(() => {
+    document.title = TITLE
+  }, [])
+
 
   return (
     <main className='w-[90%] max-w-[1136px] mx-auto py-16 md:py-[117px] flex gap-4'>
