@@ -37,15 +37,21 @@ const EnterPhoneNumberForm = ({ handleClose, inputValue, setInputValue, setIsEnt
                 <div className='flex flex-col w-full gap-6'>
                     <div className='w-full flex flex-col justify-center items-center gap-4'>
                         <h2 className="text-sm text-[#757575]">شماره همراه خود را وارد کنید</h2>
-                        <input maxLength={11} type="tel"
-                            placeholder="شماره همراه"
-                            required
-                            value={inputValue}
-                            onChange={(e: any) => {
-                                setInputValue(e.nativeEvent.target.value)
-                            }}
-                            className='w-full h-10 placeholder:text-base p-2 focus:outline-none border border-[#CBCBCB] rounded-lg text-black'
-                        />
+                        <div className='relative'>
+                            <input maxLength={11} type="tel"
+                                className='peer w-full h-10 placeholder:text-base p-2 outline-none focus:border-base-300 border border-[#CBCBCB] rounded-lg text-black'
+                                id='input_phone'
+                                placeholder=''
+                                required
+                                value={inputValue}
+                                onChange={(e: any) => {
+                                    setInputValue(e.nativeEvent.target.value)
+                                }}
+                            />
+                            <label htmlFor="input_phone" className='text-[10px] peer-placeholder-shown:text-base peer-focus:text-base-300 text-gray-400 absolute -top-2.5 right-4 bg-white px-1 peer-placeholder-shown:right-2 peer-placeholder-shown:top-2 transition-all'>
+                                شماره همراه
+                            </label>
+                        </div>
                     </div>
                     <button onClick={handleSubmit} className='flex justify-center solid-btn rectangle-btn w-full'>ورود</button>
                 </div>
