@@ -98,7 +98,7 @@ const AddToCartItem = ({ product, price, priceWithOffer, name, image, slug }: an
                 {!isProductToCart ?
                     <button
                     onClick={handleAddToCart}
-                        className='solid-btn square-btn p-4 w-10 h-10'
+                        className='solid-btn square-btn p-4 w-10 h-10 flex justify-center items-center'
                     >
                         <Image
                             src="/iconSax/add-to-cart.svg"

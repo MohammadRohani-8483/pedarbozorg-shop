@@ -4,18 +4,18 @@ import React from 'react'
 import AddToCartItem from './AddToCartItem'
 
 const AddToCartBox = ({ product }: any) => {
-    // console.log(product.min_price)
     return (
-        <div className='hidden lg:flex flex-col p-4 items-center justify-center gap-5 w-full max-w-[465px] bg-white bg-opacity-75 rounded-3xl border border-[#E3E3E3]'>
+        <div className='fixed bottom-0 z-50 lg:z-0 lg:static flex flex-col p-2 lg:p-4 items-center justify-center gap-2 lg:gap-5 w-full lg:max-w-[465px] bg-white lg:bg-opacity-75 lg:rounded-3xl border border-[#E3E3E3] h-[180px] lg:h-auto lg:max-h-[450px]'>
             <Image
                 src="/Image/Logo-mobile.svg"
                 alt="logo"
                 width={60}
                 height={56}
+                className='hidden lg:flex'
             />
-            {true ?
-                <>
-                    <h2 className='text-[#626262] font-bold text-base flex gap-1 justify-center items-center'>
+            {product.variants ?
+                <div id='scroll' className='ltr flex flex-col overflow-auto p-1 lg:p-0 w-full gap-1.5 lg:gap-4'>
+                    <h2 className='text-[#626262] font-bold text-base hidden lg:flex gap-1 justify-center items-center'>
                         از
                         {product.min_price &&
                             <span className='font-bold text-2xl text-base-300'>
@@ -35,7 +35,7 @@ const AddToCartBox = ({ product }: any) => {
                             alt='تومان'
                         />
                     </h2>
-                    <div className='h-[1px] w-full bg-[#E3E3E3]' />
+                    <div className='hidden lg:flex h-[1px] w-full bg-[#E3E3E3]' />
                     {product.variants?.sort((a: any, b: any) => a.shatoot_info.final_price - b.shatoot_info.final_price).map((variant: any, i: number, array: Array<any>) => (
                         <React.Fragment key={variant.id}>
                             <AddToCartItem
@@ -49,7 +49,7 @@ const AddToCartBox = ({ product }: any) => {
                             {i < array.length - 1 && <div className='h-[1px] w-full bg-[#E3E3E3]' />}
                         </React.Fragment>
                     ))}
-                </>
+                </div>
                 :
                 <>
                     <h2 className='text-[#ADADAD] font-bold text-2xl'>
