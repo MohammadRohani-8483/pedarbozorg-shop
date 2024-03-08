@@ -11,7 +11,6 @@ import Link from 'next/link';
 import AvgRateBox from '@/components/products/productSlug/AvgRateBox';
 import CommentSection from '@/components/products/productSlug/CommentSection';
 import AddToCartBox from '@/components/products/productSlug/AddToCartBox';
-import AddToCartBoxMobile from '@/components/products/productSlug/AddToCartBoxMobile';
 
 export default function ProductsSlug() {
     const { slug } = useParams()
