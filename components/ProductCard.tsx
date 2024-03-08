@@ -9,6 +9,7 @@ import formatNumber from '@/public/Functions/formatNumber';
 import { motion } from 'framer-motion';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart, removeFromCart } from '@/public/redux/store/cart';
+import toast, { Toaster } from 'react-hot-toast';
 
 const ProductCard = ({ price, link, image, name, priceWithOffer, score, product }: any) => {
     const offerPresent = (price - priceWithOffer) / price * 100
@@ -43,6 +44,11 @@ const ProductCard = ({ price, link, image, name, priceWithOffer, score, product 
     const handleDeleteFromCart = () => {
         dispatch(removeFromCart(cartItem))
     }
+
+    const toastify = () => {
+        toast.error("این قابلیت به زودی اضافه میشود.")
+    }
+
     return (
         <motion.div
             whileHover={{ boxShadow: "0px 0px 18.6px 0px rgba(61, 131, 97, 0.22)" }}
@@ -50,6 +56,11 @@ const ProductCard = ({ price, link, image, name, priceWithOffer, score, product 
             onMouseOver={() => setIsHover(true)}
             onMouseOut={() => setIsHover(false)}
         >
+            <Toaster
+                position="top-center"
+                reverseOrder={false}
+                toastOptions={{duration:3000}}
+            />
             <div className='flex flex justify-center lg:justify-between lg:flex-col items-center w-full lg:h-full gap-2'>
                 {<>
                     <div
@@ -78,7 +89,7 @@ const ProductCard = ({ price, link, image, name, priceWithOffer, score, product 
                             >
                                 {isLike ?
                                     <Image
-                                        // onClick={() => setIsLike(false)}
+                                        // onClick={toastify}
                                         src='/iconSax/is-like.svg'
                                         alt="like"
                                         width={20}
@@ -87,6 +98,7 @@ const ProductCard = ({ price, link, image, name, priceWithOffer, score, product 
                                     />
                                     :
                                     <Image
+                                        onClick={toastify}
                                         // onClick={() => {
                                         //     handleAddToCart()
                                         // }}

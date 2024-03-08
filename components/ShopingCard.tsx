@@ -7,13 +7,13 @@ import { motion } from 'framer-motion';
 import { useDispatch, useSelector } from 'react-redux';
 import { shopCartItem } from '@/public/types/productType'
 
-const ShopingCard = ({ isVisible }: any) => {
+const ShopingCard = ({ isVisible, className }: any) => {
     const [totalFinalPrice, setTotalFinalPrice] = useState(0)
 
     const cart = useSelector((state: any) => state.cart.cart)
 
     useEffect(() => {
-        setTotalFinalPrice(cart.reduce((previous:any, current:any) => previous + current?.shatootInfo.finalPrice*current?.quantity, 0))
+        setTotalFinalPrice(cart.reduce((previous: any, current: any) => previous + current?.shatootInfo.finalPrice * current?.quantity, 0))
     }, [cart])
 
     const variants = {
@@ -27,12 +27,12 @@ const ShopingCard = ({ isVisible }: any) => {
 
     return (
         <motion.div
-            className={`hidden  lg:flex  flex-col rtl w-[492px] h-[354px] justify-center items-center bg-white rounded-lg absolute top-12 -left-0.5 z-[100] p-4`}
-            animate={true ? "vsisble" : 'hidden'}
+            className={`${className || ""} flex flex-col rtl w-[492px] h-[354px] justify-center items-center bg-white rounded-lg absolute top-12 -left-0.5 z-[100] p-4`}
+            // animate={true ? "vsisble" : 'hidden'}
             // initial={isVisible ? "hidden" : "vsisble"}
-            // initial={{ opacity: 0 }}
-            // animate={{ opacity: 1 }}
-            variants={variants}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            // variants={variants}
             transition={{ duration: 0.3 }}
         >
             {
