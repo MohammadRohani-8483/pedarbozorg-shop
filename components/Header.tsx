@@ -9,6 +9,7 @@ import MenuMobile from './MenuMobile';
 import { motion } from 'framer-motion';
 import ShopingCard from './ShopingCard';
 import SignUpSignIn from './signUp_signIn/signUpSignIn';
+import { useSelector } from 'react-redux';
 
 const Header: React.FC = () => {
     const [isTop, setIsTop] = useState(true);
@@ -22,6 +23,10 @@ const Header: React.FC = () => {
     const [searchValue, setSearchValue] = useState("")
     const [focus, setFocus] = useState(false)
 
+    const [cartLength, setCartLength] = useState(0)
+
+    const cart = useSelector((state: any) => state.cart.cart)
+
     const handleScroll = () => {
         if (window.scrollY > 80) {
             setIsTop(false);
@@ -29,6 +34,11 @@ const Header: React.FC = () => {
             setIsTop(true);
         }
     };
+
+    useEffect(() => {
+        setCartLength(cart.length)
+    }, [cart])
+
 
     useEffect(() => {
         window.addEventListener('scroll', handleScroll);
@@ -113,7 +123,7 @@ const Header: React.FC = () => {
                         className='w-full flex justify-center mt-1'
                         animate={openSearchBar ? "openSearch" : "closeSearch"}
                         variants={variants}
-                        transition={{ duration: 0.3}}
+                        transition={{ duration: 0.3 }}
                     >
                         <Menu />
                     </motion.div>
@@ -165,7 +175,7 @@ const Header: React.FC = () => {
                         ورود/ثبت نام
                     </button>
                     {isFormOpen && <SignUpSignIn setIsFormOpen={setIsFormOpen} />}
-                    <div className='py-3'
+                    <div className='p-3'
                         onMouseOver={() => {
                             // !isHover && visibleCard()
                             setIsHover(true)
@@ -185,6 +195,11 @@ const Header: React.FC = () => {
                                 alt="shoping cart"
                                 className='w-[22px] h-[22px] w-full'
                             />
+                            {cartLength !== 0 &&
+                                <div className="absolute px-1.5 py-0 rounded-md bg-red-500 text-white text-xs flex justify-center items-center top-0.5 right-0.5">
+                                    {cartLength}
+                                </div>
+                            }
                             {isHover && <ShopingCard isVisible={isVisible} />}
                         </button>
                     </div>
@@ -290,7 +305,7 @@ const Header: React.FC = () => {
                         </div>
                         {isFormOpen && <SignUpSignIn setIsFormOpen={setIsFormOpen} />}
                     </button>
-                    <button className='square-btn outline-btn'
+                    <button className='square-btn outline-btn relative'
                     >
                         <Image
                             src='/iconSax/shopping-cart.svg'
@@ -298,6 +313,11 @@ const Header: React.FC = () => {
                             height={22}
                             alt="shoping cart"
                         />
+                        {cartLength !== 0 &&
+                            <div className="absolute px-1.5 py-0 rounded-md bg-red-500 text-white text-xs flex justify-center items-center top-0.5 right-0.5">
+                                {cart?.length}
+                            </div>
+                        }
                     </button>
                 </div>
             </header>
