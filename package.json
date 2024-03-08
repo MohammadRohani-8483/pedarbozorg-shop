@@ -9,13 +9,16 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@neshan-maps-platform/leaflet": "^1.0.8",
     "@reduxjs/toolkit": "^2.2.1",
     "axios": "^1.6.7",
     "framer-motion": "^11.0.3",
     "next": "14.1.0",
     "react": "^18",
     "react-dom": "^18",
+    "react-hot-toast": "^2.4.1",
     "react-icons": "^5.0.1",
+    "react-neshan-map-leaflet": "^1.2.1",
     "react-paginate": "^8.2.0",
     "react-redux": "^9.1.0",
     "react-responsive": "^9.0.2",
