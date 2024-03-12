@@ -7,14 +7,16 @@ type props = {
     register: any
     className?: string
     maxLength?: number
+    pattern?:string
 }
 
-const Input = ({ name, type, placeholder, register, className, maxLength }: props) => {
+const Input = ({ name, type, placeholder, register, className, maxLength ,pattern}: props) => {
     return (
         <div className={`relative ${className || ""}`}>
             <input type={type}
+            pattern={pattern}
                 maxLength={maxLength}
-                className='peer/name w-full h-10 p-2 outline-none focus:border-base-300 border border-gray-400 rounded-lg text-black hover:border-gray-700'
+                className={`peer/name ${type === "number" ? "[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none" : ""} w-full h-10 p-2 outline-none focus:border-base-300 border border-gray-400 rounded-lg text-black hover:border-gray-700`}
                 id={name}
                 placeholder=''
                 {...register(name)}

@@ -19,9 +19,10 @@ type Inputs = {
 
 const schema = yup.object().shape({
     name: yup.string().required(),
-    E_mail: yup.string().required(),
-    phone_number: yup.string().min(10).max(11).required(),
-    order_number: yup.number(),
+    E_mail: yup.string().required().email('ایمیل صحیح وارد کنید.'),
+    phone_number: yup.string().required("تلفن تماس اجباری است.")
+        .matches(/^09\d{9}$/, "لطفا شماره صحیح وارد کنید.")
+        .min(11, "لطفا شماره صحیح وارد کنید.").max(11, "لطفا شماره صحیح وارد کنید."),
     text_message: yup.string().required(),
 })
 
@@ -44,7 +45,7 @@ export default function SendMessageToPedarbozorg() {
         handleSubmit,
         watch,
         formState: { errors },
-    } = useForm({resolver:yupResolver(schema)})
+    } = useForm({ resolver: yupResolver(schema,"","","","","") })
 
     const onSubmit: SubmitHandler<FieldValues> = (data) => {
         const dataWithSubject = {
@@ -53,6 +54,9 @@ export default function SendMessageToPedarbozorg() {
         }
         console.log(dataWithSubject)
     }
+
+
+    console.log(errors)
     return (
         <div className='flex flex-col bg-white rounded-3xl p-4 items-center justify-center w-full gap-6'>
             <h2 className='text-base-300 font-bold text-xl'>
@@ -86,6 +90,7 @@ export default function SendMessageToPedarbozorg() {
                     />
                     <Input
                         type='tel'
+                        pattern="[0-9]{11}"
                         maxLength={11}
                         name='phone_number'
                         placeholder='تلفن تماس*'
@@ -93,7 +98,7 @@ export default function SendMessageToPedarbozorg() {
                         register={register}
                     />
                     <Input
-                        type='text'
+                        type='number'
                         name='order_number'
                         placeholder='شماره سفارش'
                         className='w-full'
@@ -111,7 +116,7 @@ export default function SendMessageToPedarbozorg() {
                         متن پیام*
                     </label>
                 </div>
-                <UploadFiles register={register} />
+                <UploadFiles register={register} name={"upload"} />
                 <button type='submit' className='solid-btn rectangle-btn flex justify-center items-center gap-2 w-[100px]'>
                     ارسال
                     <Image

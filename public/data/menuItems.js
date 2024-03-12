@@ -17,11 +17,11 @@ export const menuItems = [
   {
     id: crypto.randomUUID(),
     item: "درباره ما",
-    link: "/about-us",
+    link: "/about-us/",
   },
   {
     id: crypto.randomUUID(),
     item: "تماس با ما",
-    link: "/contact-us",
+    link: "/contact-us/",
   },
 ];
