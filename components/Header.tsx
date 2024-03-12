@@ -10,6 +10,7 @@ import { motion } from 'framer-motion';
 import ShopingCard from './ShopingCard';
 import SignUpSignIn from './signUp_signIn/signUpSignIn';
 import { useSelector } from 'react-redux';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 const Header: React.FC = () => {
     const [isTop, setIsTop] = useState(true);
@@ -27,6 +28,11 @@ const Header: React.FC = () => {
 
     const cart = useSelector((state: any) => state.cart.cart)
 
+    const { replace } = useRouter()
+    const searchParams = useSearchParams()
+    const params = new URLSearchParams(searchParams)
+    const pathname = usePathname()
+
     const handleScroll = () => {
         if (window.scrollY > 80) {
             setIsTop(false);
@@ -34,6 +40,13 @@ const Header: React.FC = () => {
             setIsTop(true);
         }
     };
+
+    useEffect(() => {
+        params.get("sign_in") == 'true' ? handleFormSignInOpen() : null
+    }, [params])
+
+    // console.log(params.get("sign_in"))
+    // params.delete("sign_in")
 
     useEffect(() => {
         setCartLength(cart.length)
@@ -83,6 +96,15 @@ const Header: React.FC = () => {
         }, 200)
     }
 
+    const handleFormSignInOpen = () => {
+        setIsFormOpen(true)
+        document.documentElement.classList.add('overflow-hidden')
+        setIsHoverLogin(true)
+        setTimeout(() => setIsHoverLogin(false), 800)
+        params.set("sign_in", "true")
+        replace(`${pathname}?${params.toString()}`)
+    }
+
     return (
         <>
             <header
@@ -130,12 +152,7 @@ const Header: React.FC = () => {
                 </div>
                 <div className="flex gap-4 items-center h-20 w-auto">
                     <button
-                        onClick={() => {
-                            setIsFormOpen(true)
-                            document.documentElement.classList.add('overflow-hidden')
-                            setIsHoverLogin(true)
-                            setTimeout(() => setIsHoverLogin(false), 800)
-                        }}
+                        onClick={handleFormSignInOpen}
                         onMouseOver={() => setIsHoverLogin(true)}
                         onMouseOut={() => setIsHoverLogin(false)}
                         className="w-[162px] border-base-100 hover:border-base-200 flex items-center gap-3 bg-base-300 hover:bg-base-400 text-base-100 text-sm md:text-base md:py-2 md:px-4 px-3 py-1.5 border-4 rounded-xl"

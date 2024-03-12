@@ -3,11 +3,17 @@ import React, { useEffect, useState } from 'react'
 import { motion } from "framer-motion";
 import EnterPhoneNumberForm from './EnterPhoneNumberForm';
 import CodeVerificationForm from './CodeVerificationForm';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 const SignUpSignIn = ({ setIsFormOpen }: { setIsFormOpen: (par: boolean) => void }) => {
     const [inputValue, setInputValue] = useState('')
     const [isEnterNumber, setIsEnterNumber] = useState(false)
     const [isAnimate, setIsAnimate] = useState(true)
+
+    const { replace } = useRouter()
+    const searchParams = useSearchParams()
+    const params = new URLSearchParams(searchParams)
+    const pathname = usePathname()
 
     const variants = {
         visible: {
@@ -32,6 +38,9 @@ const SignUpSignIn = ({ setIsFormOpen }: { setIsFormOpen: (par: boolean) => void
             setIsFormOpen(false)
             document.documentElement.classList.remove('overflow-hidden')
         }, 200)
+        params.delete("sign_in")
+        // console.log(params.get("sign_in"));
+        replace(`${pathname}?${params.toString()}`)
     }
 
     const verificationCode = Math.floor((Math.random() * 89999) + 10000)

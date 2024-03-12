@@ -11,8 +11,6 @@ import { Navigation } from 'swiper/modules';
 
 import SliderBtn from '../../SliderBtn';
 
-import { offersList } from "public/data/offersList"
-
 import { useMediaQuery } from 'react-responsive'
 import ProductCardInSlider from './ProductCardInSlider';
 import Image from 'next/image';
