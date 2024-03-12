@@ -5,7 +5,7 @@ import AddToCartItem from './AddToCartItem'
 
 const AddToCartBox = ({ product }: any) => {
     return (
-        <div className='fixed bottom-0 z-50 lg:z-0 lg:static flex flex-col p-2 lg:p-4 items-center justify-center gap-2 lg:gap-5 w-full lg:max-w-[465px] bg-white lg:bg-opacity-75 lg:rounded-3xl border border-[#E3E3E3] h-[180px] lg:h-auto lg:max-h-[450px]'>
+        <div className='fixed bottom-0 z-10 lg:z-0 lg:static flex flex-col p-2 lg:p-4 items-center justify-center gap-2 lg:gap-5 w-full lg:max-w-[465px] bg-white lg:bg-opacity-75 lg:rounded-3xl border border-[#E3E3E3] h-[180px] lg:h-auto lg:max-h-[450px]'>
             <Image
                 src="/Image/Logo-mobile.svg"
                 alt="logo"
