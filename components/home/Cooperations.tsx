@@ -1,25 +1,12 @@
 import React from 'react'
 import { cooperations } from "public/data/cooperations"
 import Image from '@/node_modules/next/image'
+import Title from '../Title'
 
 const Cooperations: React.FC = () => {
     return (
         <div className='max-w-[1136px] w-[90%] mx-auto flex flex-col mt-20 gap-8 justify-center items-center mb-40'>
-            <div className='flex items-center justify-center gap-4'>
-                <Image
-                    src="/Image/title-vecors/right.svg"
-                    alt="right"
-                    width={69}
-                    height={69}
-                />
-                <h1 className='font-bold text-lg md:text-xl lg:text-2xl text-base-300'>همکاری‌های داخلی و خارجی پدربزرگ</h1>
-                <Image
-                    src="/Image/title-vecors/left.svg"
-                    alt="left"
-                    width={69}
-                    height={69}
-                />
-            </div>
+            <Title>همکاری های خارجی و داخلی</Title>
             <div className='flex justify-around items-center w-full'>
                 {cooperations.map((cooperation) => (
                     <div key={cooperation.id} className="flex flex-col justify-center items-center gap-8">
