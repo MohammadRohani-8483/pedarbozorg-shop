@@ -11,6 +11,7 @@ import Link from 'next/link';
 import AvgRateBox from '@/components/products/productSlug/AvgRateBox';
 import CommentSection from '@/components/products/productSlug/CommentSection';
 import AddToCartBox from '@/components/products/productSlug/AddToCartBox';
+import { MotionValue, motion } from 'framer-motion';
 
 export default function ProductsSlug() {
     const { slug } = useParams()
@@ -56,7 +57,9 @@ export default function ProductsSlug() {
 
     useEffect(() => {
         document.title = TITLE
-    }, [ product])
+    }, [product])
+
+    console.log(product.categories?.values());
 
     return (
         <main className='w-full mx-auto max-w-[1136px] flex flex-col justify-center items-center gap-4 py-20 md:py-[117px]'>
@@ -74,39 +77,48 @@ export default function ProductsSlug() {
                             پدربزرگ
                         </Link>
                         /
-                        <Link href={`/products/`} className='px-3 py-2 text-base-300'>
-                            {"ادویه"}
+                        <Link href={`/products/`} className='px-3 py-2 text-base-300' onLoad={(e) => console.log(e)}>
+                            {product.categories?.map((category: any) => category.title)}
                         </Link>
                         /
                         <Link href={`/products/${slug}`} className='px-3 py-2 text-base-300'>
-                            {product.name}
+                            {product?.name}
                         </Link>
                     </div>
                     <div className='w-[90%] lg:w-full mx-auto flex flex-col md:flex-row gap-4 justify-center items-center md:items-start'>
                         <div className='flex flex-row md:flex-col w-full md:w-auto justify-end items-center gap-2'>
                             <div className='relative w-10 h-10 cursor-pointer'>
-                                <Image
-                                    src='/iconSax/bell.svg'
-                                    alt='Bell icon'
-                                    fill
-                                />
+                                <motion.div
+                                    className='absolute top-0 right-0 bg-base-100 rounded-lg h-10 z-10 flex justify-center items-center gap-1 w-10 bg-[url("/iconSax/bell.svg")] bg-right bg-contain bg-no-repeat overflow-hidden'
+                                    whileHover={{ width: "195px", backgroundColor: "#e0f1e9" }}
+                                >
+                                    <h2 className='whitespace-nowrap text-sm text-base-300 font-bold absolute right-10'>
+                                        افزودن به علاقه مندی ها
+                                    </h2>
+                                </motion.div>
                             </div>
                             <div className='relative w-10 h-10 cursor-pointer'>
-                                <Image
-                                    src='/iconSax/share-green.svg'
-                                    alt='Share icon'
-                                    fill
-                                />
+                                <motion.div
+                                    className='absolute top-0 right-0 bg-base-100 rounded-lg h-10 z-10 flex justify-center items-center gap-1 w-10 bg-[url("/iconSax/share-green.svg")] bg-right bg-contain bg-no-repeat overflow-hidden'
+                                    whileHover={{ width: "158px", backgroundColor: "#e0f1e9" }}
+                                >
+                                    <h2 className='whitespace-nowrap text-sm text-base-300 font-bold absolute right-10'>
+                                        به اشتراک گذاشتن
+                                    </h2>
+                                </motion.div>
                             </div>
                             <div className='relative w-10 h-10 cursor-pointer'>
-                                <Image
-                                    src='/iconSax/love-green.svg'
-                                    alt='Love icon'
-                                    fill
-                                />
+                                <motion.div
+                                    className='absolute top-0 right-0 bg-base-100 rounded-lg h-10 z-10 flex justify-center items-center gap-1 w-10 bg-[url("/iconSax/love-green.svg")] bg-right bg-contain bg-no-repeat overflow-hidden'
+                                    whileHover={{ width: "180px", backgroundColor: "#e0f1e9" }}
+                                >
+                                    <h2 className='whitespace-nowrap text-sm text-base-300 font-bold absolute right-10'>
+                                        اطلاع رسانی تخفیف ها
+                                    </h2>
+                                </motion.div>
                             </div>
                         </div>
-                        <ImageGallery image={product.featured_image}/>
+                        <ImageGallery image={product?.featured_image} />
                         <div className='flex flex-col w-full gap-4 justify-center items-center'>
                             <ShortInfo product={product} />
                             <Features />
