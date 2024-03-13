@@ -1,9 +1,20 @@
 import Image from 'next/image'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import React from 'react'
 import Star from './Star'
 
 const AvgRateBox = ({ product }: any) => {
     const roundRate = Math.floor(product.avg_rate)
+
+    const { replace } = useRouter()
+    const searchParams = useSearchParams()
+    const params = new URLSearchParams(searchParams)
+    const pathname = usePathname()
+
+    const goToSignIn=()=>{
+        params.set("sign_in", "true")
+        replace(`${pathname}?${params.toString()}`)
+    }
 
     return (
         <div className='bg-white rounded-3xl w-full md:w-2/3 lg:max-w-[272px] h-auto border border-[#E3E3E3] p-4 flex flex-col justify-center items-center gap-4 md:mt-12'>
@@ -46,6 +57,7 @@ const AvgRateBox = ({ product }: any) => {
                 </h5>
             }
             <button
+            onClick={goToSignIn}
                 className='border border-base-300 rounded-md text-base-300 text-base rectangle-btn w-full transition-all duration-300 hover:bg-base-200 py-2'
             >
                 افزودن نظر
