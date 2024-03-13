@@ -39,7 +39,6 @@ const SignUpSignIn = ({ setIsFormOpen }: { setIsFormOpen: (par: boolean) => void
             document.documentElement.classList.remove('overflow-hidden')
         }, 200)
         params.delete("sign_in")
-        // console.log(params.get("sign_in"));
         replace(`${pathname}?${params.toString()}`)
     }
 
