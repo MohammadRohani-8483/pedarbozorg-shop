@@ -20,7 +20,7 @@ export default function Home() {
       <SliderProduct />
       <GroupProducts />
       <SpecialProducts />
-      <OffersSlider />
+      {/* <OffersSlider /> */}
       <SpecialProductsSlider />
       <VideoCategory />
       <WhyPedarBozorg />
@@ -28,7 +28,7 @@ export default function Home() {
       {/* <SpecialOffers /> */}
       {/* <PedarBozorgInLife /> */}
       {/* <CommentsSlider /> */}
-      <BestSellingProducts />
+      {/* <BestSellingProducts /> */}
       <Cooperations />
     </main>
   );

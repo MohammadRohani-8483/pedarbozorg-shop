@@ -124,9 +124,9 @@ export default function SliderProduct() {
                     </Swiper>
                 </div>
                 <div className="flex justify-center items-center gap-1 paginate" style={{ transform: "translate3d(0px, 0, 0)" }}>
-                    <div className="w-[36px] h-2 bg-[#FFC436] rounded-lg" onClick={() => console.log(1)}></div>
-                    <div className="w-3 h-2 bg-[#E3E3E3] rounded-lg" onClick={() => console.log(2)}></div>
-                    <div className="w-3 h-2 bg-[#E3E3E3] rounded-lg" onClick={() => console.log(3)}></div>
+                    <div className="w-[36px] h-2 bg-[#FFC436] rounded-lg" ></div>
+                    <div className="w-3 h-2 bg-[#E3E3E3] rounded-lg" ></div>
+                    <div className="w-3 h-2 bg-[#E3E3E3] rounded-lg" ></div>
                 </div>
                 <div className="flex justify-between items-center">
                     <div className="flex gap-2">
