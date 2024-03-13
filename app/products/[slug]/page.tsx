@@ -12,6 +12,7 @@ import AvgRateBox from '@/components/products/productSlug/AvgRateBox';
 import CommentSection from '@/components/products/productSlug/CommentSection';
 import AddToCartBox from '@/components/products/productSlug/AddToCartBox';
 import { MotionValue, motion } from 'framer-motion';
+import toast, { Toaster } from 'react-hot-toast';
 
 export default function ProductsSlug() {
     const { slug } = useParams()
@@ -59,12 +60,19 @@ export default function ProductsSlug() {
         document.title = TITLE
     }, [product])
 
-    console.log(product.categories?.values());
+    const toastify = () => {
+        toast.error("این قابلیت به زودی اضافه میشود.")
+    }
 
     return (
         <main className='w-full mx-auto max-w-[1136px] flex flex-col justify-center items-center gap-4 py-20 md:py-[117px]'>
             {correctAPI ?
                 <>
+                    <Toaster
+                        position="top-center"
+                        reverseOrder={false}
+                        toastOptions={{ duration: 3000 }}
+                    />
                     <Image
                         src="/Image/background/vectors/tree-2.svg"
                         alt="tree 2"
@@ -89,6 +97,7 @@ export default function ProductsSlug() {
                         <div className='flex flex-row md:flex-col w-full md:w-auto justify-end items-center gap-2'>
                             <div className='relative w-10 h-10 cursor-pointer'>
                                 <motion.div
+                                    onClick={toastify}
                                     className='absolute top-0 right-0 bg-base-100 rounded-lg h-10 z-10 flex justify-center items-center gap-1 w-10 bg-[url("/iconSax/bell.svg")] bg-right bg-contain bg-no-repeat overflow-hidden'
                                     whileHover={{ width: "195px", backgroundColor: "#e0f1e9" }}
                                 >
@@ -109,6 +118,7 @@ export default function ProductsSlug() {
                             </div>
                             <div className='relative w-10 h-10 cursor-pointer'>
                                 <motion.div
+                                    onClick={toastify}
                                     className='absolute top-0 right-0 bg-base-100 rounded-lg h-10 z-10 flex justify-center items-center gap-1 w-10 bg-[url("/iconSax/love-green.svg")] bg-right bg-contain bg-no-repeat overflow-hidden'
                                     whileHover={{ width: "180px", backgroundColor: "#e0f1e9" }}
                                 >
