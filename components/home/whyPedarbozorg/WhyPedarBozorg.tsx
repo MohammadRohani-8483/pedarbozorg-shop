@@ -1,7 +1,6 @@
 import React from 'react'
 import { whyPedarBozorg } from "@/public/data/whyPedarBozorg"
 import WhyPedarbozorgItem from './WhyPedarbozorgItem'
-import Image from 'next/image'
 import Title from '@/components/Title'
 
 export const WhyPedarBozorg: React.FC = () => {
