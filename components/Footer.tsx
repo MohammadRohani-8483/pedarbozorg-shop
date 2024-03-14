@@ -24,7 +24,7 @@ const Footer: React.FC = () => {
                             className='object-cover'
                         />
                     </Link>
-                    <p className='text-justify text-base-400 text-xs md:text-sm lg:text-base'>
+                    <p className='text-justify text-base-400 text-[10px] sm:text-xs md:text-sm lg:text-base'>
                         بزرگترین لذت ما این است که بتوانیم سهمی ولو اندک در سلامت و بهداشت روحی و جسمی و روش تغذیه خانواده ها داشته باشیم. دوست داریم همانند پدربزرگ ها ، هر آنچه که می دانیم ، بی منت در اختیار جامعه قرار دهیم. به همین جهت نام پدربزرگ را برای استارت اپ خود انتخاب کردیم.
                     </p>
                 </div>
@@ -51,14 +51,14 @@ const Footer: React.FC = () => {
                                         className='flex w-full justify-between items-center text-base-300 rounded-3xl bg-[#E0F1E9] lg:w-[385px] h-auto py-2 px-4'
                                     >
                                         <div className='whitespace-nowrap text-xs'>{item.title}</div>
-                                        <div className='ltr flex items-center justify-center gap-4'>
+                                        <div className='ltr flex items-center justify-center gap-2 lg:gap-4'>
                                             <Image
                                                 src={item.icon}
                                                 alt={item.title}
                                                 width={24}
                                                 height={24}
                                             />
-                                            <p className='text-sm text-center font-bold'>{item.value}</p>
+                                            <p className='text-xs md:text-sm text-center font-bold'>{item.value}</p>
                                         </div>
                                     </div>
                                 ))
@@ -98,7 +98,7 @@ const Footer: React.FC = () => {
                 </div>
             </div>
             <div className='flex flex-col justify-center items-center my-4'>
-                <p className='text-base-300 text-xs md:text-sm lg:text-base'>تمامی حقوق مادی و معنوی این سامانه متعلق به فروشگاه<strong> پدربزرگ </strong>می‌باشد</p>
+                <p className='text-base-300 text-xs md:text-sm lg:text-base text-center'>تمامی حقوق مادی و معنوی این سامانه متعلق به فروشگاه<strong> پدربزرگ </strong>می‌باشد</p>
                 <p className='text-base-300 text-xs md:text-sm lg:text-base'>طراحی شده توسط گروه فنی مهندسی<a target="_blank" rel="noopener noreferrer" className='font-bold text-[#3F3681]' href="https://codinto.ir"> کدینتو </a></p>
             </div>
         </footer>
