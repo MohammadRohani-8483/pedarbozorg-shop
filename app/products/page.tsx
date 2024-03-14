@@ -10,8 +10,6 @@ import ProductCard from '@/components/ProductCard'
 import PaginationButtons from '@/components/PaginationButtons'
 import FiltersMobile from '@/components/products/filters/FiltersMobile'
 import OrderingMobile from '@/components/products/ordering/OrderingMobile'
-// import { Head } from 'next/document'
-import Head, { defaultHead } from 'next/head';
 
 const Products = () => {
   const [searchValue, setSearchValue] = useState('')
@@ -27,10 +25,7 @@ const Products = () => {
   const [isOrderingOpen, setIsOrderingOpen] = useState(false)
   const [currPage, setCurrPage] = useState(1)
   const searchParams = useSearchParams()
-  const params = new URLSearchParams(searchParams)
-  // const searchValue = params.get("search")
-  // const { query } = useRouter()
-  // console.log(searchParams.get("search"));
+
   const api = '/api/store-api/products-public/'
   useEffect(() => {
     setmaxPriceIpnut(maxPrice)
@@ -40,32 +35,19 @@ const Products = () => {
     const categoryParams = categories?.map((category) => `categories=${category}`).join('&');
 
     axios.get(`${api}?${`page=${currPage}`}${searchValue ? `&search=${searchValue}` : ''}&ordering=${activeOrder}${isAvailable ? '&available=true' : ''}${minPriceInput > 0 ? `&min_price=${minPriceInput}` : ""}${maxPriceInput < maxPrice ? `&max_price=${maxPriceInput}` : ''}${categoryParams.length > 0 ? `&${categoryParams}` : ''}`)
-      // axios.get(api, {
-      //   params: {
-      //     search:searchParams.get("search"),
-      //     page: currPage,
-      //     ordering: activeOrder,
-      //     available: isAvailable,
-      //     min_price: minPriceInput,
-      //     max_price: maxPriceInput,
-      //     categories: categories.includes(8) && 8
-      //   }
-      // })
       .then(res => {
         setProducts(res.data.results)
         setproductsCount(res.data.count)
         setMaxPrice(res.data.max_price)
-        setSearchValue(params.get("search") || "")
+        setSearchValue(searchParams.get("search") || "")
       })
-  }, [currPage, activeOrder, categories, isAvailable, minPriceInput, maxPriceInput, searchValue]);
+  }, [currPage, activeOrder, categories, isAvailable, minPriceInput, maxPriceInput, searchValue, searchParams, maxPrice]);
 
-  // const { title } = useHead
   const TITLE = "پدربزرگ - محصولات"
 
   useEffect(() => {
     document.title = TITLE
   }, [])
-
 
   return (
     <main className='w-[90%] max-w-[1136px] mx-auto py-16 md:py-[117px] flex gap-4'>
@@ -157,7 +139,6 @@ const Products = () => {
                   slug: product.slug,
                 },
               }
-              // console.log(product);
               return (
                 <ProductCard
                   key={product.id}

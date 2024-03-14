@@ -1,8 +1,6 @@
 import Image from 'next/image'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import React, { useEffect } from 'react'
-// import {useQ} from 'next/router'
-
+import React from 'react'
 
 const SearchBarProducts = ({ searchValue, setSearchValue }: any) => {
 
@@ -17,17 +15,13 @@ const SearchBarProducts = ({ searchValue, setSearchValue }: any) => {
             :
             params.delete("search")
         replace(`${pathname}?${params.toString()}`)
+        // setSearchValue(term)
     }
-    // useEffect(() => {
-    //     setSearchValue(params.get("search") || "")
-    // }, [])
-
 
     return (
         <div className='border-gray-200 border text-gray-400 rounded-2xl bg-white flex pr-3 py-2 pl-2 justify-between items-center w-full h-10 md:h-12'>
             <input
-                value={searchValue}
-                // defaultValue={params.get("search")?.toString()}
+                defaultValue={searchValue}
                 type="text"
                 name="Search Bar"
                 placeholder="جستجو.."
@@ -35,7 +29,6 @@ const SearchBarProducts = ({ searchValue, setSearchValue }: any) => {
                 focus:outline-none pr-1 cursor-pointer'
                 onChange={(e: any) => {
                     handleSearch(e.target.value)
-                    setSearchValue(e.nativeEvent.target.value)
                 }}
             />
             <Image
