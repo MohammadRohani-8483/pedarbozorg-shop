@@ -44,14 +44,10 @@ const Header: React.FC = () => {
     useEffect(() => {
         params.get("sign_in") == 'true' ? handleFormSignInOpen() : null
     }, [params])
-
-    // console.log(params.get("sign_in"))
-    // params.delete("sign_in")
-
+    
     useEffect(() => {
         setCartLength(cart.length)
     }, [cart])
-
 
     useEffect(() => {
         window.addEventListener('scroll', handleScroll);
