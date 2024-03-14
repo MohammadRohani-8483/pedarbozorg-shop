@@ -11,13 +11,17 @@ export default function SearchBar({ handleOpenSearch, handleCloseSearch, openSea
     const [products, setProducts] = useState([])
     const [productsCount, setProductsCount] = useState(0)
 
-    useEffect(() => {
 
-        axios.get(`${api}?search=${searchValue}`)
-            .then(res => {
-                setProducts(res.data.results)
-                setProductsCount(res.data.count)
-            })
+    const array = Array('hello')
+    array.length
+
+    useEffect(() => {
+        if (searchValue.length > 0)
+            axios.get(`${api}${searchValue.length > 0 ? `?search=${searchValue}` : ""}`)
+                .then(res => {
+                    setProducts(res.data.results)
+                    setProductsCount(res.data.count)
+                })
     }, [searchValue]);
 
     const variants = {
