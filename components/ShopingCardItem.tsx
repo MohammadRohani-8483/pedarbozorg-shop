@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { useDispatch, useSelector } from 'react-redux';
 import { incrementQuantity, removeFromCart, decrementQuantity } from '@/public/redux/store/cart';
 
-const ShopingCardItem = ({ image, link, price, priceWithOffer, weight, name, count, product }: any) => {
+const ShopingCardItem = ({ image, link, price, priceWithOffer, name, count, product }: any) => {
     const offerPresent = (price - priceWithOffer) / price * 100
     const present = price * offerPresent / 100
 
@@ -28,6 +28,7 @@ const ShopingCardItem = ({ image, link, price, priceWithOffer, weight, name, cou
             localStorage.removeItem('shoping_cart')
         }
     }
+    
     return (
         <div
             className='flex justify-between h-[131px] w-[455px] items-center'

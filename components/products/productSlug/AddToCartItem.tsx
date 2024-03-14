@@ -41,6 +41,7 @@ const AddToCartItem = ({ product, price, priceWithOffer, name, image, slug }: an
 
     const cart = useSelector((state: any) => state.cart.cart)
     const isProductToCart = Boolean(Array(...cart).find((item: any) => item.id === cartItem.id))
+    const productInCart = Array(...cart).find((item: any) => item.id === cartItem.id) || null
 
     const dispatch = useDispatch()
 
@@ -97,7 +98,7 @@ const AddToCartItem = ({ product, price, priceWithOffer, name, image, slug }: an
                 </div>
                 {!isProductToCart ?
                     <button
-                    onClick={handleAddToCart}
+                        onClick={handleAddToCart}
                         className='solid-btn square-btn p-4 w-10 h-10 flex justify-center items-center'
                     >
                         <Image
@@ -122,7 +123,7 @@ const AddToCartItem = ({ product, price, priceWithOffer, name, image, slug }: an
                             />
                         </button>
                         <>
-                            {true ?
+                            {productInCart?.quantity > 1 ?
                                 <button
                                     onClick={handleDecrementQuantity}
                                     className='bg-[#E0F1E9] size-8 hover:bg-[#C1E2D2] rounded-lg text-[#3D8361] p-1.5 cursor-pointer'>
