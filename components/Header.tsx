@@ -128,7 +128,6 @@ const Header: React.FC = () => {
                                 !isTop && setOpenSearchBar(false)
                                 setSearchValue('')
                                 setFocus(false)
-                                // setIsTop(false)
                             }}
                             openSearchBar={openSearchBar}
                             searchValue={searchValue}
@@ -178,24 +177,16 @@ const Header: React.FC = () => {
                                 data-nimg={1}
                                 style={{ color: 'transparent' }}
                             />
-                            {/* <Image
-                                src="/iconSax/right-arrow.svg"
-                                width={24}
-                                height={24}
-                                alt="login"
-                            /> */}
                         </div>
                         ورود/ثبت نام
                     </button>
                     {isFormOpen && <SignUpSignIn setIsFormOpen={setIsFormOpen} />}
                     <div className='p-3'
                         onMouseOver={() => {
-                            // !isHover && visibleCard()
                             setIsHover(true)
                             document.documentElement.classList.add('overflow-hidden')
                         }}
                         onMouseOut={() => {
-                            // isVisible && hiddenCard()
                             setIsHover(false)
                             document.documentElement.classList.remove('overflow-hidden')
                         }}
@@ -309,12 +300,6 @@ const Header: React.FC = () => {
                                 data-nimg={1}
                                 style={{ color: 'transparent' }}
                             />
-                            {/* <Image
-                                src="/iconSax/right-arrow.svg"
-                                width={24}
-                                height={24}
-                                alt="login"
-                            /> */}
                         </div>
                         {isFormOpen && <SignUpSignIn setIsFormOpen={setIsFormOpen} />}
                     </button>

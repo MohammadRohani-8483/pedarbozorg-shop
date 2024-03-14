@@ -11,10 +11,6 @@ export default function SearchBar({ handleOpenSearch, handleCloseSearch, openSea
     const [products, setProducts] = useState([])
     const [productsCount, setProductsCount] = useState(0)
 
-
-    const array = Array('hello')
-    array.length
-
     useEffect(() => {
         if (searchValue.length > 0)
             axios.get(`${api}${searchValue.length > 0 ? `?search=${searchValue}` : ""}`)
@@ -40,7 +36,7 @@ export default function SearchBar({ handleOpenSearch, handleCloseSearch, openSea
             animate={openSearchBar ? "openSearch" : "closeSearch"}
             variants={variants}
             transition={{ duration: 0.3 }}
-            className={`${openSearchBar ? 'w-4/5' : 'w-40px]'} border-[#CBCBCB] ${searchValue.length > 0 ? "rounded-t-lg bg-white" : "rounded-lg"} border text-gray-400 h-10 flex items-center p-2 z-50 relative`}
+            className={`${openSearchBar ? 'w-4/5' : 'w-40px]'} border-[#CBCBCB] ${searchValue.length > 0 ? "rounded-t-lg bg-white" : "rounded-lg"} border text-gray-400 h-10 flex items-center justify-end p-2 z-50 relative`}
         >
             {openSearchBar &&
                 <>
