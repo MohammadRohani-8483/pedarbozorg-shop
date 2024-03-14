@@ -12,7 +12,6 @@ const PriceRange = ({ max, inputFrom, setInputFrom, inputTo, setInputTo }: any) 
             transition={{ type: "tween" }}
             whileHover={!boxIsOpen ? { backgroundColor: '#F9F9F9' } : {}}
             className="overflow-hidden h-12 border-gray-200 border text-base-300 rounded-2xl bg-white cursor-pointer flex flex-col px-4 py-3 justify-start items-start transition-all w-full gap-4"
-            style={{ height: "auto" }}
         >
             <div
                 className='w-full flex justify-between items-center text-base-300'
