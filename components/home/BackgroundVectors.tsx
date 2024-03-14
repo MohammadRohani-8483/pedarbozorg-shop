@@ -39,9 +39,9 @@ const BackgroundVectors = () => {
                 alt="tree 2"
                 width={336}
                 height={335}
-                className='top-[1805px] left-0 absolute z-[-1]'
+                className='top-[1230px] left-0 absolute z-[-1]'
             />
-            <Image
+            {/* <Image
                 src="/Image/background/vectors/tree-4.svg"
                 alt="tree 2"
                 width={351}
@@ -54,7 +54,7 @@ const BackgroundVectors = () => {
                 width={600}
                 height={300}
                 className='top-[4150px] left-0 absolute z-[-1]'
-            />
+            /> */}
         </div>
     )
 }
