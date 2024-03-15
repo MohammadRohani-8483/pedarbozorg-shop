@@ -12,7 +12,7 @@ import { addToCart, removeFromCart } from '@/public/redux/store/cart';
 import toast, { Toaster } from 'react-hot-toast';
 
 const ProductCard = ({ price, link, image, name, priceWithOffer, score, product }: any) => {
-    const offerPresent = (price - priceWithOffer) / price * 100
+    const offerPresent = ((price - priceWithOffer) / price * 100)||0
 
     const [isLike, setIsLike] = useState(false)
     const [isHover, setIsHover] = useState(false)
@@ -79,9 +79,6 @@ const ProductCard = ({ price, link, image, name, priceWithOffer, score, product 
                         }
                         <div
                             className='w-full absolute top-0.5 left-0 flex justify-between items-center px-2'
-                        // animate={isHover ? "hover" : "unHover"}
-                        // variants={variants}
-                        // transition={{ duration: 0.5 }}
                         >
                             <motion.div
                                 animate={isHover ? { x: 0 } : { x: '30px' }}
@@ -89,7 +86,6 @@ const ProductCard = ({ price, link, image, name, priceWithOffer, score, product 
                             >
                                 {isLike ?
                                     <Image
-                                        // onClick={toastify}
                                         src='/iconSax/is-like.svg'
                                         alt="like"
                                         width={20}
@@ -99,9 +95,6 @@ const ProductCard = ({ price, link, image, name, priceWithOffer, score, product 
                                     :
                                     <Image
                                         onClick={toastify}
-                                        // onClick={() => {
-                                        //     handleAddToCart()
-                                        // }}
                                         src='/iconSax/like.png'
                                         alt="like"
                                         width={20}
@@ -157,7 +150,7 @@ const ProductCard = ({ price, link, image, name, priceWithOffer, score, product 
                     <div className='flex justify-between w-full items-center ltr gap-2'>
                         <div className='flex gap-2 items-center justify-start lg:justify-end w-full'>
                             <p className='font-bold text-base lg:text-xl gap-2'>
-                                {priceWithOffer === 0 ? "رایگان" : (offerPresent !== 0 ? formatNumber(priceWithOffer) : formatNumber(price))}
+                                {priceWithOffer === 0 ? "رایگان" : (offerPresent !== 0 ? formatNumber(priceWithOffer||0) : formatNumber(price||0))}
                             </p>
                             {priceWithOffer !== 0 &&
                                 <Image
@@ -185,7 +178,7 @@ const ProductCard = ({ price, link, image, name, priceWithOffer, score, product 
                     <div className='flex justify-between items-center ltr'>
                         {offerPresent !== 0 &&
                             <>
-                                <p className='line-through text-gray-400 text-sm lg:text-base'>{formatNumber(price)}</p>
+                                <p className='line-through text-gray-400 text-sm lg:text-base'>{formatNumber(price||0)}</p>
                                 {score &&
                                     <div className='flex items-center justify-center gap-1'>
                                         <FaStar className='text-[#FFC436]' />
@@ -210,6 +203,7 @@ const ProductCard = ({ price, link, image, name, priceWithOffer, score, product 
                     :
                     <Image
                         // onClick={() => setIsLike(true)}
+                        onClick={toastify}
                         src='/iconSax/like.png'
                         alt="like"
                         width={20}
