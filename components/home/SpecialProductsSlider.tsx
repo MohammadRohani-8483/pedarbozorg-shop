@@ -41,6 +41,7 @@ export default function SpecialProductsSlider() {
                     }}
                     modules={[Navigation]}
                     className="mySwiper flex justify-center text-right"
+                    loop={true}
                 >
                     {specialProductsSlider.map((product) => (
                         <SwiperSlide
