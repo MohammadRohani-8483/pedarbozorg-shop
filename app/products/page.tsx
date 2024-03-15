@@ -10,6 +10,7 @@ import ProductCard from '@/components/ProductCard'
 import PaginationButtons from '@/components/PaginationButtons'
 import FiltersMobile from '@/components/products/filters/FiltersMobile'
 import OrderingMobile from '@/components/products/ordering/OrderingMobile'
+import { useDebounce } from '@/public/hooks/useDebounce'
 
 const Products = () => {
   const [searchValue, setSearchValue] = useState('')
@@ -26,6 +27,8 @@ const Products = () => {
   const [currPage, setCurrPage] = useState(1)
   const searchParams = useSearchParams()
 
+  const debouncedSearch = useDebounce(searchValue)
+
   const api = '/api/store-api/products-public/'
   useEffect(() => {
     setmaxPriceIpnut(maxPrice)
@@ -34,14 +37,17 @@ const Products = () => {
   useEffect(() => {
     const categoryParams = categories?.map((category) => `categories=${category}`).join('&');
 
-    axios.get(`${api}?${`page=${currPage}`}${searchValue ? `&search=${searchValue}` : ''}&ordering=${activeOrder}${isAvailable ? '&available=true' : ''}${minPriceInput > 0 ? `&min_price=${minPriceInput}` : ""}${maxPriceInput < maxPrice ? `&max_price=${maxPriceInput}` : ''}${categoryParams.length > 0 ? `&${categoryParams}` : ''}`)
+    axios.get(`${api}?${`page=${currPage}`}${searchValue ? `&search=${debouncedSearch}` : ''}&ordering=${activeOrder}${isAvailable ? '&available=true' : ''}${minPriceInput > 0 ? `&min_price=${minPriceInput}` : ""}${maxPriceInput < maxPrice ? `&max_price=${maxPriceInput}` : ''}${categoryParams.length > 0 ? `&${categoryParams}` : ''}`)
       .then(res => {
         setProducts(res.data.results)
         setproductsCount(res.data.count)
-        setMaxPrice(res.data.max_price)
-        setSearchValue(searchParams.get("search") || "")
       })
-  }, [currPage, activeOrder, categories, isAvailable, minPriceInput, maxPriceInput, searchValue, searchParams, maxPrice]);
+  }, [currPage, activeOrder, categories, isAvailable, minPriceInput, maxPriceInput, maxPrice, debouncedSearch]);
+
+  useEffect(() => {
+    setSearchValue(searchParams.get("search") || "")
+  }, [searchParams])
+
 
   const TITLE = "پدربزرگ - محصولات"
 

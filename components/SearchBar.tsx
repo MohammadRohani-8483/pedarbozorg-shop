@@ -5,20 +5,23 @@ import { IoClose } from "@/node_modules/react-icons/io5/index";
 import { motion } from 'framer-motion';
 import SearchValueProduct from './SearchValueProduct';
 import axios from 'axios';
+import { useDebounce } from '@/public/hooks/useDebounce';
 
 export default function SearchBar({ handleOpenSearch, handleCloseSearch, openSearchBar, searchValue, setSearchValue, focus }: any) {
     const api = '/api/store-api/products-public/'
     const [products, setProducts] = useState([])
     const [productsCount, setProductsCount] = useState(0)
 
+    const debouncedSearch = useDebounce(searchValue)
+
     useEffect(() => {
         if (searchValue.length > 0)
-            axios.get(`${api}${searchValue.length > 0 ? `?search=${searchValue}` : ""}`)
+            axios.get(`${api}${searchValue.length > 0 ? `?search=${debouncedSearch}` : ""}`)
                 .then(res => {
                     setProducts(res.data.results)
                     setProductsCount(res.data.count)
                 })
-    }, [searchValue]);
+    }, [debouncedSearch]);
 
     const variants = {
         openSearch: {
@@ -54,7 +57,7 @@ export default function SearchBar({ handleOpenSearch, handleCloseSearch, openSea
                         placeholder="جستجو.."
                         className='bg-transparent w-full outline-none focus:bg-transparent pr-2 cursor-pointer'
                         onChange={(e: any) => {
-                            setSearchValue(e.nativeEvent.target.value)
+                            setSearchValue(e.target.value)
                         }}
                     >
                     </input>
