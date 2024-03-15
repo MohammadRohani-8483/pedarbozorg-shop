@@ -1,6 +1,6 @@
 'use client'
 import Image from 'next/image'
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
 type props = {
     options: string[]
@@ -11,20 +11,35 @@ type props = {
 
 export default function Select({ options, activeOption, setActiveOption, defaultValue }: props) {
     const [isOpen, setIsOpen] = useState(false)
-    // const [activeOption, setActiveOption] = useState(defaultValue)
+
+    const dropdownRef = useRef<HTMLDivElement>(null);
+
+    const handleClickOutside = (e: any) => {
+        if (!dropdownRef.current?.contains(e.target)) {
+            setIsOpen(false);
+        }
+    };
+
+    useEffect(() => {
+        document.addEventListener('click', handleClickOutside);
+        return () => document.removeEventListener('click', handleClickOutside);
+    }, [isOpen]);
+
 
     const handleOptionsClick = (vlaue: string) => {
         setActiveOption(vlaue)
         setIsOpen(false)
     }
+
     const toggling = () => setIsOpen(!isOpen)
+
     return (
-        <div className='relative flex flex-col w-full justify-center items-center'>
+        <div ref={dropdownRef} className='relative flex flex-col w-full justify-center items-center'>
             <div
                 onClick={toggling}
-                className={`flex justify-between items-center pl-2 pr-3 py-2.5 w-full h-10 bg-white border border-gray-400 rounded-lg text-black cursor-pointer hover:border-gray-700 ${activeOption?"text-black":"text-gray-400"}`}
+                className={`flex justify-between items-center pl-2 pr-3 py-2.5 w-full h-10 bg-white border border-gray-400 rounded-lg text-black cursor-pointer hover:border-gray-700 ${activeOption ? "text-black" : "text-gray-400"}`}
             >
-                {activeOption||defaultValue}
+                {activeOption || defaultValue}
                 {isOpen ?
                     <Image
                         src='/iconSax/arrow-up.svg'
@@ -64,6 +79,5 @@ export default function Select({ options, activeOption, setActiveOption, default
                 </div>
             }
         </div>
-
     )
 }
