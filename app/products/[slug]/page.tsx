@@ -78,7 +78,7 @@ export default function ProductsSlug() {
     const link = origin + pathname
 
     return (
-        <main className='w-full mx-auto max-w-[1136px] flex flex-col justify-center items-center gap-4 py-20 md:py-[117px]'>
+        <main className='w-full mx-auto max-w-[1136px] flex flex-col justify-center items-center gap-4 py-20 md:py-[117px] pb-48 lg:pb-[117px]'>
             {product ?
                 correctAPI ?
                     <>
