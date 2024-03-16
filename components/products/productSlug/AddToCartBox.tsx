@@ -1,9 +1,12 @@
 import formatNumber from '@/public/Functions/formatNumber'
 import Image from 'next/image'
 import React from 'react'
+// import { array } from 'yup'
 import AddToCartItem from './AddToCartItem'
 
 const AddToCartBox = ({ product }: any) => {
+
+    const arr = [].length
     return (
         <div className='fixed bottom-0 z-10 lg:z-0 lg:static flex flex-col p-2 lg:p-4 items-center justify-center gap-2 lg:gap-5 w-full lg:max-w-[465px] bg-white lg:bg-opacity-75 lg:rounded-3xl border border-[#E3E3E3] h-[180px] lg:h-auto lg:max-h-[450px]'>
             <Image
@@ -13,7 +16,7 @@ const AddToCartBox = ({ product }: any) => {
                 height={56}
                 className='hidden lg:flex'
             />
-            {product.variants ?
+            {product.variants?.length > 0 ?
                 <div id='scroll' className='ltr flex flex-col overflow-auto p-1 lg:p-0 w-full gap-1.5 lg:gap-4'>
                     <h2 className='text-[#626262] font-bold text-base hidden lg:flex gap-1 justify-center items-center'>
                         از
