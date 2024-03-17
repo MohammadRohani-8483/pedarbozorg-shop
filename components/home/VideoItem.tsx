@@ -17,7 +17,7 @@ type props = {
 export default function VideoItem({ video, bgColor, color, title, desc, classNameVideo, classNameDiv, link, firstDiv }: props) {
     return (
         <div
-            className={`gap-4 flex flex-col ${firstDiv ? "md:flex-col-reverse" : ""}`}
+            className={`gap-2 md:gap-4 flex flex-col ${firstDiv ? "md:flex-col-reverse" : ""}`}
         >
             <video autoPlay loop
                 className={`object-cover max-w-[272px] w-full h-auto rounded-3xl ${classNameVideo}`}
