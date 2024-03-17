@@ -181,13 +181,12 @@ const Header: React.FC = () => {
                         ورود/ثبت نام
                     </button>
                     {isFormOpen && <SignUpSignIn setIsFormOpen={setIsFormOpen} />}
-                    <div className='py-3'
-                        onMouseOver={() => {
+                    <motion.div className='py-3'
+                        onHoverStart={() => {
+                            setIsVisible(true)
                             setIsHover(true)
                         }}
-                        onMouseOut={() => {
-                            setIsHover(false)
-                        }}
+                        onHoverEnd={()=>setIsHover(false)}
                     >
                         <button className='w-[38px] relative outline-btn square-btn'>
                             <Image
@@ -202,9 +201,9 @@ const Header: React.FC = () => {
                                     {cartLength}
                                 </div>
                             }
-                            <ShopingCard isVisible={isHover} />
+                            {isVisible && <ShopingCard isVisible={isHover} />}
                         </button>
-                    </div>
+                    </motion.div>
                 </div>
             </header>
 
