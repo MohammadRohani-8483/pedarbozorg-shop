@@ -18,7 +18,7 @@ const Header: React.FC = () => {
     const [openSearchBarMobile, setOpenSearchBarMobile] = useState(false)
     const [isMenuOpen, setIsMenuOpen] = useState(false)
     const [isHover, setIsHover] = useState(false)
-    const [isVisible, setIsVisible] = useState(true)
+    const [isVisible, setIsVisible] = useState(false)
     const [isHoverLogin, setIsHoverLogin] = useState(false)
     const [isFormOpen, setIsFormOpen] = useState(false)
     const [searchValue, setSearchValue] = useState("")
@@ -44,7 +44,7 @@ const Header: React.FC = () => {
     useEffect(() => {
         params.get("sign_in") == 'true' ? handleFormSignInOpen() : null
     }, [params])
-    
+
     useEffect(() => {
         setCartLength(cart.length)
     }, [cart])
@@ -181,17 +181,15 @@ const Header: React.FC = () => {
                         ورود/ثبت نام
                     </button>
                     {isFormOpen && <SignUpSignIn setIsFormOpen={setIsFormOpen} />}
-                    <div className='p-3'
+                    <div className='py-3'
                         onMouseOver={() => {
                             setIsHover(true)
-                            document.documentElement.classList.add('overflow-hidden')
                         }}
                         onMouseOut={() => {
                             setIsHover(false)
-                            document.documentElement.classList.remove('overflow-hidden')
                         }}
                     >
-                        <button className="w-[38px] relative outline-btn square-btn">
+                        <button className='w-[38px] relative outline-btn square-btn'>
                             <Image
                                 src='/iconSax/shopping-cart.svg'
                                 width={22}
@@ -204,7 +202,7 @@ const Header: React.FC = () => {
                                     {cartLength}
                                 </div>
                             }
-                            {isHover && <ShopingCard isVisible={isVisible} />}
+                            <ShopingCard isVisible={isHover} />
                         </button>
                     </div>
                 </div>

@@ -11,10 +11,11 @@ import PaginationButtons from '@/components/PaginationButtons'
 import FiltersMobile from '@/components/products/filters/FiltersMobile'
 import OrderingMobile from '@/components/products/ordering/OrderingMobile'
 import { useDebounce } from '@/public/hooks/useDebounce'
+import SkeletonCard from '@/components/SkeletonCard'
 
 const Products = () => {
   const [searchValue, setSearchValue] = useState('')
-  const [products, setProducts] = useState([])
+  const [products, setProducts] = useState<any[]>()
   const [productsCount, setproductsCount] = useState(0)
   const [activeOrder, setActiveOrder] = useState("-view_count")
   const [categories, setCategories] = useState<number[]>([])
@@ -130,34 +131,24 @@ const Products = () => {
             }
           </div>
           <div className="grid lg:grid-cols-3 xl:grid-cols-4 sm:grid-cols-2 grid-cols-1 justify-items-center gap-4 lg:gap-8 w-full">
-            {products?.map((product: any) => {
-              const cartItem = {
-                id: product.cheapest_variant_id,
-                shatootInfo: {
-                  sellPrice: product.min_sell_price,
-                  finalPrice: product.min_price,
-                  discount: product.min_price - product.min_sell_price,
-                },
-                product: {
-                  id: product.id,
-                  featuredImage: product.featured_image,
-                  name: product.name,
-                  slug: product.slug,
-                },
-              }
-              return (
-                <ProductCard
-                  key={product.id}
-                  link={product.slug}
-                  name={product.name}
-                  price={product.min_sell_price}
-                  image={product.featured_image}
-                  score={product.avg_rate}
-                  priceWithOffer={product.min_sell_price}
-                  product={product}
-                />
-              )
-            })}
+            {products ?
+              products.map((product: any) => {
+                return (
+                  <ProductCard
+                    key={product.id}
+                    link={product.slug}
+                    name={product.name}
+                    price={product.min_sell_price}
+                    image={product.featured_image}
+                    score={product.avg_rate}
+                    priceWithOffer={product.min_sell_price}
+                    product={product}
+                  />
+                )
+              })
+              :
+              Array(8).fill(1).map((_, i) => <SkeletonCard key={i} />)
+            }
           </div>
         </div>
         {Math.ceil(productsCount / 12) > 1 && <PaginationButtons

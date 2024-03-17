@@ -4,13 +4,13 @@ import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 import ShopingCardItem from './ShopingCardItem'
 import { motion } from 'framer-motion';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { shopCartItem } from '@/public/types/productType'
 
-const ShopingCard = ({ isVisible, className }: any) => {
+const ShopingCard = ({ isVisible }: any) => {
     const [totalFinalPrice, setTotalFinalPrice] = useState(0)
 
-    const cart = useSelector((state: any) => state.cart.cart)
+    const cart = useSelector((state: any) => state.cart.cart) || ""
 
     useEffect(() => {
         setTotalFinalPrice(cart.reduce((previous: any, current: any) => previous + current?.shatootInfo.finalPrice * current?.quantity, 0))
@@ -27,19 +27,15 @@ const ShopingCard = ({ isVisible, className }: any) => {
 
     return (
         <motion.div
-            className={`${className || ""} flex flex-col rtl w-[492px] h-[354px] justify-center items-center bg-white rounded-lg absolute top-12 -left-0.5 z-[100] p-4`}
-            // animate={true ? "vsisble" : 'hidden'}
-            // initial={isVisible ? "hidden" : "vsisble"}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            // variants={variants}
+            className={`${(isVisible || false) ? "pointer-events-auto" : "pointer-events-none"} flex flex-col rtl w-[492px] h-[354px] justify-center items-center bg-white rounded-lg absolute top-12 -left-0.5 z-[100] p-4 opacity-0`}
+            animate={(isVisible || false) ? { opacity: 1 } : { opacity: 0 }}
             transition={{ duration: 0.3 }}
         >
-            {
-                cart.length > 0 ?
+            {/* {cart ?
+                cart?.length > 0 ?
                     <>
                         <div className='w-full h-[266px] overflow-auto overflow-x-hidden flex flex-col gap-2 ltr' id='scroll'>
-                            {cart.map((cartItem: shopCartItem, i: number, array: shopCartItem[]) => {
+                            {cart?.map((cartItem: shopCartItem, i: number, array: shopCartItem[]) => {
                                 return (
                                     <div
                                         className='gap-2 flex flex-col justify-center items-center'
@@ -86,7 +82,9 @@ const ShopingCard = ({ isVisible, className }: any) => {
                     </>
                     :
                     <h1 className='text-xl text-gray-600'>سبد خرید شما خالی میباشد</h1>
-            }
+                :
+                <>sghl</>
+            } */}
         </motion.div>
     )
 }
