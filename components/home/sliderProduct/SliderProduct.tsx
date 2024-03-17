@@ -67,6 +67,7 @@ export default function SliderProduct() {
                             direction='vertical'
                             loop={true}
                             simulateTouch={false}
+                            
                             autoplay={{
                                 delay: 4000,
                                 disableOnInteraction: true,
@@ -110,7 +111,7 @@ export default function SliderProduct() {
                             prevEl: '.prev-descript-btn',
                         }}
                         modules={[Pagination, Navigation, Autoplay]}
-                        className="mySwiper h-[137px]"
+                        className="mySwiper h-64 lg:h-[137px]"
                     >
                         {
                             description.map((descript, i) => (
