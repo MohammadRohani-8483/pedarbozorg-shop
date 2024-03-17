@@ -1,3 +1,4 @@
+'use client'
 import formatNumber from '@/public/Functions/formatNumber'
 import { addToCart, decrementQuantity, incrementQuantity, removeFromCart } from '@/public/redux/store/cart'
 import Image from 'next/image'
@@ -40,8 +41,18 @@ const AddToCartItem = ({ product, price, priceWithOffer, name, image, slug }: an
     }
 
     const cart = useSelector((state: any) => state.cart.cart)
-    const isProductToCart = Boolean(Array(...cart).find((item: any) => item.id === cartItem.id))
-    const productInCart = Array(...cart).find((item: any) => item.id === cartItem.id) || null
+    let foundItem;
+    if (Array.isArray(cart)) {
+        foundItem = cart.find((item: any) => item.id === cartItem.id);
+        console.log('yes');
+        // ...
+    } else {
+        foundItem = false
+        console.log('no');
+    }
+
+    const isProductToCart = Boolean(foundItem)
+    const productInCart = foundItem || null
 
     const dispatch = useDispatch()
 
