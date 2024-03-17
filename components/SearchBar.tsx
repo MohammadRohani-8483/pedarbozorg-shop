@@ -6,11 +6,19 @@ import { motion } from 'framer-motion';
 import SearchValueProduct from './SearchValueProduct';
 import axios from 'axios';
 import { useDebounce } from '@/public/hooks/useDebounce';
+import { useRouter } from 'next/navigation';
 
 export default function SearchBar({ handleOpenSearch, handleCloseSearch, openSearchBar, searchValue, setSearchValue, focus }: any) {
     const api = '/api/store-api/products-public/'
     const [products, setProducts] = useState([])
     const [productsCount, setProductsCount] = useState(0)
+
+    const router = useRouter()
+
+    const clickBtnSearch = () => {
+        router.replace(`/products/?search=${searchValue}`)
+        handleCloseSearch()
+    }
 
     const debouncedSearch = useDebounce(searchValue)
 
@@ -82,7 +90,10 @@ export default function SearchBar({ handleOpenSearch, handleCloseSearch, openSea
                                 ))}
                             </div>
                             <div className='w-full flex items-center justify-center mt-2'>
-                                <button className='rectangle-btn outline-btn'>
+                                <button
+                                    onClick={clickBtnSearch}
+                                    className='rectangle-btn outline-btn'
+                                >
                                     جستجوی {searchValue} در تمامی محصولات
                                 </button>
                             </div>

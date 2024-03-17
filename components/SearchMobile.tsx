@@ -1,10 +1,13 @@
 "use client"
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Image from '@/node_modules/next/image'
 import { IoClose } from "@/node_modules/react-icons/io5/index";
 import SearchValueProduct from './SearchValueProduct';
-import { products } from 'public/data/products'
+// import { products } from 'public/data/products'
 import { motion } from 'framer-motion';
+import axios from 'axios';
+import { useDebounce } from '@/public/hooks/useDebounce';
+import { useRouter } from 'next/navigation';
 
 type searchProps = {
     setOpenSearchBar: (value: boolean) => void
@@ -22,6 +25,37 @@ const SearchMobile: React.FC<searchProps> = ({ setOpenSearchBar }) => {
         },
     };
 
+    const api = '/api/store-api/products-public/'
+    const [products, setProducts] = useState([])
+    const [productsCount, setProductsCount] = useState(0)
+
+    const debouncedSearch = useDebounce(inputValue)
+
+    useEffect(() => {
+        if (inputValue.length > 0)
+            axios.get(`${api}${inputValue.length > 0 ? `?search=${debouncedSearch}` : ""}`)
+                .then(res => {
+                    setProducts(res.data.results)
+                    setProductsCount(res.data.count)
+                })
+    }, [debouncedSearch]);
+
+    const handleCloseSearch = () => {
+        setIsOpen(false)
+        setTimeout(() => {
+            setOpenSearchBar(false)
+            setInputValue("")
+            document.documentElement.classList.remove('overflow-hidden')
+        }, 300)
+    }
+
+    const router = useRouter()
+
+    const clickBtnSearch = () => {
+        router.replace(`/products/?search=${inputValue}`)
+        handleCloseSearch()
+    }
+
     return (
         <motion.div
             animate={isOpen ? "visible" : "hidden"}
@@ -34,14 +68,7 @@ const SearchMobile: React.FC<searchProps> = ({ setOpenSearchBar }) => {
                 <div className='flex items-center gap-1 text-xl text-gray-200'>
                     <IoClose
                         className="cursor-pointer text-gray-300"
-                        onClick={() => {
-                            setIsOpen(false)
-                            setTimeout(() => {
-                                setOpenSearchBar(false)
-                                setInputValue("")
-                                document.documentElement.classList.remove('overflow-hidden')
-                            }, 300)
-                        }}
+                        onClick={handleCloseSearch}
                     />|
                 </div>
                 <input
@@ -63,13 +90,16 @@ const SearchMobile: React.FC<searchProps> = ({ setOpenSearchBar }) => {
                     className="cursor-pointer"
                 />
             </div>
-            <div className='w-[90%] mx-auto mt-14'>
-                {products.slice(0, 4).map((product) => (
-                    <SearchValueProduct link={product.link} image={product.image} key={product.id} name={product.name} />
+            <div className='w-[90%] mx-auto mt-14 overflow-auto h-[88%] ltr' id='scroll'>
+                {products?.map((product: any) => (
+                    <SearchValueProduct link={product.slug} image={product.featured_image} key={product.id} name={product.name} />
                 ))}
                 {inputValue &&
                     <div className='w-full flex items-center justify-center mt-2'>
-                        <button className='rectangle-btn outline-btn'>
+                        <button
+                            onClick={clickBtnSearch}
+                            className='rectangle-btn outline-btn'
+                        >
                             جستجوی {inputValue} در تمامی محصولات
                         </button>
                     </div>
