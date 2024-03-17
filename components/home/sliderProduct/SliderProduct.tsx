@@ -1,22 +1,23 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 'use client'
 import SliderBtn from "../../SliderBtn";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import SliderProductItems from "./SliderProductItems";
 
-import 'app/pagination-slider-product.css'
+import './pagination-slider-product.css'
 
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 // Import Swiper styles
 import 'swiper/css';
-import 'swiper/css/pagination';
+// import 'swiper/css/pagination';
 
 // import required modules
 import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 
 import { titles, description } from "@/public/data/sliderProductImages";
+import Link from "next/link";
 
 export default function SliderProduct() {
     const [imageIndex, setImageIndex] = useState(0);
@@ -135,9 +136,11 @@ export default function SliderProduct() {
                         <SliderBtn next className="next-descript-btn" />
                     </div>
                     <div>
+                        <Link href='/products'>
                         <button className="solid-btn rectangle-btn">
                             ورود به فروشگاه
                         </button>
+                        </Link>
                     </div>
                 </div>
             </div>

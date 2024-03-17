@@ -85,33 +85,6 @@ html {
   background-size: contain;
   background-position: center;
 }
-.bg-red-200{
-  background-color: #faeeed;
-}
-.bg-blue-200{
-  background-color: #e5edff;
-}
-.bg-orange-200{
-  background-color: #f5eee7;
-}
-.bg-red-300{
-  background-color: #c15248;
-}
-.bg-blue-300{
-  background-color: #5375c2;
-}
-.bg-orange-300{
-  background-color: #db7a18;
-}
-.text-red-300{
-  color: #c15248;
-}
-.text-blue-300{
-  color: #5375c2;
-}
-.text-orange-300{
-  color: #db7a18;
-}
 
 ::-webkit-scrollbar {
   @apply w-[8px] bg-base-200
@@ -173,4 +146,25 @@ html {
 
 .box_container:nth-child(10){
   @apply lg:col-start-2
+}
+
+.swiper-pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 80px;
+  gap: 4px;
+}
+
+.swiper-pagination-bullet {
+  width: 12px;
+  height: 8px;
+  border-radius: 8px;
+  opacity: 1;
+  background: #E3E3E3;
+  margin: 0 , 4px;
+}
+
+.swiper-pagination-bullet-active {
+  width: 36px;
+  background: #FFC436;
 }

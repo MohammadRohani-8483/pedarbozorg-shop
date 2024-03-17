@@ -40,8 +40,9 @@ export default function SpecialProductsSlider() {
                         prevEl: '.prev-special-btn',
                     }}
                     modules={[Navigation]}
-                    className="mySwiper flex justify-center text-right"
+                    className="mySwiper text-right"
                     loop={true}
+                    spaceBetween={80}
                 >
                     {specialProductsSlider.map((product) => (
                         <SwiperSlide
@@ -60,8 +61,8 @@ export default function SpecialProductsSlider() {
                                 <div className='flex flex-col gap-8'>
                                     <h1 className='text-base-300 text-2xl text-center font-bold'>{product.name}</h1>
                                     <div className='flex flex-col gap-2 text-center text-base text-base-300 w-full'>
-                                        {product.attributes.map((attribute, index) => (
-                                            <div key={index} className='bg-base-200 min-w-[270px] w-4/5 max-w-[368px] rounded-lg py-2 px-4 text-sm lg:text-base'>
+                                        {product.attributes.map((attribute) => (
+                                            <div key={crypto.randomUUID()} className='bg-base-200 min-w-[190px] w-full max-w-[368px] rounded-lg py-2 sm:px-4 text-[10px] sm:text-xs md:text-sm lg:text-base'>
                                                 <p className='whitespace-nowrap'>{attribute}</p>
                                             </div>
                                         ))}
