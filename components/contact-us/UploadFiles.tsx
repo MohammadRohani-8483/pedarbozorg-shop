@@ -4,7 +4,7 @@ import React from 'react'
 
 export default function UploadFiles({ register }: any) {
     return (
-        <div className='flex flex-col items-center justify-center w-full  outline-none border border-gray-400 rounded-lg text-black p-4 gap-4'>
+        <div className='flex flex-col lg:flex-row lg:py-12 items-center justify-center lg:justify-around w-full  outline-none border border-gray-400 rounded-lg text-black p-4 gap-4 lg:gap-0'>
             <Image
                 src='/iconSax/document-upload.svg'
                 alt='document upload'
