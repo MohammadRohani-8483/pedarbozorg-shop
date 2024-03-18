@@ -5,7 +5,7 @@ import React from 'react'
 const EmptyCheckoutCart = () => {
     return (
         <div className='flex flex-col bg-white rounded-3xl p-4 md:p-8 items-center justify-center w-full gap-4 md:gap-8 max-w-[752px]'>
-            <div className='w-8 h-8 md:w-16 md:h-16 relative'>
+            <div className='size-8 md:size-16 relative'>
                 <Image
                     src='/iconSax/shopping-cart.svg'
                     alt='shoping cart'
