@@ -1,3 +1,4 @@
+'use client'
 import React from 'react'
 import Image from 'next/image'
 import formatNumber from 'public/Functions/formatNumber'
@@ -5,7 +6,17 @@ import Link from 'next/link'
 import { useDispatch, useSelector } from 'react-redux';
 import { incrementQuantity, removeFromCart, decrementQuantity } from '@/public/redux/store/cart';
 
-const ShopingCardItem = ({ image, link, price, priceWithOffer, name, count, product }: any) => {
+type props = {
+    image: string
+    link: string
+    name: string
+    price: number
+    priceWithOffer: number
+    count: number
+    product: any
+}
+
+const ShopingCardItem = ({ image, link, price, priceWithOffer, name, count, product }: props) => {
     const offerPresent = (price - priceWithOffer) / price * 100
     const present = price * offerPresent / 100
 
@@ -28,10 +39,10 @@ const ShopingCardItem = ({ image, link, price, priceWithOffer, name, count, prod
             localStorage.removeItem('shoping_cart')
         }
     }
-    
+
     return (
         <div
-            className='flex justify-between h-[131px] w-[455px] items-center'
+            className='flex justify-between h-[131px] w-full items-center'
         >
             <Link href={link} className='flex gap-2 justify-center items-center'>
                 <Image
@@ -41,7 +52,9 @@ const ShopingCardItem = ({ image, link, price, priceWithOffer, name, count, prod
                     height={131}
                 />
                 <div className='flex flex-col gap-2 items-start justify-center'>
-                    <h2 className='text-[#353535] text-xl font-bold'>{name}</h2>
+                    <h2 className='text-[#353535] text-xl font-bold'>
+                        {name}
+                    </h2>
                     <div className='flex items-center justify-start gap-2'>
                         {/* <div className='bg-[#626262] aspect-square w-[6px] rounded-full'></div> */}
                         {/* <h3 className='text-sm text-[#626262]'>{weight} گرم</h3> */}
@@ -73,7 +86,7 @@ const ShopingCardItem = ({ image, link, price, priceWithOffer, name, count, prod
                 <div className='flex justify-center items-center gap-2'>
                     <h2 className='text-[#353535] text-xl font-bold'>
                         {count}
-                        </h2>
+                    </h2>
                     <div className='flex flex-col justify-center items-center gap-2'>
                         <div
                             onClick={handleIncrementQuantity}

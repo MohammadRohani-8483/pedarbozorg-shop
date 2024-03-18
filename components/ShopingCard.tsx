@@ -22,7 +22,6 @@ const ShopingCard = ({ isVisible }: any) => {
         <motion.div
             className={`${(isVisible || false) ? "pointer-events-auto" : "pointer-events-none"} flex flex-col rtl w-[492px] h-[354px] justify-center items-center bg-white rounded-lg absolute top-12 -left-0.5 z-[100] p-4 opacity-0`}
             animate={(isVisible || false) ? { opacity: 1, display: "flex" } : { opacity: 0, display: "flex" }}
-            // initial={{ display: "none" }}
             transition={{ duration: 0.3 }}
         >
             {cart &&
@@ -40,7 +39,6 @@ const ShopingCard = ({ isVisible }: any) => {
                                         priceWithOffer={cartItem.shatootInfo.finalPrice}
                                         image={cartItem.product.featuredImage}
                                         link={cartItem.product.slug}
-                                        // weight={130}
                                         name={cartItem.product.name}
                                         count={cartItem.quantity}
                                         product={cartItem}
