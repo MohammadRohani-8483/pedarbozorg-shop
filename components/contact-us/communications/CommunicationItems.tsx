@@ -1,20 +1,20 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react'
-// import icon from 'public/iconSax/alarm.svg'
 
 type props = {
-    icon?: string
+    icon: string
     title: string
     desc?: string
     descs?: {
         key: string
         value: string
+        link: string
     }[]
+    link?: string
 }
 
-const icon = '/iconSax/alarm.svg'
-
-const CommunicationItems = ({ icon = '/iconSax/alarm.svg', title, desc, descs }: props) => {
+const CommunicationItems = ({ icon, title, desc, descs, link }: props) => {
     return (
         <div className='w-full flex flex-col justify-center items-center p-4 bg-white rounded-3xl gap-6 md:h-[318px]'>
             <div className='flex flex-col justify-center items-center gap-6'>
@@ -37,11 +37,13 @@ const CommunicationItems = ({ icon = '/iconSax/alarm.svg', title, desc, descs }:
                                 className=' flex justify-between items-center'
                             >
                                 <div>{desc.key}:</div>
-                                <div>{desc.value}</div>
+                                <Link href={desc.link}>{desc.value}</Link>
                             </div>
                         ))
-                        :
-                        desc
+                        : link ?
+                            <Link href={link}>{desc}</Link>
+                            :
+                            desc
                 }
             </div>
         </div>
