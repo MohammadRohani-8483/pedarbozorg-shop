@@ -56,23 +56,27 @@ export const companyProfile = [
     title: "تلفن فروشگاه",
     value: "021-44612752",
     icon: "/iconSax/shop.svg",
+    link: "tel:+982144612752",
   },
   {
     id: crypto.randomUUID(),
     title: "تلفن سفارشات",
     value: "021-44899210",
     icon: "/iconSax/shopping-bag.svg",
+    link: "tel:+982144899210",
   },
   {
     id: crypto.randomUUID(),
     title: "همراه مدیر عامل",
     value: "09194060805",
     icon: "/iconSax/mobile.svg",
+    link: 'tel:+989194060805'
   },
   {
     id: crypto.randomUUID(),
     title: "ایمیل",
     value: "Pedarbozorg.busiuness@gmail.com",
     icon: "/iconSax/sms.svg",
+    link:"mailto:Pedarbozorg.busiuness@gmail.com"
   },
 ];

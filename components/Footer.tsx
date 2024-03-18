@@ -12,10 +12,10 @@ const Footer: React.FC = () => {
     return (
         <footer className='flex flex-col items-center justify-center bg-[url("/Image/Footer-Mobile.png")] md:bg-[url("/Image/footer-bg.png")] bg-cover bg-no-repeat w-screen px-[10%] pt-[10%] md:pl-[5%] md:p-0 gap-8 md:gap-0'>
             <div className='flex flex-col md:flex-row justify-center md:justify-between items-center md:pt-[74px] md:pr-[5%] gap-6 md:gap-8 w-full'>
-                <div className='w-[88%] max-w-[496px] flex flex-col justify-center gap-8 items-center bg-[url("/Image/about-footer-bg.png")] bg-cover bg-no-repeat pr-[19%] md:pr-16 lg:pr-[94px] pl-[23%] md:pl-[75px] lg:pl-[118px] aspect-[496/501]'>
+                <div className='w-[88%] max-w-[496px] flex flex-col justify-center gap-4 md:gap-8 items-center bg-[url("/Image/about-footer-bg.png")] bg-cover bg-no-repeat pr-[14%] sm:pr-[19%] md:pr-16 lg:pr-[94px] pl-[18%] sm:pl-[23%] md:pl-[75px] lg:pl-[118px] aspect-[496/501]'>
                     <Link
                         href="/"
-                        className='relative w-1/2 aspect-square'
+                        className='relative w-[30%] sm:w-[40%] md:w-1/2 aspect-square'
                     >
                         <Image
                             alt='Logo Footer'
@@ -50,7 +50,7 @@ const Footer: React.FC = () => {
                                         key={item.id}
                                         className='flex w-full justify-between items-center text-base-300 rounded-3xl bg-[#E0F1E9] lg:w-[385px] h-auto py-2 px-4'
                                     >
-                                        <div className='whitespace-nowrap text-xs'>{item.title}</div>
+                                        <div className={`whitespace-nowrap text-xs ${item.title === "ایمیل" ? "hidden sm:block" : ""}`}>{item.title}</div>
                                         <div className='ltr flex items-center justify-center gap-2 lg:gap-4'>
                                             <Image
                                                 src={item.icon}
@@ -58,7 +58,11 @@ const Footer: React.FC = () => {
                                                 width={24}
                                                 height={24}
                                             />
-                                            <p className='text-xs md:text-sm text-center font-bold'>{item.value}</p>
+                                            {item.link ?
+                                                <Link href={item.link} className='text-xs md:text-sm text-center font-bold'>{item.value}</Link>
+                                                :
+                                                <p className='text-xs md:text-sm text-center font-bold'>{item.value}</p>
+                                            }
                                         </div>
                                     </div>
                                 ))
@@ -81,7 +85,7 @@ const Footer: React.FC = () => {
                                 ))
                             }
                         </div>
-                        <div className='flex lg:flex-col justify-between lg:justify-around items-center w-1/2 aspect-[5/1] mt-4 lg:mt-0 lg:rounded-3xl lg:bg-[#E0F1E9] lg:w-[76px] lg:h-[268px] lg:py-4'>
+                        <div className='flex lg:flex-col justify-between lg:justify-around items-center sm:w-1/2 aspect-[5/1] mt-4 lg:mt-0 lg:rounded-3xl lg:bg-[#E0F1E9] lg:w-[76px] lg:h-[268px] lg:py-4'>
                             {
                                 medias.map((media) => (
                                     <MediaIcon

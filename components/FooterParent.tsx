@@ -2,7 +2,7 @@
 import { useParams, usePathname } from "next/navigation";
 import Footer from "./Footer";
 
-export default function ChildComponent() {
+export default function FooterParent() {
     const pathname = usePathname()
     const params = useParams()
     const isVsisble = !(pathname.includes("products") && Boolean(params.slug))
