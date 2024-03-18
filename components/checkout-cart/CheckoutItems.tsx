@@ -23,7 +23,7 @@ const CheckoutItems = () => {
     }
 
     return (
-        <div className='flex flex-col bg-white rounded-3xl p-4 items-center justify-center w-full gap-4'>
+        <div className='flex flex-col bg-white rounded-3xl p-4 md:p-8 items-center justify-center w-full gap-4'>
             <h3 className='font-medium text-base-300 text-sm'>{cart?.length} کالا</h3>
             <div className='w-full h-[1px] bg-gray-200' />
             {cart.map((cartItem, i, array) => {
