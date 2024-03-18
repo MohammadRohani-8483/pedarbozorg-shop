@@ -1,6 +1,7 @@
 'use client'
 import CheckoutCartItem from '@/components/checkout-cart/CheckoutCartItem'
 import CheckoutItems from '@/components/checkout-cart/CheckoutItems'
+import EmptyCheckoutCart from '@/components/checkout-cart/EmptyCheckoutCart'
 import Title from '@/components/Title'
 import { shopCartItem } from '@/public/types/productType'
 import React, { useEffect, useState } from 'react'
@@ -27,13 +28,13 @@ const CheckoutCart = () => {
                 <>
                     <main className='w-[90%] mx-auto max-w-[1136px] flex flex-col justify-center items-center gap-16 md:gap-20 py-20 md:py-[117px]'>
                         <Title>سبد خرید</Title>
-                        {cart.length > 0
+                        {cart?.length > 0
                             ?
                             <div className='flex flex-col w-full justify-center items-center gap-2 lg:gap-6'>
                                 <CheckoutItems />
                             </div>
                             :
-                            <div></div>
+                            <EmptyCheckoutCart />
                         }
                     </main>
                 </>
