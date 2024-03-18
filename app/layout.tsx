@@ -3,8 +3,7 @@ import "./globals.css";
 import StoreProvider from "public/redux/StoreProvider";
 import Header from "@/components/Header";
 import ScrollToTop from "@/components/ScrollToTop";
-import Footer from "@/components/Footer";
-import ChildComponent from "@/components/ChildComponent";
+import FooterParent from "@/components/FooterParent";
 
 export const metadata: Metadata = {
   title: "پدربزرگ",
@@ -27,7 +26,7 @@ export default function RootLayout({
           <Header />
           <ScrollToTop />
           {children}
-          <ChildComponent/>
+          <FooterParent/>
         </StoreProvider>
       </body>
     </html >
