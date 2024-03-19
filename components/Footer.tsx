@@ -69,21 +69,37 @@ const Footer: React.FC = () => {
                             }
                         </div>
                         <div className='flex lg:flex-col justify-between lg:justify-around items-center rounded-3xl bg-[#E0F1E9] w-full lg:w-[107px] p-4 gap-4 h-[120px] lg:h-[268px]'>
-                            {
-                                symbols.map((symbol) => (
-                                    <Link
-                                        href={symbol.link}
-                                        className='relative w-[87px] aspect-square lg:w-[74px]'
-                                        key={symbol.id}
-                                    >
-                                        <Image
-                                            alt={symbol.name}
-                                            src={symbol.icon}
-                                            fill
-                                        />
-                                    </Link>
-                                ))
-                            }
+                            <Link
+                                href='/'
+                                className='relative w-[87px] aspect-square lg:w-[74px]'
+                            >
+                                <Image
+                                    alt='zarinpal'
+                                    src="/Image/footer/symbols/zarinpal.svg"
+                                    fill
+                                />
+                            </Link>
+                            <Link
+                                className='relative w-[87px] aspect-square lg:w-[74px]'
+                                href="https://trustseal.enamad.ir/?id=442491&Code=fpIN0X9CJKuz2Rym1BNamoRVIobsmlM2"
+                                referrerPolicy="origin" target="_blank"
+                            >
+                                <Image
+                                    alt='enamad'
+                                    src="/Image/footer/symbols/enamad.svg"
+                                    fill
+                                />
+                            </Link>
+                            <Link
+                                href='/'
+                                className='relative w-[87px] aspect-square lg:w-[74px]'
+                            >
+                                <Image
+                                    alt='samandehi'
+                                    src="/Image/footer/symbols/samandehi.svg"
+                                    fill
+                                />
+                            </Link>
                         </div>
                         <div className='flex lg:flex-col justify-between lg:justify-around items-center sm:w-1/2 aspect-[5/1] mt-4 lg:mt-0 lg:rounded-3xl lg:bg-[#E0F1E9] lg:w-[76px] lg:h-[268px] lg:py-4'>
                             {

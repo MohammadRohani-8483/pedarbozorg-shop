@@ -33,7 +33,7 @@ export const symbols = [
     id: crypto.randomUUID(),
     name: "enamad",
     icon: "/Image/footer/symbols/enamad.svg",
-    link: "/",
+    link: "https://trustseal.enamad.ir/?id=442491&Code=fpIN0X9CJKuz2Rym1BNamoRVIobsmlM2",
   },
   {
     id: crypto.randomUUID(),
