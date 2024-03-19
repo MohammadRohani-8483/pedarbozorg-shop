@@ -68,7 +68,6 @@ export default function SliderProduct() {
                             direction='vertical'
                             loop={true}
                             simulateTouch={false}
-                            
                             autoplay={{
                                 delay: 4000,
                                 disableOnInteraction: true,
@@ -137,9 +136,9 @@ export default function SliderProduct() {
                     </div>
                     <div>
                         <Link href='/products'>
-                        <button className="solid-btn rectangle-btn">
-                            ورود به فروشگاه
-                        </button>
+                            <button className="solid-btn rectangle-btn">
+                                ورود به فروشگاه
+                            </button>
                         </Link>
                     </div>
                 </div>
