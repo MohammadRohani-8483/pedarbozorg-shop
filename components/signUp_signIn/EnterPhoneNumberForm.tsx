@@ -30,7 +30,7 @@ const EnterPhoneNumberForm = ({ handleClose, inputValue, setInputValue, setIsEnt
             <div className='flex flex-col gap-2 justify-center items-center w-full max-w-[300px]'>
                 <Image
                     alt='Logo'
-                    src='/Image/logo-login.png'
+                    src='/Image/logo-login.svg'
                     width={145}
                     height={145}
                 />
