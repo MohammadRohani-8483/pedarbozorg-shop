@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import React from 'react'
 import { FaChevronLeft } from 'react-icons/fa'
+import { motion } from "framer-motion"
 
 type props = {
     video: string
@@ -36,11 +37,10 @@ export default function VideoItem({ video, bgColor, color, title, desc, classNam
                 </p>
                 <Link
                     href={link}
+                    className='rounded-lg text-white text-sm overflow-hidden'
+                    style={{ backgroundColor: color }}
                 >
-                    <button
-                        style={{ backgroundColor: color }}
-                        className='rounded-lg text-white text-sm flex justify-center items-center gap-2 hover:backdrop-brightness-[0.8] px-3 py-1.5 '
-                    >
+                    <button className='w-full flex justify-center items-center gap-2 hover:!backdrop-brightness-[0.9] px-3 py-1.5 transition-all duration-300'>
                         خرید
                         <FaChevronLeft />
                     </button>
