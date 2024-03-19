@@ -3,7 +3,7 @@ const API_URL = process.env.API;
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ["api.pedarbozorg.shop"],
+    domains: ["trustseal.enamad.ir", "api.pedarbozorg.shop"],
   },
   trailingSlash: true,
   rewrites: async () => [
