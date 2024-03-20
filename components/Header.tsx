@@ -182,31 +182,35 @@ const Header: React.FC = () => {
                         ورود/ثبت نام
                     </button>
                     {isFormOpen && <SignUpSignIn setIsFormOpen={setIsFormOpen} />}
-                    <Link href='/checkout-cart'>
-                        <motion.div className='py-3'
-                            onHoverStart={() => {
-                                setIsVisible(true)
-                                setIsHover(true)
-                            }}
-                            onHoverEnd={() => setIsHover(false)}
-                        >
-                            <button className='w-[38px] relative outline-btn square-btn'>
-                                <Image
-                                    src='/iconSax/shopping-cart.svg'
-                                    width={22}
-                                    height={22}
-                                    alt="shoping cart"
-                                    className='w-[22px] h-[22px] w-full'
-                                />
-                                {cartLength !== 0 &&
-                                    <div className="absolute px-1.5 py-0 rounded-md bg-red-500 text-white text-xs flex justify-center items-center top-0.5 right-0.5">
-                                        {cartLength}
-                                    </div>
-                                }
-                                {isVisible && <ShopingCard isVisible={isHover} />}
-                            </button>
-                        </motion.div>
-                    </Link>
+                    {/* <Link href='/checkout-cart'> */}
+                    <motion.div className='py-3'
+                        onHoverStart={() => {
+                            setIsVisible(true)
+                            setIsHover(true)
+                        }}
+                        onHoverEnd={() => setIsHover(false)}
+                    >
+                        <div className='relative'>
+                            <Link href='/checkout-cart'>
+                                <button className='w-[38px] outline-btn square-btn'>
+                                    <Image
+                                        src='/iconSax/shopping-cart.svg'
+                                        width={22}
+                                        height={22}
+                                        alt="shoping cart"
+                                        className='w-[22px] h-[22px] w-full'
+                                    />
+                                    {cartLength !== 0 &&
+                                        <div className="absolute px-1.5 py-0 rounded-md bg-red-500 text-white text-xs flex justify-center items-center top-0.5 right-0.5">
+                                            {cartLength}
+                                        </div>
+                                    }
+                                </button>
+                            </Link>
+                            {isVisible && <ShopingCard isVisible={isHover} />}
+                        </div>
+                    </motion.div>
+                    {/* </Link> */}
                 </div>
             </header>
 
