@@ -1,8 +1,17 @@
-import { orders } from '@/public/data/pageProducts'
 import Image from 'next/image'
 import React from 'react'
 
-const Ordering = ({ activeOrder, setActiveOrder }: any) => {
+type props = {
+    activeOrder: string
+    setActiveOrder: (par: string) => void
+    orders: {
+        id: string
+        value: string
+        name: string
+    }[]
+}
+
+const Ordering = ({ activeOrder, setActiveOrder, orders }: props) => {
     return (
         <div className='hidden lg:flex gap-2 w-'>
             <Image

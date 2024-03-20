@@ -1,9 +1,18 @@
 import Image from 'next/image'
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
-import { categories } from '@/public/data/pageProducts'
+import { number } from 'yup'
 
-const Category = ({ categoryState, setCategory }: any) => {
+type props = {
+    categoryState: number[]
+    setCategory: (par: number[]) => void
+    categories: {
+        name: string
+        value: number
+    }[]
+}
+
+const Category = ({ categoryState, setCategory, categories }: props) => {
     const [boxIsOpen, setBoxIsOpen] = useState(false)
 
     const handleCheckboxChange = (value: number) => {
@@ -47,7 +56,7 @@ const Category = ({ categoryState, setCategory }: any) => {
                 }
             </div>
             <div className='flex flex-col gap-2 justify-start items-start text-[#626262] text-sm'>
-                {categories.map((category: any, index, array) => (
+                {categories.map((category) => (
                     <div key={category.value} className='flex gap-2 items-center'>
                         <input
                             type="checkbox"

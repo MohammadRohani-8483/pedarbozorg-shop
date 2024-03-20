@@ -1,11 +1,11 @@
 'use client'
 import { blogs } from 'public/data/blogs'
 import React, { useState } from 'react'
-import Category from '@/components/blog/Category'
 import BlogCard from '@/components/home/pedarBozorgInLife/blogsDesktop/BlogCard'
 import BlogCardMobile from '@/components/home/pedarBozorgInLife/blogsMobile/BlogCardMobile'
 import PaginationButtons from '@/components/PaginationButtons'
 import SearchBarProducts from '@/components/products/SearchBarProducts'
+import Category from '@/components/products/Category'
 
 const Blog = () => {
     const [currPage, setCurrPage] = useState(1)
@@ -14,12 +14,17 @@ const Blog = () => {
     const [category, setCategory] = useState<number[]>([])
     return (
         <main className='w-[90%] max-w-[1136px] mx-auto py-16 md:py-[117px] flex flex-col gap-2 lg:gap-4'>
-            <div className='w-full grid grid-rows-2 md:grid-rows-1 md:grid-cols-[65%_33%] lg:grid-cols-[74.8%_24%] md:gap-4 ltr'>
+            <div className='w-full grid grid-rows-2 md:grid-rows-1 md:grid-cols-[65%_33%] lg:grid-cols-[74.5%_24%] md:gap-3 lg:gap-4 ltr'>
                 <SearchBarProducts searchValue={searchValue} setSearchValue={setSearchValue} />
-                <Category
-                    categoryState={category}
-                    setCategory={setCategory}
-                />
+                <div className='relative'>
+                    <div className='absolute w-full z-10'>
+                        <Category
+                            categoryState={category}
+                            setCategory={setCategory}
+                            categories={[]}
+                        />
+                    </div>
+                </div>
             </div>
             <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify- gap-2 md:gap-4'>
                 {

@@ -4,6 +4,7 @@ import React from 'react'
 import AvailableProductsToggle from '../AvailableProductsToggle'
 import Category from '../Category'
 import PriceRange from '../PriceRange'
+import { categories as categoriesArray } from '@/public/data/pageProducts'
 
 const Filters = ({ categories, isAvailable, setCategory, setIsAvailable, max, inputFrom, setInputFrom, inputTo, setInputTo }: any) => {
     return (
@@ -33,6 +34,7 @@ const Filters = ({ categories, isAvailable, setCategory, setIsAvailable, max, in
                 }
             </div>
             <Category
+                categories={categoriesArray}
                 categoryState={categories}
                 setCategory={setCategory}
             />

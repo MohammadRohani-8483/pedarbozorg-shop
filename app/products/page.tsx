@@ -12,6 +12,7 @@ import FiltersMobile from '@/components/products/filters/FiltersMobile'
 import OrderingMobile from '@/components/products/ordering/OrderingMobile'
 import { useDebounce } from '@/public/hooks/useDebounce'
 import SkeletonCard from '@/components/SkeletonCard'
+import { orders } from '@/public/data/pageProducts'
 
 const Products = () => {
   const [searchValue, setSearchValue] = useState('')
@@ -74,6 +75,7 @@ const Products = () => {
         <div className='flex justify-start items-center w-full gap-2'>
           <SearchBarProducts searchValue={searchValue} setSearchValue={setSearchValue} />
           <Ordering
+            orders={orders}
             setActiveOrder={setActiveOrder}
             activeOrder={activeOrder}
           />
