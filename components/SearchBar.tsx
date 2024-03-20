@@ -86,7 +86,7 @@ export default function SearchBar({ handleOpenSearch, handleCloseSearch, openSea
                         <div className='w-full h-full'>
                             <div className='w-full h-[87.5%] overflow-auto ltr' id='scroll'>
                                 {products.map((product: any) => (
-                                    <SearchValueProduct link={product.slug} image={product.featured_image} key={product.id} name={product.name} />
+                                    <SearchValueProduct link={`/products/${product.slug}`} image={product.featured_image} key={product.id} name={product.name} />
                                 ))}
                             </div>
                             <div className='w-full flex items-center justify-center mt-2'>

@@ -92,7 +92,7 @@ const SearchMobile: React.FC<searchProps> = ({ setOpenSearchBar }) => {
             </div>
             <div className='w-[90%] mx-auto mt-14 overflow-auto h-[88%] ltr' id='scroll'>
                 {products?.map((product: any) => (
-                    <SearchValueProduct link={product.slug} image={product.featured_image} key={product.id} name={product.name} />
+                    <SearchValueProduct link={`/products/${product.slug}`} image={product.featured_image} key={product.id} name={product.name} />
                 ))}
                 {inputValue &&
                     <div className='w-full flex items-center justify-center mt-2'>
