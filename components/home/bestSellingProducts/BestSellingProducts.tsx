@@ -1,20 +1,16 @@
-'use client'
-import React, { useEffect, useState } from 'react'
-import { bestSellingProducts } from "public/data/bestSellingProducts"
+import React from 'react'
 import BestSellingCard from './BestSellingCard'
-import Image from 'next/image'
-import axios from 'axios'
 import Title from '@/components/Title'
 
-const BestSellingProducts = () => {
-    const [products, setProducts] = useState([])
-    const url = "/api/core-api/site/landing/"
-    useEffect(() => {
-        axios.get(url)
-            .then(res => {
-                setProducts(res.data.best_seller_products)
-            })
-    }, [])
+const BestSellingProducts = ({ products }: any) => {
+    // const [products, setProducts] = useState([])
+    // const url = "/api/core-api/site/landing/"
+    // useEffect(() => {
+    //     axios.get(url)
+    //         .then(res => {
+    //             setProducts(res.data.best_seller_products)
+    //         })
+    // }, [])
 
     return (
         <div className='max-w-[1136px] w-[90%] mx-auto mt-20 flex flex-col gap-8 justify-between items-center'>

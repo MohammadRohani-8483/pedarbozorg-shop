@@ -13,14 +13,23 @@ import SpecialProductsSlider from "components/home/SpecialProductsSlider";
 import VideoCategory from "components/home/VideoCategory";
 import { WhyPedarBozorg } from "components/home/whyPedarbozorg/WhyPedarBozorg";
 
-export default function Home() {
+const fetchFunc = async () => {
+  const res = fetch(`${process.env.API}/core-api/site/landing/`, {
+    method: "GET"
+  })
+  return (await res).json()
+}
+
+export default async function Home() {
+  const data = await fetchFunc()
+
   return (
     <main className="lg:pt-48 pt-16">
       <BackgroundVectors />
       <SliderProduct />
       <GroupProducts />
       <SpecialProducts />
-      {/* <OffersSlider /> */}
+      <OffersSlider products={data.most_discount_products} />
       <SpecialProductsSlider />
       <VideoCategory />
       <WhyPedarBozorg />
@@ -28,7 +37,7 @@ export default function Home() {
       {/* <SpecialOffers /> */}
       {/* <PedarBozorgInLife /> */}
       {/* <CommentsSlider /> */}
-      {/* <BestSellingProducts /> */}
+      <BestSellingProducts products={data.best_seller_products}/>
       <Cooperations />
     </main>
   );

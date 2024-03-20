@@ -1,111 +1,190 @@
 'use client'
 import { useState } from 'react';
-import Link from '@/node_modules/next/link'
+import Link from '@/node_modules/next/link';
 import Image from '@/node_modules/next/image';
 import { FiCameraOff } from "@/node_modules/react-icons/fi/index";
 import { FaStar } from "@/node_modules/react-icons/fa/index";
-import tooman from "@/public/Image/tooman.svg"
+import tooman from "@/public/Image/tooman.svg";
 import formatNumber from '@/public/Functions/formatNumber';
-import { product } from '@/public/types/productType';
 import { motion } from 'framer-motion';
+import { useDispatch, useSelector } from 'react-redux';
+import { addToCart, removeFromCart } from '@/public/redux/store/cart';
+import toast, { Toaster } from 'react-hot-toast';
 
-export const ProductCardInSlider: React.FC<product> = ({ price, link, image, name, priceWithOffer , score }) => {
-    // const priceWithOffer = Math.floor((price * ((100 - offerPresent) / 100)) / 1000) * 1000
+const ProductCard = ({ price, link, image, name, priceWithOffer, score, product }: any) => {
+    const offerPresent = ((price - priceWithOffer) / price * 100) || 0
 
-    const present = (price - priceWithOffer) / price * 100
+    const productIsAvailable = price || product?.is_available
 
-    const [isHover, setIsHover] = useState(false)
     const [isLike, setIsLike] = useState(false)
-    const [isShopingCard, setIsShopingCard] = useState(false)
+    const [isHover, setIsHover] = useState(false)
 
-    const variants = {
-        hover: {
-            scale: 1,
+    const cart = useSelector((state: any) => state.cart.cart)
+
+    const cartItem = {
+        id: product.cheapest_variant_id,
+        shatootInfo: {
+            sellPrice: product.min_sell_price,
+            finalPrice: product.min_price,
+            discount: product.min_price - product.min_sell_price,
         },
-        unHover: {
-            scale: 1.5,
-        }
+        product: {
+            id: product.id,
+            featuredImage: product.featured_image,
+            name: product.name,
+            slug: product.slug,
+        },
+    }
+
+    const isProductToCart = Boolean(Array(...cart).find((item: any) => item.id === cartItem.id))
+
+    const dispatch = useDispatch()
+    const handleAddToCart = () => {
+        dispatch(addToCart(cartItem))
+    }
+
+    const handleDeleteFromCart = () => {
+        dispatch(removeFromCart(cartItem))
+    }
+
+    const toastify = (msg: string) => {
+        toast.error(msg)
     }
 
     return (
-        <div
-            onMouseOver={() => setIsHover(true)}
-            onMouseOut={() => setIsHover(false)}
-            className='bg-white gap-2 justify-between rounded-3xl p-4 flex flex-col h-72 hover:shadow-hover hover:transition-shadow hover:duration-300'>
-            <div
-                className='relative overflow-hidden h-auto w-full aspect-square rounded-xl flex items-center justify-center'
+        <>
+            <Toaster
+                position="top-center"
+                reverseOrder={false}
+                toastOptions={{ duration: 3000 }}
+            />
+            <motion.div
+                whileHover={{ boxShadow: "0px 0px 18.6px 0px rgba(61, 131, 97, 0.22)" }}
+                className='w-full bg-white gap-3.5 justify-between items-center rounded-3xl p-4 flex flex-col h-72 gap-2'
+                onMouseOver={() => setIsHover(true)}
+                onMouseOut={() => setIsHover(false)}
             >
-                {image ?
+                <div
+                    className='overflow-hidden relative min-w-[85px] w-full h-auto aspect-square rounded-xl flex items-center justify-center'
+                >
                     <Image
                         src={image}
-                        width={180}
-                        height={180}
+                        fill
                         alt={name}
                         className="object-cover"
-                    /> :
-                    <div className='flex w-full justify-center items-center bg-gray-200 text-3xl h-full text-gray-600'>
-                        <FiCameraOff />
+                    />
+                    <div
+                        className='w-full absolute top-0.5 left-0 flex justify-between items-center px-2'
+                    >
+                        <motion.div
+                            animate={isHover ? { x: 0 } : { x: '30px' }}
+                            transition={{ duration: 0.3 }}
+                        >
+                            {isLike ?
+                                <Image
+                                    src='/iconSax/is-like.svg'
+                                    alt="like"
+                                    width={20}
+                                    height={20}
+                                    className='cursor-pointer'
+                                />
+                                :
+                                <Image
+                                    onClick={() => toastify("این قابلیت به زودی اضافه میشود.")}
+                                    src='/iconSax/like.png'
+                                    alt="like"
+                                    width={20}
+                                    height={20}
+                                    className='cursor-pointer'
+                                />
+                            }
+                        </motion.div>
+                        <motion.div
+                            animate={isHover ? { x: 0 } : { x: "-30px" }}
+                            transition={{ duration: 0.3 }}
+                        >
+                            {isProductToCart ?
+                                <Image
+                                    onClick={handleDeleteFromCart}
+                                    src='/iconSax/is-shopping-cart-product.svg'
+                                    alt="shoping cart"
+                                    width={20}
+                                    height={20}
+                                    className='cursor-pointer'
+                                />
+                                :
+                                <Image
+                                    onClick={() => {
+                                        productIsAvailable ?
+                                            handleAddToCart()
+                                            :
+                                            toastify('این محصول ناموجود میباشد.')
+                                    }}
+                                    src='/iconSax/shopping-cart-product.svg'
+                                    alt="shoping cart"
+                                    width={20}
+                                    height={20}
+                                    className='cursor-pointer'
+                                />
+                            }
+                        </motion.div>
                     </div>
-                }
-                <motion.div
-                    className='w-full absolute top-0.5 left-0 flex justify-between items-center px-2'
-                    animate={isHover ? "hover" : "unHover"}
-                    variants={variants}
-                    transition={{ duration: 0.3 }}
-                >
-                    {isLike ?
-                        <Image onClick={() => setIsLike(false)} src='/iconSax/is-like.svg' alt="like" width={20} height={20} className='cursor-pointer' />
-                        :
-                        <Image onClick={() => setIsLike(true)} src='/iconSax/like.png' alt="like" width={20} height={20} className='cursor-pointer' />
-                    }
-                    {isShopingCard ?
-                        <Image onClick={() => setIsShopingCard(false)} src='/iconSax/is-shopping-cart-product.svg' alt="shoping cart" width={20} height={20} className='cursor-pointer' />
-                        :
-                        <Image onClick={() => setIsShopingCard(true)} src='/iconSax/shopping-cart-product.svg' alt="shoping cart" width={20} height={20} className='cursor-pointer' />
-                    }
-                </motion.div>
-            </div>
-            <Link href={link} className='font-bold text-base-300 text-xl'>{name}</Link>
-            <div className='flex justify-between items-center ltr'>
-                <div className='flex gap-2 items-center'>
-                    <p className='font-bold text-xl'>
-                        {priceWithOffer === 0 ? "رایگان" : (present !== 0 ? formatNumber(priceWithOffer) : formatNumber(price))}
-                    </p>
-                    {priceWithOffer !== 0 &&
-                        <Image
-                            src={tooman}
-                            alt='تومان'
-                            width={23}
-                            height={16}
-                            className='object-cover'
-                        />
-                    }
                 </div>
-                {present !== 0 ?
-                    <div className='bg-red-500 text-white rounded-full px-2 h-[20px] flex items-center text-xs'>
-                        {present}%
-                    </div>
-                    :
-                    (score &&
-                        <div className='flex items-center justify-center gap-1'>
-                            <FaStar className='text-yellow-600' /><p className='text-gray-600'>{score.toFixed(1)}</p>
+                <div className='w-full flex flex-col gap-2'>
+                    <Link href={link} className='text-base-300 text-xl font-bold'>{name}</Link>
+                    <div className='flex justify-between w-full items-center ltr gap-2'>
+                        <div className='flex gap-2 items-center justify-end w-full'>
+                            {productIsAvailable ?
+                                <>
+                                    <p className='font-bold text-xl gap-2'>
+                                        {priceWithOffer === 0 ? "رایگان" : (offerPresent !== 0 ? formatNumber(priceWithOffer) : formatNumber(price))}
+                                    </p>
+                                    {priceWithOffer !== 0 &&
+                                        <Image
+                                            src={tooman}
+                                            alt='تومان'
+                                            width={23}
+                                            height={16}
+                                            className='object-cover'
+                                        />
+                                    }
+                                </>
+                                :
+                                <p className='font-bold text-xl gap-2'>
+                                    ناموجود
+                                </p>
+                            }
                         </div>
-                    )
-                }
-            </div>
-            <div className='flex justify-between items-center ltr'>
-                {present !== 0 &&
-                    <>
-                        <p className='line-through text-gray-400'>{formatNumber(price)}</p>
-                        {score &&
-                            <div className='flex items-center justify-center gap-1'>
-                                <FaStar className='text-yellow-600' /><p className='text-gray-600'>{score}</p>
+                        {offerPresent !== 0 ?
+                            <div className='bg-red-500 text-white rounded-full px-2 h-[20px] flex items-center text-xs'>
+                                {offerPresent}%
                             </div>
+                            :
+                            (score &&
+                                <div className='flex items-center justify-center gap-1'>
+                                    <FaStar className='text-[#FFC436]' />
+                                    <p className='text-gray-600 text-base'>{score.toFixed(1)}</p>
+                                </div>
+                            )
                         }
-                    </>
-                }
-            </div>
-        </div>)
+                    </div>
+                    <div className='flex justify-between items-center ltr'>
+                        {offerPresent !== 0 &&
+                            <>
+                                <p className='line-through text-gray-400 text-base'>{formatNumber(price)}</p>
+                                {score &&
+                                    <div className='flex items-center justify-center gap-1'>
+                                        <FaStar className='text-[#FFC436]' />
+                                        <p className='text-gray-600 text-base'>{score.toFixed(1)}</p>
+                                    </div>
+                                }
+                            </>
+                        }
+                    </div>
+                </div>
+            </motion.div>
+        </>
+    )
 }
 
-export default ProductCardInSlider
+export default ProductCard
