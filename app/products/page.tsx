@@ -42,6 +42,7 @@ const Products = () => {
       .then(res => {
         setProducts(res.data.results)
         setproductsCount(res.data.count)
+        setMaxPrice(res.data.max_price)
       })
   }, [currPage, activeOrder, categories, isAvailable, minPriceInput, maxPriceInput, maxPrice, debouncedSearch]);
 
