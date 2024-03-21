@@ -1,10 +1,9 @@
 import AboutUsItem from '@/components/about-us/AboutUsItem'
-import SkeletonCard from '@/components/SkeletonCard'
 import Title from '@/components/Title'
 import Image from 'next/image'
 import React from 'react'
 
-const page = () => {
+const AboutUsPage = () => {
   return (
     <>
       <Image
@@ -93,4 +92,4 @@ const page = () => {
   )
 }
 
-export default page
+export default AboutUsPage

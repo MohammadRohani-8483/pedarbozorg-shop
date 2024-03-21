@@ -10,11 +10,14 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
-    "@neshan-maps-platform/leaflet": "^1.0.8",
+    "@neshan-maps-platform/ol": "^1.0.5",
+    "@neshan-maps-platform/react-openlayers": "^3.0.1",
     "@reduxjs/toolkit": "^2.2.1",
+    "@types/ol": "^5.3.8",
     "axios": "^1.6.7",
     "framer-motion": "^11.0.3",
     "next": "14.1.0",
+    "ol": "^9.0.0",
     "react": "^18",
     "react-dom": "^18",
     "react-hook-form": "^7.51.0",
@@ -24,6 +27,7 @@
     "react-paginate": "^8.2.0",
     "react-redux": "^9.1.0",
     "react-responsive": "^9.0.2",
+    "save-dev": "^0.0.1-security",
     "swiper": "^11.0.6",
     "yup": "^1.4.0"
   },
