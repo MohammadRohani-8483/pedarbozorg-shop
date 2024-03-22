@@ -12,7 +12,7 @@ const Footer: React.FC = () => {
     return (
         <footer className='flex flex-col items-center justify-center bg-[url("/Image/Footer-Mobile.png")] md:bg-[url("/Image/footer-bg.png")] bg-cover bg-no-repeat w-screen px-[10%] pt-[10%] md:pl-[5%] md:p-0 gap-8 md:gap-0'>
             <div className='flex flex-col md:flex-row justify-center md:justify-between items-center md:pt-[74px] md:pr-[5%] gap-6 md:gap-8 w-full'>
-                <div className='w-[88%] max-w-[496px] flex flex-col justify-center gap-4 md:gap-8 items-center bg-[url("/Image/about-footer-bg.png")] bg-cover bg-no-repeat pr-[14%] sm:pr-[19%] md:pr-16 lg:pr-[94px] pl-[18%] sm:pl-[23%] md:pl-[75px] lg:pl-[118px] aspect-[496/501]'>
+                <div className='w-[88%] max-w-[496px] flex flex-col justify-center gap-2 sm:gap-4 md:gap-8 items-center bg-[url("/Image/about-footer-bg.png")] bg-cover bg-no-repeat pr-[16%] sm:pr-[19%] md:pr-16 lg:pr-[94px] pl-[20%] sm:pl-[23%] md:pl-[75px] lg:pl-[118px] aspect-[496/501]'>
                     <Link
                         href="/"
                         className='relative w-[30%] sm:w-[40%] md:w-1/2 aspect-square'
@@ -24,7 +24,7 @@ const Footer: React.FC = () => {
                             className='object-cover'
                         />
                     </Link>
-                    <p className='text-justify text-base-400 text-[10px] sm:text-xs md:text-sm lg:text-base'>
+                    <p className='text-justify text-base-400 text-[9px] sm:text-xs md:text-sm lg:text-base'>
                         بزرگترین لذت ما این است که بتوانیم سهمی ولو اندک در سلامت و بهداشت روحی و جسمی و روش تغذیه خانواده ها داشته باشیم. دوست داریم همانند پدربزرگ ها ، هر آنچه که می دانیم ، بی منت در اختیار جامعه قرار دهیم. به همین جهت نام پدربزرگ را برای استارت اپ خود انتخاب کردیم.
                     </p>
                 </div>
@@ -77,7 +77,7 @@ const Footer: React.FC = () => {
                                     alt='zarinpal'
                                     src="/Image/footer/symbols/zarinpal.svg"
                                     fill
-                                />
+                                /> 
                             </Link>
                             <Link
                                 className='relative w-[87px] aspect-square lg:w-[74px]'
