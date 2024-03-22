@@ -30,7 +30,7 @@ const Info = () => {
                         <h2 className='font-bold text-base-300 text-base'>
                             کیف پول
                         </h2>
-                        <p className='text-sm md:text-xl text-[#626262] flex justify-center items-center gap-2 font-bold'>
+                        <div className='text-sm md:text-xl text-[#626262] flex justify-center items-center gap-2 font-bold'>
                             {formatNumber(235000)}
                             <div className='relative w-[19px] h-3 md:w-[27px] md:h-[18px]'>
                                 <Image
@@ -39,7 +39,7 @@ const Info = () => {
                                     fill
                                 />
                             </div>
-                        </p>
+                        </div>
                     </div>
                     <div className='p-1.5'>
                         <Image

@@ -10,7 +10,7 @@ const Account = () => {
                     <div className="-mr-1.5 md:-mr-2 bg-[url('/Image/background/bg-title-account.svg')] bg-cover size-8 md:size-10 bg-no-repeat flex justify-center items-center" >
                         <Image
                             src='/iconSax/home.svg'
-                            alt="edit"
+                            alt="account"
                             width={24}
                             height={24}
                         />
@@ -21,7 +21,7 @@ const Account = () => {
                     <div className="-mr-2 size-10 flex justify-center items-center" >
                         <Image
                             src='/iconSax/box.svg'
-                            alt="edit"
+                            alt="orders"
                             width={24}
                             height={24}
                         />
@@ -32,7 +32,7 @@ const Account = () => {
                     <div className="-mr-2 size-10 flex justify-center items-center" >
                         <Image
                             src='/iconSax/heart.svg'
-                            alt="edit"
+                            alt="my favorite list"
                             width={24}
                             height={24}
                         />
@@ -43,7 +43,7 @@ const Account = () => {
                     <div className="-mr-2 size-10 flex justify-center items-center" >
                         <Image
                             src='/iconSax/bg-location.svg'
-                            alt="edit"
+                            alt="locations"
                             width={24}
                             height={24}
                         />
@@ -54,7 +54,7 @@ const Account = () => {
                     <div className="-mr-2 size-10 flex justify-center items-center" >
                         <Image
                             src='/iconSax/mail.svg'
-                            alt="edit"
+                            alt="messages"
                             width={24}
                             height={24}
                         />
@@ -65,7 +65,7 @@ const Account = () => {
                     <div className="-mr-2 size-10 flex justify-center items-center" >
                         <Image
                             src='/iconSax/message-text.svg'
-                            alt="edit"
+                            alt="comments"
                             width={24}
                             height={24}
                         />
@@ -76,7 +76,7 @@ const Account = () => {
                     <div className="-mr-2 size-10 flex justify-center items-center" >
                         <Image
                             src='/iconSax/user-square.svg'
-                            alt="edit"
+                            alt="user account"
                             width={24}
                             height={24}
                         />
@@ -87,7 +87,7 @@ const Account = () => {
                     <div className="-mr-2 size-10 flex justify-center items-center" >
                         <Image
                             src='/iconSax/logout.svg'
-                            alt="edit"
+                            alt="logout"
                             width={24}
                             height={24}
                         />
