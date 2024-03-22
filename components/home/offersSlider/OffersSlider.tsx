@@ -72,7 +72,7 @@ export default function OffersSlider({ products }: any) {
                 />
                 {start ?
                     <Swiper
-                        // slidesPerView={1}
+                        slidesPerView={1}
                         spaceBetween={8}
                         breakpoints={{
                             640: {
