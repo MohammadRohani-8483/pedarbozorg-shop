@@ -2,11 +2,13 @@ import { deleteAllItems, removeFromCart } from '@/public/redux/store/cart'
 import { shopCartItem } from '@/public/types/productType'
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
+import toast, { Toaster } from 'react-hot-toast'
 import { useDispatch, useSelector } from 'react-redux'
+import Alert from 'components/Alert'
 import CheckoutCartItem from './CheckoutCartItem'
 
 const CheckoutItems = () => {
-    // const [cart, setCart] = useState<shopCartItem[]>(useSelector((state: any) => state.cart.cart))
+    const [isDeleting, setIsDeleting] = useState(false)
     const cart: shopCartItem[] = useSelector((state: any) => state.cart.cart)
 
     const dispatch = useDispatch()
@@ -16,7 +18,7 @@ const CheckoutItems = () => {
         setStart(true)
     }, [])
 
-    const handleDeleteFromCart = () => {
+    const handleDeleteAllCart = () => {
         dispatch(deleteAllItems())
         localStorage.removeItem('shoping_cart')
         window.scrollTo(0, 0)
@@ -47,7 +49,7 @@ const CheckoutItems = () => {
             <div className='w-full h-[1px] bg-gray-200' />
             <div className='flex w-full justify-end items-center'>
                 <button
-                    onClick={handleDeleteFromCart}
+                    onClick={() => setIsDeleting(true)}
                     className='flex justify-center items-center text-[#C62020] text-sm gap-2 py-1.5 px-3 font-medium'
                 >
                     <Image
@@ -59,7 +61,25 @@ const CheckoutItems = () => {
                     حذف همه کالا ها از سبد
                 </button>
             </div>
-        </div>
+            {isDeleting &&
+                <Alert
+                title='حذف همه محصولات از سبد خرید'
+                    setIsAlertOpen={setIsDeleting} redBtn
+                    textBtn='حذف همه'
+                    confirmFunc={handleDeleteAllCart}
+                    messageToast='سبد خرید با موفقیت پاک شد'
+                >
+                    <p className='text-[#353535] w-full text-right'>
+                        آیا از حذف همه محصولات از سبد خرید خود اطمینان دارید؟
+                    </p>
+                </Alert>
+            }
+            <Toaster
+                position="top-center"
+                reverseOrder={false}
+                toastOptions={{ duration: 3000 }}
+            />
+        </div >
     )
 }
 

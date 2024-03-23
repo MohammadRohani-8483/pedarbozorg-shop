@@ -5,7 +5,7 @@ import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 
-const OrderBox = () => {
+const SubmitOrderBox = () => {
     const [totalFinalPrice, setTotalFinalPrice] = useState(0)
     const [totalSellPrice, setTotalSellPrice] = useState(0)
 
@@ -74,4 +74,4 @@ const OrderBox = () => {
     )
 }
 
-export default OrderBox
+export default SubmitOrderBox

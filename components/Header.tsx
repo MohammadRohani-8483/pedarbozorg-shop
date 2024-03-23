@@ -191,7 +191,7 @@ const Header: React.FC = () => {
                         onHoverEnd={() => setIsHover(false)}
                     >
                         <div className='relative'>
-                            <Link href='/checkout-cart'>
+                            <Link href='/checkout-cart/cart'>
                                 <button className='w-[38px] outline-btn square-btn'>
                                     <Image
                                         src='/iconSax/shopping-cart.svg'
@@ -307,7 +307,7 @@ const Header: React.FC = () => {
                         </div>
                         {isFormOpen && <SignUpSignIn setIsFormOpen={setIsFormOpen} />}
                     </button>
-                    <Link href='/checkout-cart'>
+                    <Link href='/checkout-cart/cart'>
                         <button className='square-btn outline-btn relative'
                         >
                             <Image

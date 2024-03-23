@@ -1,13 +1,13 @@
 'use client'
-import CheckoutItems from '@/components/checkout-cart/CheckoutItems'
-import EmptyCheckoutCart from '@/components/checkout-cart/EmptyCheckoutCart'
-import OrderBox from '@/components/checkout-cart/OrderBox'
+import CheckoutItems from '@/components/checkout-cart/cart/CheckoutItems'
+import EmptyCheckoutCart from '@/components/checkout-cart/cart/EmptyCheckoutCart'
+import SubmitOrderBox from '@/components/checkout-cart/cart/SubmitOrderBox'
 import Title from '@/components/Title'
 import { shopCartItem } from '@/public/types/productType'
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import Loading from '../loading'
+import Loading from './loading'
 
 const CheckoutCart = () => {
     const cart: shopCartItem[] = useSelector((state: any) => state.cart.cart)
@@ -47,7 +47,7 @@ const CheckoutCart = () => {
                             ?
                             <div className='flex flex-col md:flex-row w-full justify-center items-start gap-2 lg:gap-6'>
                                 <CheckoutItems />
-                                <OrderBox />
+                                <SubmitOrderBox />
                             </div>
                             :
                             <EmptyCheckoutCart />
