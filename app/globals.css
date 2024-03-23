@@ -34,11 +34,11 @@ html {
 }
 
 .solid-btn {
-  @apply bg-base-300 hover:bg-base-400 text-base-100 rounded-lg text-sm md:text-base cursor-pointer
+  @apply bg-base-300 hover:bg-base-400 text-base-100 rounded-lg text-sm md:text-base cursor-pointer transition-all duration-300
 }
 
 .outline-btn {
-  @apply bg-base-100 text-base-300 border border-base-300 hover:bg-base-200 rounded-lg text-sm md:text-base cursor-pointer
+  @apply bg-base-100 text-base-300 border border-base-300 hover:bg-base-200 rounded-lg text-sm md:text-base cursor-pointer transition-all duration-300
 }
 
 .rectangle-btn {
