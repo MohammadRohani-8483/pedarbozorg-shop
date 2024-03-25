@@ -13,9 +13,9 @@ import 'swiper/css/pagination';
 // import required modules
 import { FreeMode, Navigation } from 'swiper/modules';
 
-import SliderBtn from '../SliderBtn';
-import ProductCard from '../productCard';
-import SkeletonCard from '../SkeletonCard';
+import SliderBtn from 'components/SliderBtn';
+import ProductCard from 'components/productCard';
+import SkeletonCard from 'components/SkeletonCard';
 import toast, { Toaster } from 'react-hot-toast';
 
 const LastSeenProducts = ({ products }: any) => {

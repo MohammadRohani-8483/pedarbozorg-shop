@@ -8,7 +8,7 @@ import SearchMobile from './SearchMobile';
 import MenuMobile from './MenuMobile';
 import { motion } from 'framer-motion';
 import ShopingCard from './ShopingCard';
-import SignUpSignIn from './signUp_signIn/signUpSignIn';
+import SignUpSignIn from 'components/signUp_signIn/signUpSignIn';
 import { useSelector } from 'react-redux';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
@@ -191,7 +191,7 @@ const Header: React.FC = () => {
                         onHoverEnd={() => setIsHover(false)}
                     >
                         <div className='relative'>
-                            <Link href='/checkout-cart/cart'>
+                            <Link href='/checkout-cart'>
                                 <button className='w-[38px] outline-btn square-btn'>
                                     <Image
                                         src='/iconSax/shopping-cart.svg'
@@ -307,7 +307,7 @@ const Header: React.FC = () => {
                         </div>
                         {isFormOpen && <SignUpSignIn setIsFormOpen={setIsFormOpen} />}
                     </button>
-                    <Link href='/checkout-cart/cart'>
+                    <Link href='/checkout-cart'>
                         <button className='square-btn outline-btn relative'
                         >
                             <Image
