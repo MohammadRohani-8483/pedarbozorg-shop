@@ -6,6 +6,7 @@ export const specialOffers = [
     price: 19383000,
     link: "/",
     score: 4.5,
+    image: "/Image/offer-products/ard-nokhodchi.png",
   },
   {
     id: crypto.randomUUID(),
@@ -44,6 +45,7 @@ export const specialOffers = [
     score: 5,
   },
   {
+    image: "/Image/offer-products/ard-nokhodchi.png",
     id: crypto.randomUUID(),
     name: "آرد نخودچی",
     price: 19383000,
