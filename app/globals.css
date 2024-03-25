@@ -49,6 +49,10 @@ html {
   @apply md:p-2 p-1.5
 }
 
+.disable-btn{
+  @apply !bg-[#EDEDED] hover:!bg-[#EDEDED] !text-[#ADADAD] !cursor-not-allowed
+}
+
 * {
   font-family: 'IranYekan';
   direction: rtl;
@@ -167,4 +171,8 @@ html {
 .swiper-pagination-bullet-active {
   width: 36px;
   background: #FFC436;
+}
+
+.swiper-scrollbar-drag{
+  @apply h-1 bg-gray-300 rounded
 }
