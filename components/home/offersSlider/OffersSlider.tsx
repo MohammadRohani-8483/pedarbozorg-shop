@@ -34,9 +34,6 @@ export default function OffersSlider({ products }: any) {
         setStart(true)
     }, [])
 
-
-    console.log(products)
-
     const isSmallWidth = useMediaQuery({
         query: "(min-width: 640px)"
     })
