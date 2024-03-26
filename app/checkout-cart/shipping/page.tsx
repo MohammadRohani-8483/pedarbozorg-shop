@@ -9,6 +9,8 @@ import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
+import { GoArrowRight  } from "react-icons/go";
+import Link from 'next/link'
 
 const ShippingPage = () => {
     const cart: shopCartItem[] = useSelector((state: any) => state.cart.cart)
@@ -65,7 +67,13 @@ const ShippingPage = () => {
                     <main className='w-[90%] mx-auto max-w-[1136px] flex flex-col justify-center items-center gap-8 py-20 md:py-[117px]'>
                         <OrderSteps page='SHIPPING' />
                         <div className='flex flex-col md:flex-row w-full justify-center items-start gap-2 lg:gap-6'>
-                            <ShippingInfos addresses={addresses} />
+                            <div className="w-full flex flex-col justify-center items-start gap-4">
+                                <ShippingInfos addresses={addresses} />
+                                <Link href='/checkout-cart' className="flex justify-center items-center py-1.5 px-3 gap-2 text-base-300 text-sm">
+                                    <GoArrowRight  size={20}/>
+                                    بازگشت به سبد خرید
+                                </Link>
+                            </div>
                             <SubmitOrderBox
                                 countProduct={cart?.length}
                                 finalPrice={totalFinalPrice}
