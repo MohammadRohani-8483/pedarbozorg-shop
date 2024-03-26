@@ -13,7 +13,7 @@ import OrderingMobile from '@/components/products/ordering/OrderingMobile'
 import { useDebounce } from '@/public/hooks/useDebounce'
 import SkeletonCard from '@/components/SkeletonCard'
 import { orders } from '@/public/data/pageProducts'
-import toast, { Toaster } from 'react-hot-toast'
+import toast from 'react-hot-toast'
 
 const Products = () => {
   const [searchValue, setSearchValue] = useState('')
@@ -65,11 +65,6 @@ const Products = () => {
 
   return (
     <>
-      <Toaster
-        position="top-center"
-        reverseOrder={false}
-        toastOptions={{ duration: 3000 }}
-      />
       <main className='w-[90%] max-w-[1136px] mx-auto py-16 md:py-[117px] flex gap-4'>
         <Filters
           max={maxPrice}

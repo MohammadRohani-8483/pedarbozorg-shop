@@ -16,7 +16,7 @@ import { FreeMode, Navigation } from 'swiper/modules';
 import SliderBtn from 'components/SliderBtn';
 import ProductCard from 'components/productCard';
 import SkeletonCard from 'components/SkeletonCard';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 
 const LastSeenProducts = ({ products }: any) => {
   const [start, setStart] = useState(false)
@@ -30,12 +30,6 @@ const LastSeenProducts = ({ products }: any) => {
   }
 
   return (
-    <>
-      <Toaster
-        position="top-center"
-        reverseOrder={false}
-        toastOptions={{ duration: 3000 }}
-      />
       <ProfileBox title='آخرین بازدید ها'>
         <div className='flex flex-col gap-4 justify-center items-center w-full md:hidden'>
           {products?.slice(0, 6).map((product: any, i: number) => (
@@ -120,7 +114,6 @@ const LastSeenProducts = ({ products }: any) => {
           }
         </div>
       </ProfileBox>
-    </>
   )
 }
 
