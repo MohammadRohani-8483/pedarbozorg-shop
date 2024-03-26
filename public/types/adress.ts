@@ -11,15 +11,13 @@ export type address = {
     address: string
     phone_number: string
     is_active: boolean
-    alley: number
 }
 
 export const fakeAddress: address = {
     id: 2325,
     province: "قم",
     city: "قم",
-    address: 'بلوار امین',
-    alley: 15,
+    address: 'بلوار امین کوچه 15',
     flat_no: 2,
     unit_no: 5,
     zip_code: "3713526895",
