@@ -16,7 +16,7 @@ type props = {
 
 const CommunicationItems = ({ icon, title, desc, descs, link }: props) => {
     return (
-        <div className='w-full flex flex-col justify-center items-center p-4 bg-white rounded-3xl gap-6 md:h-[318px]'>
+        <div className='w-full flex flex-col justify-center items-center p-4 bg-white rounded-2xl gap-6 md:h-[318px]'>
             <div className='flex flex-col justify-center items-center gap-6'>
                 <Image
                     src={icon}

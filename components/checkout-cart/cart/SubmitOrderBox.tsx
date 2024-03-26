@@ -41,7 +41,7 @@ const SubmitOrderBox = ({
             ""
 
     return (
-        <div className='flex flex-col bg-white rounded-3xl p-4 md:p-8 items-center justify-center w-full md:w-2/3 gap-4 md:gap-8'>
+        <div className='flex flex-col bg-white rounded-2xl p-4 md:p-8 items-center justify-center w-full md:w-2/3 gap-4 md:gap-8'>
             <div className='flex flex-col w-full gap-4'>
                 <div className='text-[#626262] text-base font-bold flex justify-between items-center'>
                     <p>

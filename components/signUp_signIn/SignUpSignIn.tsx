@@ -58,7 +58,7 @@ const SignUpSignIn = ({ setIsFormOpen }: { setIsFormOpen: (par: boolean) => void
             className='fixed inset-0 bg-black bg-opacity-50 w-screen h-screen z-50 flex justify-center items-center'
         >
             <motion.div
-                className='flex flex-col justify-center items-center p-6 gap-2 bg-white rounded-3xl w-[288px] md:w-[419px]'
+                className='flex flex-col justify-center items-center p-6 gap-2 bg-white rounded-2xl w-[288px] md:w-[419px]'
                 animate={isAnimate ? "visible" : "hidden"}
                 initial={isAnimate ? "hidden" : "visible"}
                 variants={variants}

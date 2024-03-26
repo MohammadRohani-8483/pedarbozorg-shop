@@ -8,7 +8,7 @@ export default function CommentCard({ name, score, product, comment, like, disli
     const likeIcon = "/iconSax/like.svg"
 
     return (
-        <div className='bg-white gap-2 justify-between items-center rounded-3xl p-4 flex flex-col w-full h-[250px] hover:shadow-hover hover:transition-shadow hover:duration-300'>
+        <div className='bg-white gap-2 justify-between items-center rounded-2xl p-4 flex flex-col w-full h-[250px] hover:shadow-hover hover:transition-shadow hover:duration-300'>
             <div className="flex justify-between items-center w-full">
                 <h2 className="text-xl text-base-300 font-bold">{name}</h2>
                 <div className="flex ltr text-[#FFC436]">

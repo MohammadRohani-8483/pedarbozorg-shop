@@ -2,7 +2,6 @@ import { deleteAllItems, removeFromCart } from '@/public/redux/store/cart'
 import { shopCartItem } from '@/public/types/productType'
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
-import toast, { Toaster } from 'react-hot-toast'
 import { useDispatch, useSelector } from 'react-redux'
 import Alert from 'components/Alert'
 import CheckoutCartItem from './CheckoutCartItem'
@@ -25,7 +24,7 @@ const CheckoutItems = () => {
     }
 
     return (
-        <div className='flex flex-col bg-white rounded-3xl p-4 md:p-8 items-center justify-center w-full gap-4'>
+        <div className='flex flex-col bg-white rounded-2xl p-4 md:p-8 items-center justify-center w-full gap-4'>
             <h3 className='font-medium text-base-300 text-sm'>{cart?.length} کالا</h3>
             <div className='w-full h-[1px] bg-gray-200' />
             {cart.map((cartItem, i, array) => {
@@ -63,7 +62,7 @@ const CheckoutItems = () => {
             </div>
             {isDeleting &&
                 <Alert
-                title='حذف همه محصولات از سبد خرید'
+                    title='حذف همه محصولات از سبد خرید'
                     setIsAlertOpen={setIsDeleting} redBtn
                     textBtn='حذف همه'
                     confirmFunc={handleDeleteAllCart}
@@ -74,11 +73,6 @@ const CheckoutItems = () => {
                     </p>
                 </Alert>
             }
-            <Toaster
-                position="top-center"
-                reverseOrder={false}
-                toastOptions={{ duration: 3000 }}
-            />
         </div >
     )
 }

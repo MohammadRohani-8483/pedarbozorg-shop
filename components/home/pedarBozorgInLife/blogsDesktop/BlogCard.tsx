@@ -7,8 +7,8 @@ export default function BlogCard({ link, image, name, category, readingTime, con
     return (
         <Link
             href={link}
-            className='bg-white gap-4 justify-center items-center rounded-3xl p-4 flex flex-col max-w-[272px] w-full hover:shadow-hover hover:transition-shadow hover:duration-300'>
-            <div className='relative overflow-hidden h-auto w-full aspect-[5/4] rounded-xl flex items-center justify-center'>
+            className='bg-white gap-4 justify-center items-center rounded-2xl p-4 flex flex-col max-w-[272px] w-full hover:shadow-hover hover:transition-shadow hover:duration-300'>
+            <div className='relative overflow-hidden h-auto w-full aspect-[5/4] rounded-[10px] flex items-center justify-center'>
                 {image ?
                     <Image
                         src={image}

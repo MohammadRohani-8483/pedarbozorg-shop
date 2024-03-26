@@ -2,9 +2,8 @@
 import React, { useEffect, useState } from 'react'
 import { motion } from "framer-motion";
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import Image from 'next/image'
 import { IoIosClose } from "react-icons/io";
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 
 type props = {
     setIsFormOpen: (par: boolean) => void
@@ -68,13 +67,8 @@ const ShareForm = ({ setIsFormOpen, link }: props) => {
             variants={variants}
             className='fixed inset-0 bg-black bg-opacity-50 w-screen h-screen z-50 flex justify-center items-center'
         >
-            <Toaster
-                        position="top-center"
-                        reverseOrder={false}
-                        toastOptions={{ duration: 3000 }}
-                    />
             <motion.div
-                className='flex flex-col justify-center items-center p-6 gap-6 bg-white rounded-3xl w-[288px] md:w-[419px]'
+                className='flex flex-col justify-center items-center p-6 gap-6 bg-white rounded-2xl w-[288px] md:w-[419px]'
                 animate={isAnimate ? "visible" : "hidden"}
                 initial={isAnimate ? "hidden" : "visible"}
                 variants={variants}

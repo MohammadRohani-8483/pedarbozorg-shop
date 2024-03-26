@@ -60,14 +60,14 @@ const ProductCard = ({ price, link, image, name, priceWithOffer, score, product,
     return (
         <motion.div
             whileHover={{ boxShadow: "0px 0px 18.6px 0px rgba(61, 131, 97, 0.22)" }}
-            className='w-full bg-white gap-3.5 justify-center rounded-3xl p-2 lg:p-4 flex flex-col h-36 lg:h-72'
+            className='w-full bg-white gap-3.5 justify-center rounded-2xl p-2 lg:p-4 flex flex-col h-36 lg:h-72'
             onMouseOver={() => setIsHover(true)}
             onMouseOut={() => setIsHover(false)}
         >
             <div className='flex flex justify-center lg:justify-between lg:flex-col items-center w-full lg:h-full gap-2'>
                 {<>
                     <div
-                        className='overflow-hidden relative min-w-[85px] lg:w-full h-auto aspect-square rounded-xl hidden lg:flex items-center justify-center'
+                        className='overflow-hidden relative min-w-[85px] lg:w-full h-auto aspect-square rounded-[10px] hidden lg:flex items-center justify-center'
                     >
                         {image ?
                             <Image
@@ -137,7 +137,7 @@ const ProductCard = ({ price, link, image, name, priceWithOffer, score, product,
                             </motion.div>
                         </div>
                     </div>
-                    <Link href={link} className='overflow-hidden relative min-w-[85px] lg:w-full h-auto aspect-square rounded-xl flex lg:hidden items-center justify-center'>
+                    <Link href={link} className='overflow-hidden relative min-w-[85px] lg:w-full h-auto aspect-square rounded-[10px] flex lg:hidden items-center justify-center'>
                         {image ?
                             <Image
                                 src={image}

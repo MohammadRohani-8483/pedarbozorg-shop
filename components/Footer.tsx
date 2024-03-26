@@ -48,7 +48,7 @@ const Footer: React.FC = () => {
                                 companyProfile.map((item) => (
                                     <div
                                         key={item.id}
-                                        className='flex w-full justify-between items-center text-base-300 rounded-3xl bg-[#E0F1E9] lg:w-[385px] h-auto py-2 px-4'
+                                        className='flex w-full justify-between items-center text-base-300 rounded-2xl bg-[#E0F1E9] lg:w-[385px] h-auto py-2 px-4'
                                     >
                                         <div className={`whitespace-nowrap text-xs ${item.title === "ایمیل" ? "hidden sm:block" : ""}`}>{item.title}</div>
                                         <div className='ltr flex items-center justify-center gap-2 lg:gap-4'>
@@ -68,7 +68,7 @@ const Footer: React.FC = () => {
                                 ))
                             }
                         </div>
-                        <div className='flex lg:flex-col justify-between lg:justify-around items-center rounded-3xl bg-[#E0F1E9] w-full lg:w-[107px] p-4 gap-4 h-[120px] lg:h-[268px]'>
+                        <div className='flex lg:flex-col justify-between lg:justify-around items-center rounded-2xl bg-[#E0F1E9] w-full lg:w-[107px] p-4 gap-4 h-[120px] lg:h-[268px]'>
                             <Link
                                 href='/'
                                 className='relative w-[87px] aspect-square lg:w-[74px]'
@@ -101,7 +101,7 @@ const Footer: React.FC = () => {
                                 />
                             </Link>
                         </div>
-                        <div className='flex lg:flex-col justify-between lg:justify-around items-center sm:w-1/2 aspect-[5/1] mt-4 lg:mt-0 lg:rounded-3xl lg:bg-[#E0F1E9] lg:w-[76px] lg:h-[268px] lg:py-4'>
+                        <div className='flex lg:flex-col justify-between lg:justify-around items-center sm:w-1/2 aspect-[5/1] mt-4 lg:mt-0 lg:rounded-2xl lg:bg-[#E0F1E9] lg:w-[76px] lg:h-[268px] lg:py-4'>
                             {
                                 medias.map((media) => (
                                     <MediaIcon

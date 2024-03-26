@@ -151,7 +151,7 @@ const Header: React.FC = () => {
                         onClick={handleFormSignInOpen}
                         onMouseOver={() => setIsHoverLogin(true)}
                         onMouseOut={() => setIsHoverLogin(false)}
-                        className="w-[162px] border-base-100 hover:border-base-200 flex items-center gap-3 bg-base-300 hover:bg-base-400 text-base-100 text-sm md:text-base md:py-2 md:px-4 px-3 py-1.5 border-4 rounded-xl"
+                        className="w-[162px] border-base-100 hover:border-base-200 flex items-center gap-3 bg-base-300 hover:bg-base-400 text-base-100 text-sm md:text-base md:py-2 md:px-4 px-3 py-1.5 border-4 rounded-[10px]"
                     >
                         <div className='flex w-[20px] gap-1 h-[20px] overflow-hidden bg-[url("/iconSax/login-bg-btn.svg")] bg-contain bg-no-repeat bg-right'>
                             <motion.img
@@ -277,7 +277,7 @@ const Header: React.FC = () => {
                             setIsHoverLogin(true)
                             setTimeout(() => setIsHoverLogin(false), 800)
                         }}
-                        className='border-base-100 hover:border-base-200 flex items-center gap-3 bg-base-300 hover:bg-base-400 text-base-100 text-sm md:text-base md:p-2 p-2 border-4 rounded-xl'
+                        className='border-base-100 hover:border-base-200 flex items-center gap-3 bg-base-300 hover:bg-base-400 text-base-100 text-sm md:text-base md:p-2 p-2 border-4 rounded-[10px]'
                     >
                         <div className='flex w-[20px] gap-1 h-[20px] overflow-hidden bg-[url("/iconSax/login-bg-btn.svg")] bg-contain bg-no-repeat bg-right'>
                             <motion.img

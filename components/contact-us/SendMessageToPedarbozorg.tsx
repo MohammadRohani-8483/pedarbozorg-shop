@@ -1,8 +1,8 @@
 'use client'
 import Image from 'next/image'
 import React, { useState } from 'react'
-import Select from './Select'
-import UploadFiles from './UploadFiles'
+import Select from 'components/contact-us/Select'
+import UploadFiles from 'components/contact-us/UploadFiles'
 import { useForm, SubmitHandler, FieldValues } from "react-hook-form"
 import * as yup from "yup"
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -55,10 +55,8 @@ export default function SendMessageToPedarbozorg() {
         console.log(dataWithSubject)
     }
 
-
-    console.log(errors)
     return (
-        <div className='flex flex-col bg-white rounded-3xl p-4 items-center justify-center w-full gap-6'>
+        <div className='flex flex-col bg-white rounded-2xl p-4 items-center justify-center w-full gap-6'>
             <h2 className='text-base-300 font-bold text-xl'>
                 ارسال پیام به پدربزرگ
             </h2>

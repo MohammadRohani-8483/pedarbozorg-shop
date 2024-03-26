@@ -50,7 +50,7 @@ export default function OffersSlider({ products }: any) {
     })
 
     return (
-        <div className='text-center max-w-[1136px] mx-auto w-[90%] px-2 py-4 sm:px-4 md:px-6 sm:py-5 md:py-6 bg-base-300 mt-10 rounded-3xl'>
+        <div className='text-center max-w-[1136px] mx-auto w-[90%] px-2 py-4 sm:px-4 md:px-6 sm:py-5 md:py-6 bg-base-300 mt-10 rounded-2xl'>
             <div className='flex items-center justify-center gap-4'>
                 <Image
                     src="/Image/title-vecors/right-white.svg"

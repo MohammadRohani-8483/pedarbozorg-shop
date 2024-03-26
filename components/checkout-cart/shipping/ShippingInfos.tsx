@@ -2,7 +2,7 @@ import { deleteAllItems, removeFromCart } from '@/public/redux/store/cart'
 import { shopCartItem } from '@/public/types/productType'
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { address } from '@/public/types/adress'
 import formatNumber from '@/public/Functions/formatNumber'
 import SkeletonCard from '@/components/SkeletonCard'
@@ -18,12 +18,18 @@ import 'swiper/css/pagination';
 import { FreeMode, Scrollbar } from 'swiper/modules';
 
 import OrdersCart from 'components/checkout-cart/OrdersCart'
+import Alert from '@/components/Alert'
+import AddressForm from '@/components/AddressForm'
 
 type props = {
   addresses: address[]
 }
 
 const ShippingInfos = ({ addresses }: props) => {
+  const [addAddressIsOpen, setAddAddressIsOpen] = useState(false)
+
+  const [addAddressFunc, setaddAddressFunc] = useState<(data: any) => void>((data: any) => { })
+
   const cart: shopCartItem[] = useSelector((state: any) => state.cart.cart)
 
   const [start, setStart] = useState(false)
@@ -34,7 +40,7 @@ const ShippingInfos = ({ addresses }: props) => {
   const activeAddress = addresses.find(address => address.is_active)
 
   return (
-    <div className='flex flex-col bg-white rounded-3xl p-4 md:p-8 items-center justify-center w-full gap-8'>
+    <div className='flex flex-col bg-white rounded-2xl p-4 md:p-8 items-center justify-center w-full gap-8'>
       <div className='w-full flex flex-col items-start justify-center gap-4'>
         <h2 className='text-base font-bold text-base-300'>
           انتخاب آدرس تحویل سفارش
@@ -49,7 +55,7 @@ const ShippingInfos = ({ addresses }: props) => {
                 height={24}
               />
               <p className='text-[#353535] leading-6 text-sm flex gap-1 items-center'>
-                {activeAddress?.city !== activeAddress?.province && `${activeAddress?.province}/`}{activeAddress?.city}/{activeAddress?.address}/کوچه {activeAddress?.alley}/پلاک {activeAddress?.flat_no}/واحد {activeAddress?.unit_no}
+                {activeAddress?.city !== activeAddress?.province && `${activeAddress?.province}/`}{activeAddress?.city}/{activeAddress?.address}/پلاک {activeAddress?.flat_no}/واحد {activeAddress?.unit_no}
               </p>
               <p className='text-[#757575] text-sm'>
                 {activeAddress?.first_name} {activeAddress?.last_name}
@@ -66,9 +72,23 @@ const ShippingInfos = ({ addresses }: props) => {
             <p className='text-[#626262] text-sm'>
               تا کنون آدرسی اضافه نکرده اید
             </p>
-            <button className="solid-btn rectangle-btn w-full">
+            <button
+              onClick={() => setAddAddressIsOpen(true)}
+              className="solid-btn rectangle-btn w-full"
+            >
               افزودن آدرس
             </button>
+            {addAddressIsOpen &&
+              <Alert
+                confirmFunc={addAddressFunc}
+                messageToast='آدرس با موفقیت اضافه شد'
+                textBtn='افزودن'
+                title='افزودن آدرس جدید'
+                setIsAlertOpen={setAddAddressIsOpen}
+              >
+                <AddressForm addAddressFunc={setaddAddressFunc} />
+              </Alert>
+            }
           </>
         }
       </div>
@@ -100,7 +120,7 @@ const ShippingInfos = ({ addresses }: props) => {
         </div>
       </div>
       <div className='max-w-[688px] w-full'>
-        {true ?
+        {start ?
           <>
             <Swiper
               slidesPerView={'auto'}
@@ -113,12 +133,12 @@ const ShippingInfos = ({ addresses }: props) => {
               modules={[FreeMode, Scrollbar]}
               className="mySwiper !p-4 !-mx-4"
             >
-              {Array(10).fill(1).map((product: any, i: number) => (
-                <SwiperSlide key={i} className='!w-[133px]'>
+              {cart.map((product: any, i: number) => (
+                <SwiperSlide key={crypto.randomUUID()} className='!w-[133px]'>
                   <OrdersCart
-                    image='/Image/offer-products/ard-nokhodchi.png'
-                    name='آرد نخودچی'
-                    quantity={2}
+                    image={product?.product.featuredImage}
+                    name={product?.product.name}
+                    quantity={product?.quantity}
                   />
                 </SwiperSlide>
               ))}
