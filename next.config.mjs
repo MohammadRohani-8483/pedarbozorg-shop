@@ -9,7 +9,7 @@ const nextConfig = {
   rewrites: async () => [
     {
       source: "/api/:path*",
-      destination: `https://pedarbozorg-api.codintofuture.ir/:path*/`,
+      destination: `${API_URL}/:path*/`,
       basePath: false,
     },
   ],
