@@ -30,7 +30,7 @@ const ShippingInfos = ({ addresses }: props) => {
 
   const [addAddressFunc, setaddAddressFunc] = useState<(data: any) => void>((data: any) => { })
 
-  const cart: shopCartItem[] = useSelector((state: any) => state.cart.cart)
+  const cart = useSelector((state: { cart: { cart: shopCartItem[] } }) => state.cart.cart)
 
   const [start, setStart] = useState(false)
   useEffect(() => {

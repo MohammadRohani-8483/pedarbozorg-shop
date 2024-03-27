@@ -5,6 +5,7 @@ import formatNumber from 'public/Functions/formatNumber'
 import Link from 'next/link'
 import { useDispatch, useSelector } from 'react-redux';
 import { incrementQuantity, removeFromCart, decrementQuantity } from '@/public/redux/store/cart';
+import { shopCartItem } from '@/public/types/productType'
 
 type props = {
     image: string
@@ -20,7 +21,7 @@ const ShopingCardItem = ({ image, link, price, priceWithOffer, name, count, prod
     const offerPresent = (price - priceWithOffer) / price * 100
     const present = price * offerPresent / 100
 
-    const cart = useSelector((state: any) => state.cart.cart)
+    const cart = useSelector((state: { cart: { cart: shopCartItem[] } }) => state.cart.cart)
     const dispatch = useDispatch()
 
     const handleIncrementQuantity = () => {
@@ -33,6 +34,7 @@ const ShopingCardItem = ({ image, link, price, priceWithOffer, name, count, prod
 
     const handleDeleteFromCart = () => {
         if (cart?.length > 1) {
+            console.log('first')
             dispatch(removeFromCart(product))
         } else {
             dispatch(removeFromCart(product))

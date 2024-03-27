@@ -1,6 +1,7 @@
 'use client'
 import formatNumber from '@/public/Functions/formatNumber'
 import { addToCart, decrementQuantity, incrementQuantity, removeFromCart } from '@/public/redux/store/cart'
+import { shopCartItem } from '@/public/types/productType'
 import Image from 'next/image'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -40,19 +41,10 @@ const AddToCartItem = ({ product, price, priceWithOffer, name, image, slug }: an
         },
     }
 
-    const cart = useSelector((state: any) => state.cart.cart)
-    let foundItem;
-    if (Array.isArray(cart)) {
-        foundItem = cart.find((item: any) => item.id === cartItem.id);
-        console.log('yes');
-        // ...
-    } else {
-        foundItem = false
-        console.log('no');
-    }
-
-    const isProductToCart = Boolean(foundItem)
-    const productInCart = foundItem || null
+    const cart = useSelector((state: { cart: { cart: shopCartItem[] } }) => state.cart.cart)
+    const productInCart = cart.find((item) => item.id === cartItem.id);
+    
+    const isProductToCart = Boolean(productInCart)
 
     const dispatch = useDispatch()
 
@@ -134,7 +126,7 @@ const AddToCartItem = ({ product, price, priceWithOffer, name, image, slug }: an
                             />
                         </button>
                         <>
-                            {productInCart?.quantity > 1 ?
+                            {productInCart?.quantity! > 1 ?
                                 <button
                                     onClick={handleDecrementQuantity}
                                     className='bg-[#E0F1E9] size-8 hover:bg-[#C1E2D2] rounded-lg text-[#3D8361] p-1.5 cursor-pointer'>

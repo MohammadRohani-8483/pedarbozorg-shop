@@ -9,6 +9,7 @@ import formatNumber from '@/public/Functions/formatNumber';
 import { motion } from 'framer-motion';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart, removeFromCart } from '@/public/redux/store/cart';
+import { shopCartItem } from '@/public/types/productType';
 
 type prop = {
     price: number
@@ -29,8 +30,8 @@ const ProductCard = ({ price, link, image, name, priceWithOffer, score, product,
     const [isLike, setIsLike] = useState(false)
     const [isHover, setIsHover] = useState(false)
 
-    const cart = useSelector((state: any) => state.cart.cart)
-    
+    const cart = useSelector((state: { cart: { cart: shopCartItem[] } }) => state.cart.cart)
+
     const cartItem = {
         id: product.cheapest_variant_id,
         shatootInfo: {

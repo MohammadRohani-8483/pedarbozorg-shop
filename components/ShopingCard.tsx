@@ -10,9 +10,7 @@ import { shopCartItem } from '@/public/types/productType'
 const ShopingCard = ({ isVisible }: any) => {
     const [totalFinalPrice, setTotalFinalPrice] = useState(0)
 
-
-
-    const cart = useSelector((state: any) => state.cart.cart) || null
+    const cart = useSelector((state: { cart: { cart: shopCartItem[] } }) => state.cart.cart)
 
     useEffect(() => {
         setTotalFinalPrice(cart.reduce((previous: any, current: any) => previous + current?.shatootInfo.finalPrice * current?.quantity, 0))

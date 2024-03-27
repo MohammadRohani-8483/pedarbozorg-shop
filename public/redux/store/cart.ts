@@ -1,31 +1,11 @@
+import { shopCartItem } from '@/public/types/productType';
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-type cartItem = {
-    id: number,
-    shatootInfo: {
-        sellPrice: number,
-        finalPrice: number,
-        discount: number,
-    },
-    product: {
-        id: number,
-        featuredImage: string,
-        name: string,
-        slug: string,
-    },
-    quantity: number,
-    totalFinalPrice: Function,
-    totalSellPrice: Function,
-}
-export interface CartState {
-    cart: cartItem[];
-}
-
-const cartItems = typeof window !== 'undefined' && (localStorage?.getItem("shoping_cart") ? JSON.parse(localStorage?.getItem("shoping_cart")!) : [])
+const initialState: shopCartItem[] = []
 
 const slice = createSlice({
     name: 'cart',
-    initialState: { cart: cartItems } as CartState,
+    initialState: { cart: initialState },
     reducers: {
         addToCart: (state, action) => {
             const itemInCart = state.cart.find(
@@ -65,9 +45,13 @@ const slice = createSlice({
         deleteAllItems: (state) => {
             state.cart = []
             localStorage.removeItem('shoping_cart')
+        },
+        getCartFromLocalStorage: (state) => {
+            const localItems: shopCartItem[] = typeof window !== 'undefined' && (localStorage?.getItem("shoping_cart") ? JSON.parse(localStorage?.getItem("shoping_cart")!) : [])
+            state.cart = localItems
         }
     }
 })
 export default slice.reducer
-export const { addToCart, removeFromCart, incrementQuantity, decrementQuantity, deleteAllItems } =
+export const { addToCart, removeFromCart, incrementQuantity, decrementQuantity, deleteAllItems, getCartFromLocalStorage } =
     slice.actions;

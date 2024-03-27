@@ -1,6 +1,7 @@
 'use client'
 import formatNumber from '@/public/Functions/formatNumber'
 import { decrementQuantity, incrementQuantity, removeFromCart } from '@/public/redux/store/cart'
+import { shopCartItem } from '@/public/types/productType'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
@@ -22,7 +23,7 @@ const CheckoutCartItem = ({ image, link, price, priceWithOffer, name, count, pro
     const offerPresent = (price - priceWithOffer) / price * 100
     const present = price * offerPresent / 100
 
-    const cart = useSelector((state: any) => state.cart.cart)
+    const cart = useSelector((state: { cart: { cart: shopCartItem[] } }) => state.cart.cart)
     const dispatch = useDispatch()
 
     const handleIncrementQuantity = () => {

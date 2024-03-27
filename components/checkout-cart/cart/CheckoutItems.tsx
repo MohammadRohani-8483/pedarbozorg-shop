@@ -8,7 +8,7 @@ import CheckoutCartItem from './CheckoutCartItem'
 
 const CheckoutItems = () => {
     const [isDeleting, setIsDeleting] = useState(false)
-    const cart: shopCartItem[] = useSelector((state: any) => state.cart.cart)
+    const cart = useSelector((state: { cart: { cart: shopCartItem[] } }) => state.cart.cart)
 
     const dispatch = useDispatch()
 

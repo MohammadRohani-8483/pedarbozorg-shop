@@ -3,7 +3,7 @@ const API_URL = process.env.API;
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ["pedarbozorg-api.codintofuture.ir"],
+    domains: ["pedarbozorg-api.codintofuture.ir", "api.pedarbozorg.shop"],
   },
   trailingSlash: true,
   rewrites: async () => [

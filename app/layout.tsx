@@ -4,6 +4,7 @@ import StoreProvider from "public/redux/StoreProvider";
 import Header from "@/components/Header";
 import ScrollToTop from "@/components/ScrollToTop";
 import FooterParent from "@/components/FooterParent";
+import ClientProvider from "@/components/ClientProvider";
 
 export const metadata: Metadata = {
   title: "پدربزرگ",
@@ -23,10 +24,12 @@ export default function RootLayout({
     <html lang="fa" className='bg-base-100 overflow-x-hidden'>
       <body>
         <StoreProvider>
-          <Header />
-          <ScrollToTop />
-          {children}
-          <FooterParent/>
+          <ClientProvider>
+            <Header />
+            <ScrollToTop />
+            {children}
+            <FooterParent />
+          </ClientProvider>
         </StoreProvider>
       </body>
     </html >

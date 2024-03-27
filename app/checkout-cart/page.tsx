@@ -10,7 +10,7 @@ import { useSelector } from 'react-redux'
 import Loading from './loading'
 
 const CheckoutCart = () => {
-    const cart: shopCartItem[] = useSelector((state: any) => state.cart.cart)
+    const cart = useSelector((state: { cart: { cart: shopCartItem[] } }) => state.cart.cart)
 
     const [totalFinalPrice, setTotalFinalPrice] = useState(0)
     const [totalSellPrice, setTotalSellPrice] = useState(0)

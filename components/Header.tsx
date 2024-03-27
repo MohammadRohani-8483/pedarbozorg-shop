@@ -9,8 +9,11 @@ import MenuMobile from './MenuMobile';
 import { motion } from 'framer-motion';
 import ShopingCard from './ShopingCard';
 import SignUpSignIn from 'components/signUp_signIn/signUpSignIn';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { shopCartItem } from '@/public/types/productType';
+import { getCartInLocalStorage } from '@/public/redux/store/cart';
+import { AppDispatch } from '@/public/redux/store';
 
 const Header: React.FC = () => {
     const [isTop, setIsTop] = useState(true);
@@ -26,7 +29,7 @@ const Header: React.FC = () => {
 
     const [cartLength, setCartLength] = useState(0)
 
-    const cart = useSelector((state: any) => state.cart.cart)
+    const cart = useSelector((state: { cart: { cart: shopCartItem[] } }) => state.cart.cart)
 
     const { replace } = useRouter()
     const searchParams = useSearchParams()

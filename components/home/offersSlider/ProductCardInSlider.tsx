@@ -2,7 +2,6 @@
 import { useState } from 'react';
 import Link from '@/node_modules/next/link';
 import Image from '@/node_modules/next/image';
-import { FiCameraOff } from "@/node_modules/react-icons/fi/index";
 import { FaStar } from "@/node_modules/react-icons/fa/index";
 import tooman from "@/public/Image/tooman.svg";
 import formatNumber from '@/public/Functions/formatNumber';
@@ -10,6 +9,7 @@ import { motion } from 'framer-motion';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart, removeFromCart } from '@/public/redux/store/cart';
 import toast from 'react-hot-toast';
+import { shopCartItem } from '@/public/types/productType';
 
 const ProductCard = ({ price, link, image, name, priceWithOffer, score, product }: any) => {
     const offerPresent = ((price - priceWithOffer) / price * 100) || 0
@@ -19,7 +19,7 @@ const ProductCard = ({ price, link, image, name, priceWithOffer, score, product 
     const [isLike, setIsLike] = useState(false)
     const [isHover, setIsHover] = useState(false)
 
-    const cart = useSelector((state: any) => state.cart.cart)
+    const cart = useSelector((state: { cart: { cart: shopCartItem[] } }) => state.cart.cart)
 
     const cartItem = {
         id: product.cheapest_variant_id,
