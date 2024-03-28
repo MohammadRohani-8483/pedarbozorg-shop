@@ -48,7 +48,7 @@ const AddressForm = ({ addAddressFunc, editAddressFunc }: props) => {
   return (
     <div className='w-full max-h-[330px] md:max-h-[400px] p-2 md:p-0 ltr overflow-auto -mx-2 md:m-0' id='scroll'>
       <form
-        onSubmit={handleSubmit(onSubmit)} 
+        onSubmit={handleSubmit(onSubmit)}
         className="w-full md:w-[614px] flex flex-col gap-2 sm:gap-4 md:gap-6 justify-center items-center"
       >
         <div className='w-full flex flex-col gap-2 md:gap-4 justify-center items-start'>
@@ -60,7 +60,7 @@ const AddressForm = ({ addAddressFunc, editAddressFunc }: props) => {
               className='peer/message w-full p-2 outline-none  text-black resize-none h-full '
               id='scroll'
               placeholder=''
-            {...register("address")}
+              {...register("address")}
             />
             <label htmlFor="scroll" className='peer-focus/message:text-[10px] text-[10px] peer-focus/message:text-base-300 text-gray-400 absolute peer-focus/message:-top-2.5 peer-focus/message:right-4 bg-white px-1 right-4 -top-[10px] transition-all pointer-events-none peer-placeholder-shown/message:text-base peer-placeholder-shown/message:right-2 peer-placeholder-shown/message:top-2'>
               نشانی پستی*
@@ -93,14 +93,14 @@ const AddressForm = ({ addAddressFunc, editAddressFunc }: props) => {
                   type='number'
                   name='unit_no'
                   placeholder='واحد'
-                register={'unit_no'}
+                  register={'unit_no'}
                 />
               </div>
               <Input
                 type='number'
                 name='zip_code'
                 placeholder='کدپستی*'
-              register={'zip_code'}
+                register={'zip_code'}
               />
             </div>
             <div className='flex justify-center items-center w-full gap-3'></div>
@@ -127,21 +127,22 @@ const AddressForm = ({ addAddressFunc, editAddressFunc }: props) => {
               type='text'
               name='first_name'
               placeholder='نام*'
-            register={'first_name'}
+              register={'first_name'}
             />
             <Input
               className='w-full'
               type='text'
               name='last_name'
               placeholder='نام خانوادگی*'
-            register={'last_name'}
+              register={'last_name'}
             />
             <Input
+              maxLength={11}
               className='w-full'
               type='tel'
               name='phone_number'
               placeholder='شماره همراه*'
-            register={'phone_number'}
+              register={'phone_number'}
             />
           </div>
         </div>

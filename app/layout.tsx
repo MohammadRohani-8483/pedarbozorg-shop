@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import ScrollToTop from "@/components/ScrollToTop";
 import FooterParent from "@/components/FooterParent";
 import ClientProvider from "@/components/ClientProvider";
+import { cookies } from "next/headers";
 
 export const metadata: Metadata = {
   title: "پدربزرگ",
@@ -20,11 +21,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
 
+  const cookiesStore = cookies()
+  const accessToken = cookiesStore.get("access")
+  const refreshToken = cookiesStore.get("refresh")
+
   return (
     <html lang="fa" className='bg-base-100 overflow-x-hidden'>
       <body>
         <StoreProvider>
-          <ClientProvider>
+          <ClientProvider accessToken={{ accessToken, refreshToken }}>
             <Header />
             <ScrollToTop />
             {children}

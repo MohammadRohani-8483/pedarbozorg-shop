@@ -12,8 +12,6 @@ import SignUpSignIn from 'components/signUp_signIn/signUpSignIn';
 import { useDispatch, useSelector } from 'react-redux';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { shopCartItem } from '@/public/types/productType';
-import { getCartInLocalStorage } from '@/public/redux/store/cart';
-import { AppDispatch } from '@/public/redux/store';
 
 const Header: React.FC = () => {
     const [isTop, setIsTop] = useState(true);
@@ -31,23 +29,13 @@ const Header: React.FC = () => {
 
     const cart = useSelector((state: { cart: { cart: shopCartItem[] } }) => state.cart.cart)
 
-    const { replace } = useRouter()
-    const searchParams = useSearchParams()
-    const params = new URLSearchParams(searchParams)
-    const pathname = usePathname()
-
     const handleScroll = () => {
         if (window.scrollY > 80) {
             setIsTop(false);
         } else {
             setIsTop(true);
         }
-    };
-
-    useEffect(() => {
-        params.get("sign_in") == 'true' ? handleFormSignInOpen() : null
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [params])
+    }
 
     useEffect(() => {
         setCartLength(cart.length)
@@ -81,28 +69,11 @@ const Header: React.FC = () => {
         setFocus(searchValue.length > 0)
     }, [searchValue])
 
-
-    const visibleCard = () => {
-        setIsHover(true)
-        setTimeout(() => {
-            setIsVisible(true)
-        }, 200)
-    }
-
-    const hiddenCard = () => {
-        setIsVisible(false)
-        setTimeout(() => {
-            setIsHover(false)
-        }, 200)
-    }
-
     const handleFormSignInOpen = () => {
         setIsFormOpen(true)
         document.documentElement.classList.add('overflow-hidden')
         setIsHoverLogin(true)
         setTimeout(() => setIsHoverLogin(false), 800)
-        params.set("sign_in", "true")
-        replace(`${pathname}?${params.toString()}`)
     }
 
     return (
@@ -185,7 +156,6 @@ const Header: React.FC = () => {
                         ورود/ثبت نام
                     </button>
                     {isFormOpen && <SignUpSignIn setIsFormOpen={setIsFormOpen} />}
-                    {/* <Link href='/checkout-cart'> */}
                     <motion.div className='py-3'
                         onHoverStart={() => {
                             setIsVisible(true)
@@ -213,7 +183,6 @@ const Header: React.FC = () => {
                             {isVisible && <ShopingCard isVisible={isHover} />}
                         </div>
                     </motion.div>
-                    {/* </Link> */}
                 </div>
             </header>
 
@@ -273,7 +242,7 @@ const Header: React.FC = () => {
                     </div>
                 </Link>
                 <div className='flex items-center gap-1'>
-                    <button
+                    <div
                         onClick={() => {
                             setIsFormOpen(true)
                             document.documentElement.classList.add('overflow-hidden')
@@ -309,7 +278,7 @@ const Header: React.FC = () => {
                             />
                         </div>
                         {isFormOpen && <SignUpSignIn setIsFormOpen={setIsFormOpen} />}
-                    </button>
+                    </div>
                     <Link href='/checkout-cart'>
                         <button className='square-btn outline-btn relative'
                         >

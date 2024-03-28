@@ -1,52 +1,71 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { boolean } from "yup";
 import { loginUser } from "../actions/authActions";
 
-type state = {
+export type authState = {
+    isLoad: boolean
     userInfo: any
     userToken: {
         access: string | null
         refresh: string | null
     },
-    isLogedIn: boolean
+    isLogedIn: boolean,
+    error: string | null
 }
 
-const initialState: state = {
+const initialState: authState = {
+    isLoad: false,
     userInfo: {},
     userToken: {
         access: null,
         refresh: null
     },
     isLogedIn: false,
+    error: null
 }
 
 const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
-        getTokenFromLocalStorage: (state) => {
-            const localToken = typeof window !== 'undefined' && (localStorage?.getItem("user_token") ? JSON.parse(localStorage?.getItem("user_token")!) : {
-                access: null,
-                refresh: null
-            })
-            state.userToken = localToken
-            state.userToken.access ? state.isLogedIn = true : state.isLogedIn = false
-            console.log(state.userToken)
+        getTokenFromCookie: (state, action) => {
+            if (action.payload.accessToken) {
+                state.userToken.access = action.payload.accessToken.value
+                state.userToken.refresh = action.payload.refreshToken.value
+                state.isLogedIn = true
+                state.error = null
+            }
         }
     },
     extraReducers: builder => {
         builder.addCase(loginUser.fulfilled, (state, action) => {
             if (!action.payload.error) {
+                state.error = null
                 state.userToken.access = action.payload.access
                 state.userToken.refresh = action.payload.refresh
                 state.isLogedIn = true
-                localStorage.setItem('user_token', JSON.stringify(state.userToken))
+                console.log(state.error)
+            } else {
+                state.isLogedIn = false
+                state.error = action.payload.error
+                console.log(state.error)
             }
+            state.isLoad = false
+            console.log('fulfilled')
         })
         builder.addCase(loginUser.rejected, (state) => {
             state.isLogedIn = false
+            state.isLoad = false
+            console.log('rejected')
+        })
+        builder.addCase(loginUser.pending, (state) => {
+            state.isLogedIn = false
+            state.error = null
+            state.isLoad = true
+            console.log('pending')
         })
     }
 })
 export default authSlice.reducer
-export const { getTokenFromLocalStorage } =
+export const { getTokenFromCookie } =
     authSlice.actions;

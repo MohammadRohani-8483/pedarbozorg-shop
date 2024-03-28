@@ -1,129 +1,70 @@
-'use client'
-import React, { useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 interface OTPInputGroupProps {
-    setInputValues: React.Dispatch<React.SetStateAction<{ input1: string; input2: string; input3: string; input4: string; input5: string; }>>;
-    inputValuesNumber: number; // یا هر تایپ دیگری که مناسب است
-    inputValues: { [key: string]: string };
-    handleSubmit: () => void; // یا هر تایپ دیگری که مناسب است
+    setInputValues: (pars: string[]) => void
+    inputValuesString: string
+    inputValues: string[]
+    handleSubmit: () => void
 }
 
-const OTPInputGroup = ({ inputValues, inputValuesNumber, setInputValues, handleSubmit }: OTPInputGroupProps) => {
-    //state to store all input boxes    
-    // const [inputValues, setInputValues] = useState({
-    //     input1: '',
-    //     input2: '',
-    //     input3: '',
-    //     input4: '',
-    //     input5: '',
-    // });
+let currentOTPIndex: number = 0;
+const OTPInputGroup = ({ inputValues, inputValuesString, setInputValues, handleSubmit }: OTPInputGroupProps) => {
+    const [activeOTPIndex, setActiveOTPIndex] = useState(0);
 
-    // const inputValuesString = Object.values(inputValues).join('');
-    // const inputValuesNumber = Number(inputValuesString);
+    const inputRef = useRef<HTMLInputElement>(null);
 
-    useEffect(() => {
-        inputValuesNumber > 9999 && handleSubmit()
-    }, [inputValuesNumber])
+    const handleOnChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
+        const { value } = target;
+        const newOTP: string[] = [...inputValues];
+        newOTP[currentOTPIndex] = value.substring(value.length - 1);
 
+        if (!value) setActiveOTPIndex(currentOTPIndex - 1);
+        else setActiveOTPIndex(currentOTPIndex + 1);
 
-    //this function updates the value of the state inputValues
-    const handleInputChange = (inputId: any, value: any) => {
-        setInputValues((prevInputValues: any) => ({
-            ...prevInputValues,
-            [inputId]: value,
-        }));
+        setInputValues(newOTP);
     };
 
-    return (
-        <>
-            <div data-autosubmit="true" className="w-full ltr flex justify-between items-center">
-                <OTPInput
-                    id="input1"
-                    value={inputValues.input1}
-                    onValueChange={handleInputChange}
-                    previousId={null}
-                    nextId="input2"
-                    className="w-[47px] h-10 border-2 rounded-lg bg-transparent outline-none text-center font-semibold text-xl spin-button-none border-[#CBCBCB] focus:border-gray-700 focus:text-gray-800 text-gray-500 transition"
-                />
-                <OTPInput
-                    id="input2"
-                    value={inputValues.input2}
-                    onValueChange={handleInputChange}
-                    previousId="input1"
-                    nextId="input3"
-                    className="w-[47px] h-10 border-2 rounded-lg bg-transparent outline-none text-center font-semibold text-xl spin-button-none border-[#CBCBCB] focus:border-gray-700 focus:text-gray-800 text-gray-500 transition"
-                />
-                <OTPInput
-                    id="input3"
-                    value={inputValues.input3}
-                    onValueChange={handleInputChange}
-                    previousId="input2"
-                    nextId="input4"
-                    className="w-[47px] h-10 border-2 rounded-lg bg-transparent outline-none text-center font-semibold text-xl spin-button-none border-[#CBCBCB] focus:border-gray-700 focus:text-gray-800 text-gray-500 transition"
-                />
-                <OTPInput
-                    id="input4"
-                    value={inputValues.input4}
-                    onValueChange={handleInputChange}
-                    previousId="input3"
-                    nextId="input5"
-                    className="w-[47px] h-10 border-2 rounded-lg bg-transparent outline-none text-center font-semibold text-xl spin-button-none border-[#CBCBCB] focus:border-gray-700 focus:text-gray-800 text-gray-500 transition"
-                />
-                <OTPInput
-                    id="input5"
-                    value={inputValues.input5}
-                    onValueChange={handleInputChange}
-                    previousId="input4"
-                    className="w-[47px] h-10 border-2 rounded-lg bg-transparent outline-none text-center font-semibold text-xl spin-button-none border-[#CBCBCB] focus:border-gray-700 focus:text-gray-800 text-gray-500 transition"
-                />
-            </div>
-        </>
-    );
-}
+    const handleOnKeyDown = (
+        e: React.KeyboardEvent<HTMLInputElement>,
+        index: number
+    ) => {
+        currentOTPIndex = index;
+        if (e.key === "Backspace") setActiveOTPIndex(currentOTPIndex - 1);
+    };
 
-const OTPInput = ({ id, previousId, nextId, value, onValueChange, className }: any) => {
-    //This callback function only runs when a key is released
-    const handleKeyUp = (e: any) => {
-        //check if key is backspace or arrowleft
-        if (e.keyCode === 8 || e.keyCode === 37) {
-            //find the previous element
-            const prev = document.getElementById(previousId) as HTMLInputElement;
-            if (prev) {
-                //select the previous element
-                prev.select();
-            }
-        } else if (
-            (e.keyCode >= 48 && e.keyCode <= 57) || //check if key is numeric keys 0 to 9
-            (e.keyCode >= 65 && e.keyCode <= 90) || //check if key is alphabetical keys A to Z
-            (e.keyCode >= 96 && e.keyCode <= 105) || //check if key is numeric keypad keys 0 to 9
-            e.keyCode === 39 //check if key is right arrow key
-        ) {
-            //find the next element
-            const next = document.getElementById(nextId) as HTMLInputElement;
-            if (next) {
-                //select the next element
-                next.select();
-            } else {
-                //check if inputGroup has autoSubmit enabled
-                const inputGroup = document.getElementById('OTPInputGroup');
-                if (inputGroup && inputGroup.dataset['autosubmit']) {
-                    //submit the form
-                }
-            }
+    useEffect(() => {
+        inputRef.current?.focus();
+    }, [activeOTPIndex]);
+
+    useEffect(() => {
+        if (inputValuesString.length > 4) {
+            handleSubmit()
+            setActiveOTPIndex(0)
         }
-    }
+    }, [inputValuesString])
+
     return (
-        <input
-            id={id}
-            name={id}
-            type="text"
-            value={value}
-            maxLength={1}
-            onChange={(e) => onValueChange(id, e.target.value)}
-            onKeyUp={handleKeyUp}
-            className={className}
-        />
+        <div className="w-full ltr flex justify-between items-center">
+            {inputValues.map((_, index) => {
+                return (
+                    <input
+                        key={index}
+                        ref={activeOTPIndex === index ? inputRef : null}
+                        type="number"
+                        className={
+                            "w-[47px] h-10 border-2 rounded-lg bg-transparent outline-none text-center font-semibold text-xl spin-button-none border-[#CBCBCB] focus:border-gray-700 focus:text-gray-800 text-gray-500 transition [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                        }
+                        onChange={handleOnChange}
+                        onKeyDown={(e) => handleOnKeyDown(e, index)}
+                        value={inputValues[index]}
+                        onSubmit={(e) => e.preventDefault()}
+                    />
+                );
+            })}
+        </div>
     );
 };
 
+
 export default OTPInputGroup;
+

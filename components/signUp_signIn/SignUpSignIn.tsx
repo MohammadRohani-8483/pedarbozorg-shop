@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { motion } from "framer-motion";
 import EnterPhoneNumberForm from './EnterPhoneNumberForm';
 import CodeVerificationForm from './CodeVerificationForm';
@@ -32,6 +32,8 @@ const SignUpSignIn = ({ setIsFormOpen }: { setIsFormOpen: (par: boolean) => void
         },
     };
 
+    const backRef = useRef<HTMLDivElement>(null)
+
     const handleClose = () => {
         setIsAnimate(false)
         setTimeout(() => {
@@ -42,16 +44,10 @@ const SignUpSignIn = ({ setIsFormOpen }: { setIsFormOpen: (par: boolean) => void
         replace(`${pathname}?${params.toString()}`)
     }
 
-    const verificationCode = Math.floor((Math.random() * 89999) + 10000)
-
-    useEffect(() => {
-        console.log(verificationCode);
-    }, [])
-
-
     return (
         <motion.div
-            onClick={(e: any) => e.target.className === "fixed inset-0 bg-black bg-opacity-50 w-screen h-screen z-[2000] flex justify-center items-center" && handleClose()}
+            ref={backRef}
+            onClick={(e: any) => e.target.classList === backRef.current?.classList && handleClose()}
             animate={isAnimate ? "bgVisible" : "bgHidden"}
             initial={isAnimate ? "bgHidden" : "bgVisible"}
             variants={variants}
@@ -67,7 +63,6 @@ const SignUpSignIn = ({ setIsFormOpen }: { setIsFormOpen: (par: boolean) => void
                 {!isEnterNumber ?
                     <EnterPhoneNumberForm
                         handleClose={handleClose}
-                        inputValue={inputValue}
                         setInputValue={setInputValue}
                         setIsEnterNumber={setIsEnterNumber}
                     />
@@ -75,7 +70,6 @@ const SignUpSignIn = ({ setIsFormOpen }: { setIsFormOpen: (par: boolean) => void
                     <CodeVerificationForm
                         handleClose={handleClose}
                         phoneNumber={inputValue}
-                        verificationCode={verificationCode}
                     />
                 }
             </motion.div>

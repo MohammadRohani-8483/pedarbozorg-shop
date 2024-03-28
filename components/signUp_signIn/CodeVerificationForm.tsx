@@ -1,36 +1,46 @@
 'use client'
+import { loginUser } from '@/public/redux/actions/authActions';
+import { AppDispatch } from '@/public/redux/store';
 import Image from 'next/image'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 import { IoIosClose } from "react-icons/io";
+import { useDispatch, useSelector } from 'react-redux';
 import OTPInputGroup from './OTP';
+import { useTimer } from 'public/hooks/useTimer'
+import { authState } from '@/public/redux/store/auth';
+import { sendSMS } from './EnterPhoneNumberForm';
 
 type props = {
     handleClose: () => void
     phoneNumber: string
-    verificationCode: number
 }
 
-const CodeVerificationForm = ({ handleClose, phoneNumber, verificationCode }: props) => {
+const CodeVerificationForm = ({ handleClose, phoneNumber }: props) => {
+    const dispatch = useDispatch<AppDispatch>()
+    const authState: authState = useSelector((state: any) => state.auth)
     const [isLoading, setIsLoading] = useState(false)
 
-    const [inputValues, setInputValues] = useState({
-        input1: '',
-        input2: '',
-        input3: '',
-        input4: '',
-        input5: '',
-    });
-    let inputValuesString = Object.values(inputValues).join('');
-    let inputValuesNumber = Number(inputValuesString);
+    useEffect(() => {
+        setIsLoading(authState.isLoad)
+        if (authState.isLogedIn) {
+            toast.success("شما با موفقیت وارد شدید.")
+            handleClose()
+        } else if (authState.error) {
+            toast.error(authState.error)
+            setInputValues(new Array(5).fill(""))
+        }
+    }, [authState])
 
-    const handleSubmit = () => {
-        setIsLoading(true)
-        setTimeout(() => {
-            setIsLoading(false)
-            console.log("inputNumber", inputValuesNumber);
-            console.log("verificationCode", verificationCode);
-            (inputValuesNumber > 9999 && (verificationCode == inputValuesNumber)) ? alert('yes') : alert('no')
-        }, 700)
+    const [isTimerEnd, setIsTimerEnd] = useState(false)
+    const [timer, setTimer] = useState(120)
+    const { finalMinute, finalSec } = useTimer(timer, setTimer, setIsTimerEnd)
+
+    const [inputValues, setInputValues] = useState(new Array(5).fill(""));
+    let inputValuesString = inputValues.join('');
+
+    const handleSubmit = async () => {
+        await dispatch(loginUser({ phone_number: phoneNumber, code: inputValuesString }))
     }
 
     return (
@@ -49,13 +59,30 @@ const CodeVerificationForm = ({ handleClose, phoneNumber, verificationCode }: pr
                 />
                 <div className='flex flex-col w-full gap-6'>
                     <div className='w-full flex flex-col justify-center items-center gap-4'>
-                        <h2 className="text-sm text-[#757575]">کد ارسال شده به شماره {phoneNumber} را وارد کنید</h2>
+                        <h2 className="text-sm text-gray-500">کد ارسال شده به شماره {phoneNumber} را وارد کنید.</h2>
                         <OTPInputGroup
                             setInputValues={setInputValues}
-                            inputValuesNumber={inputValuesNumber}
+                            inputValuesString={inputValuesString}
                             inputValues={inputValues}
                             handleSubmit={handleSubmit}
                         />
+                        <div className='flex justify-between items-center -mt-2 -mb-4 w-full'>
+                            <h2 className='flex justify-start items-center text-sm text-gray-600'>
+                                {finalSec} : {finalMinute}
+                            </h2>
+                            <h2
+                                onClick={() => {
+                                    if (isTimerEnd) {
+                                        sendSMS(phoneNumber)
+                                        setTimer(120)
+                                        setIsTimerEnd(false)
+                                    }
+                                }}
+                                className={`text-sm ${isTimerEnd ? "text-gray-600 cursor-pointer" : "text-gray-400"}`}
+                            >
+                                ارسال مجدد کد
+                            </h2>
+                        </div>
                     </div>
                     {isLoading ?
                         <button className='relative flex justify-center solid-btn rectangle-btn w-full h-10'>
@@ -69,7 +96,7 @@ const CodeVerificationForm = ({ handleClose, phoneNumber, verificationCode }: pr
                             </div>
                         </button>
                         :
-                        <button onClick={handleSubmit} className='flex justify-center solid-btn rectangle-btn w-full'>
+                        <button id='submit_btn' onClick={handleSubmit} className='flex justify-center solid-btn rectangle-btn w-full'>
                             ورود
                         </button>
                     }
