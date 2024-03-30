@@ -11,6 +11,10 @@ type deleteCartItemParam = {
     token: string
     cartItemID: number
 }
+type deleteCartParam = {
+    token: string
+    cartID: string
+}
 
 export const makeCartItem = createAsyncThunk(
     'cart/makeCartItem',
@@ -50,6 +54,19 @@ export const deleteCartItem = createAsyncThunk(
             }
         }
         const data = await fetch(`/api/transaction-api/cart-item/${cartItemID}`, config)
+        return data.json()
+    }
+)
+export const deleteCart = createAsyncThunk(
+    'cart/deleteCart',
+    async ({ token, cartID }: deleteCartParam) => {
+        const config = {
+            method: "DELETE",
+            headers: {
+                Authorization: `JWT ${token}`
+            }
+        }
+        const data = await fetch(`/api/transaction-api/cart/${cartID}/`, config)
         return data.json()
     }
 )

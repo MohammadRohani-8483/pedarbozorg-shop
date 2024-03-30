@@ -16,14 +16,14 @@ export const metadata: Metadata = {
 };
 
 const fetchFunc = async (par: any) => {
-  const res = fetch(`${process.env.API}/core-api/user/customers/me/`, {
+  const res = await fetch(`${process.env.API}/core-api/user/customers/me/`, {
     method: "GET",
     credentials: 'include',
     headers: {
       Authorization: `JWT ${par}`
     }
   })
-  return (await res).json()
+  return res.json()
 }
 
 export default async function RootLayout({
@@ -31,12 +31,11 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
   const cookiesStore = cookies()
   const accessToken = cookiesStore.get("access")
   const refreshToken = cookiesStore.get("refresh")
 
-  const me = await fetchFunc(accessToken?.value)
+  const me = accessToken && await fetchFunc(accessToken?.value)
 
   return (
     <html lang="fa" className='bg-base-100 overflow-x-hidden'>

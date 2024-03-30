@@ -3,7 +3,7 @@ import formatNumber from '@/public/Functions/formatNumber'
 import { deleteCartItem, getCartFromServer, makeCartItem } from '@/public/redux/actions/cartActions'
 import { AppDispatch } from '@/public/redux/store'
 import { authState } from '@/public/redux/store/auth'
-import { decrementQuantity, incrementQuantity, removeFromCart } from '@/public/redux/store/cart'
+import { decrementQuantity, incrementQuantity, removeFromCart, setCartToLocalStorage } from '@/public/redux/store/cart'
 import { cart, shopCartItem } from '@/public/types/productType'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -36,9 +36,9 @@ const CheckoutCartItem = ({ image, link, price, priceWithOffer, name, count, pro
         if (auth.isLogedIn) {
             dispatch(makeCartItem({ quantity: 1, token: auth.userToken.access!, variant: product.variant.id }))
             dispatch(incrementQuantity(product))
-            localStorage.removeItem('shoping_cart')
         } else {
             dispatch(incrementQuantity(product))
+            dispatch(setCartToLocalStorage())
         }
     }
 
@@ -46,9 +46,9 @@ const CheckoutCartItem = ({ image, link, price, priceWithOffer, name, count, pro
         if (auth.isLogedIn) {
             dispatch(makeCartItem({ quantity: -1, token: auth.userToken.access!, variant: product.variant.id }))
             dispatch(decrementQuantity(product))
-            localStorage.removeItem('shoping_cart')
         } else {
             dispatch(decrementQuantity(product))
+            dispatch(setCartToLocalStorage())
         }
     }
 
@@ -56,15 +56,16 @@ const CheckoutCartItem = ({ image, link, price, priceWithOffer, name, count, pro
         if (auth.isLogedIn) {
             dispatch(deleteCartItem({ cartItemID: productIdForDelete!, token: auth.userToken.access! }))
             dispatch(removeFromCart(product))
-            localStorage.removeItem('shoping_cart')
         } else {
             dispatch(removeFromCart(product))
-            if (cart?.length === 1) {
+            if (cart?.length === 0) {
                 localStorage.removeItem('shoping_cart')
+            } else {
+                dispatch(setCartToLocalStorage())
             }
         }
     }
-    
+
     return (
         <div className="w-full flex flex-col md:flex-row items-center justify-center h-[92px] md:h-[131px] gap-2 md:gap-12">
             <Link href={link || "/"} className='flex justify-between items-center w-full h-full'>

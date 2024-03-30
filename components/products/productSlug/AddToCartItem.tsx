@@ -1,12 +1,15 @@
 'use client'
 import formatNumber from '@/public/Functions/formatNumber'
-import { addToCart, decrementQuantity, incrementQuantity, removeFromCart } from '@/public/redux/store/cart'
-import { cart, cartItem, shopCartItem } from '@/public/types/productType'
+import { deleteCartItem } from '@/public/redux/actions/cartActions'
+import { AppDispatch } from '@/public/redux/store'
+import { authState } from '@/public/redux/store/auth'
+import { addToCart, decrementQuantity, incrementQuantity, removeFromCart, setCartToLocalStorage } from '@/public/redux/store/cart'
+import { cart, cartItem } from '@/public/types/productType'
 import Image from 'next/image'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-const AddToCartItem = ({ product, price, priceWithOffer, name, image, slug, variant }: any) => {
+const AddToCartItem = ({ product, price, priceWithOffer, name, image, variant }: any) => {
     const offerPresent = (price - priceWithOffer) / price * 100
 
     const cartItem: cartItem = {
@@ -16,24 +19,27 @@ const AddToCartItem = ({ product, price, priceWithOffer, name, image, slug, vari
             name: variant.shatoot_info.good_name,
             product: {
                 id: product.id,
-                image: product.featured_image,
+                featured_image:product.featured_image,
                 name: product.name,
                 slug: product.slug,
             },
-            shatootInfo: {
-                sellPrice: variant.shatoot_info.sell_price,
-                finalPrice: variant.shatoot_info.final_price,
+            shatoot_info: {
+                sell_price: variant.shatoot_info.sell_price,
+                final_price: variant.shatoot_info.final_price,
                 discount: variant.shatoot_info.discount,
             }
         }
     }
 
     const cart = useSelector((state: { cart: cart }) => state.cart.cartItems)
+    const auth = useSelector((state: { auth: authState }) => state.auth)
+
     const productInCart = cart.find((item) => item.id === cartItem.id);
+    const productIdForDelete: number | null = productInCart?.id || null
 
     const isProductToCart = Boolean(productInCart)
 
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
 
     const handleAddToCart = () => {
         dispatch(addToCart(cartItem))
@@ -48,11 +54,16 @@ const AddToCartItem = ({ product, price, priceWithOffer, name, image, slug, vari
     }
 
     const handleDeleteFromCart = () => {
-        if (cart?.length > 1) {
-            dispatch(removeFromCart(cartItem))
+        if (auth.isLogedIn) {
+            dispatch(deleteCartItem({ cartItemID: productIdForDelete!, token: auth.userToken.access! }))
+            dispatch(removeFromCart(product))
         } else {
-            dispatch(removeFromCart(cartItem))
-            localStorage.removeItem('shoping_cart')
+            dispatch(removeFromCart(product))
+            if (cart?.length === 0) {
+                localStorage.removeItem('shoping_cart')
+            } else {
+                dispatch(setCartToLocalStorage())
+            }
         }
     }
 

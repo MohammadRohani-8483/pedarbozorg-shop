@@ -5,21 +5,33 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Alert from 'components/Alert'
 import CheckoutCartItem from './CheckoutCartItem'
+import { authState } from '@/public/redux/store/auth'
+import { deleteCart, getCartFromServer } from '@/public/redux/actions/cartActions'
+import { AppDispatch } from '@/public/redux/store'
 
 const CheckoutItems = () => {
     const [isDeleting, setIsDeleting] = useState(false)
     const cart = useSelector((state: { cart: cart }) => state.cart.cartItems)
+    const cartID = useSelector((state: { cart: cart }) => state.cart.id)
+    const auth = useSelector((state: { auth: authState }) => state.auth)
 
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
 
     const [start, setStart] = useState(false)
     useEffect(() => {
         setStart(true)
     }, [])
 
-    const handleDeleteAllCart = () => {
-        dispatch(deleteAllItems())
-        localStorage.removeItem('shoping_cart')
+    console.log(cartID)
+
+    const handleDeleteAllCart = async () => {
+        if (auth.isLogedIn) {
+            await dispatch(deleteCart({ token: auth.userToken.access!, cartID: cartID! }))
+            dispatch(getCartFromServer(auth.userToken.access!))
+        } else {
+            dispatch(deleteAllItems())
+            localStorage.removeItem('shoping_cart')
+        }
         window.scrollTo(0, 0)
     }
 
@@ -35,7 +47,7 @@ const CheckoutItems = () => {
                         <CheckoutCartItem
                             price={cartItem?.variant?.shatoot_info.final_price}
                             priceWithOffer={cartItem?.variant?.shatoot_info.sell_price}
-                            image={cartItem?.variant?.image||cartItem.variant.product.featured_image}
+                            image={cartItem?.variant?.image || cartItem.variant.product.featured_image}
                             link={cartItem?.variant?.product.slug}
                             name={cartItem?.variant.name}
                             count={cartItem?.quantity!}

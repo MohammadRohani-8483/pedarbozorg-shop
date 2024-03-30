@@ -4,7 +4,7 @@ import Image from 'next/image'
 import formatNumber from 'public/Functions/formatNumber'
 import Link from 'next/link'
 import { useDispatch, useSelector } from 'react-redux';
-import { incrementQuantity, removeFromCart, decrementQuantity } from '@/public/redux/store/cart';
+import { incrementQuantity, removeFromCart, decrementQuantity, setCartToLocalStorage } from '@/public/redux/store/cart';
 import { cart, cartItem } from '@/public/types/productType'
 import { deleteCartItem, getCartFromServer, makeCartItem } from '@/public/redux/actions/cartActions'
 import { AppDispatch } from '@/public/redux/store'
@@ -34,9 +34,9 @@ const ShopingCardItem = ({ image, link, price, priceWithOffer, name, count, prod
         if (auth.isLogedIn) {
             dispatch(makeCartItem({ quantity: 1, token: auth.userToken.access!, variant: product.variant.id }))
             dispatch(incrementQuantity(product))
-            localStorage.removeItem('shoping_cart')
         } else {
             dispatch(incrementQuantity(product))
+            dispatch(setCartToLocalStorage())
         }
     }
 
@@ -44,9 +44,9 @@ const ShopingCardItem = ({ image, link, price, priceWithOffer, name, count, prod
         if (auth.isLogedIn) {
             dispatch(makeCartItem({ quantity: -1, token: auth.userToken.access!, variant: product.variant.id }))
             dispatch(decrementQuantity(product))
-            localStorage.removeItem('shoping_cart')
         } else {
             dispatch(decrementQuantity(product))
+            dispatch(setCartToLocalStorage())
         }
     }
 
@@ -54,11 +54,12 @@ const ShopingCardItem = ({ image, link, price, priceWithOffer, name, count, prod
         if (auth.isLogedIn) {
             dispatch(deleteCartItem({ cartItemID: productIdForDelete!, token: auth.userToken.access! }))
             dispatch(removeFromCart(product))
-            localStorage.removeItem('shoping_cart')
         } else {
             dispatch(removeFromCart(product))
-            if (cart?.length === 1) {
+            if (cart?.length === 0) {
                 localStorage.removeItem('shoping_cart')
+            } else {
+                dispatch(setCartToLocalStorage())
             }
         }
     }
