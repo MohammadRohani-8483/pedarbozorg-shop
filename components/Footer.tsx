@@ -77,19 +77,21 @@ const Footer: React.FC = () => {
                                     alt='zarinpal'
                                     src="/Image/footer/symbols/zarinpal.svg"
                                     fill
-                                /> 
-                            </Link>
-                            <Link
-                                className='relative w-[87px] aspect-square lg:w-[74px]'
-                                href="https://trustseal.enamad.ir/?id=442491&Code=fpIN0X9CJKuz2Rym1BNamoRVIobsmlM2"
-                                referrerPolicy="origin" target="_blank"
-                            >
-                                <Image
-                                    alt='enamad'
-                                    src="/Image/footer/symbols/enamad.svg"
-                                    fill
                                 />
                             </Link>
+                            <a
+                                className='w-[87px] aspect-square lg:w-[74px]'
+                                referrerPolicy='origin'
+                                target='_blank'
+                                href='https://trustseal.enamad.ir/?id=442491&Code=fpIN0X9CJKuz2Rym1BNamoRVIobsmlM2'
+                            >
+                                <img
+                                    referrerPolicy='origin'
+                                    src='https://trustseal.enamad.ir/logo.aspx?id=442491&Code=fpIN0X9CJKuz2Rym1BNamoRVIobsmlM2'
+                                    alt='' code='fpIN0X9CJKuz2Rym1BNamoRVIobsmlM2'
+                                    className='cursor-pointer w-[87px] aspect-square lg:w-[74px]'
+                                />
+                            </a>
                             <Link
                                 href='/'
                                 className='relative w-[87px] aspect-square lg:w-[74px]'
