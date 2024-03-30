@@ -39,7 +39,8 @@ const AddToCartBox = ({ product }: any) => {
                     {product.variants?.sort((a: any, b: any) => a.shatoot_info.final_price - b.shatoot_info.final_price).map((variant: any, i: number, array: Array<any>) => (
                         <React.Fragment key={variant.id}>
                             <AddToCartItem
-                                product={variant}
+                                variant={variant}
+                                product={product}
                                 image={variant.image}
                                 name={variant.shatoot_info.good_name}
                                 price={variant.shatoot_info.sell_price}

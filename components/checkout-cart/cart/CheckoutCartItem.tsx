@@ -1,7 +1,10 @@
 'use client'
 import formatNumber from '@/public/Functions/formatNumber'
+import { deleteCartItem, getCartFromServer, makeCartItem } from '@/public/redux/actions/cartActions'
+import { AppDispatch } from '@/public/redux/store'
+import { authState } from '@/public/redux/store/auth'
 import { decrementQuantity, incrementQuantity, removeFromCart } from '@/public/redux/store/cart'
-import { shopCartItem } from '@/public/types/productType'
+import { cart, shopCartItem } from '@/public/types/productType'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
@@ -23,27 +26,45 @@ const CheckoutCartItem = ({ image, link, price, priceWithOffer, name, count, pro
     const offerPresent = (price - priceWithOffer) / price * 100
     const present = price * offerPresent / 100
 
-    const cart = useSelector((state: { cart: { cart: shopCartItem[] } }) => state.cart.cart)
-    const dispatch = useDispatch()
+    const cart = useSelector((state: { cart: cart }) => state.cart.cartItems)
+    const auth = useSelector((state: { auth: authState }) => state.auth)
+    const dispatch = useDispatch<AppDispatch>()
+    const productInCart = cart.find((item) => item.variant.id === product.variant.id)
+    const productIdForDelete: number | null = productInCart?.id || null
 
     const handleIncrementQuantity = () => {
-        dispatch(incrementQuantity(product))
-    }
-
-    const handleDecrementQuantity = () => {
-        dispatch(decrementQuantity(product))
-    }
-
-    const handleDeleteFromCart = () => {
-        if (cart?.length > 1) {
-            dispatch(removeFromCart(product))
-        } else {
-            dispatch(removeFromCart(product))
+        if (auth.isLogedIn) {
+            dispatch(makeCartItem({ quantity: 1, token: auth.userToken.access!, variant: product.variant.id }))
+            dispatch(incrementQuantity(product))
             localStorage.removeItem('shoping_cart')
+        } else {
+            dispatch(incrementQuantity(product))
         }
     }
 
+    const handleDecrementQuantity = () => {
+        if (auth.isLogedIn) {
+            dispatch(makeCartItem({ quantity: -1, token: auth.userToken.access!, variant: product.variant.id }))
+            dispatch(decrementQuantity(product))
+            localStorage.removeItem('shoping_cart')
+        } else {
+            dispatch(decrementQuantity(product))
+        }
+    }
 
+    const handleDeleteFromCart = () => {
+        if (auth.isLogedIn) {
+            dispatch(deleteCartItem({ cartItemID: productIdForDelete!, token: auth.userToken.access! }))
+            dispatch(removeFromCart(product))
+            localStorage.removeItem('shoping_cart')
+        } else {
+            dispatch(removeFromCart(product))
+            if (cart?.length === 1) {
+                localStorage.removeItem('shoping_cart')
+            }
+        }
+    }
+    
     return (
         <div className="w-full flex flex-col md:flex-row items-center justify-center h-[92px] md:h-[131px] gap-2 md:gap-12">
             <Link href={link || "/"} className='flex justify-between items-center w-full h-full'>

@@ -15,7 +15,18 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+const fetchFunc = async (par: any) => {
+  const res = fetch(`${process.env.API}/core-api/user/customers/me/`, {
+    method: "GET",
+    credentials: 'include',
+    headers: {
+      Authorization: `JWT ${par}`
+    }
+  })
+  return (await res).json()
+}
+
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -25,11 +36,13 @@ export default function RootLayout({
   const accessToken = cookiesStore.get("access")
   const refreshToken = cookiesStore.get("refresh")
 
+  const me = await fetchFunc(accessToken?.value)
+
   return (
     <html lang="fa" className='bg-base-100 overflow-x-hidden'>
       <body>
         <StoreProvider>
-          <ClientProvider accessToken={{ accessToken, refreshToken }}>
+          <ClientProvider token={{ accessToken, refreshToken }} me={me}>
             <Header />
             <ScrollToTop />
             {children}

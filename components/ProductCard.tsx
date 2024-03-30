@@ -9,7 +9,10 @@ import formatNumber from '@/public/Functions/formatNumber';
 import { motion } from 'framer-motion';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart, removeFromCart } from '@/public/redux/store/cart';
-import { shopCartItem } from '@/public/types/productType';
+import { cart, cartItem } from '@/public/types/productType';
+import { authState } from '@/public/redux/store/auth';
+import { deleteCartItem, getCartFromServer, makeCartItem } from '@/public/redux/actions/cartActions';
+import { AppDispatch } from '@/public/redux/store';
 
 type prop = {
     price: number
@@ -30,37 +33,55 @@ const ProductCard = ({ price, link, image, name, priceWithOffer, score, product,
     const [isLike, setIsLike] = useState(false)
     const [isHover, setIsHover] = useState(false)
 
-    const cart = useSelector((state: { cart: { cart: shopCartItem[] } }) => state.cart.cart)
+    const cart = useSelector((state: { cart: cart }) => state.cart.cartItems)
+    const auth = useSelector((state: { auth: authState }) => state.auth)
 
-    const cartItem = {
-        id: product.cheapest_variant_id,
-        shatootInfo: {
-            sellPrice: product.min_sell_price,
-            finalPrice: product.min_price,
-            discount: product.min_price - product.min_sell_price,
-        },
-        product: {
-            id: product.id,
-            featuredImage: product.featured_image,
+    const cartItem: cartItem = {
+        variant: {
+            id: product.cheapest_variant_id,
+            image: product.featured_image,
             name: product.name,
-            slug: product.slug,
-        },
+            product: {
+                id: product.id,
+                featured_image: product.featured_image,
+                name: product.name,
+                slug: product.slug
+            },
+            shatoot_info: {
+                discount: product.min_price - product.min_sell_price,
+                final_price: product.min_price,
+                sell_price: product.min_sell_price
+            }
+        }
     }
 
-    const isProductToCart = Boolean(Array(...cart).find((item: any) => item.id === cartItem.id))
+    const productInCart = cart.find((item) => item.variant.id === cartItem.variant.id)
+    const isProductToCart = Boolean(productInCart)
+    const productIdForDelete: number | null = productInCart?.id || null
 
-    const dispatch = useDispatch()
-    const handleAddToCart = () => {
-        dispatch(addToCart(cartItem))
+    const dispatch = useDispatch<AppDispatch>()
+    const handleAddToCart = async () => {
+        if (auth.isLogedIn) {
+            await dispatch(makeCartItem({ quantity: 1, token: auth.userToken.access!, variant: cartItem.variant.id }))
+            dispatch(getCartFromServer(auth.userToken.access!))
+        } else {
+            dispatch(addToCart(cartItem))
+        }
     }
 
-    const handleDeleteFromCart = () => {
-        dispatch(removeFromCart(cartItem))
+    const handleDeleteFromCart = async () => {
+        if (auth.isLogedIn) {
+            await dispatch(deleteCartItem({ cartItemID: productIdForDelete!, token: auth.userToken.access! }))
+            dispatch(getCartFromServer(auth.userToken.access!))
+        } else {
+            dispatch(removeFromCart(cartItem))
+        }
     }
 
     return (
         <motion.div
-            whileHover={{ boxShadow: "0px 0px 18.6px 0px rgba(61, 131, 97, 0.22)" }}
+            whileHover={{ boxShadow: "0px 0px 18.6px 0px rgba(61, 131, 97, 0.22)" }
+            }
             className='w-full bg-white gap-3.5 justify-center rounded-2xl p-2 lg:p-4 flex flex-col h-36 lg:h-72'
             onMouseOver={() => setIsHover(true)}
             onMouseOut={() => setIsHover(false)}
@@ -248,7 +269,7 @@ const ProductCard = ({ price, link, image, name, priceWithOffer, score, product,
                     />
                 }
             </div>
-        </motion.div>
+        </motion.div >
     )
 }
 

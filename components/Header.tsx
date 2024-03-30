@@ -11,7 +11,7 @@ import ShopingCard from './ShopingCard';
 import SignUpSignIn from 'components/signUp_signIn/signUpSignIn';
 import { useDispatch, useSelector } from 'react-redux';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { shopCartItem } from '@/public/types/productType';
+import { cart, shopCartItem } from '@/public/types/productType';
 
 const Header: React.FC = () => {
     const [isTop, setIsTop] = useState(true);
@@ -27,7 +27,7 @@ const Header: React.FC = () => {
 
     const [cartLength, setCartLength] = useState(0)
 
-    const cart = useSelector((state: { cart: { cart: shopCartItem[] } }) => state.cart.cart)
+    const cart = useSelector((state: { cart: cart }) => state.cart.cartItems)
 
     const handleScroll = () => {
         if (window.scrollY > 80) {
@@ -38,7 +38,7 @@ const Header: React.FC = () => {
     }
 
     useEffect(() => {
-        setCartLength(cart.length)
+        setCartLength(cart?.length!)
     }, [cart])
 
     useEffect(() => {

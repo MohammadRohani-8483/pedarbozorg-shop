@@ -35,6 +35,12 @@ const authSlice = createSlice({
                 state.isLogedIn = true
                 state.error = null
             }
+        },
+        getMe: (state, action) => {
+            if (action.payload.code !== "token_not_valid") {
+                state.userInfo = action.payload[0]
+            }
+            console.log(state.userInfo)
         }
     },
     extraReducers: builder => {
@@ -67,5 +73,5 @@ const authSlice = createSlice({
     }
 })
 export default authSlice.reducer
-export const { getTokenFromCookie } =
+export const { getTokenFromCookie, getMe } =
     authSlice.actions;

@@ -5,15 +5,15 @@ import React, { useEffect, useState } from 'react'
 import ShopingCardItem from './ShopingCardItem'
 import { motion } from 'framer-motion';
 import { useSelector } from 'react-redux';
-import { shopCartItem } from '@/public/types/productType'
+import { cart } from '@/public/types/productType'
 
 const ShopingCard = ({ isVisible }: any) => {
     const [totalFinalPrice, setTotalFinalPrice] = useState(0)
 
-    const cart = useSelector((state: { cart: { cart: shopCartItem[] } }) => state.cart.cart)
+    const cart = useSelector((state: { cart: cart }) => state.cart.cartItems)
 
     useEffect(() => {
-        setTotalFinalPrice(cart.reduce((previous: any, current: any) => previous + current?.shatootInfo.finalPrice * current?.quantity, 0))
+        setTotalFinalPrice(cart.reduce((previous, current) => previous + current.variant.shatoot_info.final_price * current.quantity!, 0))
     }, [cart])
 
     return (
@@ -26,20 +26,20 @@ const ShopingCard = ({ isVisible }: any) => {
                 cart.length > 0 ?
                 <>
                     <div className='w-full h-[266px] overflow-auto overflow-x-hidden flex flex-col gap-2 ltr' id='scroll'>
-                        {cart?.map((cartItem: shopCartItem, i: number, array: shopCartItem[]) => {
+                        {cart.map((cartItem, i, array) => {
                             return (
                                 <div
                                     className='gap-2 flex flex-col justify-center items-center'
-                                    key={cartItem.id}
+                                    key={cartItem.variant.id}
                                 >
                                     <ShopingCardItem
-                                        price={cartItem.shatootInfo.finalPrice}
-                                        priceWithOffer={cartItem.shatootInfo.finalPrice}
-                                        image={cartItem.product.featuredImage}
-                                        link={cartItem.product.slug}
-                                        name={cartItem.product.name}
-                                        count={cartItem.quantity}
-                                        product={cartItem}
+                                        price={cartItem?.variant?.shatoot_info.sell_price!}
+                                        priceWithOffer={cartItem?.variant?.shatoot_info.sell_price}
+                                        image={cartItem?.variant?.image||cartItem.variant.product.featured_image}
+                                        link={cartItem?.variant?.product.slug}
+                                        name={cartItem?.variant?.name}
+                                        count={cartItem?.quantity!}
+                                        product={cartItem!}
                                     />
                                     {i < array.length - 1 && <div className='w-[432px] h-[1px] bg-[#E3E3E3]' />}
                                 </div>

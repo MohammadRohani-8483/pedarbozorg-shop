@@ -3,21 +3,21 @@ import CheckoutItems from '@/components/checkout-cart/cart/CheckoutItems'
 import EmptyCheckoutCart from '@/components/checkout-cart/cart/EmptyCheckoutCart'
 import SubmitOrderBox from '@/components/checkout-cart/cart/SubmitOrderBox'
 import Title from '@/components/Title'
-import { shopCartItem } from '@/public/types/productType'
+import { cart, shopCartItem } from '@/public/types/productType'
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import Loading from './loading'
 
 const CheckoutCart = () => {
-    const cart = useSelector((state: { cart: { cart: shopCartItem[] } }) => state.cart.cart)
+    const cart = useSelector((state: { cart: cart }) => state.cart.cartItems)
 
     const [totalFinalPrice, setTotalFinalPrice] = useState(0)
     const [totalSellPrice, setTotalSellPrice] = useState(0)
 
     useEffect(() => {
-        setTotalFinalPrice(cart.reduce((previous, current) => previous + current?.shatootInfo.finalPrice * current?.quantity, 0))
-        setTotalSellPrice(cart.reduce((previous, current) => previous + current?.shatootInfo.sellPrice * current?.quantity, 0))
+        setTotalFinalPrice(cart.reduce((previous, current) => previous + current?.variant.shatoot_info.final_price * current?.quantity!, 0))
+        setTotalSellPrice(cart.reduce((previous, current) => previous + current?.variant.shatoot_info.sell_price * current?.quantity!, 0))
     }, [cart])
 
     const [start, setStart] = useState(false)
@@ -51,7 +51,7 @@ const CheckoutCart = () => {
                 <>
                     <main className='w-[90%] mx-auto max-w-[1136px] flex flex-col justify-center items-center gap-16 md:gap-20 py-20 md:py-[117px]'>
                         <Title>سبد خرید</Title>
-                        {cart?.length > 0
+                        {cart.length > 0
                             ?
                             <div className='flex flex-col md:flex-row w-full justify-center items-start gap-2 lg:gap-6'>
                                 <CheckoutItems />

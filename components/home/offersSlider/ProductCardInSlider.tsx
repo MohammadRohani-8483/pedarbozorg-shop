@@ -9,7 +9,10 @@ import { motion } from 'framer-motion';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart, removeFromCart } from '@/public/redux/store/cart';
 import toast from 'react-hot-toast';
-import { shopCartItem } from '@/public/types/productType';
+import { cart, cartItem, shopCartItem } from '@/public/types/productType';
+import { deleteCartItem, getCartFromServer, makeCartItem } from '@/public/redux/actions/cartActions';
+import { AppDispatch } from '@/public/redux/store';
+import { authState } from '@/public/redux/store/auth';
 
 const ProductCard = ({ price, link, image, name, priceWithOffer, score, product }: any) => {
     const offerPresent = ((price - priceWithOffer) / price * 100) || 0
@@ -19,32 +22,49 @@ const ProductCard = ({ price, link, image, name, priceWithOffer, score, product 
     const [isLike, setIsLike] = useState(false)
     const [isHover, setIsHover] = useState(false)
 
-    const cart = useSelector((state: { cart: { cart: shopCartItem[] } }) => state.cart.cart)
+    const cart = useSelector((state: { cart: cart }) => state.cart.cartItems)
+    const auth = useSelector((state: { auth: authState }) => state.auth)
 
-    const cartItem = {
-        id: product.cheapest_variant_id,
-        shatootInfo: {
-            sellPrice: product.min_sell_price,
-            finalPrice: product.min_price,
-            discount: product.min_price - product.min_sell_price,
-        },
-        product: {
-            id: product.id,
-            featuredImage: product.featured_image,
+    const cartItem: cartItem = {
+        variant: {
+            id: product.cheapest_variant_id,
+            image: product.featured_image,
             name: product.name,
-            slug: product.slug,
-        },
+            product: {
+                id: product.id,
+                featured_image: product.featured_image,
+                name: product.name,
+                slug: product.slug
+            },
+            shatoot_info: {
+                discount: product.min_price - product.min_sell_price,
+                final_price: product.min_price,
+                sell_price: product.min_sell_price
+            }
+        }
     }
 
-    const isProductToCart = Boolean(Array(...cart).find((item: any) => item.id === cartItem.id))
+    const productInCart = cart.find((item) => item.variant.id === cartItem.variant.id)
+    const isProductToCart = Boolean(productInCart)
+    const productIdForDelete: number | null = productInCart?.id || null
 
-    const dispatch = useDispatch()
-    const handleAddToCart = () => {
-        dispatch(addToCart(cartItem))
+    const dispatch = useDispatch<AppDispatch>()
+    const handleAddToCart = async () => {
+        if (auth.isLogedIn) {
+            await dispatch(makeCartItem({ quantity: 1, token: auth.userToken.access!, variant: cartItem.variant.id }))
+            dispatch(getCartFromServer(auth.userToken.access!))
+        } else {
+            dispatch(addToCart(cartItem))
+        }
     }
 
-    const handleDeleteFromCart = () => {
-        dispatch(removeFromCart(cartItem))
+    const handleDeleteFromCart = async () => {
+        if (auth.isLogedIn) {
+            await dispatch(deleteCartItem({ cartItemID: productIdForDelete!, token: auth.userToken.access! }))
+            dispatch(getCartFromServer(auth.userToken.access!))
+        } else {
+            dispatch(removeFromCart(cartItem))
+        }
     }
 
     const toastify = (msg: string) => {

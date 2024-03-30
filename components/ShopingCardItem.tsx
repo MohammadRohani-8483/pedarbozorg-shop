@@ -5,7 +5,10 @@ import formatNumber from 'public/Functions/formatNumber'
 import Link from 'next/link'
 import { useDispatch, useSelector } from 'react-redux';
 import { incrementQuantity, removeFromCart, decrementQuantity } from '@/public/redux/store/cart';
-import { shopCartItem } from '@/public/types/productType'
+import { cart, cartItem } from '@/public/types/productType'
+import { deleteCartItem, getCartFromServer, makeCartItem } from '@/public/redux/actions/cartActions'
+import { AppDispatch } from '@/public/redux/store'
+import { authState } from '@/public/redux/store/auth'
 
 type props = {
     image: string
@@ -14,38 +17,54 @@ type props = {
     price: number
     priceWithOffer: number
     count: number
-    product: any
+    product: cartItem
 }
 
 const ShopingCardItem = ({ image, link, price, priceWithOffer, name, count, product }: props) => {
     const offerPresent = (price - priceWithOffer) / price * 100
     const present = price * offerPresent / 100
 
-    const cart = useSelector((state: { cart: { cart: shopCartItem[] } }) => state.cart.cart)
-    const dispatch = useDispatch()
+    const cart = useSelector((state: { cart: cart }) => state.cart.cartItems)
+    const auth = useSelector((state: { auth: authState }) => state.auth)
+    const dispatch = useDispatch<AppDispatch>()
+    const productInCart = cart.find((item) => item.variant.id === product.variant.id)
+    const productIdForDelete: number | null = productInCart?.id || null
 
     const handleIncrementQuantity = () => {
-        dispatch(incrementQuantity(product))
+        if (auth.isLogedIn) {
+            dispatch(makeCartItem({ quantity: 1, token: auth.userToken.access!, variant: product.variant.id }))
+            dispatch(incrementQuantity(product))
+            localStorage.removeItem('shoping_cart')
+        } else {
+            dispatch(incrementQuantity(product))
+        }
     }
 
     const handleDecrementQuantity = () => {
-        dispatch(decrementQuantity(product))
+        if (auth.isLogedIn) {
+            dispatch(makeCartItem({ quantity: -1, token: auth.userToken.access!, variant: product.variant.id }))
+            dispatch(decrementQuantity(product))
+            localStorage.removeItem('shoping_cart')
+        } else {
+            dispatch(decrementQuantity(product))
+        }
     }
 
     const handleDeleteFromCart = () => {
-        if (cart?.length > 1) {
-            console.log('first')
-            dispatch(removeFromCart(product))
-        } else {
+        if (auth.isLogedIn) {
+            dispatch(deleteCartItem({ cartItemID: productIdForDelete!, token: auth.userToken.access! }))
             dispatch(removeFromCart(product))
             localStorage.removeItem('shoping_cart')
+        } else {
+            dispatch(removeFromCart(product))
+            if (cart?.length === 1) {
+                localStorage.removeItem('shoping_cart')
+            }
         }
     }
 
     return (
-        <div
-            className='flex justify-between h-[131px] w-full items-center'
-        >
+        <div className='flex justify-between h-[131px] w-full items-center'>
             <Link href={link} className='flex gap-2 justify-center items-center'>
                 <Image
                     src={image}
@@ -58,8 +77,6 @@ const ShopingCardItem = ({ image, link, price, priceWithOffer, name, count, prod
                         {name}
                     </h2>
                     <div className='flex items-center justify-start gap-2'>
-                        {/* <div className='bg-[#626262] aspect-square w-[6px] rounded-full'></div> */}
-                        {/* <h3 className='text-sm text-[#626262]'>{weight} گرم</h3> */}
                     </div>
                 </div>
             </Link>

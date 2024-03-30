@@ -1,49 +1,36 @@
 'use client'
 import formatNumber from '@/public/Functions/formatNumber'
 import { addToCart, decrementQuantity, incrementQuantity, removeFromCart } from '@/public/redux/store/cart'
-import { shopCartItem } from '@/public/types/productType'
+import { cart, cartItem, shopCartItem } from '@/public/types/productType'
 import Image from 'next/image'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-const AddToCartItem = ({ product, price, priceWithOffer, name, image, slug }: any) => {
+const AddToCartItem = ({ product, price, priceWithOffer, name, image, slug, variant }: any) => {
     const offerPresent = (price - priceWithOffer) / price * 100
 
-    const exProduct = {
-        "id": 37152,
-        "shatoot_info": {
-            "shatoot_pk": 2000048,
-            "good_name": "روغن نارگیل یک لیتری",
-            "third_name": "",
-            "good_code": "10095",
-            "sell_price": 823000.0,
-            "inventory": "-17.0",
-            "discount": "0.0",
-            "percent_discount": "0.0",
-            "final_price": 823000.0
-        },
-        "is_available": true,
-        "image": "https://api.pedarbozorg.shop/media/products/coconut-oil-1000-cc-1_1.jpg",
-        "related_variant": null
+    const cartItem: cartItem = {
+        variant: {
+            id: variant.id,
+            image: variant.image,
+            name: variant.shatoot_info.good_name,
+            product: {
+                id: product.id,
+                image: product.featured_image,
+                name: product.name,
+                slug: product.slug,
+            },
+            shatootInfo: {
+                sellPrice: variant.shatoot_info.sell_price,
+                finalPrice: variant.shatoot_info.final_price,
+                discount: variant.shatoot_info.discount,
+            }
+        }
     }
 
-    const cartItem = {
-        id: product.id,
-        shatootInfo: {
-            sellPrice: product.shatoot_info.sell_price,
-            finalPrice: product.shatoot_info.final_price,
-            discount: product.min_price - product.min_sell_price,
-        },
-        product: {
-            featuredImage: product.image,
-            name: product.shatoot_info.good_name,
-            slug: slug,
-        },
-    }
-
-    const cart = useSelector((state: { cart: { cart: shopCartItem[] } }) => state.cart.cart)
+    const cart = useSelector((state: { cart: cart }) => state.cart.cartItems)
     const productInCart = cart.find((item) => item.id === cartItem.id);
-    
+
     const isProductToCart = Boolean(productInCart)
 
     const dispatch = useDispatch()

@@ -1,5 +1,5 @@
 import { deleteAllItems, removeFromCart } from '@/public/redux/store/cart'
-import { shopCartItem } from '@/public/types/productType'
+import { cart, shopCartItem } from '@/public/types/productType'
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -8,7 +8,7 @@ import CheckoutCartItem from './CheckoutCartItem'
 
 const CheckoutItems = () => {
     const [isDeleting, setIsDeleting] = useState(false)
-    const cart = useSelector((state: { cart: { cart: shopCartItem[] } }) => state.cart.cart)
+    const cart = useSelector((state: { cart: cart }) => state.cart.cartItems)
 
     const dispatch = useDispatch()
 
@@ -33,12 +33,12 @@ const CheckoutItems = () => {
                         key={cartItem?.id}
                     >
                         <CheckoutCartItem
-                            price={cartItem?.shatootInfo.finalPrice}
-                            priceWithOffer={cartItem?.shatootInfo.finalPrice}
-                            image={cartItem?.product.featuredImage}
-                            link={cartItem?.product.slug}
-                            name={cartItem?.product.name}
-                            count={cartItem?.quantity}
+                            price={cartItem?.variant?.shatoot_info.final_price}
+                            priceWithOffer={cartItem?.variant?.shatoot_info.sell_price}
+                            image={cartItem?.variant?.image||cartItem.variant.product.featured_image}
+                            link={cartItem?.variant?.product.slug}
+                            name={cartItem?.variant.name}
+                            count={cartItem?.quantity!}
                             product={cartItem}
                         />
                         {i < array.length - 1 && <div className='w-full h-[1px] bg-gray-200' />}
