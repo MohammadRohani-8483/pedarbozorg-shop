@@ -10,8 +10,9 @@ import { motion } from 'framer-motion';
 import ShopingCard from './ShopingCard';
 import SignUpSignIn from 'components/signUp_signIn/signUpSignIn';
 import { useDispatch, useSelector } from 'react-redux';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { cart, shopCartItem } from '@/public/types/productType';
+import { cart } from '@/public/types/productType';
+import { authState } from '@/public/redux/store/auth';
+import ProfileMenu from './ProfileMenu';
 
 const Header: React.FC = () => {
     const [isTop, setIsTop] = useState(true);
@@ -25,9 +26,14 @@ const Header: React.FC = () => {
     const [searchValue, setSearchValue] = useState("")
     const [focus, setFocus] = useState(false)
 
+    const [isProfileVisible, setIsProfileVisible] = useState(false)
+    const [isProfileHover, setIsProfileHover] = useState(false)
+
     const [cartLength, setCartLength] = useState(0)
 
     const cart = useSelector((state: { cart: cart }) => state.cart.cartItems)
+    const isLogedIn = useSelector((state: { auth: authState }) => state.auth.isLogedIn)
+    const userInfo = useSelector((state: { auth: authState }) => state.auth.userInfo)
 
     const handleScroll = () => {
         if (window.scrollY > 80) {
@@ -121,40 +127,65 @@ const Header: React.FC = () => {
                     </motion.div>
                 </div>
                 <div className="flex gap-4 items-center h-20 w-auto">
-                    <button
-                        onClick={handleFormSignInOpen}
-                        onMouseOver={() => setIsHoverLogin(true)}
-                        onMouseOut={() => setIsHoverLogin(false)}
-                        className="w-[162px] border-base-100 hover:border-base-200 flex items-center gap-3 bg-base-300 hover:bg-base-400 text-base-100 text-sm md:text-base md:py-2 md:px-4 px-3 py-1.5 border-4 rounded-[10px]"
-                    >
-                        <div className='flex w-[20px] gap-1 h-[20px] overflow-hidden bg-[url("/iconSax/login-bg-btn.svg")] bg-contain bg-no-repeat bg-right'>
-                            <motion.img
-                                animate={isHoverLogin ? { x: 24 } : { x: 0 }}
-                                transition={{ duration: 0.2 }}
-                                src="/iconSax/right-arrow.svg"
-                                width={16}
-                                height={24}
-                                alt="login"
-                                loading='lazy'
-                                decoding='async'
-                                data-nimg={1}
-                                style={{ color: 'transparent' }}
-                            />
-                            <motion.img
-                                animate={isHoverLogin ? { x: 20 } : { x: 0 }}
-                                transition={{ duration: 0.2 }}
-                                src="/iconSax/right-arrow.svg"
-                                width={16}
-                                height={24}
-                                alt="login"
-                                loading='lazy'
-                                decoding='async'
-                                data-nimg={1}
-                                style={{ color: 'transparent' }}
-                            />
-                        </div>
-                        ورود/ثبت نام
-                    </button>
+                    {isLogedIn ?
+                        <motion.div className='py-3'
+                            onHoverStart={() => {
+                                setIsProfileVisible(true)
+                                setIsProfileHover(true)
+                            }}
+                            onHoverEnd={() => setIsProfileHover(false)}
+                        >
+                            <div className='relative'>
+                                <Link href='/profile' className='w-[162px] outline-btn rectangle-btn h-10 flex gap-2 justify-center items-center'>
+                                    <Image
+                                        src='/iconSax/user-square.svg'
+                                        alt="user account"
+                                        width={24}
+                                        height={24}
+                                    />
+                                    <p className='text-base-text-base-300 max-w-[98px] overflow-hidden text-ellipsis'>
+                                        {userInfo.first_name ? `${userInfo.first_name} ${userInfo.last_name}` : userInfo.user.username}
+                                    </p>
+                                </Link>
+                                {isProfileVisible && <ProfileMenu isHover={isProfileHover} />}
+                            </div>
+                        </motion.div>
+                        :
+                        <button
+                            onClick={handleFormSignInOpen}
+                            onMouseOver={() => setIsHoverLogin(true)}
+                            onMouseOut={() => setIsHoverLogin(false)}
+                            className="w-[162px] border-base-100 hover:border-base-200 flex items-center gap-3 bg-base-300 hover:bg-base-400 text-base-100 text-sm md:text-base md:py-2 md:px-4 px-3 py-1.5 border-4 rounded-[10px]"
+                        >
+                            <div className='flex w-[20px] gap-1 h-[20px] overflow-hidden bg-[url("/iconSax/login-bg-btn.svg")] bg-contain bg-no-repeat bg-right'>
+                                <motion.img
+                                    animate={isHoverLogin ? { x: 24 } : { x: 0 }}
+                                    transition={{ duration: 0.2 }}
+                                    src="/iconSax/right-arrow.svg"
+                                    width={16}
+                                    height={24}
+                                    alt="login"
+                                    loading='lazy'
+                                    decoding='async'
+                                    data-nimg={1}
+                                    style={{ color: 'transparent' }}
+                                />
+                                <motion.img
+                                    animate={isHoverLogin ? { x: 20 } : { x: 0 }}
+                                    transition={{ duration: 0.2 }}
+                                    src="/iconSax/right-arrow.svg"
+                                    width={16}
+                                    height={24}
+                                    alt="login"
+                                    loading='lazy'
+                                    decoding='async'
+                                    data-nimg={1}
+                                    style={{ color: 'transparent' }}
+                                />
+                            </div>
+                            ورود/ثبت نام
+                        </button>
+                    }
                     {isFormOpen && <SignUpSignIn setIsFormOpen={setIsFormOpen} />}
                     <motion.div className='py-3'
                         onHoverStart={() => {
@@ -241,59 +272,67 @@ const Header: React.FC = () => {
                         />
                     </div>
                 </Link>
-                <div className='flex items-center gap-1'>
-                    <div
-                        onClick={() => {
-                            setIsFormOpen(true)
-                            document.documentElement.classList.add('overflow-hidden')
-                            setIsHoverLogin(true)
-                            setTimeout(() => setIsHoverLogin(false), 800)
-                        }}
-                        className='border-base-100 hover:border-base-200 flex items-center gap-3 bg-base-300 hover:bg-base-400 text-base-100 text-sm md:text-base md:p-2 p-2 border-4 rounded-[10px]'
-                    >
-                        <div className='flex w-[20px] gap-1 h-[20px] overflow-hidden bg-[url("/iconSax/login-bg-btn.svg")] bg-contain bg-no-repeat bg-right'>
-                            <motion.img
-                                animate={isHoverLogin ? { x: 24 } : { x: 0 }}
-                                transition={{ duration: 0.2 }}
-                                src="/iconSax/right-arrow.svg"
-                                width={16}
-                                height={24}
-                                alt="login"
-                                loading='lazy'
-                                decoding='async'
-                                data-nimg={1}
-                                style={{ color: 'transparent' }}
-                            />
-                            <motion.img
-                                animate={isHoverLogin ? { x: 20 } : { x: 0 }}
-                                transition={{ duration: 0.2 }}
-                                src="/iconSax/right-arrow.svg"
-                                width={16}
-                                height={24}
-                                alt="login"
-                                loading='lazy'
-                                decoding='async'
-                                data-nimg={1}
-                                style={{ color: 'transparent' }}
-                            />
-                        </div>
-                        {isFormOpen && <SignUpSignIn setIsFormOpen={setIsFormOpen} />}
-                    </div>
-                    <Link href='/checkout-cart'>
-                        <button className='square-btn outline-btn relative'
-                        >
+                <div className='flex items-center justify-center gap-1'>
+                    {isLogedIn ?
+                        <Link href='/profile' className='outline-btn square-btn'>
                             <Image
-                                src='/iconSax/shopping-cart.svg'
+                                src='/iconSax/user-square.svg'
+                                alt="user account"
                                 width={22}
                                 height={22}
-                                alt="shoping cart"
                             />
-                            {cartLength !== 0 &&
-                                <div className="absolute px-1.5 py-0 rounded-md bg-red-500 text-white text-xs flex justify-center items-center top-0.5 right-0.5">
-                                    {cart?.length}
-                                </div>
-                            }
-                        </button>
+                        </Link>
+                        :
+                        <div
+                            onClick={() => {
+                                setIsFormOpen(true)
+                                document.documentElement.classList.add('overflow-hidden')
+                                setIsHoverLogin(true)
+                                setTimeout(() => setIsHoverLogin(false), 800)
+                            }}
+                            className='border-base-100 hover:border-base-200 flex items-center gap-3 bg-base-300 hover:bg-base-400 text-base-100 text-sm md:text-base md:p-2 p-2 border-4 rounded-[10px]'
+                        >
+                            <div className='flex w-[20px] gap-1 h-[20px] overflow-hidden bg-[url("/iconSax/login-bg-btn.svg")] bg-contain bg-no-repeat bg-right'>
+                                <motion.img
+                                    animate={isHoverLogin ? { x: 24 } : { x: 0 }}
+                                    transition={{ duration: 0.2 }}
+                                    src="/iconSax/right-arrow.svg"
+                                    width={16}
+                                    height={24}
+                                    alt="login"
+                                    loading='lazy'
+                                    decoding='async'
+                                    data-nimg={1}
+                                    style={{ color: 'transparent' }}
+                                />
+                                <motion.img
+                                    animate={isHoverLogin ? { x: 20 } : { x: 0 }}
+                                    transition={{ duration: 0.2 }}
+                                    src="/iconSax/right-arrow.svg"
+                                    width={16}
+                                    height={24}
+                                    alt="login"
+                                    loading='lazy'
+                                    decoding='async'
+                                    data-nimg={1}
+                                    style={{ color: 'transparent' }}
+                                />
+                            </div>
+                            {isFormOpen && <SignUpSignIn setIsFormOpen={setIsFormOpen} />}
+                        </div>
+                    }
+                    <Link href='/checkout-cart' className='square-btn outline-btn relative'>
+                        <Image
+                            src='/iconSax/shopping-cart.svg'
+                            width={22}
+                            height={22}
+                            alt="shoping cart"
+                        />
+                        {cartLength !== 0 &&
+                            <div className="absolute px-1.5 py-0 rounded-md bg-red-500 text-white text-xs flex justify-center items-center top-0.5 right-0.5">
+                                {cart?.length}
+                            </div>
+                        }
                     </Link>
                 </div>
             </header>
