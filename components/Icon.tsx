@@ -10,7 +10,7 @@ const Icon = ({ nameIcon, size }: props) => {
         <i
             className='aspect-square bg-no-repeat bg-center bg-cover'
             style={{
-                backgroundImage: `/iconSax/${nameIcon}.svg`,
+                backgroundImage: `url(/iconSax/${nameIcon}.svg)`,
                 width: `${size}px`,
                 height: `${size}px`
             }}
