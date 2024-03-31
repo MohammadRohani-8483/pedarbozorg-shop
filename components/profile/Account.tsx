@@ -68,8 +68,8 @@ const Account = () => {
                     </div>
                 </div>
                 <div className='w-full flex justify-start items-center'>
-                    <div className="-mr-2 size-10 flex justify-center items-center" >
-                        <div className='cursor-pointer flex justify-center items-center text-sm md:text-xl text-base-300'>
+                    <div className='cursor-pointer flex justify-center items-center text-sm md:text-xl text-base-300'>
+                        <div className="-mr-2 size-10 flex justify-center items-center" >
                             <Image
                                 src='/iconSax/mail.svg'
                                 alt="messages"

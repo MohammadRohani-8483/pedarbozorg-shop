@@ -1,7 +1,6 @@
 'use client'
 import React, { useEffect, useState } from 'react'
 import ProfileBox from './ProfileBox'
-// import { products } from '@/public/data/fakeProducts';
 
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -17,8 +16,13 @@ import SliderBtn from 'components/SliderBtn';
 import ProductCard from 'components/productCard';
 import SkeletonCard from 'components/SkeletonCard';
 import toast from 'react-hot-toast';
+import EmptyList from './EmptyList';
 
-const LastSeenProducts = ({ products }: any) => {
+type props = {
+  products: any[]
+}
+
+const LastSeenProducts = ({ products }: props) => {
   const [start, setStart] = useState(false)
 
   useEffect(() => {
@@ -30,9 +34,10 @@ const LastSeenProducts = ({ products }: any) => {
   }
 
   return (
-      <ProfileBox title='آخرین بازدید ها'>
-        <div className='flex flex-col gap-4 justify-center items-center w-full md:hidden'>
-          {products?.slice(0, 6).map((product: any, i: number) => (
+    <ProfileBox title='آخرین بازدید ها'>
+      <div className='flex flex-col gap-4 justify-center items-center w-full md:hidden'>
+        {products?.length > 0 ?
+          products?.slice(0, 6).map((product: any, i: number) => (
             <React.Fragment key={product.id}>
               {start ?
                 <ProductCard
@@ -49,16 +54,20 @@ const LastSeenProducts = ({ products }: any) => {
                 <SkeletonCard />
               }
             </React.Fragment>
-          ))}
-        </div>
-        <div className='relative w-full hidden md:block'>
-          {start ?
+          ))
+          :
+          <EmptyList />
+        }
+      </div>
+      <div className='relative w-full hidden md:block'>
+        {start ?
+          products.length > 0 ?
             <>
               <SliderBtn prev
-                className='prev-favorite-btn absolute -right-5 top-[30%] z-10'
+                className='prev-last-seen-btn absolute -right-5 top-[30%] z-10'
               />
               <SliderBtn next
-                className='next-favorite-btn absolute -left-5 top-[30%] z-10'
+                className='next-last-seen-btn absolute -left-5 top-[30%] z-10'
               />
               <Swiper
                 slidesPerView={2}
@@ -75,8 +84,8 @@ const LastSeenProducts = ({ products }: any) => {
                   }
                 }}
                 navigation={{
-                  nextEl: '.next-favorite-btn',
-                  prevEl: '.prev-favorite-btn',
+                  nextEl: '.next-last-seen-btn',
+                  prevEl: '.prev-last-seen-btn',
                 }}
                 modules={[FreeMode, Navigation]}
                 className="mySwiper !p-4 !-mx-4"
@@ -100,20 +109,22 @@ const LastSeenProducts = ({ products }: any) => {
               </Swiper>
             </>
             :
-            <div className='flex w-full justify-between items-center'>
-              <div className='w-full flex justify-center'>
-                <SkeletonCard />
-              </div>
-              <div className='w-full flex justify-center'>
-                <SkeletonCard />
-              </div>
-              <div className='hidden lg:block w-full flex justify-center'>
-                <SkeletonCard />
-              </div>
+            <EmptyList />
+          :
+          <div className='flex w-full justify-between items-center'>
+            <div className='w-full flex justify-center'>
+              <SkeletonCard />
             </div>
-          }
-        </div>
-      </ProfileBox>
+            <div className='w-full flex justify-center'>
+              <SkeletonCard />
+            </div>
+            <div className='hidden lg:block w-full flex justify-center'>
+              <SkeletonCard />
+            </div>
+          </div>
+        }
+      </div>
+    </ProfileBox>
   )
 }
 

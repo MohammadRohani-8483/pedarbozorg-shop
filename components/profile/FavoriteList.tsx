@@ -17,8 +17,14 @@ import SliderBtn from 'components/SliderBtn';
 import ProductCard from 'components/productCard';
 import SkeletonCard from 'components/SkeletonCard';
 import toast from 'react-hot-toast';
+import Image from 'next/image';
+import EmptyList from './EmptyList';
 
-const FavoriteList = ({ products }: any) => {
+type props = {
+    products: any[]
+}
+
+const FavoriteList = ({ products }: props) => {
     const [start, setStart] = useState(false)
 
     useEffect(() => {
@@ -32,73 +38,80 @@ const FavoriteList = ({ products }: any) => {
     return (
         <ProfileBox title='لیست علاقه مندی من' viewBtn>
             <div className='flex flex-col gap-4 justify-center items-center w-full md:hidden'>
-                {products?.slice(0, 6).map((product: any, i: number) => (
-                    <React.Fragment key={product.id}>
-                        {start ?
-                            <ProductCard
-                                link={product.slug}
-                                name={product.name}
-                                price={product.min_sell_price}
-                                image={product.featured_image}
-                                score={product.avg_rate}
-                                priceWithOffer={product.min_sell_price}
-                                product={product}
-                                toastify={toastify}
-                            />
-                            :
-                            <SkeletonCard />
-                        }
-                    </React.Fragment>
-                ))}
+                {products.length > 0 ?
+                    products?.slice(0, 6).map((product: any, i: number) => (
+                        <React.Fragment key={product.id}>
+                            {start ?
+                                <ProductCard
+                                    link={product.slug}
+                                    name={product.name}
+                                    price={product.min_sell_price}
+                                    image={product.featured_image}
+                                    score={product.avg_rate}
+                                    priceWithOffer={product.min_sell_price}
+                                    product={product}
+                                    toastify={toastify}
+                                />
+                                :
+                                <SkeletonCard />
+                            }
+                        </React.Fragment>
+                    ))
+                    :
+                    <EmptyList />
+                }
             </div>
             <div className='relative w-full hidden md:block'>
                 {start ?
-                    <>
-                        <SliderBtn prev
-                            className='prev-favorite-btn absolute -right-5 top-[30%] z-10'
-                        />
-                        <SliderBtn next
-                            className='next-favorite-btn absolute -left-5 top-[30%] z-10'
-                        />
-                        <Swiper
-                            slidesPerView={2}
-                            spaceBetween={16}
-                            freeMode={true}
-                            breakpoints={{
-                                768: {
-                                    slidesPerView: 2,
-                                    spaceBetween: 16
-                                },
-                                1024: {
-                                    slidesPerView: 3,
-                                    spaceBetween: 20
-                                }
-                            }}
-                            navigation={{
-                                nextEl: '.next-favorite-btn',
-                                prevEl: '.prev-favorite-btn',
-                            }}
-                            modules={[FreeMode, Navigation]}
-                            className="mySwiper !p-4 !-mx-4"
-                        >
-                            {products?.map((product: any, i: number) => {
-                                return (
-                                    <SwiperSlide key={product.id} className='!flex !justify-center !items-center !gap-5'>
-                                        <ProductCard
-                                            link={product.slug}
-                                            name={product.name}
-                                            price={product.min_sell_price}
-                                            image={product.featured_image}
-                                            score={product.avg_rate}
-                                            priceWithOffer={product.min_sell_price}
-                                            product={product}
-                                            toastify={toastify}
-                                        />
-                                    </SwiperSlide>
-                                )
-                            })}
-                        </Swiper>
-                    </>
+                    products.length > 0 ?
+                        <>
+                            <SliderBtn prev
+                                className='prev-favorite-btn absolute -right-5 top-[30%] z-10'
+                            />
+                            <SliderBtn next
+                                className='next-favorite-btn absolute -left-5 top-[30%] z-10'
+                            />
+                            <Swiper
+                                slidesPerView={2}
+                                spaceBetween={16}
+                                freeMode={true}
+                                breakpoints={{
+                                    768: {
+                                        slidesPerView: 2,
+                                        spaceBetween: 16
+                                    },
+                                    1024: {
+                                        slidesPerView: 3,
+                                        spaceBetween: 20
+                                    }
+                                }}
+                                navigation={{
+                                    nextEl: '.next-favorite-btn',
+                                    prevEl: '.prev-favorite-btn',
+                                }}
+                                modules={[FreeMode, Navigation]}
+                                className="mySwiper !p-4 !-mx-4"
+                            >
+                                {products?.map((product: any, i: number) => {
+                                    return (
+                                        <SwiperSlide key={product.id} className='!flex !justify-center !items-center !gap-5'>
+                                            <ProductCard
+                                                link={product.slug}
+                                                name={product.name}
+                                                price={product.min_sell_price}
+                                                image={product.featured_image}
+                                                score={product.avg_rate}
+                                                priceWithOffer={product.min_sell_price}
+                                                product={product}
+                                                toastify={toastify}
+                                            />
+                                        </SwiperSlide>
+                                    )
+                                })}
+                            </Swiper>
+                        </>
+                        :
+                        <EmptyList />
                     :
                     <div className='flex w-full justify-between items-center'>
                         <div className='w-full flex justify-center'>
