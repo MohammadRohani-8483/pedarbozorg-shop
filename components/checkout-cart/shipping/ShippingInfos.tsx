@@ -1,5 +1,4 @@
-import { deleteAllItems, removeFromCart } from '@/public/redux/store/cart'
-import { shopCartItem } from '@/public/types/productType'
+import { cart } from '@/public/types/productType'
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
@@ -30,7 +29,7 @@ const ShippingInfos = ({ addresses }: props) => {
 
   const [addAddressFunc, setaddAddressFunc] = useState<(data: any) => void>((data: any) => { })
 
-  const cart = useSelector((state: { cart: { cart: shopCartItem[] } }) => state.cart.cart)
+  const cart = useSelector((state: { cart: cart }) => state.cart.cartItems)
 
   const [start, setStart] = useState(false)
   useEffect(() => {

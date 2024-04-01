@@ -7,9 +7,9 @@ import tooman from "@/public/Image/tooman.svg";
 import formatNumber from '@/public/Functions/formatNumber';
 import { motion } from 'framer-motion';
 import { useDispatch, useSelector } from 'react-redux';
-import { addToCart, removeFromCart } from '@/public/redux/store/cart';
+import { addToCart, removeFromCart, setCartToLocalStorage } from '@/public/redux/store/cart';
 import toast from 'react-hot-toast';
-import { cart, cartItem, shopCartItem } from '@/public/types/productType';
+import { cart, cartItem } from '@/public/types/productType';
 import { deleteCartItem, getCartFromServer, makeCartItem } from '@/public/redux/actions/cartActions';
 import { AppDispatch } from '@/public/redux/store';
 import { authState } from '@/public/redux/store/auth';
@@ -55,6 +55,7 @@ const ProductCard = ({ price, link, image, name, priceWithOffer, score, product 
             dispatch(getCartFromServer(auth.userToken.access!))
         } else {
             dispatch(addToCart(cartItem))
+            dispatch(setCartToLocalStorage())
         }
     }
 
@@ -64,6 +65,7 @@ const ProductCard = ({ price, link, image, name, priceWithOffer, score, product 
             dispatch(getCartFromServer(auth.userToken.access!))
         } else {
             dispatch(removeFromCart(cartItem))
+            dispatch(setCartToLocalStorage())
         }
     }
 
@@ -75,8 +77,8 @@ const ProductCard = ({ price, link, image, name, priceWithOffer, score, product 
         <motion.div
             whileHover={{ boxShadow: "0px 0px 18.6px 0px rgba(61, 131, 97, 0.22)" }}
             className='w-full bg-white gap-3.5 justify-between items-center rounded-2xl p-4 flex flex-col h-72 gap-2'
-            onMouseOver={() => setIsHover(true)}
-            onMouseOut={() => setIsHover(false)}
+            onHoverStart={() => setIsHover(true)}
+            onHoverEnd={() => setIsHover(false)}
         >
             <div
                 className='overflow-hidden relative min-w-[85px] w-full h-auto aspect-square rounded-[10px] flex items-center justify-center'
@@ -90,9 +92,58 @@ const ProductCard = ({ price, link, image, name, priceWithOffer, score, product 
                 <div
                     className='w-full absolute top-0.5 left-0 flex justify-between items-center px-2'
                 >
+                    {/* mobile mode */}
+                    <div className='sm:hidden'>
+                        {isLike ?
+                            <Image
+                                src='/iconSax/is-like.svg'
+                                alt="like"
+                                width={20}
+                                height={20}
+                                className='cursor-pointer'
+                            />
+                            :
+                            <Image
+                                onClick={() => toastify("این قابلیت به زودی اضافه میشود.")}
+                                src='/iconSax/like.png'
+                                alt="like"
+                                width={20}
+                                height={20}
+                                className='cursor-pointer'
+                            />
+                        }
+                    </div>
+                    <div className='sm:hidden'>
+                        {isProductToCart ?
+                            <Image
+                                onClick={handleDeleteFromCart}
+                                src='/iconSax/is-shopping-cart-product.svg'
+                                alt="shoping cart"
+                                width={20}
+                                height={20}
+                                className='cursor-pointer'
+                            />
+                            :
+                            <Image
+                                onClick={() => {
+                                    productIsAvailable ?
+                                        handleAddToCart()
+                                        :
+                                        toastify('این محصول ناموجود میباشد.')
+                                }}
+                                src='/iconSax/shopping-cart-product.svg'
+                                alt="shoping cart"
+                                width={20}
+                                height={20}
+                                className='cursor-pointer'
+                            />
+                        }
+                    </div>
+                    {/* desktop mode */}
                     <motion.div
                         animate={isHover ? { x: 0 } : { x: '30px' }}
                         transition={{ duration: 0.3 }}
+                        className='hidden sm:block'
                     >
                         {isLike ?
                             <Image
@@ -116,6 +167,7 @@ const ProductCard = ({ price, link, image, name, priceWithOffer, score, product 
                     <motion.div
                         animate={isHover ? { x: 0 } : { x: "-30px" }}
                         transition={{ duration: 0.3 }}
+                        className='hidden sm:block'
                     >
                         {isProductToCart ?
                             <Image

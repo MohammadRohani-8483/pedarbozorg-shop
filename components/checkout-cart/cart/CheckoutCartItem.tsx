@@ -4,7 +4,7 @@ import { deleteCartItem, getCartFromServer, makeCartItem } from '@/public/redux/
 import { AppDispatch } from '@/public/redux/store'
 import { authState } from '@/public/redux/store/auth'
 import { decrementQuantity, incrementQuantity, removeFromCart, setCartToLocalStorage } from '@/public/redux/store/cart'
-import { cart, shopCartItem } from '@/public/types/productType'
+import { cart } from '@/public/types/productType'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'

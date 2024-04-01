@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { MouseEventHandler, useState } from 'react'
 import { motion } from 'framer-motion';
-import Icon from './Icon';
+import Icon from 'components/Icon';
 import { useSelector } from 'react-redux';
-import { authState } from '@/public/redux/store/auth';
+import { authState } from 'public/redux/store/auth';
 import Link from 'next/link';
+import Alert from 'components/Alert';
 
 type menuProps = {
     isHover: boolean
@@ -12,10 +13,15 @@ type itemProps = {
     iconName: string
     title: string
     red?: boolean
+    link?: string
+    clickFunc?: MouseEventHandler<HTMLAnchorElement>
 }
 
 const ProfileMenu = ({ isHover }: menuProps) => {
     const userInfo = useSelector((state: { auth: authState }) => state.auth.userInfo)
+    const [isLogingOut, setIsLogingOut] = useState(false)
+    const handleLogOut = () => {
+    }
 
     return (
         <motion.div
@@ -35,18 +41,35 @@ const ProfileMenu = ({ isHover }: menuProps) => {
             </Link>
             <ProfileMenuItem iconName='box' title='سفارش‌ها' />
             <ProfileMenuItem iconName='heart' title='لیست علاقه‌مندی' />
-            <ProfileMenuItem iconName='logout' title='خروج از حساب' red />
+            <ProfileMenuItem iconName='logout' title='خروج از حساب' red clickFunc={() => setIsLogingOut(true)} />
+            {isLogingOut &&
+                <Alert
+                    confirmFunc={handleLogOut}
+                    messageToast='با موفقیت از حساب خود خارج شدید'
+                    setIsAlertOpen={setIsLogingOut}
+                    textBtn='خروج از حساب'
+                    title='خروج از حساب کاربری' redBtn
+                >
+                    <p className='text-[#353535] w-full text-right'>
+                        برای سفارش و مشاهده سبد خرید بایستی وارد حساب خود باشید
+                    </p>
+                </Alert>
+            }
         </motion.div>
     )
 }
 
-const ProfileMenuItem = ({ iconName, title, red }: itemProps) => {
+const ProfileMenuItem = ({ iconName, title, red, link = '', clickFunc = () => { } }: itemProps) => {
     return (
         <div className='flex justify-start items-center w-full'>
-            <div className='flex justify-center items-center gap-2 cursor-pointer'>
+            <Link
+                onClick={clickFunc}
+                href={link}
+                className='flex justify-center items-center gap-2 cursor-pointer'
+            >
                 <Icon nameIcon={iconName} size={20} />
                 <h3 className={`text-sm whitespace-nowrap font-medium ${red ? "text-[#C62020] hover:drop-shadow-[0_0_24px_rgba(198,32,32,0.60)]" : "text-base-300 hover:drop-shadow-[0_0_24px_rgba(61,131,97,0.60)]"}`}>{title}</h3>
-            </div>
+            </Link>
         </div>
     )
 }

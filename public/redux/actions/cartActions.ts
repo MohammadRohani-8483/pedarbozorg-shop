@@ -6,7 +6,6 @@ type mekeParam = {
     variant: number
     quantity: number
 }
-
 type deleteCartItemParam = {
     token: string
     cartItemID: number
@@ -67,6 +66,30 @@ export const deleteCart = createAsyncThunk(
             }
         }
         const data = await fetch(`/api/transaction-api/cart/${cartID}/`, config)
+        return data.json()
+    }
+)
+export const makeCartFromLocalStorage = createAsyncThunk(
+    'cart/makeCartFromLocalStorage',
+    async (token: string) => {
+        const localItem: cartItem[] = typeof window !== 'undefined' && (localStorage?.getItem("shoping_cart") ? JSON.parse(localStorage?.getItem("shoping_cart")!) : [])
+        const arr = localItem.map(item => ({
+            variant: item.variant.id,
+            quantity: item.quantity!
+        }))
+        const body: Record<string, number> = {}
+        arr.forEach((item, index) => {
+            body[`cart_items[${index}]variant`] = item.variant;
+            body[`cart_items[${index}]quantity`] = item.quantity;
+        })
+        const config = {
+            method: "POST",
+            headers: {
+                Authorization: `JWT ${token}`
+            },
+            body: JSON.stringify(body)
+        }
+        const data = await fetch(`/api/transaction-api/cart-item/multi_cart_item/`, config)
         return data.json()
     }
 )

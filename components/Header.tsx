@@ -127,7 +127,7 @@ const Header: React.FC = () => {
                     </motion.div>
                 </div>
                 <div className="flex gap-4 items-center h-20 w-auto">
-                    {isLogedIn ?
+                    {userInfo?.user ?
                         <motion.div className='py-3'
                             onHoverStart={() => {
                                 setIsProfileVisible(true)

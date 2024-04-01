@@ -8,7 +8,7 @@ import tooman from "@/public/Image/tooman.svg";
 import formatNumber from '@/public/Functions/formatNumber';
 import { motion } from 'framer-motion';
 import { useDispatch, useSelector } from 'react-redux';
-import { addToCart, removeFromCart } from '@/public/redux/store/cart';
+import { addToCart, removeFromCart, setCartToLocalStorage } from '@/public/redux/store/cart';
 import { cart, cartItem } from '@/public/types/productType';
 import { authState } from '@/public/redux/store/auth';
 import { deleteCartItem, getCartFromServer, makeCartItem } from '@/public/redux/actions/cartActions';
@@ -66,6 +66,7 @@ const ProductCard = ({ price, link, image, name, priceWithOffer, score, product,
             dispatch(getCartFromServer(auth.userToken.access!))
         } else {
             dispatch(addToCart(cartItem))
+            dispatch(setCartToLocalStorage())
         }
     }
 
@@ -75,6 +76,7 @@ const ProductCard = ({ price, link, image, name, priceWithOffer, score, product,
             dispatch(getCartFromServer(auth.userToken.access!))
         } else {
             dispatch(removeFromCart(cartItem))
+            dispatch(setCartToLocalStorage())
         }
     }
 

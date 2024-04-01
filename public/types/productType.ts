@@ -8,22 +8,6 @@ export type product = {
     priceWithOffer: number,
 }
 
-export type shopCartItem = {
-    id: number,
-    shatootInfo: {
-        sellPrice: number,
-        finalPrice: number,
-        discount: number,
-    },
-    product: {
-        id: number,
-        featuredImage: string,
-        name: string,
-        slug: string,
-    },
-    quantity: number
-}
-
 export type cartItem = {
     id?: number
     cart?: string
@@ -56,3 +40,30 @@ export type cart = {
     totalFinallPrice?: number
     totalSellPrice?: number
 }
+
+export type vipProducts = {
+    id: number,
+    advantages: [
+        {
+            id: number,
+            title: string
+        },
+        {
+            id: number,
+            title: string
+        },
+        {
+            id: number,
+            title: string
+        },
+        {
+            id: number,
+            title: string
+        }
+    ],
+    name: string,
+    slug: string,
+    min_price: number,
+    min_sell_price: number,
+    cheapest_variant_id: number
+}[]

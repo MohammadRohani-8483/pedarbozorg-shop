@@ -1,4 +1,4 @@
-import { makeCartItem, getCartFromServer, deleteCart } from './../actions/cartActions';
+import { makeCartItem, getCartFromServer, deleteCart, makeCartFromLocalStorage } from './../actions/cartActions';
 import { cart, cartItem } from '@/public/types/productType';
 import { createSlice } from "@reduxjs/toolkit";
 
@@ -13,7 +13,6 @@ const slice = createSlice({
                 ...action.payload,
                 quantity: 1,
             });
-            console.log(state.cartItems)
         },
         removeFromCart: (state, action) => {
             const cartWithoutItem = state.cartItems?.filter((item) => item.id !== action.payload.id);
@@ -62,6 +61,12 @@ const slice = createSlice({
         })
         builder.addCase(deleteCart.rejected, (state, action) => {
             return initialState
+        })
+        builder.addCase(makeCartFromLocalStorage.fulfilled, (state, action) => {
+            console.log(action)
+        })
+        builder.addCase(makeCartFromLocalStorage.rejected, (state, action) => {
+            console.log(action)
         })
     }
 })

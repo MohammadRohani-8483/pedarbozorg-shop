@@ -4,7 +4,7 @@ import SubmitOrderBox from '@/components/checkout-cart/cart/SubmitOrderBox'
 import OrderSteps from '@/components/checkout-cart/OrderSteps'
 import ShippingInfos from '@/components/checkout-cart/shipping/ShippingInfos'
 import { address, fakeAddress } from '@/public/types/adress'
-import { shopCartItem } from '@/public/types/productType'
+import { cart } from '@/public/types/productType'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
@@ -13,7 +13,7 @@ import { GoArrowRight } from "react-icons/go";
 import Link from 'next/link'
 
 const ShippingPage = () => {
-    const cart = useSelector((state: { cart: { cart: shopCartItem[] } }) => state.cart.cart)
+    const cart = useSelector((state: { cart: cart }) => state.cart.cartItems)
 
     const [totalFinalPrice, setTotalFinalPrice] = useState(0)
     const [totalSellPrice, setTotalSellPrice] = useState(0)
@@ -21,8 +21,8 @@ const ShippingPage = () => {
     const [addresses, setAddresses] = useState<address[]>([])
 
     useEffect(() => {
-        setTotalFinalPrice(cart.reduce((previous, current) => previous + current?.shatootInfo.finalPrice * current?.quantity, 0))
-        setTotalSellPrice(cart.reduce((previous, current) => previous + current?.shatootInfo.sellPrice * current?.quantity, 0))
+        setTotalFinalPrice(cart.reduce((previous, current) => previous + current?.variant.shatoot_info.final_price * current?.quantity!, 0))
+        setTotalSellPrice(cart.reduce((previous, current) => previous + current?.variant.shatoot_info.sell_price * current?.quantity!, 0))
     }, [cart])
 
     useEffect(() => {

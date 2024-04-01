@@ -1,5 +1,5 @@
 import { deleteAllItems, removeFromCart } from '@/public/redux/store/cart'
-import { cart, shopCartItem } from '@/public/types/productType'
+import { cart } from '@/public/types/productType'
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
