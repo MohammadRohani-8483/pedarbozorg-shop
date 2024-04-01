@@ -1,12 +1,22 @@
 import formatNumber from '@/public/Functions/formatNumber'
 import { authState } from '@/public/redux/store/auth'
 import Image from 'next/image'
-import React from 'react'
+import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
+import Alert from '../Alert'
+import Icon from '../Icon'
+import AddWalletBalance from './AddWalletBalance'
 import ProfileBox from './ProfileBox'
 
 const Info = () => {
     const userInfo = useSelector((state: { auth: authState }) => state.auth.userInfo)
+
+    const [amount, setAmount] = useState<number>()
+
+    const [isAddWalletBalance, setIsAddWalletBalance] = useState(false)
+    const addWalletBalance = () => {
+
+    }
 
     return (
         <ProfileBox>
@@ -21,12 +31,7 @@ const Info = () => {
                         </p>
                     </div>
                     <div className='p-1.5'>
-                        <Image
-                            src='/iconSax/edit.svg'
-                            alt="edit"
-                            width={20}
-                            height={20}
-                        />
+                        <Icon nameIcon='edit' size={20} />
                     </div>
                 </div>
                 <div className='flex justify-between items-center w-full'>
@@ -45,15 +50,23 @@ const Info = () => {
                             </div>
                         </div>
                     </div>
-                    <div className='p-1.5'>
-                        <Image
-                            src='/iconSax/add-wallet.svg'
-                            alt="edit"
-                            width={20}
-                            height={20}
-                        />
+                    <div className='p-1.5'
+                        onClick={() => setIsAddWalletBalance(true)}
+                    >
+                        <Icon nameIcon='add-wallet' size={20} />
                     </div>
                 </div>
+                {isAddWalletBalance &&
+                    <Alert
+                        confirmFunc={addWalletBalance}
+                        messageToast='موجودی شما افزایش یافت'
+                        setIsAlertOpen={setIsAddWalletBalance}
+                        textBtn='افزایش موجودی'
+                        title='افزایش اعتبار کیف پول'
+                    >
+                        <AddWalletBalance amount={amount} setAmount={setAmount} />
+                    </Alert>
+                }
             </div>
         </ProfileBox>
     )

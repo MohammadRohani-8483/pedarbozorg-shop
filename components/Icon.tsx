@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import React from 'react'
 
 type props = {
@@ -7,13 +8,11 @@ type props = {
 
 const Icon = ({ nameIcon, size }: props) => {
     return (
-        <i
-            className='aspect-square bg-no-repeat bg-center bg-cover'
-            style={{
-                backgroundImage: `url(/iconSax/${nameIcon}.svg)`,
-                width: `${size}px`,
-                height: `${size}px`
-            }}
+        <Image
+            alt={nameIcon}
+            src={`/iconSax/${nameIcon}.svg`}
+            width={size}
+            height={size}
         />
     )
 }
