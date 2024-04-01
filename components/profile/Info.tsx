@@ -30,7 +30,7 @@ const Info = () => {
                             {userInfo?.first_name ? userInfo?.user?.username : null}
                         </p>
                     </div>
-                    <div className='p-1.5'>
+                    <div className='p-1.5 cursor-pointer'>
                         <Icon nameIcon='edit' size={20} />
                     </div>
                 </div>
@@ -50,10 +50,10 @@ const Info = () => {
                             </div>
                         </div>
                     </div>
-                    <div className='p-1.5'
+                    <div className='p-1.5 cursor-pointer'
                         onClick={() => setIsAddWalletBalance(true)}
                     >
-                        <Icon nameIcon='add-wallet' size={20} />
+                        <Icon nameIcon='add-wallet' size={20}/>
                     </div>
                 </div>
                 {isAddWalletBalance &&
