@@ -32,8 +32,8 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const cookiesStore = cookies()
-  const accessToken = cookiesStore.get("access")
-  const refreshToken = cookiesStore.get("refresh")
+  const accessToken = cookiesStore.get("access") || null
+  const refreshToken = cookiesStore.get("refresh") || null
 
   const me = accessToken && await fetchFunc(accessToken?.value)
 
