@@ -19,3 +19,16 @@ export const loginUser = createAsyncThunk(
         return data.json()
     }
 )
+export const getMeThunk = createAsyncThunk(
+    'auth/getMeThunk',
+    async (token: string) => {
+        const config = {
+            method: "GET",
+            headers: {
+                Authorization: `JWT ${token}`
+            }
+        }
+        const data = await fetch(`/api/core-api/user/customers/me/`, config)
+        return data.json()
+    }
+)

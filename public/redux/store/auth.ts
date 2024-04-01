@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { boolean } from "yup";
-import { loginUser } from "../actions/authActions";
+import { getMeThunk, loginUser } from "../actions/authActions";
 
 export type authState = {
     isLoad: boolean
@@ -40,7 +40,6 @@ const authSlice = createSlice({
             if (action.payload.code !== "token_not_valid") {
                 state.userInfo = action.payload[0]
             }
-            console.log(state.userInfo)
         }
     },
     extraReducers: builder => {
@@ -69,6 +68,11 @@ const authSlice = createSlice({
             state.error = null
             state.isLoad = true
             console.log('pending')
+        })
+        builder.addCase(getMeThunk.fulfilled, (state, action) => {
+            if (action.payload.code !== "token_not_valid") {
+                state.userInfo = action.payload[0]
+            }
         })
     }
 })

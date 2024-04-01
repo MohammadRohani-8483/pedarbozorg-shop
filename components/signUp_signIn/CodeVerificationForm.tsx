@@ -1,5 +1,5 @@
 'use client'
-import { loginUser } from '@/public/redux/actions/authActions';
+import { getMeThunk, loginUser } from '@/public/redux/actions/authActions';
 import { AppDispatch } from '@/public/redux/store';
 import Image from 'next/image'
 import { useEffect, useState } from 'react';
@@ -8,8 +8,9 @@ import { IoIosClose } from "react-icons/io";
 import { useDispatch, useSelector } from 'react-redux';
 import OTPInputGroup from './OTP';
 import { useTimer } from 'public/hooks/useTimer'
-import { authState } from '@/public/redux/store/auth';
+import { authState, getMe } from '@/public/redux/store/auth';
 import { sendSMS } from './EnterPhoneNumberForm';
+import { makeCartFromLocalStorage } from '@/public/redux/actions/cartActions';
 
 type props = {
     handleClose: () => void
@@ -26,6 +27,8 @@ const CodeVerificationForm = ({ handleClose, phoneNumber }: props) => {
         if (authState.isLogedIn) {
             toast.success("شما با موفقیت وارد شدید.")
             handleClose()
+            dispatch(getMeThunk(authState.userToken.access!))
+            // dispatch(makeCartFromLocalStorage(authState.userToken.access!))
         } else if (authState.error) {
             toast.error(authState.error)
             setInputValues(new Array(5).fill(""))
