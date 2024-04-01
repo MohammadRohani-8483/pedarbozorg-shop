@@ -30,52 +30,111 @@ export const specialProductsImageMobile = [
 
 export const specialProductsSlider = [
   {
-    id: crypto.randomUUID(),
-    name: "کره بادام زمینی",
-    attributes: [
-      "پروتئین بالا",
-      "بدون قند و نمک",
-      "مناسب برای رژیم های غذایی",
-      "مناسب برای ورزشکارها",
+    id: 12644,
+    advantages: [
+      {
+        id: 621,
+        title: "ضد التهابی",
+      },
+      {
+        id: 622,
+        title: "آنتی‌اکسیدانی",
+      },
+      {
+        id: 623,
+        title: "تقویت سیستم ایمنی",
+      },
+      {
+        id: 624,
+        title: "حمایت از سلامت قلب",
+      },
     ],
-    image: "/Image/special-products/slider/kare-badam-zamini.png",
-    link: "/",
-  },
-  {
-    id: 6,
-    name: "زردچوبه",
-    attributes: [
-      "آسیاب شده از چوب درجه یک هندی",
-      "افزایش ظرفیت آنتی اکسیدان بدن",
-      "کاهش خطر ابتلا به بیماری های قلبی",
-      "پیشگیری از آلزایمر",
-      "کمک به جلوگیری از سرطان و حتی درمان آن",
-    ],
+    name: "ادویه زردچوبه",
+    slug: "زردچوبه",
+    min_price: 27000,
+    min_sell_price: 27000,
+    cheapest_variant_id: 37632,
     image: "/Image/special-products/slider/zardchoobe.png",
-    link: "/",
   },
   {
-    id: crypto.randomUUID(),
-    name: "کره بادام درختی",
-    attributes: [
-      "تهیه شده از بادام ممتاز ایرانی",
-      "پروتئین بالا",
-      "ضد چربی و کلسترول",
-      "مناسب برای کاهش وزن",
+    id: 12604,
+    advantages: [
+      {
+        id: 465,
+        title: "منبع ویتامین‌ها و مواد معدنی",
+      },
+      {
+        id: 466,
+        title: "آنتی‌اکسیدان‌ها",
+      },
+      {
+        id: 467,
+        title: "کاهش کلسترول بد",
+      },
+      {
+        id: 468,
+        title: "منبع اسیدهای چرب سالم",
+      },
     ],
-    image: "/Image/special-products/slider/kare-badam-derakhti.png",
-    link: "/",
+    name: "کره بادام زمینی",
+    slug: "کره-بادام-زمینی",
+    min_price: 80304,
+    min_sell_price: 80304,
+    cheapest_variant_id: 37455,
+    image: "/Image/special-products/slider/kare-badam-zamini.png",
   },
   {
-    id: crypto.randomUUID(),
-    name: "روغن کنجد فرابکر",
-    attributes: [
-      "تهیه همه روزه با پرس سرد",
-      "مناسب پخت و پز و سرخ کردنی",
-      "بهبود سلامت قلب",
-      "تصفیه فیزیکی",
+    id: 12603,
+    advantages: [
+      {
+        id: 461,
+        title: "کاهش کلسترول بد",
+      },
+      {
+        id: 462,
+        title: "منبع اسیدهای چرب سالم",
+      },
+      {
+        id: 463,
+        title: "پشتیبانی از سلامت مغز",
+      },
+      {
+        id: 464,
+        title: "منبع ویتامین‌ها و مواد معدنی",
+      },
+    ],
+    name: "کره بادام درختی",
+    slug: "کره-بادام-درختی",
+    min_price: 261000,
+    min_sell_price: 261000,
+    cheapest_variant_id: 37452,
+    image: "/Image/special-products/slider/kare-badam-derakhti.png",
+  },
+  {
+    id: 12487,
+    name: "روغن کنجد فرابکر ممتاز",
+    advantages: [
+      {
+        id: 321,
+        title: "تقویت قوای ذهنی و حافظه",
+      },
+      {
+        id: 322,
+        title: "کنترل قند خون",
+      },
+      {
+        id: 323,
+        title: "حفظ سلامت استخوان‌ها",
+      },
+      {
+        id: 324,
+        title: "جلوگیری از پیری زودرس",
+      },
     ],
     image: "/Image/special-products/slider/roghan-konjed.png",
-    link: "/",
+    slug: "/روغن-کنجد-فرابکر-ممتاز",
+    min_price: 45600,
+    min_sell_price: 45600,
+    cheapest_variant_id: 37192,
   },
 ];

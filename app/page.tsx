@@ -13,15 +13,23 @@ import SpecialProductsSlider from "components/home/SpecialProductsSlider";
 import VideoCategory from "components/home/VideoCategory";
 import { WhyPedarBozorg } from "components/home/whyPedarbozorg/WhyPedarBozorg";
 
-const fetchFunc = async () => {
-  const res = fetch(`${process.env.API}/core-api/site/landing/`, {
+const fetchFunc = async (api: string) => {
+  const res = fetch(api, {
     method: "GET"
   })
   return (await res).json()
 }
 
 export default async function Home() {
-  const data = await fetchFunc()
+  const data = await fetchFunc(`${process.env.API}/core-api/site/landing/`)
+  const productPage1 = await fetchFunc(`${process.env.API}/store-api/products-public/?ordering=-view_count&page=1`)
+
+  const addProductToCart = [
+    productPage1.results[3],
+    productPage1.results[1],
+    productPage1.results[6],
+    productPage1.results[2],
+  ]
 
   return (
     <main className="lg:pt-48 pt-16">
@@ -30,14 +38,14 @@ export default async function Home() {
       <GroupProducts />
       <SpecialProducts />
       <OffersSlider products={data.most_discount_products} />
-      <SpecialProductsSlider />
+      <SpecialProductsSlider products={data.vip_products} productToCart={addProductToCart} />
       <VideoCategory />
       <WhyPedarBozorg />
       <BannerHomePage />
       {/* <SpecialOffers /> */}
       {/* <PedarBozorgInLife /> */}
       {/* <CommentsSlider /> */}
-      <BestSellingProducts products={data.best_seller_products}/>
+      <BestSellingProducts products={data.best_seller_products} />
       <Cooperations />
     </main>
   );
