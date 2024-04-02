@@ -1,7 +1,7 @@
 'use client'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import React, { MouseEventHandler, useState } from 'react'
 import Alert from '../Alert'
 import ProfileBox from './ProfileBox'
@@ -13,6 +13,7 @@ type itemProps = {
     clickFunc?: MouseEventHandler<HTMLAnchorElement>
     iconName: string
     title: string
+    activeIcon?: string
 }
 
 const Account = () => {
@@ -27,13 +28,13 @@ const Account = () => {
     return (
         <ProfileBox>
             <div className='w-full flex flex-col gap-2 md:gap-4 justify-center items-center'>
-                <AccountItem iconName='home' link='' title='حساب من در یک نگاه' />
-                <AccountItem iconName='box' link='' title='سفارش ها' />
-                <AccountItem iconName='heart' link='' title='لیست علافه مندی من' />
-                <AccountItem iconName='bg-location' link='' title='آدرس ها' />
-                <AccountItem iconName='mail' link='' title='پیغام ها' />
-                <AccountItem iconName='message-text' link='' title='نظرات' />
-                <AccountItem iconName='user-square' link='' title='مشخصات حساب کاربری' />
+                <AccountItem iconName='home-2' activeIcon='home' link='/profile/' title='حساب من در یک نگاه' />
+                <AccountItem iconName='box' activeIcon='active-box' link='/profile/orders/' title='سفارش ها' />
+                <AccountItem iconName='heart' activeIcon='solid-heart' link='/profile/favorite/' title='لیست علافه مندی من' />
+                <AccountItem iconName='bg-location' activeIcon='solid-location' link='/profile/addresses/' title='آدرس ها' />
+                <AccountItem iconName='mail' activeIcon='solid-mail' link='/profile/notifications/' title='پیغام ها' />
+                <AccountItem iconName='message-text' activeIcon='solid-message-text' link='/profile/comments/' title='نظرات' />
+                <AccountItem iconName='user-square' activeIcon='user-square-active' link='/profile/user-account/' title='مشخصات حساب کاربری' />
                 <AccountItem iconName='logout' title='مشخصات حساب کاربری' red clickFunc={() => setIsLogingOut(true)} />
                 {isLogingOut &&
                     <Alert
@@ -55,7 +56,8 @@ const Account = () => {
 
 export default Account
 
-const AccountItem = ({ title, link = '', clickFunc = () => { }, red, iconName }: itemProps) => {
+const AccountItem = ({ title, link = '', clickFunc = () => { }, red, iconName, activeIcon }: itemProps) => {
+    const pathname = usePathname()
     return (
         <div className='w-full flex justify-start items-center'>
             <Link
@@ -63,10 +65,10 @@ const AccountItem = ({ title, link = '', clickFunc = () => { }, red, iconName }:
                 href={link}
                 className='cursor-pointer flex justify-center items-center text-sm md:text-xl text-base-300'
             >
-                <div className="-mr-2 size-10 flex justify-center items-center" >
-                    <Icon nameIcon={iconName} size={24} />
+                <div className={`-mr-2 size-10 flex justify-center items-center ${link === pathname ? "bg-[url('/Image/background/bg-title-account.svg')] bg-no-repeat bg-cover" : ""}`} >
+                    <Icon nameIcon={link === pathname ? activeIcon! : iconName} size={24} />
                 </div>
-                <h3 className={`text-sm md:text-xl ${red ? "text-[#C62020] hover:drop-shadow-[0_0_24px_rgba(198,32,32,0.60)]" : "text-base-300 hover:drop-shadow-[0_0_24px_rgba(61,131,97,0.60)]"}`}>
+                <h3 className={`text-sm md:text-xl ${link === pathname ? "font-bold" : ""} ${red ? "text-[#C62020] hover:drop-shadow-[0_0_24px_rgba(198,32,32,0.60)]" : "text-base-300 hover:drop-shadow-[0_0_24px_rgba(61,131,97,0.60)]"}`}>
                     {title}
                 </h3>
             </Link>
