@@ -19,7 +19,7 @@ const Info = () => {
     }
 
     return (
-        <ProfileBox>
+        <ProfileBox bgImage>
             <div className='w-full gap-4 md:gap-8 flex flex-col justigy-center items-center'>
                 <div className='flex justify-between items-center w-full'>
                     <div className='flex flex-col justify-center items-start gap-2'>
@@ -53,7 +53,7 @@ const Info = () => {
                     <div className='p-1.5 cursor-pointer'
                         onClick={() => setIsAddWalletBalance(true)}
                     >
-                        <Icon nameIcon='add-wallet' size={20}/>
+                        <Icon nameIcon='add-wallet' size={20} />
                     </div>
                 </div>
                 {isAddWalletBalance &&

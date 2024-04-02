@@ -1,9 +1,9 @@
 import Image from 'next/image'
 import React from 'react'
 
-const ProfileBox = ({ children, title, viewBtn }: any) => {
+const ProfileBox = ({ children, title, viewBtn, bgImage, CustomBtn }: any) => {
     return (
-        <div className='flex flex-col w-full p-4 md:p-8 gap-6 items-center justify-center bg-white border border-[#E3E3E3] rounded-2xl'>
+        <div className={`flex flex-col w-full p-4 md:p-8 gap-6 items-center justify-center bg-white border border-[#E3E3E3] rounded-2xl ${bgImage ? "bg-[url('/Image/background/bg-info-box.svg')] bg-no-repeat bg-[length:80%] bg-right-top" : ""}`}>
             {title &&
                 <div className='flex justify-between items-center w-full text-base-300 text-base font-bold'>
                     {title}
@@ -18,6 +18,7 @@ const ProfileBox = ({ children, title, viewBtn }: any) => {
                             />
                         </button>
                     }
+                    {CustomBtn && <CustomBtn />}
                 </div>
             }
             {children}
