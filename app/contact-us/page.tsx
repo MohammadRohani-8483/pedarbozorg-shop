@@ -1,8 +1,11 @@
+'use client'
 import Communications from '@/components/contact-us/communications/Communications'
 import SendMessageToPedarbozorg from '@/components/contact-us/SendMessageToPedarbozorg'
 import Title from '@/components/Title'
 import Image from 'next/image'
 import React from 'react'
+import Map from '../../components/contact-us/Map'
+import NewMap from '../about-us/NewMap'
 
 export default function page() {
     return (
@@ -27,6 +30,7 @@ export default function page() {
                     <SendMessageToPedarbozorg />
                     <Communications />
                 </div>
+                <Map />
             </main>
         </>
     )

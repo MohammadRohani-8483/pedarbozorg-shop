@@ -176,3 +176,25 @@ html {
 .swiper-scrollbar-drag{
   @apply h-1 bg-gray-300 rounded
 }
+
+.leaflet-control-zoom-in{
+  @apply !bg-white !border !border-base-300 !rounded-lg !text-base-300 !size-10 !p-0 !flex !justify-center !items-center !pt-1 hover:!bg-base-100
+}
+.leaflet-control-zoom-out{
+  @apply !bg-white !border !border-base-300 !rounded-lg !text-base-300 !size-10 !p-0 !flex !justify-center !items-center !pt-1 hover:!bg-base-100
+}
+
+.leaflet-control-zoom{
+  @apply !border-none !gap-2 !flex !flex-col !h-auto !overflow-auto
+}
+.leaflet-top{
+  @apply  !bottom-2 !right-2 sm:!bottom-4 sm:!right-4 !absolute
+}
+
+.leaflet-control-attribution{
+  @apply !hidden
+}
+
+.leaflet-bar a:last-child{
+  @apply !border-b
+}
