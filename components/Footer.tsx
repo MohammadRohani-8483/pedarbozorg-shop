@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 'use client'
 import React, { useState } from 'react'
 import { menuItems } from '@/public/data/menuItems'
@@ -88,7 +89,7 @@ const Footer: React.FC = () => {
                                 <img
                                     referrerPolicy='origin'
                                     src='https://trustseal.enamad.ir/logo.aspx?id=442491&Code=fpIN0X9CJKuz2Rym1BNamoRVIobsmlM2'
-                                    alt='' code='fpIN0X9CJKuz2Rym1BNamoRVIobsmlM2'
+                                    alt=''
                                     className='cursor-pointer w-[87px] aspect-square lg:w-[74px]'
                                 />
                             </a>
