@@ -5,7 +5,20 @@
 @font-face {
   font-family: 'IranYekan';
   src: url("/Font/IRANYekanXFaNum-Regular.woff2");
-  format: "woff2"
+  format: "woff2";
+  font-weight: 300;
+}
+@font-face {
+  font-family: 'IranYekan';
+  src: url("/Font/IRANYekanXFaNum-Medium.woff2");
+  format: "woff2";
+  font-weight: 500;
+}
+@font-face {
+  font-family: 'IranYekan';
+  src: url("/Font/IRANYekanXFaNum-Bold.woff2");
+  format: "woff2";
+  font-weight: 700;
 }
 
 html {
