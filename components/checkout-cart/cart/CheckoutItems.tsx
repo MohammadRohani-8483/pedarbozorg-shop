@@ -22,7 +22,7 @@ const CheckoutItems = () => {
         setStart(true)
     }, [])
 
-    console.log(cartID)
+    // console.log(cartID)
 
     const handleDeleteAllCart = async () => {
         if (auth.isLogedIn) {

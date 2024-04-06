@@ -4,15 +4,17 @@ import React from 'react'
 type props = {
     nameIcon: string
     size: number
+    className?: string
 }
 
-const Icon = ({ nameIcon, size }: props) => {
+const Icon = ({ nameIcon, size, className }: props) => {
     return (
         <Image
             alt={nameIcon}
             src={`/iconSax/${nameIcon}.svg`}
             width={size}
             height={size}
+            className={className || ""}
         />
     )
 }

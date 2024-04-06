@@ -6,6 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import Input from '../Input';
 import toast from 'react-hot-toast';
 import axios from 'axios';
+import { useState } from 'react';
 
 type props = {
     handleClose: () => void
@@ -20,6 +21,7 @@ export const sendSMS = (phoneNumber: string) => {
 
 const EnterPhoneNumberForm = ({ handleClose, setInputValue, setIsEnterNumber }: props) => {
     const phoneNumberRegEx = new RegExp(/^09\d{9}$/)
+    const [phoneNumber, setPhoneNumber] = useState<string>('')
     const {
         register,
         watch,
@@ -27,16 +29,16 @@ const EnterPhoneNumberForm = ({ handleClose, setInputValue, setIsEnterNumber }: 
 
     const handleSubmit = (e: any) => {
         e.preventDefault()
-        if (watch('phone_number').length === 0) {
+        if (phoneNumber.length === 0) {
             toast.error("تلفن تماس اجباری است.");
             return
         }
-        if (!phoneNumberRegEx.test(watch('phone_number'))) {
+        if (!phoneNumberRegEx.test(phoneNumber)) {
             toast.error("لطفا شماره صحیح وارد کنید.");
             return
         }
-        sendSMS(watch('phone_number'))
-        setInputValue(watch('phone_number'))
+        sendSMS(phoneNumber)
+        setInputValue(phoneNumber)
         setIsEnterNumber(true)
     }
 
@@ -65,6 +67,8 @@ const EnterPhoneNumberForm = ({ handleClose, setInputValue, setIsEnterNumber }: 
                             name='phone_number'
                             placeholder='شماره همراه*'
                             register={register}
+                            value={phoneNumber}
+                            setValue={setPhoneNumber}
                         />
                     </div>
                     <button onClick={handleSubmit} className='flex justify-center solid-btn rectangle-btn w-full'>ورود</button>

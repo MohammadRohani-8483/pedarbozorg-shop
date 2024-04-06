@@ -43,7 +43,7 @@ const CodeVerificationForm = ({ handleClose, phoneNumber }: props) => {
     let inputValuesString = inputValues.join('');
 
     const handleSubmit = async () => {
-        await dispatch(loginUser({ phone_number: phoneNumber, code: inputValuesString }))
+        inputValuesString.length > 4 && await dispatch(loginUser({ phone_number: phoneNumber, code: inputValuesString }))
     }
 
     return (

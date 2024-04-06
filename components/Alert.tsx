@@ -1,7 +1,5 @@
 import React, { ReactNode, useEffect, useRef, useState } from 'react'
 import { motion } from "framer-motion";
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import Image from 'next/image'
 import { IoIosClose } from "react-icons/io";
 import toast from 'react-hot-toast';
 
@@ -13,9 +11,10 @@ type props = {
     messageToast: string
     children: ReactNode
     textBtn: string
+    error?: string | null
 }
 
-const Alert = ({ title, confirmFunc, redBtn, setIsAlertOpen, messageToast, children, textBtn }: props) => {
+const Alert = ({ title, confirmFunc, redBtn, setIsAlertOpen, messageToast, children, textBtn, error = null }: props) => {
     const [isAnimate, setIsAnimate] = useState(true)
 
     const variants = {
@@ -54,9 +53,13 @@ const Alert = ({ title, confirmFunc, redBtn, setIsAlertOpen, messageToast, child
     }
 
     const handleConfirm = () => {
-        confirmFunc()
-        handleClose()
-        toast.success(messageToast)
+        if (error) {
+            toast.error(error)
+        } else {
+            confirmFunc()
+            handleClose()
+            toast.success(messageToast)
+        }
     }
 
     return (
