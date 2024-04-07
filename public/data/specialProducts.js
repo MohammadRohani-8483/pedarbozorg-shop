@@ -30,58 +30,31 @@ export const specialProductsImageMobile = [
 
 export const specialProductsSlider = [
   {
-    id: 12644,
+    id: 12487,
+    name: "روغن کنجد فرابکر ممتاز",
     advantages: [
       {
-        id: 621,
-        title: "ضد التهابی",
+        id: 321,
+        title: "تقویت قوای ذهنی و حافظه",
       },
       {
-        id: 622,
-        title: "آنتی‌اکسیدانی",
+        id: 322,
+        title: "کنترل قند خون",
       },
       {
-        id: 623,
-        title: "تقویت سیستم ایمنی",
+        id: 323,
+        title: "حفظ سلامت استخوان‌ها",
       },
       {
-        id: 624,
-        title: "حمایت از سلامت قلب",
+        id: 324,
+        title: "جلوگیری از پیری زودرس",
       },
     ],
-    name: "ادویه زردچوبه",
-    slug: "زردچوبه",
-    min_price: 27000,
-    min_sell_price: 27000,
-    cheapest_variant_id: 37632,
-    image: "/Image/special-products/slider/zardchoobe.png",
-  },
-  {
-    id: 12604,
-    advantages: [
-      {
-        id: 465,
-        title: "منبع ویتامین‌ها و مواد معدنی",
-      },
-      {
-        id: 466,
-        title: "آنتی‌اکسیدان‌ها",
-      },
-      {
-        id: 467,
-        title: "کاهش کلسترول بد",
-      },
-      {
-        id: 468,
-        title: "منبع اسیدهای چرب سالم",
-      },
-    ],
-    name: "کره بادام زمینی",
-    slug: "کره-بادام-زمینی",
-    min_price: 80304,
-    min_sell_price: 80304,
-    cheapest_variant_id: 37455,
-    image: "/Image/special-products/slider/kare-badam-zamini.png",
+    image: "/Image/special-products/slider/roghan-konjed.png",
+    slug: "/روغن-کنجد-فرابکر-ممتاز",
+    min_price: 45600,
+    min_sell_price: 45600,
+    cheapest_variant_id: 37192,
   },
   {
     id: 12603,
@@ -111,30 +84,57 @@ export const specialProductsSlider = [
     image: "/Image/special-products/slider/kare-badam-derakhti.png",
   },
   {
-    id: 12487,
-    name: "روغن کنجد فرابکر ممتاز",
+    id: 12604,
     advantages: [
       {
-        id: 321,
-        title: "تقویت قوای ذهنی و حافظه",
+        id: 465,
+        title: "منبع ویتامین‌ها و مواد معدنی",
       },
       {
-        id: 322,
-        title: "کنترل قند خون",
+        id: 466,
+        title: "آنتی‌اکسیدان‌ها",
       },
       {
-        id: 323,
-        title: "حفظ سلامت استخوان‌ها",
+        id: 467,
+        title: "کاهش کلسترول بد",
       },
       {
-        id: 324,
-        title: "جلوگیری از پیری زودرس",
+        id: 468,
+        title: "منبع اسیدهای چرب سالم",
       },
     ],
-    image: "/Image/special-products/slider/roghan-konjed.png",
-    slug: "/روغن-کنجد-فرابکر-ممتاز",
-    min_price: 45600,
-    min_sell_price: 45600,
-    cheapest_variant_id: 37192,
+    name: "کره بادام زمینی",
+    slug: "کره-بادام-زمینی",
+    min_price: 80304,
+    min_sell_price: 80304,
+    cheapest_variant_id: 37455,
+    image: "/Image/special-products/slider/kare-badam-zamini.png",
+  },
+  {
+    id: 12644,
+    advantages: [
+      {
+        id: 621,
+        title: "ضد التهابی",
+      },
+      {
+        id: 622,
+        title: "آنتی‌اکسیدانی",
+      },
+      {
+        id: 623,
+        title: "تقویت سیستم ایمنی",
+      },
+      {
+        id: 624,
+        title: "حمایت از سلامت قلب",
+      },
+    ],
+    name: "ادویه زردچوبه",
+    slug: "زردچوبه",
+    min_price: 27000,
+    min_sell_price: 27000,
+    cheapest_variant_id: 37632,
+    image: "/Image/special-products/slider/zardchoobe.png",
   },
 ];

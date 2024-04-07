@@ -66,4 +66,22 @@ export type vipProducts = {
     min_price: number,
     min_sell_price: number,
     cheapest_variant_id: number
+    cheapest_variant: {
+        id: number,
+        shatoot_info: cheapestVariantItem
+        is_available: boolean,
+        image: string
+    }
 }[]
+
+export type cheapestVariantItem = {
+    shatoot_pk: number,
+    good_name: string,
+    third_name: string,
+    good_code: string,
+    sell_price: number,
+    inventory: string,
+    discount: string,
+    percent_discount: string,
+    final_price: number
+}

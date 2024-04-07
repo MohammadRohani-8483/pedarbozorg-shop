@@ -12,13 +12,14 @@ import { Navigation } from 'swiper/modules';
 import Image from '@/node_modules/next/image';
 import Link from '@/node_modules/next/link';
 import SliderBtn from '../SliderBtn';
-import { specialProductsSlider } from '@/public/data/specialProducts';
-import { cart, cartItem, vipProducts } from '@/public/types/productType';
+import { cartItem, vipProducts } from '@/public/types/productType';
 import { useDispatch, useSelector } from 'react-redux';
 import { authState } from '@/public/redux/store/auth';
 import { AppDispatch } from '@/public/redux/store';
 import { getCartFromServer, makeCartItem } from '@/public/redux/actions/cartActions';
 import { addToCart, setCartToLocalStorage } from '@/public/redux/store/cart';
+import { specialProductsSlider } from '@/public/data/specialProducts';
+import { motion } from 'framer-motion'
 
 type prop = {
     products: vipProducts
@@ -45,16 +46,15 @@ export default function SpecialProductsSlider({ products, productToCart }: prop)
         }
     }))
 
-    const cart = useSelector((state: { cart: cart }) => state.cart.cartItems)
     const auth = useSelector((state: { auth: authState }) => state.auth)
 
     const dispatch = useDispatch<AppDispatch>()
-    const handleAddToCart = async (index: number) => {
+    const handleAddToCart = async (product: cartItem) => {
         if (auth.isLogedIn) {
-            await dispatch(makeCartItem({ quantity: 1, token: auth.userToken.access!, variant: cartItems[index].variant.id }))
+            await dispatch(makeCartItem({ quantity: 1, token: auth.userToken.access!, variant: product.variant.id }))
             dispatch(getCartFromServer(auth.userToken.access!))
         } else {
-            dispatch(addToCart(cartItems[index]))
+            dispatch(addToCart(product))
             dispatch(setCartToLocalStorage())
         }
     }
@@ -87,8 +87,25 @@ export default function SpecialProductsSlider({ products, productToCart }: prop)
                     loop={true}
                     spaceBetween={80}
                 >
-                    {specialProductsSlider.map((product, i) => {
-                        const isProductToCart = Boolean(cart.find((item) => item.variant.id === cartItems[i].variant.id))
+                    {products?.map((product, i) => {
+                        const cartItem: cartItem = {
+                            variant: {
+                                id: product.cheapest_variant_id,
+                                image: product.cheapest_variant?.image,
+                                name: product.cheapest_variant?.shatoot_info.good_name,
+                                shatoot_info: {
+                                    final_price: product.cheapest_variant?.shatoot_info.final_price,
+                                    sell_price: product.cheapest_variant?.shatoot_info.sell_price,
+                                    discount: product.cheapest_variant?.shatoot_info.final_price - product.cheapest_variant?.shatoot_info.sell_price,
+                                },
+                                product: {
+                                    name: product.name,
+                                    slug: product.slug,
+                                    id: product.id,
+                                    featured_image: product.cheapest_variant?.image
+                                }
+                            }
+                        }
                         return (
                             <SwiperSlide
                                 key={product.id}
@@ -97,7 +114,7 @@ export default function SpecialProductsSlider({ products, productToCart }: prop)
                                 <div className='flex flex-col md:flex-row justify-center md:justify-between items-center gap-4 md:gap-8 ltr'>
                                     <div className='relative aspect-[404/400] lg:max-w-[404px] max-w-xs min-w-[190px] min-h-[153px] w-4/5 h-4/5'>
                                         <Image
-                                            src={product.image}
+                                            src={specialProductsSlider[i].image}
                                             fill
                                             alt={product.name}
                                             className='object-cover'
@@ -107,9 +124,13 @@ export default function SpecialProductsSlider({ products, productToCart }: prop)
                                         <h1 className='text-base-300 text-2xl text-center font-bold'>{product.name}</h1>
                                         <div className='flex flex-col gap-2 text-center text-base text-base-300 w-full'>
                                             {product.advantages.map((advantage) => (
-                                                <div key={advantage.id} className='bg-base-200 min-w-[190px] w-full max-w-[368px] rounded-lg py-2 sm:px-4 text-[10px] sm:text-xs md:text-sm lg:text-base'>
+                                                <motion.div
+                                                    key={advantage.id}
+                                                    className='bg-secondry-tint-7 min-w-[190px] w-full max-w-[368px] rounded-lg py-2 sm:px-4 text-[10px] sm:text-xs md:text-sm lg:text-base'
+                                                    whileHover={{ backgroundColor: "#C1E2D2" }}
+                                                >
                                                     <p className='whitespace-nowrap'>{advantage.title}</p>
-                                                </div>
+                                                </motion.div>
                                             ))}
                                         </div>
                                         <div className='flex items-center justify-center gap-2 w-full'>
@@ -119,7 +140,7 @@ export default function SpecialProductsSlider({ products, productToCart }: prop)
                                                 </button>
                                             </Link>
                                             <button className='outline-btn square-btn'
-                                                onClick={() => !isProductToCart && handleAddToCart(i)}
+                                                onClick={() => handleAddToCart(cartItem)}
                                             >
                                                 <Image
                                                     src="/iconSax/shopping-cart.svg"
