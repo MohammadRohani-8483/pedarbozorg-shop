@@ -1,3 +1,4 @@
+import { toFixedDigit } from '@/public/Functions/toFixedDigit'
 import React from 'react'
 import { FaStar } from 'react-icons/fa'
 type specification = {
@@ -19,7 +20,7 @@ const ShortInfo = ({ product }: any) => {
                     <div className='flex justify-center items-center gap-1'>
                         <FaStar className='text-[#FFC436]' />
                         <p className='text-[#757575] text-base '>
-                            {product.avg_rate.toFixed(1)}
+                            {toFixedDigit(product.avg_rate)}
                         </p>
                         <p className='text-[#ADADAD] text-base'>
                             ({product.rate_count})

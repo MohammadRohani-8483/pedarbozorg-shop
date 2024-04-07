@@ -1,15 +1,22 @@
 'use client'
+import Icon from '@/components/Icon'
 import formatNumber from '@/public/Functions/formatNumber'
-import { deleteCartItem } from '@/public/redux/actions/cartActions'
+import { deleteCartItem, getCartFromServer, makeCartItem } from '@/public/redux/actions/cartActions'
 import { AppDispatch } from '@/public/redux/store'
 import { authState } from '@/public/redux/store/auth'
 import { addToCart, decrementQuantity, incrementQuantity, removeFromCart, setCartToLocalStorage } from '@/public/redux/store/cart'
 import { cart, cartItem } from '@/public/types/productType'
 import Image from 'next/image'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 const AddToCartItem = ({ product, price, priceWithOffer, name, image, variant }: any) => {
+    const [start, setStart] = useState(false)
+    useEffect(() => {
+        setStart(true)
+    }, [])
+
+
     const offerPresent = (price - priceWithOffer) / price * 100
 
     const cartItem: cartItem = {
@@ -19,7 +26,7 @@ const AddToCartItem = ({ product, price, priceWithOffer, name, image, variant }:
             name: variant.shatoot_info.good_name,
             product: {
                 id: product.id,
-                featured_image:product.featured_image,
+                featured_image: product.featured_image,
                 name: product.name,
                 slug: product.slug,
             },
@@ -34,125 +41,125 @@ const AddToCartItem = ({ product, price, priceWithOffer, name, image, variant }:
     const cart = useSelector((state: { cart: cart }) => state.cart.cartItems)
     const auth = useSelector((state: { auth: authState }) => state.auth)
 
-    const productInCart = cart.find((item) => item.id === cartItem.id);
+    const productInCart = cart.find((item) => item.variant.id === cartItem.variant.id);
     const productIdForDelete: number | null = productInCart?.id || null
 
     const isProductToCart = Boolean(productInCart)
 
     const dispatch = useDispatch<AppDispatch>()
 
-    const handleAddToCart = () => {
-        dispatch(addToCart(cartItem))
+    const handleAddToCart = async () => {
+        if (auth.isLogedIn) {
+            await dispatch(makeCartItem({ quantity: 1, token: auth.userToken.access!, variant: cartItem.variant.id }))
+            dispatch(getCartFromServer(auth.userToken.access!))
+        } else {
+            dispatch(addToCart(cartItem))
+            dispatch(setCartToLocalStorage())
+        }
     }
 
-    const handleIncrementQuantity = () => {
-        dispatch(incrementQuantity(cartItem))
+    const handleIncrementQuantity = async () => {
+        if (auth.isLogedIn) {
+            await dispatch(makeCartItem({ quantity: 1, token: auth.userToken.access!, variant: cartItem.variant.id }))
+            dispatch(getCartFromServer(auth.userToken.access!))
+        } else {
+            dispatch(incrementQuantity(cartItem))
+            dispatch(setCartToLocalStorage())
+        }
     }
 
     const handleDecrementQuantity = () => {
-        dispatch(decrementQuantity(cartItem))
+        if (auth.isLogedIn) {
+            dispatch(makeCartItem({ quantity: -1, token: auth.userToken.access!, variant: product.variant.id }))
+            dispatch(decrementQuantity(product))
+        } else {
+            dispatch(decrementQuantity(product))
+            dispatch(setCartToLocalStorage())
+        }
     }
 
-    const handleDeleteFromCart = () => {
+    const handleDeleteFromCart = async () => {
         if (auth.isLogedIn) {
-            dispatch(deleteCartItem({ cartItemID: productIdForDelete!, token: auth.userToken.access! }))
-            dispatch(removeFromCart(product))
+            await dispatch(deleteCartItem({ cartItemID: productIdForDelete!, token: auth.userToken.access! }))
+            dispatch(getCartFromServer(auth.userToken.access!))
         } else {
-            dispatch(removeFromCart(product))
-            if (cart?.length === 0) {
-                localStorage.removeItem('shoping_cart')
-            } else {
-                dispatch(setCartToLocalStorage())
-            }
+            dispatch(removeFromCart(cartItem))
+            dispatch(setCartToLocalStorage())
         }
     }
 
     return (
-        <div className='h-[65px] w-full flex justify-between items-center gap-2'>
-            <div className='h-full flex justify-center items-center gap-2'>
-                <Image
-                    src={image}
-                    alt={name}
-                    width={65}
-                    height={65}
-                    className='rounded-md'
-                />
-                <h3 className='text-base-300 font-bold'>
-                    {name}
-                </h3>
-            </div>
-            <div className='gap-2 flex justify-center items-center'>
-                <div className='flex flex-col justify-center items-center'>
-                    <h2 className='text-xl text-base-300 font-bold'>
-                        {formatNumber(priceWithOffer)}
-                    </h2>
-                    {price !== priceWithOffer &&
-                        <div className='h-5 gap-2 flex justify-center items-center'>
-                            <div className='h-full flex justify-center items-center px-2 rounded-full bg-[#C62020] text-xs text-white'>
-                                {offerPresent}%
-                            </div>
-                            <h3 className='text-[#ADADAD] text-sm line-through'>
-                                {formatNumber(price)}
-                            </h3>
-                        </div>
-                    }
-                </div>
-                {!isProductToCart ?
-                    <button
-                        onClick={handleAddToCart}
-                        className='solid-btn square-btn p-4 w-10 h-10 flex justify-center items-center'
-                    >
+        <>
+            {start ?
+                <div className='h-[65px] w-full flex justify-between items-center gap-2'>
+                    <div className='h-full flex justify-center items-center gap-2'>
                         <Image
-                            src="/iconSax/add-to-cart.svg"
-                            alt='Add To Cart'
-                            width={24}
-                            height={24}
+                            src={image}
+                            alt={name}
+                            width={65}
+                            height={65}
                             className='rounded-md'
                         />
-                    </button>
-                    :
-                    <div className='flex flex-col gap-1'>
-                        <button
-                            onClick={handleIncrementQuantity}
-                            className='bg-[#E0F1E9] size-8 hover:bg-[#C1E2D2] rounded-lg text-[#3D8361] p-1.5 cursor-pointer'
-                        >
-                            <Image
-                                src='/iconSax/add.svg'
-                                alt='add product count'
-                                width={20}
-                                height={20}
-                            />
-                        </button>
-                        <>
-                            {productInCart?.quantity! > 1 ?
+                        <h3 className='text-base-300 font-bold'>
+                            {name}
+                        </h3>
+                    </div>
+                    <div className='gap-2 flex justify-center items-center'>
+                        <div className='flex flex-col justify-center items-center'>
+                            <h2 className='text-xl text-base-300 font-bold'>
+                                {formatNumber(priceWithOffer)}
+                            </h2>
+                            {price !== priceWithOffer &&
+                                <div className='h-5 gap-2 flex justify-center items-center'>
+                                    <div className='h-full flex justify-center items-center px-2 rounded-full bg-[#C62020] text-xs text-white'>
+                                        {offerPresent}%
+                                    </div>
+                                    <h3 className='text-[#ADADAD] text-sm line-through'>
+                                        {formatNumber(price)}
+                                    </h3>
+                                </div>
+                            }
+                        </div>
+                        {!isProductToCart ?
+                            <button
+                                onClick={handleAddToCart}
+                                className='solid-btn square-btn p-4 w-10 h-10 flex justify-center items-center'
+                            >
+                                <Icon size={24} nameIcon="add-to-cart" />
+                            </button>
+                            :
+                            <div className='flex flex-col gap-1'>
                                 <button
-                                    onClick={handleDecrementQuantity}
-                                    className='bg-[#E0F1E9] size-8 hover:bg-[#C1E2D2] rounded-lg text-[#3D8361] p-1.5 cursor-pointer'>
-                                    <Image
-                                        src='/iconSax/minus.svg'
-                                        alt='minus product count'
-                                        width={20}
-                                        height={20}
-                                    />
-                                </button>
-                                :
-                                <button
-                                    onClick={handleDeleteFromCart}
+                                    onClick={handleIncrementQuantity}
                                     className='bg-[#E0F1E9] size-8 hover:bg-[#C1E2D2] rounded-lg text-[#3D8361] p-1.5 cursor-pointer'
                                 >
-                                    <Image
-                                        src='/iconSax/trash.svg'
-                                        alt='delete product'
-                                        width={20}
-                                        height={20}
-                                    />
+                                    <Icon size={20} nameIcon="add" />
                                 </button>
-                            }
-                        </>
+                                <>
+                                    {productInCart?.quantity! > 1 ?
+                                        <button
+                                            onClick={handleDecrementQuantity}
+                                            className='bg-[#E0F1E9] size-8 hover:bg-[#C1E2D2] rounded-lg text-[#3D8361] p-1.5 cursor-pointer'
+                                        >
+                                            <Icon size={20} nameIcon="minus" />
+                                        </button>
+                                        :
+                                        <button
+                                            onClick={handleDeleteFromCart}
+                                            className='bg-[#E0F1E9] size-8 hover:bg-[#C1E2D2] rounded-lg text-[#3D8361] p-1.5 cursor-pointer'
+                                        >
+                                            <Icon size={20} nameIcon="trash" />
+                                        </button>
+                                    }
+                                </>
+                            </div>
+                        }
                     </div>
-                }
-            </div>
-        </div>
+                </div>
+                :
+                <div className='h-[65px] w-full flex justify-between items-center gap-2'></div>
+            }
+        </>
     )
 }
 
