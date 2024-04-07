@@ -3,7 +3,7 @@ import Loading from '@/app/loading'
 import SubmitOrderBox from '@/components/checkout-cart/cart/SubmitOrderBox'
 import OrderSteps from '@/components/checkout-cart/OrderSteps'
 import ShippingInfos from '@/components/checkout-cart/shipping/ShippingInfos'
-import { address, fakeAddress } from '@/public/types/adress'
+import { address } from '@/public/types/adress'
 import { cart } from '@/public/types/productType'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
@@ -30,13 +30,12 @@ const ShippingPage = () => {
             setShipmentPrice(50000)
     }, [addresses])
 
-
     const { replace } = useRouter()
 
     const [start, setStart] = useState(false)
     useEffect(() => {
-        cart.length < 1 && replace('/checkout-cart/cart')
         setStart(true)
+        cart.length < 1 && replace('/checkout-cart')
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [cart])
 
@@ -68,7 +67,7 @@ const ShippingPage = () => {
                         <OrderSteps page='SHIPPING' />
                         <div className='flex flex-col md:flex-row w-full justify-center items-start gap-2 lg:gap-6'>
                             <div className="w-full flex flex-col justify-center items-start gap-4">
-                                <ShippingInfos addresses={addresses} />
+                                <ShippingInfos addresses={addresses} setAddresses={setAddresses} />
                                 <Link href='/checkout-cart' className="flex justify-center items-center py-1.5 px-3 gap-2 text-base-300 text-sm">
                                     <GoArrowRight size={20} />
                                     بازگشت به سبد خرید

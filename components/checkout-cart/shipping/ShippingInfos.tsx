@@ -19,24 +19,71 @@ import { FreeMode, Scrollbar } from 'swiper/modules';
 import OrdersCart from 'components/checkout-cart/OrdersCart'
 import Alert from '@/components/Alert'
 import AddressForm from '@/components/AddressForm'
+import axios from 'axios'
 
 type props = {
   addresses: address[]
+  setAddresses: (address: address[]) => void
 }
 
-const ShippingInfos = ({ addresses }: props) => {
+const ShippingInfos = ({ addresses, setAddresses }: props) => {
   const [addAddressIsOpen, setAddAddressIsOpen] = useState(false)
 
-  const [addAddressFunc, setaddAddressFunc] = useState<(data: any) => void>((data: any) => { })
+  const [address, setAddress] = useState<address>()
+  const [error, setError] = useState<string | null>()
+  const [province, setProvince] = useState<string>()
+  const [city, setCity] = useState<string>()
 
   const cart = useSelector((state: { cart: cart }) => state.cart.cartItems)
 
   const [start, setStart] = useState(false)
   useEffect(() => {
+    console.log(cart)
     setStart(true)
   }, [])
 
-  const activeAddress = addresses.find(address => address.is_active)
+  const activeAddress = addresses.find(address => address.isActive)
+
+  useEffect(() => {
+    if (!(address?.address?.length! > 0 && address?.province && address.city && address.flatNum && address.zipCode!.length > 0 && address.firstName!.length > 0 && address.lastName!.length > 0 && address.phoneNumber!.length > 0) || (address?.city === 1508 && !address.strict)) {
+      setError('لطفا فیلد های ضروری را کامل نمایید')
+    } else if (!/^[\u0600-\u06FF\s]+$/.test(address.address!)) {
+      setError('لطفا ادرس خود را به فارسی وارد کنید')
+    } else if (!/^[1-9]\d{9}$/.test(address.zipCode!)) {
+      setError('لطفا کد پستی ادرس خود را صحیح وارد کنید')
+    } else if (!/^[\u0600-\u06FF\s]+$/.test(address.firstName!) || !/^[\u0600-\u06FF\s]+$/.test(address.lastName!)) {
+      setError('لطفا نام و نام خانوادگی خود را به فارسی وارد کنید')
+    } else if (!/^09\d{9}$/.test(address.phoneNumber!)) {
+      setError('لطفا شماره موبایل خود را صحیح وارد کنید')
+    } else {
+      setError(null)
+    }
+  }, [address])
+
+
+  const handleAddAddress = () => {
+    console.log('address', address)
+    const newActiveAddress: address = { ...address, isActive: true }
+    const newAddressArray = [
+      ...addresses, newActiveAddress
+    ]
+    setAddresses(newAddressArray)
+    setAddress({})
+  }
+
+  useEffect(() => {
+    if (activeAddress) {
+      axios(`/api/transaction-api/provinces/${activeAddress.province}/`)
+        .then(res => {
+          setProvince(res.data.name);
+        })
+      axios(`/api/transaction-api/cities/${activeAddress.city}/`)
+        .then(res => {
+          setCity(res.data.name);
+        })
+    }
+  }, [activeAddress])
+
 
   return (
     <div className='flex flex-col bg-white rounded-2xl p-4 md:p-8 items-center justify-center w-full gap-8'>
@@ -54,10 +101,12 @@ const ShippingInfos = ({ addresses }: props) => {
                 height={24}
               />
               <p className='text-[#353535] leading-6 text-sm flex gap-1 items-center'>
-                {activeAddress?.city !== activeAddress?.province && `${activeAddress?.province}/`}{activeAddress?.city}/{activeAddress?.address}/پلاک {activeAddress?.flat_no}/واحد {activeAddress?.unit_no}
+                <>
+                  {city !== province && `${province}/`}{city}/{activeAddress?.address}/پلاک {activeAddress?.flatNum}{activeAddress?.unitNum && `/واحد ${activeAddress?.unitNum}`}
+                </>
               </p>
               <p className='text-[#757575] text-sm'>
-                {activeAddress?.first_name} {activeAddress?.last_name}
+                {activeAddress?.firstName} {activeAddress?.lastName}
               </p>
             </div>
             <div className="flex justify-center items-center w-full">
@@ -79,13 +128,14 @@ const ShippingInfos = ({ addresses }: props) => {
             </button>
             {addAddressIsOpen &&
               <Alert
-                confirmFunc={addAddressFunc}
+                confirmFunc={handleAddAddress}
                 messageToast='آدرس با موفقیت اضافه شد'
                 textBtn='افزودن'
                 title='افزودن آدرس جدید'
                 setIsAlertOpen={setAddAddressIsOpen}
+                error={error}
               >
-                <AddressForm addAddressFunc={setaddAddressFunc} />
+                <AddressForm setAddress={setAddress} />
               </Alert>
             }
           </>
@@ -119,7 +169,7 @@ const ShippingInfos = ({ addresses }: props) => {
         </div>
       </div>
       <div className='max-w-[688px] w-full'>
-        {start ?
+        {start && cart.length > 0 ?
           <>
             <Swiper
               slidesPerView={'auto'}
@@ -132,12 +182,12 @@ const ShippingInfos = ({ addresses }: props) => {
               modules={[FreeMode, Scrollbar]}
               className="mySwiper !p-4 !-mx-4"
             >
-              {cart.map((product: any, i: number) => (
-                <SwiperSlide key={crypto.randomUUID()} className='!w-[133px]'>
+              {cart.map((product) => (
+                <SwiperSlide key={product?.variant?.id} className='!w-[133px]'>
                   <OrdersCart
-                    image={product?.product.featuredImage}
-                    name={product?.product.name}
-                    quantity={product?.quantity}
+                    image={product?.variant?.product.featured_image}
+                    name={product?.variant?.name}
+                    quantity={product?.quantity!}
                   />
                 </SwiperSlide>
               ))}
