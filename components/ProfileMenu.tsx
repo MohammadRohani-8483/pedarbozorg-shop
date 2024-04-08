@@ -1,3 +1,4 @@
+'use client'
 import React, { MouseEventHandler, useState } from 'react'
 import { motion } from 'framer-motion';
 import Icon from 'components/Icon';
@@ -5,6 +6,10 @@ import { useSelector } from 'react-redux';
 import { authState } from 'public/redux/store/auth';
 import Link from 'next/link';
 import Alert from 'components/Alert';
+import { useRouter } from 'next/navigation';
+import { useAppDispatch } from '@/public/redux/hooks';
+import { logoutUser } from '@/public/redux/actions/authActions';
+import { getCartFromLocalStorage } from '@/public/redux/store/cart';
 
 type menuProps = {
     isHover: boolean
@@ -14,13 +19,18 @@ type itemProps = {
     title: string
     red?: boolean
     link?: string
-    clickFunc?: MouseEventHandler<HTMLAnchorElement>
+    clickFunc?: MouseEventHandler<HTMLElement>
 }
 
 const ProfileMenu = ({ isHover }: menuProps) => {
-    const userInfo = useSelector((state: { auth: authState }) => state.auth.userInfo)
+    const { replace } = useRouter()
+    const dispatch = useAppDispatch()
+    const { userInfo, userToken } = useSelector((state: { auth: authState }) => state.auth)
     const [isLogingOut, setIsLogingOut] = useState(false)
-    const handleLogOut = () => {
+    const handleLogOut = async () => {
+        await dispatch(logoutUser({ access: userToken.access!, refresh: userToken.refresh! }))
+        dispatch(getCartFromLocalStorage())
+        replace('/')
     }
 
     return (
@@ -39,8 +49,8 @@ const ProfileMenu = ({ isHover }: menuProps) => {
                 </h3>
                 <Icon nameIcon='arrow-left' size={20} />
             </Link>
-            <ProfileMenuItem iconName='box' title='سفارش‌ها' />
-            <ProfileMenuItem iconName='heart' title='لیست علاقه‌مندی' />
+            <ProfileMenuItem link='/profile/orders' iconName='box' title='سفارش‌ها' />
+            <ProfileMenuItem link='/profile/favorite' iconName='heart' title='لیست علاقه‌مندی' />
             <ProfileMenuItem iconName='logout' title='خروج از حساب' red clickFunc={() => setIsLogingOut(true)} />
             {isLogingOut &&
                 <Alert
@@ -62,14 +72,24 @@ const ProfileMenu = ({ isHover }: menuProps) => {
 const ProfileMenuItem = ({ iconName, title, red, link = '', clickFunc = () => { } }: itemProps) => {
     return (
         <div className='flex justify-start items-center w-full'>
-            <Link
-                onClick={clickFunc}
-                href={link}
-                className='flex justify-center items-center gap-2 cursor-pointer'
-            >
-                <Icon nameIcon={iconName} size={20} />
-                <h3 className={`text-sm whitespace-nowrap font-medium ${red ? "text-[#C62020] hover:drop-shadow-[0_0_24px_rgba(198,32,32,0.60)]" : "text-base-300 hover:drop-shadow-[0_0_24px_rgba(61,131,97,0.60)]"}`}>{title}</h3>
-            </Link>
+            {link ?
+                <Link
+                    onClick={clickFunc}
+                    href={link}
+                    className='flex justify-center items-center gap-2 cursor-pointer'
+                >
+                    <Icon nameIcon={iconName} size={20} />
+                    <h3 className={`text-sm whitespace-nowrap font-medium ${red ? "text-[#C62020] hover:drop-shadow-[0_0_24px_rgba(198,32,32,0.60)]" : "text-base-300 hover:drop-shadow-[0_0_24px_rgba(61,131,97,0.60)]"}`}>{title}</h3>
+                </Link>
+                :
+                <div
+                    onClick={clickFunc}
+                    className='flex justify-center items-center gap-2 cursor-pointer'
+                    >
+                    <Icon nameIcon={iconName} size={20} />
+                    <h3 className={`text-sm whitespace-nowrap font-medium ${red ? "text-[#C62020] hover:drop-shadow-[0_0_24px_rgba(198,32,32,0.60)]" : "text-base-300 hover:drop-shadow-[0_0_24px_rgba(61,131,97,0.60)]"}`}>{title}</h3>
+                </div>
+            }
         </div>
     )
 }

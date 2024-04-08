@@ -1,3 +1,4 @@
+import { logoutUser } from './../actions/authActions';
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { boolean } from "yup";
 import { getMeThunk, loginUser } from "../actions/authActions";
@@ -72,6 +73,15 @@ const authSlice = createSlice({
                 state.isLogedIn = false
                 state.userInfo = {}
             }
+        })
+        builder.addCase(logoutUser.fulfilled, (state,action) => {
+            console.log('logout fulfilled')
+            console.log(action)
+            return initialState
+        })
+        builder.addCase(logoutUser.rejected, (state,action) => {
+            console.log('logout rejected')
+            console.log(action)
         })
     }
 })

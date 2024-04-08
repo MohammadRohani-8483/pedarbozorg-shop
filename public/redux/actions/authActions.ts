@@ -41,8 +41,17 @@ export const getMeThunk = createAsyncThunk(
 export const logoutUser = createAsyncThunk(
     'auth/logoutUser',
     async ({ refresh, access }: logoutParams) => {
+        const config = {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `JWT ${access}`
+            },
+            body: JSON.stringify({refresh})
+        }
+        // const data = await fetch('/api/core-api/auth/logout/', config)
         const data = await axios.post('/api/core-api/auth/logout/',
-            refresh,
+            {refresh},
             {
                 headers: {
                     Authorization: `JWT ${access}`
