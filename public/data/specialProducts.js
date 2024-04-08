@@ -1,12 +1,12 @@
 export const specialProductsImageDesktop = [
   {
-    id: crypto.randomUUID(),
+    id: 1,
     name: "کره بادام زمینی پدربزرگ",
     image: "/Image/special-products/kare-badam-zamini.svg",
     link: "/",
   },
   {
-    id: crypto.randomUUID(),
+    id: 2,
     name: "زرد چوبه پدربزرگ",
     image: "/Image/special-products/zardchoobe.svg",
     link: "/",
@@ -15,13 +15,13 @@ export const specialProductsImageDesktop = [
 
 export const specialProductsImageMobile = [
   {
-    id: crypto.randomUUID(),
+    id: 1,
     name: "محصولات 100 درصد طبیعی",
     image: "/Image/special-products/mahsoolat-tabiei.svg",
     link: "/",
   },
   {
-    id: crypto.randomUUID(),
+    id: 2,
     name: "استفاده از محصولات پدربزرگ",
     image: "/Image/special-products/mahsoolat-pedarbozorg.svg",
     link: "/",

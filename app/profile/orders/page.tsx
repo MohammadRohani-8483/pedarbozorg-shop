@@ -120,8 +120,8 @@ const ActiveOrderItems = ({ list, activeList }: orderItemsProps) => {
                                                 <div className={`size-2 rounded-full ${order.level === 'completed' ? "bg-base-300" : "bg-[#CBCBCB]"}`} />
                                             </>
                                             :
-                                            Array(3).fill(1).map(item => (
-                                                <div key={crypto.randomUUID()} className='size-2 rounded-full bg-[#C62020]' />
+                                            Array(3).fill(1).map((_, i) => (
+                                                <div key={i} className='size-2 rounded-full bg-[#C62020]' />
                                             ))
                                         }
                                     </div>
@@ -160,10 +160,9 @@ const ActiveOrderItems = ({ list, activeList }: orderItemsProps) => {
                                 modules={[FreeMode, Scrollbar]}
                                 className="mySwiper w-full !pb-2"
                             >
-                                {Array(3).fill(1).map(item => (
-                                    <SwiperSlide key={crypto.randomUUID()} className='!w-20'>
+                                {Array(3).fill(1).map((_,i) => (
+                                    <SwiperSlide key={i} className='!w-20'>
                                         <Image
-                                            key={crypto.randomUUID()}
                                             src='/Image/offer-products/ard-nokhodchi.png'
                                             width={80}
                                             height={80}

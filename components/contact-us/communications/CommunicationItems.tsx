@@ -31,9 +31,9 @@ const CommunicationItems = ({ icon, title, desc, descs, link }: props) => {
             <div className='flex flex-col gap-4 w-full text-gray-500 text-base font-bold text-center'>
                 {
                     descs ?
-                        descs.map((desc) => (
+                        descs.map((desc,i) => (
                             <div
-                                key={crypto.randomUUID()}
+                                key={i}
                                 className=' flex justify-between items-center'
                             >
                                 <div>{desc.key}:</div>

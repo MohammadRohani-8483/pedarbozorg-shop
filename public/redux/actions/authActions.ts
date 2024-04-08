@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit'
 
 type parLogin = {
@@ -5,9 +6,14 @@ type parLogin = {
     code: string
 }
 
+type logoutParams = {
+    access: string
+    refresh: string
+}
+
 export const loginUser = createAsyncThunk(
     'auth/loginUser',
-    async ({ phone_number, code }: parLogin, { rejectWithValue }) => {
+    async ({ phone_number, code }: parLogin) => {
         const config = {
             method: "POST",
             headers: {
@@ -30,5 +36,18 @@ export const getMeThunk = createAsyncThunk(
         }
         const data = await fetch(`/api/core-api/user/customers/me/`, config)
         return data.json()
+    }
+)
+export const logoutUser = createAsyncThunk(
+    'auth/logoutUser',
+    async ({ refresh, access }: logoutParams) => {
+        const data = await axios.post('/api/core-api/auth/logout/',
+            refresh,
+            {
+                headers: {
+                    Authorization: `JWT ${access}`
+                }
+            })
+        return data
     }
 )

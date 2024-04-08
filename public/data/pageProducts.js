@@ -1,16 +1,16 @@
 export const orders = [
   {
-    id: crypto.randomUUID(),
+    id: 1,
     name: "پربازدیدترین",
     value: "-view_count",
   },
   {
-    id: crypto.randomUUID(),
+    id: 2,
     name: "پرفروش ترین",
     value: "-order_count",
   },
   {
-    id: crypto.randomUUID(),
+    id: 3,
     name: "محبوب ترین",
     value: "-avg_rate",
   },

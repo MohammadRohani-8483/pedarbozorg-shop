@@ -5,7 +5,7 @@ type props = {
     activeOrder: string
     setActiveOrder: (par: string) => void
     orders: {
-        id: string
+        id: number
         value: string
         name: string
     }[]

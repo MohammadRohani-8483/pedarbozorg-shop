@@ -5,6 +5,8 @@ import { IoClose } from 'react-icons/io5';
 import AvailableProductsToggle from '../AvailableProductsToggle';
 import Category from '../Category';
 import PriceRange from '../PriceRange';
+import { categories  } from '@/public/data/pageProducts'
+
 
 const FiltersMobile = ({ setIsFiltersOpen, categories, isAvailable, setCategory, setIsAvailable, max, inputFrom, setInputFrom, inputTo, setInputTo }: any) => {
     const [isVisible, setIsVisible] = useState(true)
@@ -73,7 +75,7 @@ const FiltersMobile = ({ setIsFiltersOpen, categories, isAvailable, setCategory,
                         حذف فیلترها
                     </div>
                 </div>
-                <Category categoryState={categories} setCategory={setCategory} />
+                <Category categoryState={categories} setCategory={setCategory} categories={categories}  />
                 <PriceRange
                     max={max}
                     inputFrom={inputFrom}

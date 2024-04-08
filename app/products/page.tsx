@@ -6,14 +6,13 @@ import Image from 'next/image'
 import Filters from '@/components/products/filters/Filters'
 import SearchBarProducts from '@/components/products/SearchBarProducts'
 import Ordering from '@/components/products/ordering/Ordering'
-import ProductCard from '@/components/ProductCard'
 import PaginationButtons from '@/components/PaginationButtons'
 import FiltersMobile from '@/components/products/filters/FiltersMobile'
 import OrderingMobile from '@/components/products/ordering/OrderingMobile'
 import { useDebounce } from '@/public/hooks/useDebounce'
 import SkeletonCard from '@/components/SkeletonCard'
 import { orders } from '@/public/data/pageProducts'
-import toast from 'react-hot-toast'
+import ProductCard from '@/components/ProductCard'
 
 const Products = () => {
   const [searchValue, setSearchValue] = useState('')
@@ -46,6 +45,7 @@ const Products = () => {
         setproductsCount(res.data.count)
         setMaxPrice(res.data.max_price)
       })
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currPage, activeOrder, categories, isAvailable, minPriceInput, maxPriceInput, maxPrice, debouncedSearch]);
 
   useEffect(() => {
@@ -58,10 +58,6 @@ const Products = () => {
   useEffect(() => {
     document.title = TITLE
   }, [])
-
-  const toastify = (msg: string) => {
-    toast.error(msg)
-  }
 
   return (
     <>
@@ -152,7 +148,6 @@ const Products = () => {
                       score={product.avg_rate}
                       priceWithOffer={product.min_sell_price}
                       product={product}
-                      toastify={toastify}
                     />
                   )
                 })

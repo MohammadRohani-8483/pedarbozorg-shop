@@ -1,7 +1,7 @@
 import React from 'react'
 import { specialOffers } from '@/public/data/specialOffers'
 import Image from 'next/image'
-import ProductCard from 'components/productCard'
+import ProductCard from 'components/ProductCard'
 import Link from 'next/link'
 
 const RelatedProducts = ({ product }: any) => {
@@ -35,7 +35,6 @@ const RelatedProducts = ({ product }: any) => {
                             score={product.score}
                             priceWithOffer={product.price}
                             name={product.name}
-                            toastify={alert}
                         />
                     ))
                 }

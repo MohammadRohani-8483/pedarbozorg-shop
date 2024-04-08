@@ -14,7 +14,7 @@ import { deleteCartItem, getCartFromServer, makeCartItem } from '@/public/redux/
 import { AppDispatch } from '@/public/redux/store';
 import { authState } from '@/public/redux/store/auth';
 
-const ProductCard = ({ price, link, image, name, priceWithOffer, score, product }: any) => {
+const ProductCardInSlider = ({ price, link, image, name, priceWithOffer, score, product }: any) => {
     const offerPresent = ((price - priceWithOffer) / price * 100) || 0
 
     const productIsAvailable = price || product?.is_available
@@ -252,4 +252,4 @@ const ProductCard = ({ price, link, image, name, priceWithOffer, score, product 
     )
 }
 
-export default ProductCard
+export default ProductCardInSlider

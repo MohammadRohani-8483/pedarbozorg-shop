@@ -1,26 +1,26 @@
 export const menuItems = [
   {
-    id: crypto.randomUUID(),
+    id: 1,
     item: "صفحه اصلی",
     link: "/",
   },
   {
-    id: crypto.randomUUID(),
+    id: 2,
     item: "محصولات",
     link: "/products/",
   },
   {
-    id: crypto.randomUUID(),
+    id: 3,
     item: "مجله",
     link: "/blog/",
   },
   {
-    id: crypto.randomUUID(),
+    id: 4,
     item: "درباره ما",
     link: "/about-us/",
   },
   {
-    id: crypto.randomUUID(),
+    id: 5,
     item: "تماس با ما",
     link: "/contact-us/",
   },

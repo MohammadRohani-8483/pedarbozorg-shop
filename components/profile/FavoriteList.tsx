@@ -14,10 +14,8 @@ import 'swiper/css/pagination';
 import { FreeMode, Navigation } from 'swiper/modules';
 
 import SliderBtn from 'components/SliderBtn';
-import ProductCard from 'components/productCard';
+import ProductCard from '@/components/ProductCard';
 import SkeletonCard from 'components/SkeletonCard';
-import toast from 'react-hot-toast';
-import Image from 'next/image';
 import EmptyList from './EmptyList';
 
 type props = {
@@ -30,10 +28,6 @@ const FavoriteList = ({ products }: props) => {
     useEffect(() => {
         setStart(true)
     }, [])
-
-    const toastify = (msg: string) => {
-        toast.error(msg)
-    }
 
     return (
         <ProfileBox title='لیست علاقه مندی من' viewBtn>
@@ -50,7 +44,6 @@ const FavoriteList = ({ products }: props) => {
                                     score={product.avg_rate}
                                     priceWithOffer={product.min_sell_price}
                                     product={product}
-                                    toastify={toastify}
                                 />
                                 :
                                 <SkeletonCard />
@@ -103,7 +96,6 @@ const FavoriteList = ({ products }: props) => {
                                                 score={product.avg_rate}
                                                 priceWithOffer={product.min_sell_price}
                                                 product={product}
-                                                toastify={toastify}
                                             />
                                         </SwiperSlide>
                                     )

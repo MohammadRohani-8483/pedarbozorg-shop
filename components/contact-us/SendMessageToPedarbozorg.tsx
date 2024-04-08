@@ -8,25 +8,11 @@ import * as yup from "yup"
 import { yupResolver } from "@hookform/resolvers/yup";
 import Input from "@/components/Input"
 
-type Inputs = {
-    name: string
-    E_mail: string
-    phone_number: string
-    order_number: string
-    text_message: string
-    upload: any
-}
-
-const schema = yup.object().shape({
-    name: yup.string().required(),
-    E_mail: yup.string().required().email('ایمیل صحیح وارد کنید.'),
-    phone_number: yup.string().required("تلفن تماس اجباری است.")
-        .matches(/^09\d{9}$/, "لطفا شماره صحیح وارد کنید.")
-        .min(11, "لطفا شماره صحیح وارد کنید.").max(11, "لطفا شماره صحیح وارد کنید."),
-    text_message: yup.string().required(),
-})
-
 export default function SendMessageToPedarbozorg() {
+    const [name, setName] = useState('')
+    const [mail, setMail] = useState('')
+    const [phoneNumber, setPhoneNumber] = useState('')
+    const [orderNumber, setOrderNumber] = useState('')
     const subjectOptions = [
         'پیشنهاد',
         'انتقاد یا شکایت',
@@ -40,27 +26,12 @@ export default function SendMessageToPedarbozorg() {
 
     const defaultValue = "انتخاب موضوع"
 
-    const {
-        register,
-        handleSubmit,
-        watch,
-        formState: { errors },
-    } = useForm({ resolver: yupResolver(schema,"","","","","") })
-
-    const onSubmit: SubmitHandler<FieldValues> = (data) => {
-        const dataWithSubject = {
-            ...data,
-            subject: activeOption
-        }
-        console.log(dataWithSubject)
-    }
-
     return (
         <div className='flex flex-col bg-white rounded-2xl p-4 items-center justify-center w-full gap-6'>
             <h2 className='text-base-300 font-bold text-xl'>
                 ارسال پیام به پدربزرگ
             </h2>
-            <form onSubmit={handleSubmit(onSubmit)} className='w-full gap-4 flex flex-col items-end justify-center'>
+            <form className='w-full gap-4 flex flex-col items-end justify-center'>
                 <div className='w-full grid grid-cols-1 md:grid-cols-2 gap-4'>
                     <div className='flex justify-center items-center w-full gap-3'>
                         <label htmlFor="subject">موضوع*:</label>
@@ -75,7 +46,7 @@ export default function SendMessageToPedarbozorg() {
                         type='text'
                         name='name'
                         placeholder='نام و نام خانوادگی*'
-                        register={register}
+                        setValue={setName}
                     />
                 </div>
                 <div className='w-full grid grid-cols-1 md:grid-cols-3 gap-4'>
@@ -84,7 +55,7 @@ export default function SendMessageToPedarbozorg() {
                         name='E_mail'
                         placeholder='ایمیل*'
                         className='w-full'
-                        register={register}
+                        setValue={setMail}
                     />
                     <Input
                         type='tel'
@@ -93,14 +64,14 @@ export default function SendMessageToPedarbozorg() {
                         name='phone_number'
                         placeholder='تلفن تماس*'
                         className='w-full'
-                        register={register}
+                        setValue={setPhoneNumber}
                     />
                     <Input
                         type='number'
                         name='order_number'
                         placeholder='شماره سفارش'
                         className='w-full'
-                        register={register}
+                        setValue={setOrderNumber}
                     />
                 </div>
                 <div className='relative w-full focus:border-base-300 border border-gray-400 hover:border-gray-700 rounded-lg p-1 flex justify-center items-center h-40'>
@@ -108,13 +79,12 @@ export default function SendMessageToPedarbozorg() {
                         className='peer/message w-full h-10 p-2 outline-none  text-black resize-none h-full '
                         id='scroll'
                         placeholder=''
-                        {...register("text_message")}
                     />
                     <label htmlFor="scroll" className='peer-focus/message:text-[10px] text-[10px] peer-focus/message:text-base-300 text-gray-400 absolute peer-focus/message:-top-2.5 peer-focus/message:right-4 bg-white px-1 right-4 -top-[10px] transition-all pointer-events-none peer-placeholder-shown/message:text-base peer-placeholder-shown/message:right-2 peer-placeholder-shown/message:top-2'>
                         متن پیام*
                     </label>
                 </div>
-                <UploadFiles register={register} name={"upload"} />
+                <UploadFiles />
                 <button type='submit' className='solid-btn rectangle-btn flex justify-center items-center gap-2 w-[100px]'>
                     ارسال
                     <Image

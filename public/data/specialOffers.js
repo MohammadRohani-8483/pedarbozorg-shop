@@ -1,7 +1,7 @@
 
 export const specialOffers = [
   {
-    id: crypto.randomUUID(),
+    id: 1,
     name: "آرد نخودچی",
     price: 19383000,
     link: "/",
@@ -9,7 +9,7 @@ export const specialOffers = [
     image: "/Image/offer-products/ard-nokhodchi.png",
   },
   {
-    id: crypto.randomUUID(),
+    id: 2,
     name: "آرد نخودچی",
     image: "/Image/offer-products/ard-nokhodchi.png",
     price: 19383000,
@@ -18,7 +18,7 @@ export const specialOffers = [
     score: 3,
   },
   {
-    id: crypto.randomUUID(),
+    id: 3,
     name: "آرد نخودچی",
     image: "/Image/offer-products/ard-nokhodchi.png",
     price: 19383000,
@@ -27,7 +27,7 @@ export const specialOffers = [
     score: 4,
   },
   {
-    id: crypto.randomUUID(),
+    id: 4,
     name: "آرد نخودچی",
     image: "/Image/offer-products/ard-nokhodchi.png",
     price: 19383000,
@@ -36,7 +36,7 @@ export const specialOffers = [
     score: 3.5,
   },
   {
-    id: crypto.randomUUID(),
+    id: 5,
     name: "آرد نخودچی",
     image: "/Image/offer-products/ard-nokhodchi.png",
     price: 19383000,
@@ -46,7 +46,7 @@ export const specialOffers = [
   },
   {
     image: "/Image/offer-products/ard-nokhodchi.png",
-    id: crypto.randomUUID(),
+    id: 6,
     name: "آرد نخودچی",
     price: 19383000,
     offerPresent: 68,
@@ -54,7 +54,7 @@ export const specialOffers = [
     score: 4,
   },
   {
-    id: crypto.randomUUID(),
+    id: 7,
     name: "آرد نخودچی",
     image: "/Image/offer-products/ard-nokhodchi.png",
     price: 19383000,
@@ -63,7 +63,7 @@ export const specialOffers = [
     score: 5,
   },
   {
-    id: crypto.randomUUID(),
+    id: 8,
     name: "آرد نخودچی",
     image: "/Image/offer-products/ard-nokhodchi.png",
     price: 19383000,

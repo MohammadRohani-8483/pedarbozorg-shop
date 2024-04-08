@@ -13,6 +13,7 @@ import { cart, cartItem } from '@/public/types/productType';
 import { authState } from '@/public/redux/store/auth';
 import { deleteCartItem, getCartFromServer, makeCartItem } from '@/public/redux/actions/cartActions';
 import { AppDispatch } from '@/public/redux/store';
+import toast from 'react-hot-toast';
 
 type prop = {
     price: number
@@ -22,10 +23,9 @@ type prop = {
     priceWithOffer: number
     score?: number
     product?: any
-    toastify: (par: string) => void
 }
 
-const ProductCard = ({ price, link, image, name, priceWithOffer, score, product, toastify }: prop) => {
+const ProductCard = ({ price, link, image, name, priceWithOffer, score, product }: prop) => {
     const offerPresent = ((price - priceWithOffer) / price * 100) || 0
 
     const productIsAvailable = price || product?.is_available
@@ -121,7 +121,7 @@ const ProductCard = ({ price, link, image, name, priceWithOffer, score, product,
                                     />
                                     :
                                     <Image
-                                        onClick={() => toastify("این قابلیت به زودی اضافه میشود.")}
+                                        onClick={() => toast.error("این قابلیت به زودی اضافه میشود.")}
                                         src='/iconSax/like.png'
                                         alt="like"
                                         width={20}
@@ -149,7 +149,7 @@ const ProductCard = ({ price, link, image, name, priceWithOffer, score, product,
                                             productIsAvailable ?
                                                 handleAddToCart()
                                                 :
-                                                toastify('این محصول ناموجود میباشد.')
+                                                toast.error('این محصول ناموجود میباشد.')
                                         }}
                                         src='/iconSax/shopping-cart-product.svg'
                                         alt="shoping cart"
@@ -233,7 +233,6 @@ const ProductCard = ({ price, link, image, name, priceWithOffer, score, product,
             <div className='lg:hidden w-full flex justify-between items-center px-2'>
                 {isLike ?
                     <Image
-                        // onClick={() => setIsLike(false)}
                         src='/iconSax/is-like.svg'
                         alt="like"
                         width={20}
@@ -242,8 +241,7 @@ const ProductCard = ({ price, link, image, name, priceWithOffer, score, product,
                     />
                     :
                     <Image
-                        // onClick={() => setIsLike(true)}
-                        onClick={() => toastify("این قابلیت به زودی اضافه میشود.")}
+                        onClick={() => toast.error("این قابلیت به زودی اضافه میشود.")}
                         src='/iconSax/like.png'
                         alt="like"
                         width={20}

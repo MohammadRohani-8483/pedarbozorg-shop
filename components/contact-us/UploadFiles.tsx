@@ -2,7 +2,7 @@
 import Image from 'next/image'
 import React from 'react'
 
-export default function UploadFiles({ register }: any) {
+export default function UploadFiles() {
     return (
         <div className='flex flex-col lg:flex-row lg:py-12 items-center justify-center lg:justify-around w-full  outline-none border border-gray-400 rounded-lg text-black p-4 gap-4 lg:gap-0'>
             <Image
@@ -21,7 +21,7 @@ export default function UploadFiles({ register }: any) {
                 />
                 بارگذاری عکس یا ویدئو
             </label>
-            <input {...register("upload")} id="upload" type="file" className="hidden" accept="image/png, image/jpeg, video/mp4" multiple />
+            <input id="upload" type="file" className="hidden" accept="image/png, image/jpeg, video/mp4" multiple />
         </div>
     )
 }

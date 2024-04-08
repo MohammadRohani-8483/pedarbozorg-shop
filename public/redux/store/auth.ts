@@ -48,30 +48,29 @@ const authSlice = createSlice({
                 state.error = null
                 state.userToken.access = action.payload.access
                 state.userToken.refresh = action.payload.refresh
-                state.isLogedIn = true
-                console.log(state.error)
             } else {
                 state.isLogedIn = false
                 state.error = action.payload.error
-                console.log(state.error)
             }
             state.isLoad = false
-            console.log('fulfilled')
+            console.log('login fulfilled')
         })
         builder.addCase(loginUser.rejected, (state) => {
-            state.isLogedIn = false
             state.isLoad = false
-            console.log('rejected')
+            console.log('login rejected')
         })
         builder.addCase(loginUser.pending, (state) => {
-            state.isLogedIn = false
             state.error = null
             state.isLoad = true
-            console.log('pending')
+            console.log('login pending')
         })
         builder.addCase(getMeThunk.fulfilled, (state, action) => {
             if (action.payload.code !== "token_not_valid") {
                 state.userInfo = action.payload[0]
+                state.isLogedIn = true
+            } else {
+                state.isLogedIn = false
+                state.userInfo = {}
             }
         })
     }

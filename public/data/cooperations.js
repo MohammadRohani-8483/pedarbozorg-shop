@@ -1,16 +1,16 @@
 export const cooperations =[
     {
-        id: crypto.randomUUID(),
+        id: 1,
         name:"زودل",
         image:"/Image/cooperations/Zoodel.png",
     },
     {
-        id: crypto.randomUUID(),
+        id: 2,
         name:"اتریش",
         image:"/Image/cooperations/Austria.png",
     },
     {
-        id: crypto.randomUUID(),
+        id: 3,
         name:"سوئیس",
         image:"/Image/cooperations/Switzerland.png",
     },

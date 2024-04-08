@@ -33,7 +33,7 @@ const LastMessages = ({ messages }: props) => {
             <div className='flex flex-col gap-4 justify-center items-center w-full md:hidden'>
                 {messages?.length > 0 ?
                     Array(10).fill(1).slice(0, 4).map((_, i, array) => (
-                        <React.Fragment key={crypto.randomUUID()}>
+                        <React.Fragment key={i}>
                             <Message
                                 desc='سفارش شما درحال پردازش می‌باشد و پس از تایید تحویل پست خواهد شد'
                                 month='08' day='05' year='1409' title='سفارش شما ثبت شد'
@@ -80,7 +80,7 @@ const LastMessages = ({ messages }: props) => {
                             >
                                 {Array(10).fill(1).map((_, i, array) => {
                                     return (
-                                        <SwiperSlide key={crypto.randomUUID()} className='!flex !justify-center !items-center !gap-5'>
+                                        <SwiperSlide key={i} className='!flex !justify-center !items-center !gap-5'>
                                             <Message
                                                 desc='سفارش شما درحال پردازش می‌باشد و پس از تایید تحویل پست خواهد شد'
                                                 month='08' day='05' year='1409' title='سفارش شما ثبت شد'

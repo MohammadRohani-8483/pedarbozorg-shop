@@ -8,11 +8,11 @@ import SearchMobile from './SearchMobile';
 import MenuMobile from './MenuMobile';
 import { motion } from 'framer-motion';
 import ShopingCard from './ShopingCard';
-import SignUpSignIn from 'components/signUp_signIn/signUpSignIn';
 import { useDispatch, useSelector } from 'react-redux';
 import { cart } from '@/public/types/productType';
 import { authState } from '@/public/redux/store/auth';
 import ProfileMenu from './ProfileMenu';
+import SignUpSignIn from './signUp_signIn/SignUpSignIn';
 
 const Header: React.FC = () => {
     const [isTop, setIsTop] = useState(true);
