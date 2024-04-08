@@ -42,6 +42,7 @@ const slice = createSlice({
     },
     extraReducers: builder => {
         builder.addCase(makeCartItem.fulfilled, (state, action) => {
+            // console.log(action)
         })
         builder.addCase(makeCartItem.rejected, (state, action) => {
             console.log(action)

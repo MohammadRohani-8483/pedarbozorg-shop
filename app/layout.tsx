@@ -15,17 +15,6 @@ export const metadata: Metadata = {
   },
 };
 
-const fetchFunc = async (par: any) => {
-  const res = await fetch(`${process.env.API}/core-api/user/customers/me/`, {
-    method: "GET",
-    credentials: 'include',
-    headers: {
-      Authorization: `JWT ${par}`
-    }
-  })
-  return res.json()
-}
-
 export default async function RootLayout({
   children,
 }: Readonly<{
@@ -35,13 +24,11 @@ export default async function RootLayout({
   const accessToken = cookiesStore.get("access") || null
   const refreshToken = cookiesStore.get("refresh") || null
 
-  const me = accessToken && await fetchFunc(accessToken?.value)
-
   return (
-    <html lang="fa" className='bg-base-100 overflow-x-hidden'>
+    <html lang="fa" className='bg-background overflow-x-hidden'>
       <body>
         <StoreProvider>
-          <ClientProvider token={{ accessToken, refreshToken }} me={me}>
+          <ClientProvider token={{ accessToken, refreshToken }} >
             <Header />
             <ScrollToTop />
             {children}

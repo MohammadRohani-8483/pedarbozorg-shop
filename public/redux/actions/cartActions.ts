@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { cartItem } from 'public/types/productType';
 import { createAsyncThunk } from '@reduxjs/toolkit'
 
@@ -73,23 +74,36 @@ export const makeCartFromLocalStorage = createAsyncThunk(
     'cart/makeCartFromLocalStorage',
     async (token: string) => {
         const localItem: cartItem[] = typeof window !== 'undefined' && (localStorage?.getItem("shoping_cart") ? JSON.parse(localStorage?.getItem("shoping_cart")!) : [])
-        const arr = localItem.map(item => ({
-            variant: item.variant.id,
-            quantity: item.quantity!
-        }))
-        const body: Record<string, number> = {}
-        arr.forEach((item, index) => {
-            body[`cart_items[${index}]variant`] = item.variant;
-            body[`cart_items[${index}]quantity`] = item.quantity;
-        })
+        const body = localItem.map(item => ({ variant: item.variant.id, quantity: item.quantity! }))
+        console.log(JSON.stringify({ cart_items: body }))
         const config = {
             method: "POST",
             headers: {
                 Authorization: `JWT ${token}`
             },
-            body: JSON.stringify(body)
+            body: JSON.stringify({ cart_items: body })
         }
-        const data = await fetch(`/api/transaction-api/cart-item/multi_cart_item/`, config)
+        // const data = await fetch(`/api/transaction-api/cart-item/multi_cart_item/`, config)
+        const data = await axios.post(`/api/transaction-api/cart-item/multi_cart_item/`, { cart_items: body }, {
+            headers: {
+                Authorization: `JWT ${token}`
+            },
+        })
+        return data
+    }
+)
+export const makeMultiCartItems = createAsyncThunk(
+    'cart/makeMultiCartItems',
+    async ({ token, variant, quantity }: mekeParam) => {
+        const config = {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `JWT ${token}`
+            },
+            body: JSON.stringify({ variant, quantity })
+        }
+        const data = await fetch(`/api/transaction-api/cart-item`, config)
         return data.json()
     }
 )

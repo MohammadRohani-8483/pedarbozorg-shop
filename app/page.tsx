@@ -22,14 +22,6 @@ const fetchFunc = async (api: string) => {
 
 export default async function Home() {
   const data = await fetchFunc(`${process.env.API}/core-api/site/landing/`)
-  const productPage1 = await fetchFunc(`${process.env.API}/store-api/products-public/?ordering=-view_count&page=1`)
-
-  const addProductToCart = [
-    productPage1.results[3],
-    productPage1.results[1],
-    productPage1.results[6],
-    productPage1.results[2],
-  ]
 
   return (
     <main className="lg:pt-48 pt-16">
@@ -38,7 +30,7 @@ export default async function Home() {
       <GroupProducts />
       <SpecialProducts />
       <OffersSlider products={data.most_discount_products} />
-      <SpecialProductsSlider products={data.vip_products} productToCart={addProductToCart} />
+      <SpecialProductsSlider products={data.vip_products} />
       <VideoCategory />
       <WhyPedarBozorg />
       <BannerHomePage />

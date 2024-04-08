@@ -10,7 +10,7 @@ import OTPInputGroup from './OTP';
 import { useTimer } from 'public/hooks/useTimer'
 import { authState, getMe } from '@/public/redux/store/auth';
 import { sendSMS } from './EnterPhoneNumberForm';
-import { makeCartFromLocalStorage } from '@/public/redux/actions/cartActions';
+import { getCartFromServer, makeCartFromLocalStorage } from '@/public/redux/actions/cartActions';
 
 type props = {
     handleClose: () => void
@@ -24,11 +24,16 @@ const CodeVerificationForm = ({ handleClose, phoneNumber }: props) => {
 
     useEffect(() => {
         setIsLoading(authState.isLoad)
-        if (authState.isLogedIn) {
-            toast.success("شما با موفقیت وارد شدید.")
-            handleClose()
-            dispatch(getMeThunk(authState.userToken.access!))
-            // dispatch(makeCartFromLocalStorage(authState.userToken.access!))
+        if (authState.userToken.access) {
+            const login = async () => {
+                await dispatch(getMeThunk(authState.userToken.access!))
+                await dispatch(makeCartFromLocalStorage(authState.userToken.access!))
+                await dispatch(getCartFromServer(authState.userToken.access!))
+                localStorage.removeItem('shoping_cart')
+                handleClose()
+                toast.success("شما با موفقیت وارد شدید.")
+            }
+            login()
         } else if (authState.error) {
             toast.error(authState.error)
             setInputValues(new Array(5).fill(""))

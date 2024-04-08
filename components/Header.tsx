@@ -33,7 +33,7 @@ const Header: React.FC = () => {
 
     const cart = useSelector((state: { cart: cart }) => state.cart.cartItems)
     const isLogedIn = useSelector((state: { auth: authState }) => state.auth.isLogedIn)
-    const userInfo = useSelector((state: { auth: authState }) => state.auth.userInfo)
+    const auth = useSelector((state: { auth: authState }) => state.auth)
 
     const handleScroll = () => {
         if (window.scrollY > 80) {
@@ -127,7 +127,7 @@ const Header: React.FC = () => {
                     </motion.div>
                 </div>
                 <div className="flex gap-4 items-center h-20 w-auto">
-                    {userInfo?.user ?
+                    {auth.isLogedIn ?
                         <motion.div className='py-3'
                             onHoverStart={() => {
                                 setIsProfileVisible(true)
@@ -144,7 +144,7 @@ const Header: React.FC = () => {
                                         height={24}
                                     />
                                     <p className='text-base-text-base-300 max-w-[98px] overflow-hidden text-ellipsis'>
-                                        {userInfo.first_name ? `${userInfo.first_name} ${userInfo.last_name}` : userInfo.user.username}
+                                        {auth.userInfo.first_name ? `${auth.userInfo?.first_name} ${auth.userInfo?.last_name}` : auth.userInfo?.user?.username}
                                     </p>
                                 </Link>
                                 {isProfileVisible && <ProfileMenu isHover={isProfileHover} />}
