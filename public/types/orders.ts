@@ -1,3 +1,48 @@
+export type OrderInterface = {
+    total_price: string;
+    created_at: string;
+    status: {
+        level: number;
+        label: string;
+    };
+    address: {
+        city: string;
+        email: string;
+        phone_number: string;
+    };
+    order_id: number;
+    id: string;
+    order_items: ProductInOrderInterface[]
+}
+
+export interface ProductInOrderInterface {
+    id: number;
+    order: string;
+    is_gift: number,
+    quantity: number;
+    total_price: number;
+    variant: {
+        id: number;
+        attribute: any;
+        image: string,
+        name: string,
+        product: {
+            description: string | null;
+            featured_image: string;
+            name: string;
+            id: number;
+            slug: string,
+        };
+        featured_image: string,
+        shatoot_info: {
+            final_price: number;
+            discount: number;
+            sell_price: string;
+        };
+    };
+
+}
+
 type level = 1 | 2 | "completed" | "cancelled"
 export type order = {
     level: level

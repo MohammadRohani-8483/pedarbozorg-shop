@@ -23,29 +23,9 @@ import { motion } from 'framer-motion'
 
 type prop = {
     products: vipProducts
-    productToCart: any[]
 }
 
-export default function SpecialProductsSlider({ products, productToCart }: prop) {
-    const cartItems: cartItem[] = productToCart?.map(product => ({
-        variant: {
-            id: product.cheapest_variant_id,
-            image: product.featured_image,
-            name: product.name,
-            product: {
-                id: product.id,
-                featured_image: product.featured_image,
-                name: product.name,
-                slug: product.slug
-            },
-            shatoot_info: {
-                discount: product.min_price - product.min_sell_price,
-                final_price: product.min_price,
-                sell_price: product.min_sell_price
-            }
-        }
-    }))
-
+export default function SpecialProductsSlider({ products }: prop) {
     const auth = useSelector((state: { auth: authState }) => state.auth)
 
     const dispatch = useDispatch<AppDispatch>()
