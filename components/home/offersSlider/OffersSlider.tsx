@@ -47,7 +47,7 @@ export default function OffersSlider({ products }: any) {
     })
 
     return (
-        <div className='text-center max-w-[1136px] mx-auto w-[90%] px-2 py-4 sm:px-4 md:px-6 sm:py-5 md:py-6 bg-base-300 mt-10 rounded-2xl'>
+        <div className='text-center max-w-[1136px] mx-auto w-[90%] px-2 py-4 sm:px-4 md:px-6 sm:py-5 md:py-6 bg-secondry-base mt-10 rounded-2xl'>
             <div className='flex items-center justify-center gap-4'>
                 <Image
                     src="/Image/title-vecors/right-white.svg"
@@ -127,18 +127,6 @@ export default function OffersSlider({ products }: any) {
                             <SkeletonCard slider />
                         </div>
                     </div>
-                    // <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 grid-rows-1 overflow-hidden justify-items-center items-center w-full h-72 bg-red-400 gap-2 px-4'>
-                    //     <SkeletonCard />
-                    //     <div className='hidden sm:block'>
-                    //         <SkeletonCard />
-                    //     </div>
-                    //     <div className='hidden'>
-                    //         <SkeletonCard />
-                    //     </div>
-                    //     <div className='hidden'>
-                    //         <SkeletonCard />
-                    //     </div>
-                    // </div>
                 }
                 <SliderBtn next
                     className='next-offer-btn'

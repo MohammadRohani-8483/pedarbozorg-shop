@@ -78,7 +78,7 @@ const Alert = ({ title, confirmFunc, redBtn, setIsAlertOpen, messageToast, child
                 variants={variants}
                 transition={{ duration: 0.4 }}
             >
-                <div className='flex justify-between items-center text-base-300 text-xl font-bold w-full'>
+                <div className='flex justify-between items-center text-secondry-base text-xl font-bold w-full'>
                     <h1>
                         {title}
                     </h1>

@@ -197,7 +197,7 @@ const ProductCardInSlider = ({ price, link, image, name, priceWithOffer, score, 
                 </div>
             </div>
             <div className='w-full flex flex-col gap-2'>
-                <Link href={link} className='text-base-300 text-xl font-bold'>{name}</Link>
+                <Link href={link} className='text-secondry-base text-xl font-bold'>{name}</Link>
                 <div className='flex justify-between w-full items-center ltr gap-2'>
                     <div className='flex gap-2 items-center justify-end w-full'>
                         {productIsAvailable ?
@@ -228,7 +228,7 @@ const ProductCardInSlider = ({ price, link, image, name, priceWithOffer, score, 
                         :
                         (score &&
                             <div className='flex items-center justify-center gap-1'>
-                                <FaStar className='text-[#FFC436]' />
+                                <FaStar className='text-primery-base' />
                                 <p className='text-gray-600 text-base'>{score.toFixed(1)}</p>
                             </div>
                         )
@@ -240,7 +240,7 @@ const ProductCardInSlider = ({ price, link, image, name, priceWithOffer, score, 
                             <p className='line-through text-gray-400 text-base'>{formatNumber(price)}</p>
                             {score &&
                                 <div className='flex items-center justify-center gap-1'>
-                                    <FaStar className='text-[#FFC436]' />
+                                    <FaStar className='text-primery-base' />
                                     <p className='text-gray-600 text-base'>{score.toFixed(1)}</p>
                                 </div>
                             }

@@ -54,7 +54,7 @@ const FiltersMobile = ({ setIsFiltersOpen, categories, isAvailable, setCategory,
                     onClick={handleClose}
                 />
                 <div className='flex w-full justify-between items-center gap-8'>
-                    <div className='flex gap-2 justify-center items-center px-3 py-1.5 text-xl text-base-300 font-bold'>
+                    <div className='flex gap-2 justify-center items-center px-3 py-1.5 text-xl text-secondry-base font-bold'>
                         <Image
                             src='/iconSax/filter.svg'
                             alt='filter'
@@ -64,7 +64,7 @@ const FiltersMobile = ({ setIsFiltersOpen, categories, isAvailable, setCategory,
                         <h2>فیلترها</h2>
                     </div>
                     <div
-                        className='px-3 py-1.5 text-[#C62020] text-sm whitespace-nowrap cursor-pointer'
+                        className='px-3 py-1.5 text-error-base text-sm whitespace-nowrap cursor-pointer'
                         onClick={() => {
                             setCategory([])
                             setIsAvailable(false)

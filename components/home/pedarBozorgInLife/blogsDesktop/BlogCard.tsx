@@ -22,7 +22,7 @@ export default function BlogCard({ link, image, name, category, readingTime, con
             </div>
             <div className='flex flex-col justify-between items-center gap-2'>
                 <div className='flex justify-between w-full'>
-                    <h2 className='text-base-500 text-sm'>{category}</h2>
+                    <h2 className='text-secondry-tint-4 text-sm'>{category}</h2>
                     <div className='flex gap-2 text-xs text-gray-600'>
                         <div className='flex items-center'>
                             ’{readingTime}
@@ -46,7 +46,7 @@ export default function BlogCard({ link, image, name, category, readingTime, con
                         </div>
                     </div>
                 </div>
-                <h2 className='text-base-300 font-bold'>{name}</h2>
+                <h2 className='text-secondry-base font-bold'>{name}</h2>
                 <p className='text-justify text-sm text-gray-500'>{description}</p>
             </div>
         </Link>

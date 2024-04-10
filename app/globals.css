@@ -47,11 +47,11 @@ html {
 }
 
 .solid-btn {
-  @apply bg-base-300 hover:bg-base-400 text-base-100 rounded-lg text-sm md:text-base cursor-pointer transition-all duration-300
+  @apply bg-secondry-base hover:bg-secondry-shade-2 text-background rounded-lg text-sm md:text-base cursor-pointer transition-all duration-300
 }
 
 .outline-btn {
-  @apply bg-base-100 text-base-300 border border-base-300 hover:bg-base-200 rounded-lg text-sm md:text-base cursor-pointer transition-all duration-300
+  @apply bg-background text-secondry-base border border-secondry-base hover:bg-secondry-tint-7 rounded-lg text-sm md:text-base cursor-pointer transition-all duration-300
 }
 
 .rectangle-btn {
@@ -63,7 +63,7 @@ html {
 }
 
 .disable-btn{
-  @apply !bg-[#EDEDED] hover:!bg-[#EDEDED] !text-[#ADADAD] !cursor-not-allowed
+  @apply !bg-neutral-300 hover:!bg-neutral-300 !text-neutral-500 !cursor-not-allowed
 }
 
 * {
@@ -104,12 +104,12 @@ html {
 }
 
 ::-webkit-scrollbar {
-  @apply w-[8px] bg-base-200
+  @apply w-[8px] bg-secondry-tint-7
 }
 
 /* قسمت متحرک */
 ::-webkit-scrollbar-thumb {
-  @apply bg-base-300 rounded-2xl
+  @apply bg-secondry-base rounded-2xl
 }
 
 #scroll::-webkit-scrollbar {
@@ -191,10 +191,10 @@ html {
 }
 
 .leaflet-control-zoom-in{
-  @apply !bg-white !border !border-base-300 !rounded-lg !text-base-300 !size-10 !p-0 !flex !justify-center !items-center !pt-1 hover:!bg-base-100
+  @apply !bg-white !border !border-secondry-base !rounded-lg !text-secondry-base !size-10 !p-0 !flex !justify-center !items-center !pt-1 hover:!bg-background
 }
 .leaflet-control-zoom-out{
-  @apply !bg-white !border !border-base-300 !rounded-lg !text-base-300 !size-10 !p-0 !flex !justify-center !items-center !pt-1 hover:!bg-base-100
+  @apply !bg-white !border !border-secondry-base !rounded-lg !text-secondry-base !size-10 !p-0 !flex !justify-center !items-center !pt-1 hover:!bg-background
 }
 
 .leaflet-control-zoom{

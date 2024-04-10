@@ -11,8 +11,8 @@ export default function UploadFiles() {
                 width={64}
                 height={64}
             />
-            <p className="text-base text-[#757575] text-center">حداکثر ۵ تصویر jpeg یا png حداکثر یک مگابایت، یک ویدیو mp4 حداکثر ۵۰ مگابایت</p>
-            <label htmlFor="upload" className="rectangle-btn cursor-pointer border border-base-300 rounded-lg flex gap-2 justify-center items-center text-base-300 text-base hover:bg-base-200">
+            <p className="text-base text-neutral-600 text-center">حداکثر ۵ تصویر jpeg یا png حداکثر یک مگابایت، یک ویدیو mp4 حداکثر ۵۰ مگابایت</p>
+            <label htmlFor="upload" className="rectangle-btn cursor-pointer border border-secondry-base rounded-lg flex gap-2 justify-center items-center text-secondry-base text-base hover:bg-secondry-tint-7">
                 <Image
                     src='/iconSax/upload-green.svg'
                     alt='document upload'

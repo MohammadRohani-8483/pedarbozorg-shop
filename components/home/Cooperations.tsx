@@ -18,7 +18,7 @@ const Cooperations: React.FC = () => {
                                 className='object-contain'
                             />
                         </div>
-                        <h1 className='text-base-400 text-2xl font-bold'>{cooperation.name}</h1>
+                        <h1 className='text-secondry-shade-2 text-2xl font-bold'>{cooperation.name}</h1>
                     </div>
                 ))}
             </div>

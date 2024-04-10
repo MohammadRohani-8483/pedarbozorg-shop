@@ -40,8 +40,9 @@ const OTPInputGroup = ({ inputValues, inputValuesString, setInputValues, handleS
         if (inputValuesString.length > 4) {
             handleSubmit()
             setActiveOTPIndex(0)
+            setInputValues(new Array(5).fill(""))
         }
-    }, [inputValuesString])
+    }, [handleSubmit, inputValuesString, setInputValues])
 
     return (
         <div className="w-full ltr flex justify-between items-center">
@@ -52,7 +53,7 @@ const OTPInputGroup = ({ inputValues, inputValuesString, setInputValues, handleS
                         ref={activeOTPIndex === index ? inputRef : null}
                         type="number"
                         className={
-                            "w-[47px] h-10 border-2 rounded-lg bg-transparent outline-none text-center font-semibold text-xl spin-button-none border-[#CBCBCB] focus:border-gray-700 focus:text-gray-800 text-gray-500 transition [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                            "w-[47px] h-10 border-2 rounded-lg bg-transparent outline-none text-center font-semibold text-xl spin-button-none border-neutral-400 focus:border-gray-700 focus:text-gray-800 text-gray-500 transition [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                         }
                         onChange={handleOnChange}
                         onKeyDown={(e) => handleOnKeyDown(e, index)}
@@ -64,7 +65,6 @@ const OTPInputGroup = ({ inputValues, inputValuesString, setInputValues, handleS
         </div>
     );
 };
-
 
 export default OTPInputGroup;
 

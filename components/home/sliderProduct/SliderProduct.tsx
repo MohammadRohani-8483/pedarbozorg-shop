@@ -56,7 +56,7 @@ export default function SliderProduct() {
                 />
             </div>
             <div className="lg:max-w-[464px] w-full flex flex-col gap-2">
-                <h1 className="text-center lg:text-right font-bold text-base-300 text-[32px] lg:text-[44px] leading-[62px]">
+                <h1 className="text-center lg:text-right font-bold text-secondry-base text-[32px] lg:text-[44px] leading-[62px]">
                     محصولات پدربزرگ
                 </h1>
                 <div className="flex flex-col items-start gap-2 justify-start">
@@ -116,7 +116,7 @@ export default function SliderProduct() {
                         {
                             description.map((descript, i) => (
                                 <SwiperSlide key={i}>
-                                    <p className="text-justify text-md text-base-300 leading-8">
+                                    <p className="text-justify text-md text-secondry-base leading-8">
                                         {descript}
                                     </p>
                                 </SwiperSlide>
@@ -125,7 +125,7 @@ export default function SliderProduct() {
                     </Swiper>
                 </div>
                 <div className="flex justify-center items-center gap-1 paginate" style={{ transform: "translate3d(0px, 0, 0)" }}>
-                    <div className="w-[36px] h-2 bg-[#FFC436] rounded-lg" ></div>
+                    <div className="w-[36px] h-2 bg-primery-base rounded-lg" ></div>
                     <div className="w-3 h-2 bg-[#E3E3E3] rounded-lg" ></div>
                     <div className="w-3 h-2 bg-[#E3E3E3] rounded-lg" ></div>
                 </div>

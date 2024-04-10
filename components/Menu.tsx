@@ -3,7 +3,7 @@ import NavLink from './NavLink'
 
 export default function Menu() {
     return (
-        <ul className='flex gap-8 mt-4 font-semibold text-base-300 text-sm justify-center'>
+        <ul className='flex gap-8 mt-4 font-semibold text-secondry-base text-sm justify-center'>
             {menuItems.map((item) => (
                 <NavLink
                     key={item.id}

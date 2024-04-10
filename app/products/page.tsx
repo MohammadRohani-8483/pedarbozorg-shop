@@ -85,7 +85,7 @@ const Products = () => {
           <div className='flex flex-col gap-2 items-start justify-center'>
             <div className='flex justify-center items-center lg:hidden'>
               <div
-                className='flex gap-2 justify-center items-center text-sm text-base-300 px-3 py-1.5 cursor-pointer'
+                className='flex gap-2 justify-center items-center text-sm text-secondry-base px-3 py-1.5 cursor-pointer'
                 onClick={() => {
                   setIsFiltersOpen(true)
                   document.documentElement.classList.add('overflow-hidden')
@@ -117,7 +117,7 @@ const Products = () => {
                   setIsOrderingOpen(true)
                   document.documentElement.classList.add('overflow-hidden')
                 }}
-                className='flex gap-2 justify-center items-center text-sm text-base-300 px-3 py-1.5 cursor-pointer'
+                className='flex gap-2 justify-center items-center text-sm text-secondry-base px-3 py-1.5 cursor-pointer'
               >
                 <Image
                   src='/iconSax/sort.svg'

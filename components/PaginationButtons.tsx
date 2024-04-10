@@ -42,13 +42,13 @@ const PaginationButtons = ({ pageCount, setCurrentPage }: { pageCount: number, s
                 marginPagesDisplayed={1}
                 pageCount={pageCount}
                 previousLabel={
-                    <span className="w-10 h-10 flex items-center justify-center bg-lightGray rounded-md mr-4 text-base-300">
+                    <span className="w-10 h-10 flex items-center justify-center bg-lightGray rounded-md mr-4 text-secondry-base">
                         <BsChevronRight />
                     </span>
                 }
-                containerClassName="flex items-center justify-center gap-2 h-10 text-base-300"
+                containerClassName="flex items-center justify-center gap-2 h-10 text-secondry-base"
                 pageClassName="block hover:bg-lightGray w-10 h-10 flex items-center justify-center rounded-md m w-7"
-                activeClassName="bg-base-300 text-white"
+                activeClassName="bg-secondry-base text-white"
             />
         </motion.div>
     );

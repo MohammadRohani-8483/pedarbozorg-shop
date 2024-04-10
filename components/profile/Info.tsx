@@ -23,10 +23,10 @@ const Info = () => {
             <div className='w-full gap-4 md:gap-8 flex flex-col justigy-center items-center'>
                 <div className='flex justify-between items-center w-full'>
                     <div className='flex flex-col justify-center items-start gap-2'>
-                        <h2 className='font-bold text-base-300 text-base md:text-xl'>
+                        <h2 className='font-bold text-secondry-base text-base md:text-xl'>
                             {userInfo?.first_name ? `${userInfo?.first_name} ${userInfo?.last_name}` : userInfo?.user?.username}
                         </h2>
-                        <p className='text-sm md:text-base text-[#626262]'>
+                        <p className='text-sm md:text-base text-neutral-700'>
                             {userInfo?.first_name ? userInfo?.user?.username : null}
                         </p>
                     </div>
@@ -36,10 +36,10 @@ const Info = () => {
                 </div>
                 <div className='flex justify-between items-center w-full'>
                     <div className='flex flex-col justify-center items-start gap-2'>
-                        <h2 className='font-bold text-base-300 text-base'>
+                        <h2 className='font-bold text-secondry-base text-base'>
                             کیف پول
                         </h2>
-                        <div className='text-sm md:text-xl text-[#626262] flex justify-center items-center gap-2 font-bold'>
+                        <div className='text-sm md:text-xl text-neutral-700 flex justify-center items-center gap-2 font-bold'>
                             {formatNumber(userInfo.wallet_balance || 0)}
                             <div className='relative w-[19px] h-3 md:w-[27px] md:h-[18px]'>
                                 <Image

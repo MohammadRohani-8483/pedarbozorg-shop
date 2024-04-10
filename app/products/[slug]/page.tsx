@@ -29,16 +29,16 @@ const Page = async ({ params }: any) => {
                         height={400}
                         className='top-2 left-0 absolute z-[-1]'
                     />
-                    <div className='flex w-[90%] lg:w-full mx-auto justify-start items-center text-[#ADADAD] text-sm'>
-                        <Link href='/' className='px-3 py-2 text-base-300'>
+                    <div className='flex w-[90%] lg:w-full mx-auto justify-start items-center text-neutral-500 text-sm'>
+                        <Link href='/' className='px-3 py-2 text-secondry-base'>
                             پدربزرگ
                         </Link>
                         /
-                        <Link href='/products/' className='px-3 py-2 text-base-300'>
+                        <Link href='/products/' className='px-3 py-2 text-secondry-base'>
                             {product.categories?.map((category: any) => category.title)}
                         </Link>
                         /
-                        <Link href={`/products/${product.slug}`} className='px-3 py-2 text-base-300'>
+                        <Link href={`/products/${product.slug}`} className='px-3 py-2 text-secondry-base'>
                             {product?.name}
                         </Link>
                     </div>

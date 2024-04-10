@@ -74,7 +74,7 @@ const ShareForm = ({ setIsFormOpen, link }: props) => {
                 variants={variants}
                 transition={{ duration: 0.4 }}
             >
-                <div className='flex justify-between items-center text-base-300 text-xl font-bold w-full'>
+                <div className='flex justify-between items-center text-secondry-base text-xl font-bold w-full'>
                     <h1>اشتراک گذاری</h1>
                     <IoIosClose className='text-3xl cursor-pointer'
                         onClick={handleClose} />
@@ -83,7 +83,7 @@ const ShareForm = ({ setIsFormOpen, link }: props) => {
                     <h3 className='text-gray-500 text-sm'>این کالا را با دوستان خود به اشتراک بگذارید!</h3>
                     <button
                         onClick={copyLink}
-                        className='flex justify-center items-center w-full border border-gray-300 rounded-lg py-2 hover:bg-base-100 text-base-300'>کپی کردن لینک</button>
+                        className='flex justify-center items-center w-full border border-gray-300 rounded-lg py-2 hover:bg-background text-secondry-base'>کپی کردن لینک</button>
                 </div>
             </motion.div>
         </motion.div>

@@ -1,7 +1,6 @@
 import Image from 'next/image'
 import React from 'react'
 import { comment } from './CommentSection'
-import moment from "moment-jalaali";
 
 const Comment = ({ comment }: { comment: comment }) => {
     const datePartsRegex = /(?<!\d)\d+(?!\d)/g;
@@ -39,18 +38,18 @@ const Comment = ({ comment }: { comment: comment }) => {
                         height={16}
                     />
                 </div>
-                <div className='text-sm text-[#ADADAD]'>
+                <div className='text-sm text-neutral-500'>
                     {isCommentForThisYear ? `${shamsiDate.day} ${shamsiDate.month}` : `${shamsiDate.day} ${shamsiDate.month} ${shamsiDate.year}`}
                 </div>
-                <div className='text-sm text-[#ADADAD]'>
+                <div className='text-sm text-neutral-500'>
                     {comment.user.full_name}
                 </div>
             </div>
-            <div className='w-full h-[1px] bg-[#EDEDED]' />
+            <div className='w-full h-[1px] bg-neutral-300' />
             <p className='w-full text-right text-base text-black leading-7 text-justify'>
                 {comment.text}
             </p>
-            <div className='w-full h-[1px] bg-[#EDEDED]' />
+            <div className='w-full h-[1px] bg-neutral-300' />
             <div className='flex justify-between items-center w-full'>
                 <Image
                     src='/iconSax/flag.svg'
@@ -58,7 +57,7 @@ const Comment = ({ comment }: { comment: comment }) => {
                     width={20}
                     height={20}
                 />
-                <div className='flex justify-center items-center gap-2 text-[#757575] text-base'>
+                <div className='flex justify-center items-center gap-2 text-neutral-600 text-base'>
                     <div className='flex justify-center items-center gap-1.5'>
                         {comment.feedback.dislike_count}
                         <Image

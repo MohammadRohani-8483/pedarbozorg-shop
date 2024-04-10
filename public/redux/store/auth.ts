@@ -50,20 +50,19 @@ const authSlice = createSlice({
                 state.userToken.access = action.payload.access
                 state.userToken.refresh = action.payload.refresh
             } else {
-                state.isLogedIn = false
                 state.error = action.payload.error
             }
             state.isLoad = false
             console.log('login fulfilled')
         })
-        builder.addCase(loginUser.rejected, (state) => {
-            state.isLoad = false
-            console.log('login rejected')
-        })
         builder.addCase(loginUser.pending, (state) => {
             state.error = null
             state.isLoad = true
             console.log('login pending')
+        })
+        builder.addCase(loginUser.rejected, (state) => {
+            state.isLoad = false
+            console.log('login rejected')
         })
         builder.addCase(getMeThunk.fulfilled, (state, action) => {
             if (action.payload.code !== "token_not_valid") {

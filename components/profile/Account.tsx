@@ -35,7 +35,7 @@ const Account = () => {
                 <AccountItem iconName='mail' activeIcon='solid-mail' link='/profile/notifications/' title='پیغام ها' />
                 <AccountItem iconName='message-text' activeIcon='solid-message-text' link='/profile/comments/' title='نظرات' />
                 <AccountItem iconName='user-square' activeIcon='user-square-active' link='/profile/user-account/' title='مشخصات حساب کاربری' />
-                <AccountItem iconName='logout' title='مشخصات حساب کاربری' red clickFunc={() => setIsLogingOut(true)} />
+                <AccountItem iconName='logout' title='خروج از حساب' red clickFunc={() => setIsLogingOut(true)} />
                 {isLogingOut &&
                     <Alert
                         confirmFunc={handleLogOut}
@@ -44,7 +44,7 @@ const Account = () => {
                         textBtn='خروج از حساب'
                         title='خروج از حساب کاربری' redBtn
                     >
-                        <p className='text-[#353535] w-full text-right'>
+                        <p className='text-neutral-800 w-full text-right'>
                             برای سفارش و مشاهده سبد خرید بایستی وارد حساب خود باشید
                         </p>
                     </Alert>
@@ -63,12 +63,12 @@ const AccountItem = ({ title, link = '', clickFunc = () => { }, red, iconName, a
             <Link
                 onClick={clickFunc}
                 href={link}
-                className='cursor-pointer flex justify-center items-center text-sm md:text-xl text-base-300'
+                className='cursor-pointer flex justify-center items-center text-sm md:text-xl text-secondry-base'
             >
                 <div className={`-mr-2 size-10 flex justify-center items-center ${link === pathname ? "bg-[url('/Image/background/bg-title-account.svg')] bg-no-repeat bg-cover" : ""}`} >
                     <Icon nameIcon={link === pathname ? activeIcon! : iconName} size={24} />
                 </div>
-                <h3 className={`text-sm md:text-xl ${link === pathname ? "font-bold" : ""} ${red ? "text-[#C62020] hover:drop-shadow-[0_0_24px_rgba(198,32,32,0.60)]" : "text-base-300 hover:drop-shadow-[0_0_24px_rgba(61,131,97,0.60)]"}`}>
+                <h3 className={`text-sm md:text-xl ${link === pathname ? "font-bold" : ""} ${red ? "text-error-base hover:drop-shadow-[0_0_24px_rgba(198,32,32,0.60)]" : "text-secondry-base hover:drop-shadow-[0_0_24px_rgba(61,131,97,0.60)]"}`}>
                     {title}
                 </h3>
             </Link>

@@ -12,7 +12,7 @@ const SpecialOffers = () => {
                     width={69}
                     height={69}
                 />
-                <h1 className='font-bold text-2xl text-base-300'>پیشنهاد های ویژه</h1>
+                <h1 className='font-bold text-2xl text-secondry-base'>پیشنهاد های ویژه</h1>
                 <Image
                     src="/Image/title-vecors/left.svg"
                     alt="left"

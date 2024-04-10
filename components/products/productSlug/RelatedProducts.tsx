@@ -14,7 +14,7 @@ const RelatedProducts = ({ product }: any) => {
                     width={69}
                     height={69}
                 />
-                <h1 className='font-bold text-2xl text-base-300'>
+                <h1 className='font-bold text-2xl text-secondry-base'>
                     محصولات مرتبط
                 </h1>
                 <Image

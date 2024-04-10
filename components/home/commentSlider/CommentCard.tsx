@@ -10,8 +10,8 @@ export default function CommentCard({ name, score, product, comment, like, disli
     return (
         <div className='bg-white gap-2 justify-between items-center rounded-2xl p-4 flex flex-col w-full h-[250px] hover:shadow-hover hover:transition-shadow hover:duration-300'>
             <div className="flex justify-between items-center w-full">
-                <h2 className="text-xl text-base-300 font-bold">{name}</h2>
-                <div className="flex ltr text-[#FFC436]">
+                <h2 className="text-xl text-secondry-base font-bold">{name}</h2>
+                <div className="flex ltr text-primery-base">
                     {Array.from({ length: 5 }, (_, i) => {
                         return (
                             i < score ? <FaStar key={i} /> : <FaRegStar key={i} />
@@ -19,7 +19,7 @@ export default function CommentCard({ name, score, product, comment, like, disli
                     })}
                 </div>
             </div>
-            <h3 className="flex text-sm text-gray-400 justify-start w-full">محصول: <div className="text-base-500 pr-1"> {" " + product}</div></h3>
+            <h3 className="flex text-sm text-gray-400 justify-start w-full">محصول: <div className="text-secondry-tint-4 pr-1"> {" " + product}</div></h3>
             <p className="text-justify text-gray-700"> {comment} </p>
             <div className="ltr flex gap-4 text-gray-400 text-xs justify-start w-full">
                 <div className="flex gap-1">

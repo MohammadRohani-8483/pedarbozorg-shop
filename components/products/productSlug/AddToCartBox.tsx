@@ -15,16 +15,16 @@ const AddToCartBox = ({ product }: any) => {
             />
             {product.variants.length > 0 ?
                 <div id='scroll' className='ltr flex flex-col overflow-auto p-1 lg:p-0 w-full gap-1.5 lg:gap-4'>
-                    <h2 className='text-[#626262] font-bold text-base hidden lg:flex gap-1 justify-center items-center'>
+                    <h2 className='text-neutral-700 font-bold text-base hidden lg:flex gap-1 justify-center items-center'>
                         از
                         {product.min_price &&
-                            <span className='font-bold text-2xl text-base-300'>
+                            <span className='font-bold text-2xl text-secondry-base'>
                                 {formatNumber(product.min_price || 0)}
                             </span>
                         }
                         تا
                         {product.max_price &&
-                            <span className='font-bold text-2xl text-base-300'>
+                            <span className='font-bold text-2xl text-secondry-base'>
                                 {formatNumber(product.max_price || 0)}
                             </span>
                         }
@@ -53,10 +53,10 @@ const AddToCartBox = ({ product }: any) => {
                 </div>
                 :
                 <>
-                    <h2 className='text-[#ADADAD] font-bold text-2xl'>
+                    <h2 className='text-neutral-500 font-bold text-2xl'>
                         ناموجود
                     </h2>
-                    <button className='w-full bg-base-200 text-base-300 text-base py-2 rounded-lg flex gap-2 justify-center items-center'>
+                    <button className='w-full bg-secondry-tint-7 text-secondry-base text-base py-2 rounded-lg flex gap-2 justify-center items-center'>
                         <Image
                             src="/iconSax/alarm.svg"
                             alt="logo"

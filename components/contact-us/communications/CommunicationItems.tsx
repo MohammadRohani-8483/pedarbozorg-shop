@@ -24,7 +24,7 @@ const CommunicationItems = ({ icon, title, desc, descs, link }: props) => {
                     width={64}
                     height={64}
                 />
-                <h2 className='font-bold text-center text-xl text-base-300'>
+                <h2 className='font-bold text-center text-xl text-secondry-base'>
                     {title}
                 </h2>
             </div>

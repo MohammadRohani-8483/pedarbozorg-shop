@@ -26,10 +26,10 @@ const Notif = () => {
             <div className='relative w-10 h-10 cursor-pointer'>
                 <div
                     onClick={toastify}
-                    className='absolute top-0 right-0 bg-base-100 rounded-lg h-10 z-10 flex justify-center items-center gap-1 w-10 bg-[url("/iconSax/bell.svg")] bg-right bg-contain bg-no-repeat overflow-hidden md:hover:w-[195px] hover:bg-[#e0f1e9] transition-all duration-300'
+                    className='absolute top-0 right-0 bg-background rounded-lg h-10 z-10 flex justify-center items-center gap-1 w-10 bg-[url("/iconSax/bell.svg")] bg-right bg-contain bg-no-repeat overflow-hidden md:hover:w-[195px] hover:bg-secondry-tint-7 transition-all duration-300'
                 // whileHover={{ width: "195px", backgroundColor: "#e0f1e9" }}
                 >
-                    <h2 className='whitespace-nowrap text-sm text-base-300 font-bold absolute right-10'>
+                    <h2 className='whitespace-nowrap text-sm text-secondry-base font-bold absolute right-10'>
                         افزودن به علاقه مندی ها
                     </h2>
                 </div>
@@ -37,10 +37,10 @@ const Notif = () => {
             <div className='relative w-10 h-10 cursor-pointer'>
                 <div
                     onClick={clickShareFormHandler}
-                    className='absolute top-0 right-0 bg-base-100 rounded-lg h-10 z-10 flex justify-center items-center gap-1 w-10 bg-[url("/iconSax/share-green.svg")] bg-right bg-contain bg-no-repeat overflow-hidden md:hover:w-[158px] hover:bg-[#e0f1e9] transition-all duration-300'
+                    className='absolute top-0 right-0 bg-background rounded-lg h-10 z-10 flex justify-center items-center gap-1 w-10 bg-[url("/iconSax/share-green.svg")] bg-right bg-contain bg-no-repeat overflow-hidden md:hover:w-[158px] hover:bg-secondry-tint-7 transition-all duration-300'
                 // whileHover={{ width: "158px", backgroundColor: "#e0f1e9" }}
                 >
-                    <h2 className='whitespace-nowrap text-sm text-base-300 font-bold absolute right-10'>
+                    <h2 className='whitespace-nowrap text-sm text-secondry-base font-bold absolute right-10'>
                         به اشتراک گذاشتن
                     </h2>
                 </div>
@@ -49,10 +49,10 @@ const Notif = () => {
             <div className='relative w-10 h-10 cursor-pointer'>
                 <div
                     onClick={toastify}
-                    className='absolute top-0 right-0 bg-base-100 rounded-lg h-10 z-10 flex justify-center items-center gap-1 w-10 bg-[url("/iconSax/love-green.svg")] bg-right bg-contain bg-no-repeat overflow-hidden md:hover:w-[180px] hover:bg-[#e0f1e9] transition-all duration-300'
+                    className='absolute top-0 right-0 bg-background rounded-lg h-10 z-10 flex justify-center items-center gap-1 w-10 bg-[url("/iconSax/love-green.svg")] bg-right bg-contain bg-no-repeat overflow-hidden md:hover:w-[180px] hover:bg-secondry-tint-7 transition-all duration-300'
                 // whileHover={{ width: "180px", backgroundColor: "#e0f1e9" }}
                 >
-                    <h2 className='whitespace-nowrap text-sm text-base-300 font-bold absolute right-10'>
+                    <h2 className='whitespace-nowrap text-sm text-secondry-base font-bold absolute right-10'>
                         اطلاع رسانی تخفیف ها
                     </h2>
                 </div>

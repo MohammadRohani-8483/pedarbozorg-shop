@@ -6,17 +6,17 @@ const AvailableProductsToggle = ({ isAvailable, setIsAvailable }: any) => {
         <motion.div
             transition={{ type: "tween" }}
             whileHover={{ backgroundColor: '#F9F9F9' }}
-            className="overflow-hidden h-12 border-gray-200 border text-base-300 rounded-xl bg-white flex flex-col pr-4 py-3 pl-3 justify-start items-start transition-all w-full gap-4"
+            className="overflow-hidden h-12 border-gray-200 border text-secondry-base rounded-xl bg-white flex flex-col pr-4 py-3 pl-3 justify-start items-start transition-all w-full gap-4"
             style={{ height: "auto" }}
         >
             <div
-                className='w-full flex justify-between items-center text-base-300'
+                className='w-full flex justify-between items-center text-secondry-base'
             >
                 <div className='flex justify-center items-center gap-1'>
                     <h1>
                         فقط کالاهای موجود
                     </h1>
-                    {isAvailable && <div className='w-2 h-2 bg-[#FFC436] rounded-full'></div>}
+                    {isAvailable && <div className='w-2 h-2 bg-primery-base rounded-full'></div>}
                 </div>
                 <div className='flex items-center justify-center'>
                     <input type="checkbox" id="toggle"

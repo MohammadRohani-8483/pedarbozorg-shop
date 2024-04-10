@@ -36,7 +36,7 @@ const ScrollToTop = () => {
         <motion.button
             animate={isVisible ? {x:60} : {x:0}}
             whileHover={{backgroundColor:"#C1E2D2"}}
-            className='bg-[#E0F1E9] fixed bottom-0 -left-12 rounded-lg p-1.5 md:p-2 mb-16 z-20 items-center text-base-300 text-xl md:text-2xl'
+            className='bg-secondry-tint-7 fixed bottom-0 -left-12 rounded-lg p-1.5 md:p-2 mb-16 z-20 items-center text-secondry-base text-xl md:text-2xl'
             onClick={scrollToTop}
         >
             <PiCaretUp />

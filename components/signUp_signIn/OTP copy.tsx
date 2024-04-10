@@ -31,7 +31,7 @@ const OTPInputGroup = ({ inputValues, inputValuesString, setInputValues, handleS
                     onValueChange={handleInputChange}
                     previousId={null}
                     nextId="input2"
-                    className="w-[47px] h-10 border-2 rounded-lg bg-transparent outline-none text-center font-semibold text-xl spin-button-none border-[#CBCBCB] focus:border-gray-700 focus:text-gray-800 text-gray-500 transition"
+                    className="w-[47px] h-10 border-2 rounded-lg bg-transparent outline-none text-center font-semibold text-xl spin-button-none border-neutral-400 focus:border-gray-700 focus:text-gray-800 text-gray-500 transition"
                 />
                 <OTPInput
                     id="input2"
@@ -39,7 +39,7 @@ const OTPInputGroup = ({ inputValues, inputValuesString, setInputValues, handleS
                     onValueChange={handleInputChange}
                     previousId="input1"
                     nextId="input3"
-                    className="w-[47px] h-10 border-2 rounded-lg bg-transparent outline-none text-center font-semibold text-xl spin-button-none border-[#CBCBCB] focus:border-gray-700 focus:text-gray-800 text-gray-500 transition"
+                    className="w-[47px] h-10 border-2 rounded-lg bg-transparent outline-none text-center font-semibold text-xl spin-button-none border-neutral-400 focus:border-gray-700 focus:text-gray-800 text-gray-500 transition"
                 />
                 <OTPInput
                     id="input3"
@@ -47,7 +47,7 @@ const OTPInputGroup = ({ inputValues, inputValuesString, setInputValues, handleS
                     onValueChange={handleInputChange}
                     previousId="input2"
                     nextId="input4"
-                    className="w-[47px] h-10 border-2 rounded-lg bg-transparent outline-none text-center font-semibold text-xl spin-button-none border-[#CBCBCB] focus:border-gray-700 focus:text-gray-800 text-gray-500 transition"
+                    className="w-[47px] h-10 border-2 rounded-lg bg-transparent outline-none text-center font-semibold text-xl spin-button-none border-neutral-400 focus:border-gray-700 focus:text-gray-800 text-gray-500 transition"
                 />
                 <OTPInput
                     id="input4"
@@ -55,14 +55,14 @@ const OTPInputGroup = ({ inputValues, inputValuesString, setInputValues, handleS
                     onValueChange={handleInputChange}
                     previousId="input3"
                     nextId="input5"
-                    className="w-[47px] h-10 border-2 rounded-lg bg-transparent outline-none text-center font-semibold text-xl spin-button-none border-[#CBCBCB] focus:border-gray-700 focus:text-gray-800 text-gray-500 transition"
+                    className="w-[47px] h-10 border-2 rounded-lg bg-transparent outline-none text-center font-semibold text-xl spin-button-none border-neutral-400 focus:border-gray-700 focus:text-gray-800 text-gray-500 transition"
                 />
                 <OTPInput
                     id="input5"
                     value={inputValues.input5}
                     onValueChange={handleInputChange}
                     previousId="input4"
-                    className="w-[47px] h-10 border-2 rounded-lg bg-transparent outline-none text-center font-semibold text-xl spin-button-none border-[#CBCBCB] focus:border-gray-700 focus:text-gray-800 text-gray-500 transition"
+                    className="w-[47px] h-10 border-2 rounded-lg bg-transparent outline-none text-center font-semibold text-xl spin-button-none border-neutral-400 focus:border-gray-700 focus:text-gray-800 text-gray-500 transition"
                 />
             </div>
         </>

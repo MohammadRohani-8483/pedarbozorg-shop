@@ -29,6 +29,7 @@ export default function SearchBar({ handleOpenSearch, handleCloseSearch, openSea
                     setProducts(res.data.results)
                     setProductsCount(res.data.count)
                 })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [debouncedSearch]);
 
     const variants = {
@@ -47,7 +48,7 @@ export default function SearchBar({ handleOpenSearch, handleCloseSearch, openSea
             animate={openSearchBar ? "openSearch" : "closeSearch"}
             variants={variants}
             transition={{ duration: 0.3 }}
-            className={`${openSearchBar ? 'w-4/5' : 'w-40px]'} border-[#CBCBCB] ${searchValue.length > 0 ? "rounded-t-lg bg-white" : "rounded-lg"} border text-gray-400 h-10 flex items-center justify-end p-2 z-50 relative`}
+            className={`${openSearchBar ? 'w-4/5' : 'w-40px]'} border-neutral-400 ${searchValue.length > 0 ? "rounded-t-lg bg-white" : "rounded-lg"} border text-gray-400 h-10 flex items-center justify-end p-2 z-50 relative`}
         >
             {openSearchBar &&
                 <>
@@ -80,7 +81,7 @@ export default function SearchBar({ handleOpenSearch, handleCloseSearch, openSea
                 className="cursor-pointer"
             />
             {focus && searchValue.length > 0 &&
-                <div className='absolute w-[calc(100%+2px)] h-[480px] bg-white -left-[1px] top-[38px] border-[#CBCBCB] border rounded-b-lg flex flex-col justify-center items-center'
+                <div className='absolute w-[calc(100%+2px)] h-[480px] bg-white -left-[1px] top-[38px] border-neutral-400 border rounded-b-lg flex flex-col justify-center items-center'
                 >
                     {productsCount > 0 ?
                         <div className='w-full h-full'>
@@ -99,7 +100,7 @@ export default function SearchBar({ handleOpenSearch, handleCloseSearch, openSea
                             </div>
                         </div>
                         :
-                        <h1 className='text-2xl text-center text-[#CBCBCB]'>
+                        <h1 className='text-2xl text-center text-neutral-400'>
                             هیچ محصولی با این مشخصات وجود ندارد
                         </h1>
                     }

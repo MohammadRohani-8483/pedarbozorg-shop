@@ -28,7 +28,7 @@ export default function CommentsSlider() {
                     width={69}
                     height={69}
                 />
-                <h1 className='font-bold text-2xl text-base-300'>نظرات کاربران</h1>
+                <h1 className='font-bold text-2xl text-secondry-base'>نظرات کاربران</h1>
                 <Image
                     src="/Image/title-vecors/left.svg"
                     alt="left"

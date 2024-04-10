@@ -100,21 +100,21 @@ const AddToCartItem = ({ product, price, priceWithOffer, name, image, variant }:
                             height={65}
                             className='rounded-md'
                         />
-                        <h3 className='text-base-300 font-bold'>
+                        <h3 className='text-secondry-base font-bold'>
                             {name}
                         </h3>
                     </div>
                     <div className='gap-2 flex justify-center items-center'>
                         <div className='flex flex-col justify-center items-center'>
-                            <h2 className='text-xl text-base-300 font-bold'>
+                            <h2 className='text-xl text-secondry-base font-bold'>
                                 {formatNumber(priceWithOffer)}
                             </h2>
                             {price !== priceWithOffer &&
                                 <div className='h-5 gap-2 flex justify-center items-center'>
-                                    <div className='h-full flex justify-center items-center px-2 rounded-full bg-[#C62020] text-xs text-white'>
+                                    <div className='h-full flex justify-center items-center px-2 rounded-full bg-error-base text-xs text-white'>
                                         {offerPresent}%
                                     </div>
-                                    <h3 className='text-[#ADADAD] text-sm line-through'>
+                                    <h3 className='text-neutral-500 text-sm line-through'>
                                         {formatNumber(price)}
                                     </h3>
                                 </div>
@@ -131,7 +131,7 @@ const AddToCartItem = ({ product, price, priceWithOffer, name, image, variant }:
                             <div className='flex flex-col gap-1'>
                                 <button
                                     onClick={handleIncrementQuantity}
-                                    className='bg-[#E0F1E9] size-8 hover:bg-[#C1E2D2] rounded-lg text-[#3D8361] p-1.5 cursor-pointer'
+                                    className='bg-secondry-tint-7 size-8 hover:bg-secondry-tint-6 rounded-lg text-[#3D8361] p-1.5 cursor-pointer'
                                 >
                                     <Icon size={20} nameIcon="add" />
                                 </button>
@@ -139,14 +139,14 @@ const AddToCartItem = ({ product, price, priceWithOffer, name, image, variant }:
                                     {productInCart?.quantity! > 1 ?
                                         <button
                                             onClick={handleDecrementQuantity}
-                                            className='bg-[#E0F1E9] size-8 hover:bg-[#C1E2D2] rounded-lg text-[#3D8361] p-1.5 cursor-pointer'
+                                            className='bg-secondry-tint-7 size-8 hover:bg-secondry-tint-6 rounded-lg text-[#3D8361] p-1.5 cursor-pointer'
                                         >
                                             <Icon size={20} nameIcon="minus" />
                                         </button>
                                         :
                                         <button
                                             onClick={handleDeleteFromCart}
-                                            className='bg-[#E0F1E9] size-8 hover:bg-[#C1E2D2] rounded-lg text-[#3D8361] p-1.5 cursor-pointer'
+                                            className='bg-secondry-tint-7 size-8 hover:bg-secondry-tint-6 rounded-lg text-[#3D8361] p-1.5 cursor-pointer'
                                         >
                                             <Icon size={20} nameIcon="trash" />
                                         </button>

@@ -56,14 +56,14 @@ export default function Select({ options, activeOption, setActiveOption, default
                                 {option === activeOption ?
                                     <div
                                         onClick={() => handleOptionsClick(option)}
-                                        className='w-full bg-base-200 text-base-300 px-4 py-1'
+                                        className='w-full bg-secondry-tint-7 text-secondry-base px-4 py-1'
                                     >
                                         {option}
                                     </div>
                                     :
                                     <div
                                         onClick={() => handleOptionsClick(option)}
-                                        className='w-full hover:bg-base-200 hover:text-base-300 px-4 py-1'
+                                        className='w-full hover:bg-secondry-tint-7 hover:text-secondry-base px-4 py-1'
                                     >
                                         {option}
                                     </div>

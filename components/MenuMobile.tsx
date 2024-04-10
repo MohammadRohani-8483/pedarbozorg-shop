@@ -44,14 +44,14 @@ const MenuMobile: React.FC<MenuProps> = ({ setIsMenuOpen }) => {
             onClick={(e: any) => e.target.className === "fixed inset-0 bg-black bg-opacity-50 w-screen h-screen z-50" && handleClose()}
         >
             <motion.div
-                className='bg-base-100 max-w-[255px] h-full flex flex-col items-center gap-8'
+                className='bg-background max-w-[255px] h-full flex flex-col items-center gap-8'
                 animate={isOpen ? "visible" : "hidden"}
                 initial={isOpen ? "hidden" : "visible"}
                 variants={variants}
                 transition={{ duration: 0.4 }}
             >
-                <div className='h-16 w-full flex justify-between items-center border-b border-base-200 px-5 py-3'>
-                    <BsArrowRight className='text-xl text-base-300 cursor-pointer'
+                <div className='h-16 w-full flex justify-between items-center border-b border-secondry-tint-7 px-5 py-3'>
+                    <BsArrowRight className='text-xl text-secondry-base cursor-pointer'
                         onClick={handleClose}
                     />
                     <Image
@@ -61,7 +61,7 @@ const MenuMobile: React.FC<MenuProps> = ({ setIsMenuOpen }) => {
                         height={40}
                     />
                 </div>
-                <div className="flex flex-col items-center justify-center gap-6 text-base-300 text-sm font-bold">
+                <div className="flex flex-col items-center justify-center gap-6 text-secondry-base text-sm font-bold">
                     {menuItems.map((menu) => (
                         <Link href={menu.link} key={menu.id}
                             onClick={handleClose}

@@ -25,8 +25,8 @@ const OrderSteps = ({ page }: props) => {
                     height={24}
                     className='mx-2'
                 />
-                <div className='bg-base-300 w-full h-[1px]' />
-                <div className={`p-2 ${page === "SHIPPING" ? "bg-base-300 rounded-full" : ""}`}>
+                <div className='bg-secondry-base w-full h-[1px]' />
+                <div className={`p-2 ${page === "SHIPPING" ? "bg-secondry-base rounded-full" : ""}`}>
                     <div className='relative min-w-[24px] h-6'>
                         <Image
                             src={page === "SHIPPING" ? '/iconSax/circle-delivery.svg' : "/iconSax/delivery.svg"}
@@ -35,8 +35,8 @@ const OrderSteps = ({ page }: props) => {
                         />
                     </div>
                 </div>
-                <div className={`w-full h-[1px] ${page === "SHIPPING" ? "bg-[#ADADAD]" : "bg-base-300"}`} />
-                <div className={`p-2 ${page === "PAY" ? "bg-base-300 rounded-full" : ""}`}>
+                <div className={`w-full h-[1px] ${page === "SHIPPING" ? "bg-neutral-500" : "bg-secondry-base"}`} />
+                <div className={`p-2 ${page === "PAY" ? "bg-secondry-base rounded-full" : ""}`}>
                     <div className='relative min-w-[24px] h-6'>
                         <Image
                             src={page === "PAY" ? '/iconSax/card-pos.svg' : "/iconSax/disable-card-pos.png"}
@@ -47,9 +47,9 @@ const OrderSteps = ({ page }: props) => {
                 </div>
             </div>
             <div className='flex justify-between items-center w-full'>
-                <h2 className='font-bold text-base text-base-300'>سبد خرید</h2>
-                <h2 className={`font-bold ${page === "SHIPPING" ? "text-xl" : "text-base"} text-base-300`}>اطلاعات ارسال</h2>
-                <h2 className={`font-bold ${page === "PAY" ? "text-xl text-base-300" : "text-base text-[#ADADAD]"}`}>پرداخت</h2>
+                <h2 className='font-bold text-base text-secondry-base'>سبد خرید</h2>
+                <h2 className={`font-bold ${page === "SHIPPING" ? "text-xl" : "text-base"} text-secondry-base`}>اطلاعات ارسال</h2>
+                <h2 className={`font-bold ${page === "PAY" ? "text-xl text-secondry-base" : "text-base text-neutral-500"}`}>پرداخت</h2>
             </div>
         </div>
     )

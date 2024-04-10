@@ -9,25 +9,6 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        "red": {
-          200: "#faeeed",
-          300: "#c15248",
-        },
-        "blue": {
-          200: "#e5edff",
-          300: "#5375c2",
-        },
-        "orange": {
-          200: "#f5eee7",
-          300: "#db7a18",
-        },
-        "base": {
-          100: "#F4F6FF",
-          200: "#E0F1E9",
-          300: "#3D8361",
-          400: "#336D51",
-          500: "#83C5A5"
-        },
         "primery": {
           "base": "#FFC436",
           "tint-1": "#FFCC53",
@@ -93,11 +74,3 @@ const config: Config = {
   plugins: [],
 };
 export default config;
-
-
-// module.exports = {
-//   theme: {
-//     extend: {
-//     }
-//   }
-// }

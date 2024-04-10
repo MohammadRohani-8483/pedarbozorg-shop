@@ -81,10 +81,10 @@ const AddressForm = ({ setAddress }: { setAddress: (address: address) => void })
     <div className='w-full max-h-[330px] md:max-h-[400px] p-2 md:p-0 ltr overflow-auto -mx-2 md:m-0' id='scroll'>
       <form className="w-full md:w-[614px] flex flex-col gap-2 sm:gap-4 md:gap-6 justify-center items-center">
         <div className='w-full flex flex-col gap-2 md:gap-4 justify-center items-start'>
-          <h2 className='text-base text-base-300 font-bold'>
+          <h2 className='text-base text-secondry-base font-bold'>
             نشانی تحویل
           </h2>
-          <div className='relative w-full focus:border-base-300 border border-gray-400 hover:border-gray-700 rounded-lg p-1 flex justify-center items-center h-[90px]'>
+          <div className='relative w-full focus:border-secondry-base border border-gray-400 hover:border-gray-700 rounded-lg p-1 flex justify-center items-center h-[90px]'>
             <textarea
               className='peer/message w-full p-2 outline-none  text-black resize-none h-full '
               id='scroll'
@@ -92,7 +92,7 @@ const AddressForm = ({ setAddress }: { setAddress: (address: address) => void })
               value={state.address}
               onChange={(e) => handleChangeInputs(addressActionKind.ADDRESS, { str: e.target.value })}
             />
-            <label htmlFor="scroll" className='peer-focus/message:text-[10px] text-[10px] peer-focus/message:text-base-300 text-gray-400 absolute peer-focus/message:-top-2.5 peer-focus/message:right-4 bg-white px-1 right-4 -top-[10px] transition-all pointer-events-none peer-placeholder-shown/message:text-base peer-placeholder-shown/message:right-2 peer-placeholder-shown/message:top-2'>
+            <label htmlFor="scroll" className='peer-focus/message:text-[10px] text-[10px] peer-focus/message:text-secondry-base text-gray-400 absolute peer-focus/message:-top-2.5 peer-focus/message:right-4 bg-white px-1 right-4 -top-[10px] transition-all pointer-events-none peer-placeholder-shown/message:text-base peer-placeholder-shown/message:right-2 peer-placeholder-shown/message:top-2'>
               نشانی پستی*
             </label>
           </div>
@@ -159,7 +159,7 @@ const AddressForm = ({ setAddress }: { setAddress: (address: address) => void })
           </div>
         </div>
         <div className='w-full flex flex-col gap-2 md:gap-4 justify-center items-start'>
-          <h2 className='text-base text-base-300 font-bold'>
+          <h2 className='text-base text-secondry-base font-bold'>
             مشخصات تحویل گیرنده
           </h2>
           <div className='flex gap-2 items-center'>
@@ -171,7 +171,7 @@ const AddressForm = ({ setAddress }: { setAddress: (address: address) => void })
               onChange={() => dispatch({ type: addressActionKind.MY_SELF })}
               checked={state.recipentMyself}
             />
-            <label htmlFor="recipentMyself" className='cursor-pointer text-[#626262] text-sm'>
+            <label htmlFor="recipentMyself" className='cursor-pointer text-neutral-700 text-sm'>
               تحویل گیرنده خودم هستم
             </label>
           </div>

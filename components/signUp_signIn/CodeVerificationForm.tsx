@@ -19,26 +19,24 @@ type props = {
 
 const CodeVerificationForm = ({ handleClose, phoneNumber }: props) => {
     const dispatch = useDispatch<AppDispatch>()
-    const authState: authState = useSelector((state: any) => state.auth)
-    const [isLoading, setIsLoading] = useState(false)
+    const { isLoad, userToken, error }: authState = useSelector((state: any) => state.auth)
 
     useEffect(() => {
-        setIsLoading(authState.isLoad)
-        if (authState.userToken.access) {
+        if (userToken.access) {
             const login = async () => {
-                await dispatch(getMeThunk(authState.userToken.access!))
-                await dispatch(makeCartFromLocalStorage(authState.userToken.access!))
-                await dispatch(getCartFromServer(authState.userToken.access!))
+                await dispatch(getMeThunk(userToken.access!))
+                await dispatch(makeCartFromLocalStorage(userToken.access!))
+                await dispatch(getCartFromServer(userToken.access!))
                 localStorage.removeItem('shoping_cart')
                 handleClose()
                 toast.success("شما با موفقیت وارد شدید.")
             }
             login()
-        } else if (authState.error) {
-            toast.error(authState.error)
-            setInputValues(new Array(5).fill(""))
+        } else if (error) {
+            toast.error(error)
+
         }
-    }, [authState])
+    }, [isLoad])
 
     const [isTimerEnd, setIsTimerEnd] = useState(false)
     const [timer, setTimer] = useState(120)
@@ -48,12 +46,15 @@ const CodeVerificationForm = ({ handleClose, phoneNumber }: props) => {
     let inputValuesString = inputValues.join('');
 
     const handleSubmit = async () => {
-        inputValuesString.length > 4 && await dispatch(loginUser({ phone_number: phoneNumber, code: inputValuesString }))
+        if (inputValuesString.length > 4) {
+            await dispatch(loginUser({ phone_number: phoneNumber, code: inputValuesString }))
+            setInputValues(new Array(5).fill(""))
+        }
     }
 
     return (
         <>
-            <div className='flex justify-between items-center text-base-300 text-xl font-bold w-full'>
+            <div className='flex justify-between items-center text-secondry-base text-xl font-bold w-full'>
                 <h1>ثبت نام | ورود</h1>
                 <IoIosClose className='text-3xl cursor-pointer'
                     onClick={handleClose} />
@@ -92,7 +93,7 @@ const CodeVerificationForm = ({ handleClose, phoneNumber }: props) => {
                             </h2>
                         </div>
                     </div>
-                    {isLoading ?
+                    {isLoad ?
                         <button className='relative flex justify-center solid-btn rectangle-btn w-full h-10'>
                             <div className="absolute right-1/2 bottom-1/2 transform translate-x-1/2 translate-y-1/2">
                                 <div className="relative border-t-transparent border-solid animate-[rereverse-spin_1s_ease-in-out_infinite] rounded-full border-white border-2 h-6 w-6">

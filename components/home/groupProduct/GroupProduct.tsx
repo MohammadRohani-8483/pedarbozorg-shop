@@ -61,7 +61,7 @@ const GroupProduct: React.FC<groupProduct> = ({ link, icon, name }) => {
                     </Link>
                 </motion.div>
             </motion.div>
-            <h2 className="text-base-300 font-bold">{name}</h2>
+            <h2 className="text-secondry-base font-bold">{name}</h2>
         </motion.div>
     )
 }

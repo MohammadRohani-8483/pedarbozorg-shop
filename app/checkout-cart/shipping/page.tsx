@@ -68,7 +68,7 @@ const ShippingPage = () => {
                         <div className='flex flex-col md:flex-row w-full justify-center items-start gap-2 lg:gap-6'>
                             <div className="w-full flex flex-col justify-center items-start gap-4">
                                 <ShippingInfos addresses={addresses} setAddresses={setAddresses} />
-                                <Link href='/checkout-cart' className="flex justify-center items-center py-1.5 px-3 gap-2 text-base-300 text-sm">
+                                <Link href='/checkout-cart' className="flex justify-center items-center py-1.5 px-3 gap-2 text-secondry-base text-sm">
                                     <GoArrowRight size={20} />
                                     بازگشت به سبد خرید
                                 </Link>

@@ -18,18 +18,18 @@ const Category = ({ categoryState, setCategory }: any) => {
             animate={boxIsOpen ? { height: '225px' } : { height: "48px" }}
             transition={{ type: "tween" }}
             whileHover={!boxIsOpen ? { backgroundColor: '#F9F9F9' } : {}}
-            className="overflow-hidden h-12 border-gray-200 border text-base-300 rounded-xl bg-white flex flex-col px-4 py-3 justify-start items-start transition-all w-full gap-4"
+            className="overflow-hidden h-12 border-gray-200 border text-secondry-base rounded-xl bg-white flex flex-col px-4 py-3 justify-start items-start transition-all w-full gap-4"
             style={{ height: "auto" }}
         >
             <div
-                className='w-full flex justify-between items-center text-base-300 cursor-pointer'
+                className='w-full flex justify-between items-center text-secondry-base cursor-pointer'
                 onClick={() => setBoxIsOpen(prev => !prev)}
             >
                 <div className='flex justify-center items-center gap-1'>
                     <h1>
                         دسته بندی
                     </h1>
-                    {categoryState.length > 0 && <div className='w-2 h-2 bg-[#FFC436] rounded-full'></div>}
+                    {categoryState.length > 0 && <div className='w-2 h-2 bg-primery-base rounded-full'></div>}
                 </div>
                 {boxIsOpen ?
                     <Image
@@ -47,7 +47,7 @@ const Category = ({ categoryState, setCategory }: any) => {
                     />
                 }
             </div>
-            <div className='flex flex-col gap-2 justify-start items-start text-[#626262] text-sm'>
+            <div className='flex flex-col gap-2 justify-start items-start text-neutral-700 text-sm'>
                 {categories.map((category: any, index, array) => (
                     <div key={category.value} className='flex gap-2 items-center'>
                         <input

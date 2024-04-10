@@ -15,7 +15,6 @@ import { FreeMode, Navigation } from 'swiper/modules';
 import SliderBtn from 'components/SliderBtn';
 import ProductCard from 'components/ProductCard';
 import SkeletonCard from 'components/SkeletonCard';
-import toast from 'react-hot-toast';
 import EmptyList from './EmptyList';
 
 type props = {
@@ -56,7 +55,7 @@ const LastSeenProducts = ({ products }: props) => {
       </div>
       <div className='relative w-full hidden md:block'>
         {start ?
-          products.length > 0 ?
+          products?.length > 0 ?
             <>
               <SliderBtn prev
                 className='prev-last-seen-btn absolute -right-5 top-[30%] z-10'

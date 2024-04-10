@@ -14,7 +14,7 @@ const PedarBozorgInLife = () => {
                     width={69}
                     height={69}
                 />
-                <h1 className='font-bold text-2xl text-base-300'>پدربزرگ در زندگی</h1>
+                <h1 className='font-bold text-2xl text-secondry-base'>پدربزرگ در زندگی</h1>
                 <Image
                     src="/Image/title-vecors/left.svg"
                     alt="left"

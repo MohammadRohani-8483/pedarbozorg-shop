@@ -74,7 +74,7 @@ const ShopingCardItem = ({ image, link, price, priceWithOffer, name, count, prod
                     height={131}
                 />
                 <div className='flex flex-col gap-2 items-start justify-center'>
-                    <h2 className='text-[#353535] text-xl font-bold'>
+                    <h2 className='text-neutral-800 text-xl font-bold'>
                         {name}
                     </h2>
                     <div className='flex items-center justify-start gap-2'>
@@ -83,7 +83,7 @@ const ShopingCardItem = ({ image, link, price, priceWithOffer, name, count, prod
             </Link>
             <div className='flex justify-center items-center gap-2'>
                 <div className='flex flex-col justify-center items-center gap-2'>
-                    {offerPresent !== 0 && <div className='text-[#C62020] text-sm font-bold flex justify-center items-center gap-1'>
+                    {offerPresent !== 0 && <div className='text-error-base text-sm font-bold flex justify-center items-center gap-1'>
                         <p>{formatNumber(present * count)}</p>
                         <Image
                             src='/Image/red-Tooman.svg'
@@ -93,7 +93,7 @@ const ShopingCardItem = ({ image, link, price, priceWithOffer, name, count, prod
                         />
                         <p>تخفیف</p>
                     </div>}
-                    <div className='text-[#353535] w-full ml-4 text-xl font-bold flex gap-2 justify-center items-center'>
+                    <div className='text-neutral-800 w-full ml-4 text-xl font-bold flex gap-2 justify-center items-center'>
                         <h2>{formatNumber((price - present) * count)}</h2>
                         <Image
                             src='/Image/Tooman.svg'
@@ -104,13 +104,13 @@ const ShopingCardItem = ({ image, link, price, priceWithOffer, name, count, prod
                     </div>
                 </div>
                 <div className='flex justify-center items-center gap-2'>
-                    <h2 className='text-[#353535] text-xl font-bold'>
+                    <h2 className='text-neutral-800 text-xl font-bold'>
                         {count}
                     </h2>
                     <div className='flex flex-col justify-center items-center gap-2'>
                         <div
                             onClick={handleIncrementQuantity}
-                            className='bg-[#E0F1E9] size-8 hover:bg-[#C1E2D2] rounded-lg text-[#3D8361] p-1.5 cursor-pointer'
+                            className='bg-secondry-tint-7 size-8 hover:bg-secondry-tint-6 rounded-lg text-[#3D8361] p-1.5 cursor-pointer'
                         >
                             <Image
                                 src='/iconSax/add.svg'
@@ -123,7 +123,7 @@ const ShopingCardItem = ({ image, link, price, priceWithOffer, name, count, prod
                             {count > 1 ?
                                 <div
                                     onClick={handleDecrementQuantity}
-                                    className='bg-[#E0F1E9] size-8 hover:bg-[#C1E2D2] rounded-lg text-[#3D8361] p-1.5 cursor-pointer'>
+                                    className='bg-secondry-tint-7 size-8 hover:bg-secondry-tint-6 rounded-lg text-[#3D8361] p-1.5 cursor-pointer'>
                                     <Image
                                         src='/iconSax/minus.svg'
                                         alt='minus product count'
@@ -134,7 +134,7 @@ const ShopingCardItem = ({ image, link, price, priceWithOffer, name, count, prod
                                 :
                                 <div
                                     onClick={handleDeleteFromCart}
-                                    className='bg-[#E0F1E9] size-8 hover:bg-[#C1E2D2] rounded-lg text-[#3D8361] p-1.5 cursor-pointer'
+                                    className='bg-secondry-tint-7 size-8 hover:bg-secondry-tint-6 rounded-lg text-[#3D8361] p-1.5 cursor-pointer'
                                 >
                                     <Image
                                         src='/iconSax/trash.svg'

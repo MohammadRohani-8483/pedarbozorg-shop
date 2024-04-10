@@ -28,7 +28,7 @@ export default function SendMessageToPedarbozorg() {
 
     return (
         <div className='flex flex-col bg-white rounded-2xl p-4 items-center justify-center w-full gap-6'>
-            <h2 className='text-base-300 font-bold text-xl'>
+            <h2 className='text-secondry-base font-bold text-xl'>
                 ارسال پیام به پدربزرگ
             </h2>
             <form className='w-full gap-4 flex flex-col items-end justify-center'>
@@ -74,13 +74,13 @@ export default function SendMessageToPedarbozorg() {
                         setValue={setOrderNumber}
                     />
                 </div>
-                <div className='relative w-full focus:border-base-300 border border-gray-400 hover:border-gray-700 rounded-lg p-1 flex justify-center items-center h-40'>
+                <div className='relative w-full focus:border-secondry-base border border-gray-400 hover:border-gray-700 rounded-lg p-1 flex justify-center items-center h-40'>
                     <textarea
                         className='peer/message w-full h-10 p-2 outline-none  text-black resize-none h-full '
                         id='scroll'
                         placeholder=''
                     />
-                    <label htmlFor="scroll" className='peer-focus/message:text-[10px] text-[10px] peer-focus/message:text-base-300 text-gray-400 absolute peer-focus/message:-top-2.5 peer-focus/message:right-4 bg-white px-1 right-4 -top-[10px] transition-all pointer-events-none peer-placeholder-shown/message:text-base peer-placeholder-shown/message:right-2 peer-placeholder-shown/message:top-2'>
+                    <label htmlFor="scroll" className='peer-focus/message:text-[10px] text-[10px] peer-focus/message:text-secondry-base text-gray-400 absolute peer-focus/message:-top-2.5 peer-focus/message:right-4 bg-white px-1 right-4 -top-[10px] transition-all pointer-events-none peer-placeholder-shown/message:text-base peer-placeholder-shown/message:right-2 peer-placeholder-shown/message:top-2'>
                         متن پیام*
                     </label>
                 </div>

@@ -17,11 +17,11 @@ const AddWalletBalance = ({ amount, setAmount }: props) => {
 
     return (
         <div className='flex flex-col gap-4 md:gap-6 justify-center items-center md:px-[92px]'>
-            <h3 className='text-sm sm:text-base text-[#626262] text-center'>
+            <h3 className='text-sm sm:text-base text-neutral-700 text-center'>
                 مبلغ مورد نظر خود را برای افزایش اعتبار کیف پول خود وارد کنید
             </h3>
             <div className='flex flex-col gap-3 md:gap-4 justify-center items-center'>
-                <div className='flex justify-between items-center px-2 border border-[#CBCBCB] rounded-lg h-10 w-[180px] relative'>
+                <div className='flex justify-between items-center px-2 border border-neutral-400 rounded-lg h-10 w-[180px] relative'>
                     <span className='absolute text-xs text-black font-bold -top-2 right-4 px-2 bg-white flex justify-center'>
                         مبلغ
                     </span>
@@ -58,9 +58,9 @@ const ProposalAmount = ({ value, amount, setAmount }: prposalProps) => {
     return (
         <div
             onClick={() => setAmount(value)}
-            className={`rounded-lg border ${value === amount ? "border-[#3D8361]" : "border-[#FFC436]"} h-8 px-3 py-1.5 flex gap-2 justify-center items-center cursor-pointer`}
+            className={`rounded-lg border ${value === amount ? "border-[#3D8361]" : "border-primery-base"} h-8 px-3 py-1.5 flex gap-2 justify-center items-center cursor-pointer`}
         >
-            <p className='text-sm text-base-300'>
+            <p className='text-sm text-secondry-base'>
                 {formatNumber(value)}
             </p>
             <Image

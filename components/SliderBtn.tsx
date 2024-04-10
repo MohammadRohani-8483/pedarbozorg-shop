@@ -1,4 +1,5 @@
 import { PiCaretLeft, PiCaretRight } from "@/node_modules/react-icons/pi/index";
+import { motion } from 'framer-motion'
 
 const SliderBtn = (
     { next, prev, className, onClick }:
@@ -10,12 +11,13 @@ const SliderBtn = (
         }
 ) => {
     return (
-        <button 
-        onClick={onClick}
-        className={`bg-[#E0F1E9] rounded-lg text-base-300 text-xl md:text-2xl hover:bg-[#C1E2D2] p-1.5 md:p-2 ${className !== undefined && className}`}>
+        <motion.button
+            whileHover={{ backgroundColor: "#C1E2D2" }}
+            onClick={onClick}
+            className={`bg-secondry-tint-7 rounded-lg text-secondry-base text-xl md:text-2xl p-1.5 md:p-2 ${className || ''}`}>
             {prev && <PiCaretRight />}
             {next && <PiCaretLeft />}
-        </button>
+        </motion.button>
     )
 }
 

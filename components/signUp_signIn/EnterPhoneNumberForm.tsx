@@ -44,7 +44,7 @@ const EnterPhoneNumberForm = ({ handleClose, setInputValue, setIsEnterNumber }: 
 
     return (
         <>
-            <div className='flex justify-between items-center text-base-300 text-xl font-bold w-full'>
+            <div className='flex justify-between items-center text-secondry-base text-xl font-bold w-full'>
                 <h1>ثبت نام | ورود</h1>
                 <IoIosClose className='text-3xl cursor-pointer'
                     onClick={handleClose}
@@ -59,7 +59,7 @@ const EnterPhoneNumberForm = ({ handleClose, setInputValue, setIsEnterNumber }: 
                 />
                 <form onSubmit={handleSubmit} className='flex flex-col w-full gap-6'>
                     <div className='w-full flex flex-col justify-center items-center gap-4'>
-                        <h2 className="text-sm text-[#757575]">شماره همراه خود را وارد کنید</h2>
+                        <h2 className="text-sm text-neutral-600">شماره همراه خود را وارد کنید</h2>
                         <Input
                             maxLength={11}
                             className='w-full'

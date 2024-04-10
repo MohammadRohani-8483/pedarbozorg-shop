@@ -22,9 +22,9 @@ export default function BlogCardMobile({ link, image, name, category, readingTim
                     </div>}
             </div>
             <div className='flex flex-col justify-center items-center gap-1 w-full'>
-                <h2 className='text-base-300 font-bold text-sm w-full'>{name}</h2>
+                <h2 className='text-secondry-base font-bold text-sm w-full'>{name}</h2>
                 <div className='flex justify-between w-full'>
-                    <h2 className='text-base-500 text-[10px]'>{category}</h2>
+                    <h2 className='text-secondry-tint-4 text-[10px]'>{category}</h2>
                     <div className='flex gap-2 text-[10px] text-gray-600'>
                         <div className='flex items-center'>
                             ’{readingTime}

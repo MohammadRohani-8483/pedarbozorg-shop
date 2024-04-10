@@ -11,17 +11,17 @@ const PriceRange = ({ max, inputFrom, setInputFrom, inputTo, setInputTo }: any) 
             animate={boxIsOpen ? { height: '160px' } : { height: "48px" }}
             transition={{ type: "tween" }}
             whileHover={!boxIsOpen ? { backgroundColor: '#F9F9F9' } : {}}
-            className="overflow-hidden h-12 border-gray-200 border text-base-300 rounded-xl bg-white cursor-pointer flex flex-col px-4 py-3 justify-start items-start transition-all w-full gap-4"
+            className="overflow-hidden h-12 border-gray-200 border text-secondry-base rounded-xl bg-white cursor-pointer flex flex-col px-4 py-3 justify-start items-start transition-all w-full gap-4"
         >
             <div
-                className='w-full flex justify-between items-center text-base-300'
+                className='w-full flex justify-between items-center text-secondry-base'
                 onClick={() => setBoxIsOpen(prev => !prev)}
             >
                 <div className='flex justify-center items-center gap-1'>
                     <h1>
                         قیمت
                     </h1>
-                    {(inputFrom > 0 || inputTo < max) && <div className='w-2 h-2 bg-[#FFC436] rounded-full'></div>}
+                    {(inputFrom > 0 || inputTo < max) && <div className='w-2 h-2 bg-primery-base rounded-full'></div>}
                 </div>
                 {boxIsOpen ?
                     <Image
@@ -41,7 +41,7 @@ const PriceRange = ({ max, inputFrom, setInputFrom, inputTo, setInputTo }: any) 
             </div>
             <div className='w-full gap-6 flex flex-col'>
                 <div className='w-full gap-2 flex justify-center items-center'>
-                    <div className='flex justify-between items-center px-2 border border-[#CBCBCB] rounded-lg h-8 relative'>
+                    <div className='flex justify-between items-center px-2 border border-neutral-400 rounded-lg h-8 relative'>
                         <span className='absolute text-xs text-black font-bold -top-2 right-4 w-5 bg-white flex justify-center'>
                             از
                         </span>
@@ -53,7 +53,7 @@ const PriceRange = ({ max, inputFrom, setInputFrom, inputTo, setInputTo }: any) 
                             height={20}
                         />
                     </div>
-                    <div className='flex justify-between items-center px-2 border border-[#CBCBCB] rounded-lg h-8 relative'>
+                    <div className='flex justify-between items-center px-2 border border-neutral-400 rounded-lg h-8 relative'>
                         <span className='absolute text-xs text-black font-bold -top-2 right-4 w-5 bg-white flex justify-center'>
                             تا
                         </span>
@@ -74,7 +74,7 @@ const PriceRange = ({ max, inputFrom, setInputFrom, inputTo, setInputTo }: any) 
                         inputTo={inputTo}
                         setInputTo={setInputTo}
                     />
-                    <div className='w-full flex justify-between items-center text-xs text-[#757575]'>
+                    <div className='w-full flex justify-between items-center text-xs text-neutral-600'>
                         <div>ارزانترین</div>
                         <div>گرانترین</div>
                     </div>

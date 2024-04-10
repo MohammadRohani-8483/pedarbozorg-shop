@@ -25,7 +25,7 @@ const Footer: React.FC = () => {
                             className='object-cover'
                         />
                     </Link>
-                    <p className='text-justify text-base-400 text-[9px] sm:text-xs md:text-sm lg:text-base'>
+                    <p className='text-justify text-secondry-shade-2 text-[9px] sm:text-xs md:text-sm lg:text-base'>
                         بزرگترین لذت ما این است که بتوانیم سهمی ولو اندک در سلامت و بهداشت روحی و جسمی و روش تغذیه خانواده ها داشته باشیم. دوست داریم همانند پدربزرگ ها ، هر آنچه که می دانیم ، بی منت در اختیار جامعه قرار دهیم. به همین جهت نام پدربزرگ را برای استارت اپ خود انتخاب کردیم.
                     </p>
                 </div>
@@ -36,7 +36,7 @@ const Footer: React.FC = () => {
                                 <Link
                                     href={menu.link}
                                     key={menu.id}
-                                    className='bg-base-200 text-base-300 rounded-lg py-1.5 px-3 text-sm lg:text-base whitespace-nowrap'
+                                    className='bg-secondry-tint-7 text-secondry-base rounded-lg py-1.5 px-3 text-sm lg:text-base whitespace-nowrap'
                                 >
                                     {menu.item}
                                 </Link>
@@ -49,7 +49,7 @@ const Footer: React.FC = () => {
                                 companyProfile.map((item) => (
                                     <div
                                         key={item.id}
-                                        className='flex w-full justify-between items-center text-base-300 rounded-2xl bg-[#E0F1E9] lg:w-[385px] h-auto py-2 px-4'
+                                        className='flex w-full justify-between items-center text-secondry-base rounded-2xl bg-secondry-tint-7 lg:w-[385px] h-auto py-2 px-4'
                                     >
                                         <div className={`whitespace-nowrap text-xs ${item.title === "ایمیل" ? "hidden sm:block" : ""}`}>{item.title}</div>
                                         <div className='ltr flex items-center justify-center gap-2 lg:gap-4'>
@@ -69,7 +69,7 @@ const Footer: React.FC = () => {
                                 ))
                             }
                         </div>
-                        <div className='flex lg:flex-col justify-between lg:justify-around items-center rounded-2xl bg-[#E0F1E9] w-full lg:w-[107px] p-4 gap-4 h-[120px] lg:h-[268px]'>
+                        <div className='flex lg:flex-col justify-between lg:justify-around items-center rounded-2xl bg-secondry-tint-7 w-full lg:w-[107px] p-4 gap-4 h-[120px] lg:h-[268px]'>
                             <Link
                                 href='/'
                                 className='relative w-[87px] aspect-square lg:w-[74px]'
@@ -104,7 +104,7 @@ const Footer: React.FC = () => {
                                 />
                             </Link>
                         </div>
-                        <div className='flex lg:flex-col justify-between lg:justify-around items-center sm:w-1/2 aspect-[5/1] mt-4 lg:mt-0 lg:rounded-2xl lg:bg-[#E0F1E9] lg:w-[76px] lg:h-[268px] lg:py-4'>
+                        <div className='flex lg:flex-col justify-between lg:justify-around items-center sm:w-1/2 aspect-[5/1] mt-4 lg:mt-0 lg:rounded-2xl lg:bg-secondry-tint-7 lg:w-[76px] lg:h-[268px] lg:py-4'>
                             {
                                 medias.map((media) => (
                                     <MediaIcon
@@ -121,8 +121,8 @@ const Footer: React.FC = () => {
                 </div>
             </div>
             <div className='flex flex-col justify-center items-center my-4'>
-                <p className='text-base-300 text-xs md:text-sm lg:text-base text-center'>تمامی حقوق مادی و معنوی این سامانه متعلق به فروشگاه<strong> پدربزرگ </strong>می‌باشد</p>
-                <p className='text-base-300 text-xs md:text-sm lg:text-base'>طراحی شده توسط گروه فنی مهندسی<a target="_blank" rel="noopener noreferrer" className='font-bold text-[#3F3681]' href="https://codinto.ir"> کدینتو </a></p>
+                <p className='text-secondry-base text-xs md:text-sm lg:text-base text-center'>تمامی حقوق مادی و معنوی این سامانه متعلق به فروشگاه<strong> پدربزرگ </strong>می‌باشد</p>
+                <p className='text-secondry-base text-xs md:text-sm lg:text-base'>طراحی شده توسط گروه فنی مهندسی<a target="_blank" rel="noopener noreferrer" className='font-bold text-[#3F3681]' href="https://codinto.ir"> کدینتو </a></p>
             </div>
         </footer>
     )

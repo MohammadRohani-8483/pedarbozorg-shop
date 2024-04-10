@@ -42,18 +42,12 @@ const CommentSection = ({ itemsInfo, commentsID }: any) => {
 
     return (
         <div ref={itemsInfo[3].ref} className='flex flex-col justify-center items-center gap-4 justify-center items-start w-full py-2'>
-            <h2 className='text-xl font-bold text-base-300'>
+            <h2 className='text-xl font-bold text-secondry-base'>
                 نظرات کاربران
             </h2>
             {commentsCount > 0 ?
                 <>
-                    <div
-                        // onClick={() => {
-                        //     setIsOrderingOpen(true)
-                        //     document.documentElement.classList.add('overflow-hidden')
-                        // }}
-                        className='flex gap-2 justify-center items-center text-sm text-base-300 px-3 py-1.5 cursor-pointer'
-                    >
+                    <div className='flex gap-2 justify-center items-center text-sm text-secondry-base px-3 py-1.5 cursor-pointer'>
                         <Image
                             src='/iconSax/sort.svg'
                             alt='sort'
@@ -63,12 +57,12 @@ const CommentSection = ({ itemsInfo, commentsID }: any) => {
                         <h2>مرتب سازی</h2>
                     </div>
                     <div className='w-full flex flex-col gap-4 justify-center items-center'>
-                        <div className='w-full h-[1px] bg-[#CBCBCB]' />
+                        <div className='w-full h-[1px] bg-neutral-400' />
                         {
                             comments.map(comment => (
                                 <React.Fragment key={comment.id}>
                                     <Comment comment={comment} />
-                                    <div className='w-full h-[1px] bg-[#CBCBCB]' />
+                                    <div className='w-full h-[1px] bg-neutral-400' />
                                 </React.Fragment>
                             ))
                         }

@@ -84,7 +84,7 @@ const CheckoutCartItem = ({ image, link, price, priceWithOffer, name, count, pro
                 </div>
                 <div className='flex flex-col justify-center items-center gap-2'>
                     {offerPresent !== 0 &&
-                        <div className='text-[#C62020] text-xs md:text-sm font-bold flex justify-center items-center gap-1'>
+                        <div className='text-error-base text-xs md:text-sm font-bold flex justify-center items-center gap-1'>
                             <p>{formatNumber(present * count || 0)}</p>
                             <Image
                                 src='/Image/red-Tooman.svg'
@@ -95,7 +95,7 @@ const CheckoutCartItem = ({ image, link, price, priceWithOffer, name, count, pro
                             <p>تخفیف</p>
                         </div>
                     }
-                    <div className='text-[#353535] text-base text-xl font-bold flex gap-2 justify-center items-center'>
+                    <div className='text-neutral-800 text-base text-xl font-bold flex gap-2 justify-center items-center'>
                         <h2>{formatNumber((price - present) * count || 0)}</h2>
                         <Image
                             src='/Image/Tooman.svg'
@@ -109,7 +109,7 @@ const CheckoutCartItem = ({ image, link, price, priceWithOffer, name, count, pro
             <div className='flex md:grid md:grid-cols-2 md:grid-row-1 gap-4 md:gap-2 justify-center items-center text-xl font-bold pl-2'>
                 <div
                     onClick={handleIncrementQuantity}
-                    className='bg-[#E0F1E9] size-8 hover:bg-[#C1E2D2] rounded-lg text-[#3D8361] p-1.5 cursor-pointer col-start-2'
+                    className='bg-secondry-tint-7 size-8 hover:bg-secondry-tint-6 rounded-lg text-secondry-base p-1.5 cursor-pointer col-start-2'
                 >
                     <Image
                         src='/iconSax/add.svg'
@@ -125,7 +125,7 @@ const CheckoutCartItem = ({ image, link, price, priceWithOffer, name, count, pro
                     {(count || 1) > 1 ?
                         <div
                             onClick={handleDecrementQuantity}
-                            className='bg-[#E0F1E9] size-8 hover:bg-[#C1E2D2] rounded-lg text-[#3D8361] p-1.5 cursor-pointer'>
+                            className='bg-secondry-tint-7 size-8 hover:bg-secondry-tint-6 rounded-lg text-secondry-base p-1.5 cursor-pointer'>
                             <Image
                                 src='/iconSax/minus.svg'
                                 alt='minus product count'
@@ -136,7 +136,7 @@ const CheckoutCartItem = ({ image, link, price, priceWithOffer, name, count, pro
                         :
                         <div
                             onClick={handleDeleteFromCart}
-                            className='bg-[#E0F1E9] size-8 hover:bg-[#C1E2D2] rounded-lg text-[#3D8361] p-1.5 cursor-pointer'
+                            className='bg-secondry-tint-7 size-8 hover:bg-secondry-tint-6 rounded-lg text-secondry-base p-1.5 cursor-pointer'
                         >
                             <Image
                                 src='/iconSax/trash.svg'

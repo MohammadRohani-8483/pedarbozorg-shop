@@ -10,7 +10,7 @@ const EmptyList = () => {
                 height={64}
                 alt='no items'
             />
-            <h2 className='text-[#ADADAD] text0sm sm:text-base font-bold'>این لیست خالی میباشد!</h2>
+            <h2 className='text-neutral-500 text0sm sm:text-base font-bold'>این لیست خالی میباشد!</h2>
         </div>
     )
 }

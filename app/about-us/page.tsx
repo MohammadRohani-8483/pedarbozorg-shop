@@ -32,7 +32,7 @@ const AboutUsPage = () => {
               />
             </div>
             <div className='w-full flex flex-col justify-center items-center gap-2 md:gap-8'>
-              <h2 className='text-2xl md:text-[44px] text-base-300 font-bold text-center'>
+              <h2 className='text-2xl md:text-[44px] text-secondry-base font-bold text-center'>
                 فروشگاه پدربزرگ
               </h2>
               <p className='text-sm md:text-lg text-justify leading-6'>

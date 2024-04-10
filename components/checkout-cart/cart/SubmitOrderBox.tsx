@@ -2,8 +2,7 @@
 import formatNumber from '@/public/Functions/formatNumber'
 import Image from 'next/image'
 import Link from 'next/link'
-import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import React from 'react'
 
 type props = {
     sellPrice: number
@@ -42,7 +41,7 @@ const SubmitOrderBox = ({
     return (
         <div className='flex flex-col bg-white rounded-2xl p-4 md:p-8 items-center justify-center w-full md:w-2/3 gap-4 md:gap-8'>
             <div className='flex flex-col w-full gap-4'>
-                <div className='text-[#626262] text-base font-bold flex justify-between items-center'>
+                <div className='text-neutral-700 text-base font-bold flex justify-between items-center'>
                     <p>
                         قیمت کالا ها ({countProduct})
                     </p>
@@ -57,7 +56,7 @@ const SubmitOrderBox = ({
                     </div>
                 </div>
                 {discountProducts !== 0 &&
-                    <div className='text-[#626262] text-base font-bold flex justify-between items-center'>
+                    <div className='text-neutral-700 text-base font-bold flex justify-between items-center'>
                         <p>
                             تخفیف محصولات
                         </p>
@@ -74,7 +73,7 @@ const SubmitOrderBox = ({
                     </div>
                 }
                 {discountCode &&
-                    <div className='text-[#626262] text-base font-bold flex justify-between items-center'>
+                    <div className='text-neutral-700 text-base font-bold flex justify-between items-center'>
                         <p>
                             کد
                         </p>
@@ -91,7 +90,7 @@ const SubmitOrderBox = ({
                     </div>
                 }
                 {yourProfit !== 0 &&
-                    <div className='text-[#C62020] text-base font-bold flex justify-between items-center'>
+                    <div className='text-error-base text-base font-bold flex justify-between items-center'>
                         <p>
                             تخفیف محصولات
                         </p>
@@ -109,7 +108,7 @@ const SubmitOrderBox = ({
                 }
                 {shipmentPrice &&
                     (shipmentPrice !== 0 ?
-                        <div className='text-[#626262] text-base font-bold flex justify-between items-center'>
+                        <div className='text-neutral-700 text-base font-bold flex justify-between items-center'>
                             <p>
                                 هزینه ارسال
                             </p>
@@ -124,7 +123,7 @@ const SubmitOrderBox = ({
                             </div>
                         </div>
                         :
-                        <div className='text-[#626262] text-base font-bold flex justify-between items-center'>
+                        <div className='text-neutral-700 text-base font-bold flex justify-between items-center'>
                             <p>
                                 هزینه ارسال
                             </p>

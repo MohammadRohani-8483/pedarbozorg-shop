@@ -23,7 +23,7 @@ const Page = ({ params }: any) => {
                         height={218}
                         className='top-2 left-0 absolute z-[-1]'
                     />
-                    <div dangerouslySetInnerHTML={{ __html: blog.body }} className='[&_img]:!w-full [&_img]:!rounded-2xl [&_b]:!text-base-300 [&_b]:!text-xl [&_b]:!font-bold [&_b_a_span]:!text-xl [&_b_a_span]:!text-secondry-base [&_b_a_span]:!font-bold [&_b_span]:!text-secondry-base [&_b_span]:!font-bold [&_b_span]:!text-xl [&_*]:!text-justify [&_*]:!font-light [&_*]:!leading-8 [&_*]:!text-secondry-shade-4'></div>
+                    <div dangerouslySetInnerHTML={{ __html: blog.body }} className='[&_img]:!w-full [&_img]:!rounded-2xl [&_b]:!text-secondry-base [&_b]:!text-xl [&_b]:!font-bold [&_b_a_span]:!text-xl [&_b_a_span]:!text-secondry-base [&_b_a_span]:!font-bold [&_b_span]:!text-secondry-base [&_b_span]:!font-bold [&_b_span]:!text-xl [&_*]:!text-justify [&_*]:!font-light [&_*]:!leading-8 [&_*]:!text-secondry-shade-4'></div>
                 </>
                 :
                 <div className='flex justify-center items-center h-[400px] text-3xl text-gray-400 font-bold'>

@@ -10,7 +10,7 @@ const BenefitItem = ({ benefit }: { benefit: string }) => {
                 width={24}
                 height={24}
             />
-            <p className='text-sm text-[#626262] text-justify leading-6'>
+            <p className='text-sm text-neutral-700 text-justify leading-6'>
                 {benefit}
                 
             </p>

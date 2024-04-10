@@ -178,7 +178,7 @@ const ProductCard = ({ price, link, image, name, priceWithOffer, score, product 
                 </>
                 }
                 <div className='w-full flex flex-col gap-2'>
-                    <Link href={link} className='text-base-300 text-base lg:text-xl font-bold'>{name}</Link>
+                    <Link href={link} className='text-secondry-base text-base lg:text-xl font-bold'>{name}</Link>
                     <div className='flex justify-between w-full items-center ltr gap-2'>
                         <div className='flex gap-2 items-center justify-start lg:justify-end w-full'>
                             {productIsAvailable ?
@@ -209,7 +209,7 @@ const ProductCard = ({ price, link, image, name, priceWithOffer, score, product 
                             :
                             (score &&
                                 <div className='flex items-center justify-center gap-1'>
-                                    <FaStar className='text-[#FFC436]' />
+                                    <FaStar className='text-primery-base' />
                                     <p className='text-gray-600 text-xs lg:text-base'>{score.toFixed(1)}</p>
                                 </div>
                             )
@@ -221,7 +221,7 @@ const ProductCard = ({ price, link, image, name, priceWithOffer, score, product 
                                 <p className='line-through text-gray-400 text-sm lg:text-base'>{formatNumber(price)}</p>
                                 {score &&
                                     <div className='flex items-center justify-center gap-1'>
-                                        <FaStar className='text-[#FFC436]' />
+                                        <FaStar className='text-primery-base' />
                                         <p className='text-gray-600 text-xs lg:text-base'>{score.toFixed(1)}</p>
                                     </div>
                                 }

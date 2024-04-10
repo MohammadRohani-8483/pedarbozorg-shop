@@ -67,9 +67,9 @@ const OrderItem = ({ icon, title, count, activeList, setActiveList, nameList }: 
     return (
         <div
             onClick={() => setActiveList(nameList)}
-            className={`flex justify-center items-center gap-2 ${activeList === nameList ? "border-b-[3px] border-base-300" : "border-b-2 border[#E3E3E3]"} pb-2 md:pb-4 w-full cursor-pointer`}
+            className={`flex justify-center items-center gap-2 ${activeList === nameList ? "border-b-[3px] border-secondry-base" : "border-b-2 border[#E3E3E3]"} pb-2 md:pb-4 w-full cursor-pointer`}
         >
-            <div className={`flex flex-col items-center justify-center gap-2 ${activeList === nameList ? "text-base-300" : "text-[#ADADAD]"} text-base font-bold md:text-base-300`}>
+            <div className={`flex flex-col items-center justify-center gap-2 ${activeList === nameList ? "text-secondry-base" : "text-neutral-500"} text-base font-bold md:text-secondry-base`}>
                 <Image
                     src={icon}
                     alt={title}
@@ -79,7 +79,7 @@ const OrderItem = ({ icon, title, count, activeList, setActiveList, nameList }: 
                 />
                 {title}
             </div>
-            <div className={`${activeList === nameList ? "text-white bg-[url('/Image/background/bg-number-active-orders.svg')]" : "bg-[url('/Image/background/bg-number-orders.svg')] text-base-300"}  bg-cover w-[70px] h-[82px] bg-no-repeat hidden md:flex justify-center items-center font-bold text-3xl`}>
+            <div className={`${activeList === nameList ? "text-white bg-[url('/Image/background/bg-number-active-orders.svg')]" : "bg-[url('/Image/background/bg-number-orders.svg')] text-secondry-base"}  bg-cover w-[70px] h-[82px] bg-no-repeat hidden md:flex justify-center items-center font-bold text-3xl`}>
                 {count}
             </div>
         </div>
@@ -98,7 +98,7 @@ const ActiveOrderItems = ({ list, activeList }: orderItemsProps) => {
                     <React.Fragment key={order.id}>
                         <div className='min-h-[171px] w-full relative bg-white flex flex-col gap-4 justify-center items-start'>
                             <div className='w-full flex justify-between items-start'>
-                                <div className={`flex justify-center items-center ${order.level === 'cancelled' ? " text-[#C62020]" : "text-base-300"} font-bold gap-4`}>
+                                <div className={`flex justify-center items-center ${order.level === 'cancelled' ? " text-error-base" : "text-secondry-base"} font-bold gap-4`}>
                                     <h3>
                                         {order.level === 1 ?
                                             "در صف بررسی"
@@ -115,35 +115,35 @@ const ActiveOrderItems = ({ list, activeList }: orderItemsProps) => {
                                     <div className='flex gap-2 justify-center items-center'>
                                         {order.level !== 'cancelled' ?
                                             <>
-                                                <div className='size-2 rounded-full bg-base-300' />
-                                                <div className={`size-2 rounded-full ${order.level !== 1 ? "bg-base-300" : "bg-[#CBCBCB]"}`} />
-                                                <div className={`size-2 rounded-full ${order.level === 'completed' ? "bg-base-300" : "bg-[#CBCBCB]"}`} />
+                                                <div className='size-2 rounded-full bg-secondry-base' />
+                                                <div className={`size-2 rounded-full ${order.level !== 1 ? "bg-secondry-base" : "bg-neutral-400"}`} />
+                                                <div className={`size-2 rounded-full ${order.level === 'completed' ? "bg-secondry-base" : "bg-neutral-400"}`} />
                                             </>
                                             :
                                             Array(3).fill(1).map((_, i) => (
-                                                <div key={i} className='size-2 rounded-full bg-[#C62020]' />
+                                                <div key={i} className='size-2 rounded-full bg-error-base' />
                                             ))
                                         }
                                     </div>
                                 </div>
-                                <p className='text-sm text-[#ADADAD]'>
+                                <p className='text-sm text-neutral-500'>
                                     {order.createdAt.year}/{order.createdAt.month}/{order.createdAt.day}
                                 </p>
                             </div>
                             <div className='flex justify-center items-center gap-4'>
                                 <div className='gap-1 flex justify-center items-center'>
-                                    <p className='text-sm text-[#ADADAD]'>
+                                    <p className='text-sm text-neutral-500'>
                                         شماره سفارش
                                     </p>
-                                    <p className='text-sm text-[#626262]'>
+                                    <p className='text-sm text-neutral-700'>
                                         {order.id}
                                     </p>
                                 </div>
                                 <div className='gap-1 flex justify-center items-center'>
-                                    <p className='text-sm text-[#ADADAD]'>
+                                    <p className='text-sm text-neutral-500'>
                                         مبلغ
                                     </p>
-                                    <p className='text-sm text-[#626262]'>
+                                    <p className='text-sm text-neutral-700'>
                                         {order.price.toLocaleString()}
                                     </p>
                                     <Icon nameIcon='ToomanSquarelightGray' size={20} />
@@ -172,7 +172,7 @@ const ActiveOrderItems = ({ list, activeList }: orderItemsProps) => {
                                 ))}
                             </Swiper>
                             <div className={`scrollbar${i} h-1 !z-20 !w-full !-m-2`} />
-                            <Link href={order.slug} className='absolute bottom-0 left-0 rectangle-btn text-base-300 text-sm flex justify-center items-center gap-2 z-20'>
+                            <Link href={order.slug} className='absolute bottom-0 left-0 rectangle-btn text-secondry-base text-sm flex justify-center items-center gap-2 z-20'>
                                 جزئیات سفارش
                                 <Icon nameIcon='arrow-left-viewall-btn' size={20} />
                             </Link>

@@ -11,7 +11,7 @@ const Features = () => {
                     width={32}
                     height={32}
                 />
-                <h3 className='text-[#757575] text-sm whitespace-nowrap'>
+                <h3 className='text-neutral-600 text-sm whitespace-nowrap'>
                     قیمت مناسب
                 </h3>
             </div>
@@ -22,7 +22,7 @@ const Features = () => {
                     width={32}
                     height={32}
                 />
-                <h3 className='text-[#757575] text-sm whitespace-nowrap'>
+                <h3 className='text-neutral-600 text-sm whitespace-nowrap'>
                     تضمین اصالت
                 </h3>
             </div>
@@ -33,7 +33,7 @@ const Features = () => {
                     width={32}
                     height={32}
                 />
-                <h3 className='text-[#757575] text-sm whitespace-nowrap'>
+                <h3 className='text-neutral-600 text-sm whitespace-nowrap'>
                     100% طبیعی
                 </h3>
             </div>
@@ -44,13 +44,13 @@ const Features = () => {
                     width={32}
                     height={32}
                 />
-                <h3 className='text-[#757575] text-sm whitespace-nowrap'>
+                <h3 className='text-neutral-600 text-sm whitespace-nowrap'>
                     ارسال سریع و رایگان
                 </h3>
-                <p className='text-[10px] text-[#757575] text-center whitespace-nowrap'>
+                <p className='text-[10px] text-neutral-600 text-center whitespace-nowrap'>
                     سفارش بالای ۷۰۰ هزار تومان تهران
                 </p>
-                <p className='text-[10px] text-[#757575] text-center whitespace-nowrap'>
+                <p className='text-[10px] text-neutral-600 text-center whitespace-nowrap'>
                     سفارش بالای ۸۵۰ تومان شهرستان‌ها
                 </p>
             </div>

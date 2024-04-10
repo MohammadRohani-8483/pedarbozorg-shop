@@ -13,6 +13,13 @@ import { cart } from '@/public/types/productType';
 import { authState } from '@/public/redux/store/auth';
 import ProfileMenu from './ProfileMenu';
 import SignUpSignIn from './signUp_signIn/SignUpSignIn';
+import SkeletonLoginBtn from './SkeletonLoginBtn';
+import SkeletonShoppingCart from './SkeletonShoppingCart';
+import Alert from './Alert';
+import { useRouter } from 'next/navigation';
+import { useAppDispatch } from '@/public/redux/hooks';
+import { logoutUser } from '@/public/redux/actions/authActions';
+import { getCartFromLocalStorage } from '@/public/redux/store/cart';
 
 const Header: React.FC = () => {
     const [isTop, setIsTop] = useState(true);
@@ -25,9 +32,13 @@ const Header: React.FC = () => {
     const [isFormOpen, setIsFormOpen] = useState(false)
     const [searchValue, setSearchValue] = useState("")
     const [focus, setFocus] = useState(false)
+    const [start, setStart] = useState(false)
 
     const [isProfileVisible, setIsProfileVisible] = useState(false)
     const [isProfileHover, setIsProfileHover] = useState(false)
+    const [isLogOut, setIsLogOut] = useState(false)
+
+    const { replace } = useRouter()
 
     const [cartLength, setCartLength] = useState(0)
 
@@ -49,6 +60,7 @@ const Header: React.FC = () => {
 
     useEffect(() => {
         window.addEventListener('scroll', handleScroll);
+        setStart(true)
     }, []);
 
     useEffect(() => {
@@ -57,7 +69,6 @@ const Header: React.FC = () => {
             :
             document.documentElement.classList.remove('overflow-hidden')
     }, [focus, searchValue])
-
 
     useEffect(() => {
         !focus && setOpenSearchBar(isTop)
@@ -82,11 +93,20 @@ const Header: React.FC = () => {
         setTimeout(() => setIsHoverLogin(false), 800)
     }
 
+    const dispatch = useAppDispatch()
+    const { userToken } = useSelector((state: { auth: authState }) => state.auth)
+
+    const handleLogOut = async () => {
+        replace('/')
+        await dispatch(logoutUser({ access: userToken.access!, refresh: userToken.refresh! }))
+        dispatch(getCartFromLocalStorage())
+    }
+
     return (
         <>
             <header
                 id="header"
-                className={`w-screen fixed z-50  hidden lg:flex justify-between px-14 transition-all duration-800  ${openSearchBar ? "h-[117px]" : "h-20"} ${isTop ? 'border-base-100' : "border-base-200 bg-base-100 border-b"}`}
+                className={`w-screen fixed z-50  hidden lg:flex justify-between px-14 transition-all duration-800  ${openSearchBar ? "h-[117px]" : "h-20"} ${isTop ? 'border-background' : "border-secondry-tint-7 bg-background border-b"}`}
             >
                 <Link className={`h-14 ${openSearchBar ? "mt-5" : "mt-3"} w-14 relative pl-16`}
                     href={"/"}
@@ -127,99 +147,121 @@ const Header: React.FC = () => {
                     </motion.div>
                 </div>
                 <div className="flex gap-4 items-center h-20 w-auto">
-                    {auth.isLogedIn ?
+                    {start ?
+                        auth.isLogedIn ?
+                            <>
+                                <motion.div className='py-3'
+                                    onHoverStart={() => {
+                                        setIsProfileVisible(true)
+                                        setIsProfileHover(true)
+                                    }}
+                                    onHoverEnd={() => setIsProfileHover(false)}
+                                >
+                                    <div className='relative'>
+                                        <Link href='/profile' className='w-[162px] outline-btn rectangle-btn h-10 flex gap-2 justify-center items-center'>
+                                            <Image
+                                                src='/iconSax/user-square.svg'
+                                                alt="user account"
+                                                width={24}
+                                                height={24}
+                                            />
+                                            <p className='text-base text-secondry-base max-w-[98px] overflow-hidden text-ellipsis'>
+                                                {auth.userInfo.first_name ? `${auth.userInfo?.first_name} ${auth.userInfo?.last_name}` : auth.userInfo?.user?.username}
+                                            </p>
+                                        </Link>
+                                    {isProfileVisible && <ProfileMenu isHover={isProfileHover} setIsLogOut={setIsLogOut} />}
+                                    </div>
+                                </motion.div>
+                                {isLogOut &&
+                                    <Alert
+                                        confirmFunc={handleLogOut}
+                                        messageToast='با موفقیت از حساب خود خارج شدید'
+                                        setIsAlertOpen={setIsLogOut}
+                                        textBtn='خروج از حساب'
+                                        title='خروج از حساب کاربری' redBtn
+                                    >
+                                        <p className='text-neutral-800 w-full text-right'>
+                                            برای سفارش و مشاهده سبد خرید بایستی وارد حساب خود باشید
+                                        </p>
+                                    </Alert>
+                                }
+                            </>
+                            :
+                            <button
+                                onClick={handleFormSignInOpen}
+                                onMouseOver={() => setIsHoverLogin(true)}
+                                onMouseOut={() => setIsHoverLogin(false)}
+                                className="w-[162px] border-background hover:border-secondry-tint-7 flex items-center gap-3 bg-secondry-base hover:bg-secondry-shade-2 text-background text-sm md:text-base md:py-2 md:px-4 px-3 py-1.5 border-4 rounded-[10px]"
+                            >
+                                <div className='flex w-[20px] gap-1 h-[20px] overflow-hidden bg-[url("/iconSax/login-bg-btn.svg")] bg-contain bg-no-repeat bg-right'>
+                                    <motion.img
+                                        animate={isHoverLogin ? { x: 24 } : { x: 0 }}
+                                        transition={{ duration: 0.2 }}
+                                        src="/iconSax/right-arrow.svg"
+                                        width={16}
+                                        height={24}
+                                        alt="login"
+                                        loading='lazy'
+                                        decoding='async'
+                                        data-nimg={1}
+                                        style={{ color: 'transparent' }}
+                                    />
+                                    <motion.img
+                                        animate={isHoverLogin ? { x: 20 } : { x: 0 }}
+                                        transition={{ duration: 0.2 }}
+                                        src="/iconSax/right-arrow.svg"
+                                        width={16}
+                                        height={24}
+                                        alt="login"
+                                        loading='lazy'
+                                        decoding='async'
+                                        data-nimg={1}
+                                        style={{ color: 'transparent' }}
+                                    />
+                                </div>
+                                ورود/ثبت نام
+                            </button>
+                        :
+                        <SkeletonLoginBtn />
+                    }
+                    {isFormOpen && <SignUpSignIn setIsFormOpen={setIsFormOpen} />}
+                    {start ?
                         <motion.div className='py-3'
                             onHoverStart={() => {
-                                setIsProfileVisible(true)
-                                setIsProfileHover(true)
+                                setIsVisible(true)
+                                setIsHover(true)
                             }}
-                            onHoverEnd={() => setIsProfileHover(false)}
+                            onHoverEnd={() => setIsHover(false)}
                         >
                             <div className='relative'>
-                                <Link href='/profile' className='w-[162px] outline-btn rectangle-btn h-10 flex gap-2 justify-center items-center'>
-                                    <Image
-                                        src='/iconSax/user-square.svg'
-                                        alt="user account"
-                                        width={24}
-                                        height={24}
-                                    />
-                                    <p className='text-base-text-base-300 max-w-[98px] overflow-hidden text-ellipsis'>
-                                        {auth.userInfo.first_name ? `${auth.userInfo?.first_name} ${auth.userInfo?.last_name}` : auth.userInfo?.user?.username}
-                                    </p>
+                                <Link href='/checkout-cart'>
+                                    <button className='w-[38px] outline-btn square-btn'>
+                                        <Image
+                                            src='/iconSax/shopping-cart.svg'
+                                            width={22}
+                                            height={22}
+                                            alt="shoping cart"
+                                            className='w-[22px] h-[22px] w-full'
+                                        />
+                                        {cartLength !== 0 &&
+                                            <div className="absolute px-1.5 py-0 rounded-md bg-red-500 text-white text-xs flex justify-center items-center top-0.5 right-0.5">
+                                                {cartLength}
+                                            </div>
+                                        }
+                                    </button>
                                 </Link>
-                                {isProfileVisible && <ProfileMenu isHover={isProfileHover} />}
+                                {isVisible && <ShopingCard isVisible={isHover} />}
                             </div>
                         </motion.div>
                         :
-                        <button
-                            onClick={handleFormSignInOpen}
-                            onMouseOver={() => setIsHoverLogin(true)}
-                            onMouseOut={() => setIsHoverLogin(false)}
-                            className="w-[162px] border-base-100 hover:border-base-200 flex items-center gap-3 bg-base-300 hover:bg-base-400 text-base-100 text-sm md:text-base md:py-2 md:px-4 px-3 py-1.5 border-4 rounded-[10px]"
-                        >
-                            <div className='flex w-[20px] gap-1 h-[20px] overflow-hidden bg-[url("/iconSax/login-bg-btn.svg")] bg-contain bg-no-repeat bg-right'>
-                                <motion.img
-                                    animate={isHoverLogin ? { x: 24 } : { x: 0 }}
-                                    transition={{ duration: 0.2 }}
-                                    src="/iconSax/right-arrow.svg"
-                                    width={16}
-                                    height={24}
-                                    alt="login"
-                                    loading='lazy'
-                                    decoding='async'
-                                    data-nimg={1}
-                                    style={{ color: 'transparent' }}
-                                />
-                                <motion.img
-                                    animate={isHoverLogin ? { x: 20 } : { x: 0 }}
-                                    transition={{ duration: 0.2 }}
-                                    src="/iconSax/right-arrow.svg"
-                                    width={16}
-                                    height={24}
-                                    alt="login"
-                                    loading='lazy'
-                                    decoding='async'
-                                    data-nimg={1}
-                                    style={{ color: 'transparent' }}
-                                />
-                            </div>
-                            ورود/ثبت نام
-                        </button>
+                        <SkeletonShoppingCart />
                     }
-                    {isFormOpen && <SignUpSignIn setIsFormOpen={setIsFormOpen} />}
-                    <motion.div className='py-3'
-                        onHoverStart={() => {
-                            setIsVisible(true)
-                            setIsHover(true)
-                        }}
-                        onHoverEnd={() => setIsHover(false)}
-                    >
-                        <div className='relative'>
-                            <Link href='/checkout-cart'>
-                                <button className='w-[38px] outline-btn square-btn'>
-                                    <Image
-                                        src='/iconSax/shopping-cart.svg'
-                                        width={22}
-                                        height={22}
-                                        alt="shoping cart"
-                                        className='w-[22px] h-[22px] w-full'
-                                    />
-                                    {cartLength !== 0 &&
-                                        <div className="absolute px-1.5 py-0 rounded-md bg-red-500 text-white text-xs flex justify-center items-center top-0.5 right-0.5">
-                                            {cartLength}
-                                        </div>
-                                    }
-                                </button>
-                            </Link>
-                            {isVisible && <ShopingCard isVisible={isHover} />}
-                        </div>
-                    </motion.div>
                 </div>
             </header>
 
             <header
                 id="header"
-                className={`w-screen h-16 fixed z-40 overflow-auto bg-base-100 flex lg:hidden justify-between px-6 py-3 transition-all duration-500 border-b ${isTop ? 'border-base-100' : "border-base-200"}`}
+                className={`w-screen h-16 fixed z-40 overflow-auto bg-background flex lg:hidden justify-between px-6 py-3 transition-all duration-500 border-b ${isTop ? 'border-background' : "border-secondry-tint-7"}`}
             >
                 <div className='flex items-center gap-2'>
                     <button
@@ -290,7 +332,7 @@ const Header: React.FC = () => {
                                 setIsHoverLogin(true)
                                 setTimeout(() => setIsHoverLogin(false), 800)
                             }}
-                            className='border-base-100 hover:border-base-200 flex items-center gap-3 bg-base-300 hover:bg-base-400 text-base-100 text-sm md:text-base md:p-2 p-2 border-4 rounded-[10px]'
+                            className='border-background hover:border-secondry-tint-7 flex items-center gap-3 bg-secondry-base hover:bg-secondry-shade-2 text-background text-sm md:text-base md:p-2 p-2 border-4 rounded-[10px]'
                         >
                             <div className='flex w-[20px] gap-1 h-[20px] overflow-hidden bg-[url("/iconSax/login-bg-btn.svg")] bg-contain bg-no-repeat bg-right'>
                                 <motion.img

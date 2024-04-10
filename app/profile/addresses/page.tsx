@@ -13,9 +13,9 @@ const page = () => {
     return (
         <ProfileBox>
             <div className='w-full flex flex-col justify-center items-center gap-4'>
-                <div className='flex justify-between items-center w-full text-base-300 text-base font-bold'>
+                <div className='flex justify-between items-center w-full text-secondry-base text-base font-bold'>
                     آدرس های من
-                    <motion.button whileHover={{ backgroundColor: "#C1E2D2" }} className='rounded-lg rectangle-btn flex gap-2 justify-center items-center bg-base-200 text-base-300'>
+                    <motion.button whileHover={{ backgroundColor: "#C1E2D2" }} className='rounded-lg rectangle-btn flex gap-2 justify-center items-center bg-secondry-tint-7 text-secondry-base'>
                         افزودن آدرس
                         <Icon nameIcon='location-add' size={20} />
                     </motion.button>
@@ -33,7 +33,7 @@ const Address = () => {
     return (
         <div className='flex w-full justify-between items-center'>
             <div className='flex flex-col gap-4 justify-center items-start'>
-                <h4 className='text-sm text-[#353535]'>
+                <h4 className='text-sm text-neutral-800'>
                     قم/ خیابان امام موسی صدر/ کوچه ۷۷/ فرعی ۶
                 </h4>
                 <div className='flex flex-col gap-2 justify-center items-start'>
@@ -46,7 +46,7 @@ const Address = () => {
             <div className='flex flex-col justify-center items-center gap-2'>
                 <motion.button
                     whileHover={{ backgroundColor: "#C1E2D2" }}
-                    className='p-1.5 rounded-lg bg-base-200'
+                    className='p-1.5 rounded-lg bg-secondry-tint-7'
                 >
                     <Icon nameIcon='edit-green' size={20} />
                 </motion.button>
@@ -63,7 +63,7 @@ const Address = () => {
 
 const AddressItem = ({ iconName, value }: itemProps) => {
     return (
-        <div className='flex gap-4 justify-center items-center text-[#353535] text-xs'>
+        <div className='flex gap-4 justify-center items-center text-neutral-800 text-xs'>
             <Icon nameIcon={iconName} size={16} />
             {value}
         </div>

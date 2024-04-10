@@ -1,16 +1,15 @@
 'use client'
 import { getMeThunk } from '@/public/redux/actions/authActions'
-import { getCartFromServer, makeCartFromLocalStorage, makeCartItem } from '@/public/redux/actions/cartActions'
+import { getCartFromServer } from '@/public/redux/actions/cartActions'
 import { AppDispatch } from '@/public/redux/store'
-import { authState, getMe, getTokenFromCookie } from '@/public/redux/store/auth'
+import { getTokenFromCookie } from '@/public/redux/store/auth'
 import { getCartFromLocalStorage } from '@/public/redux/store/cart'
-import { cart, cartItem } from '@/public/types/productType'
 import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
+import { AppProgressBar as ProgressBar } from 'next-nprogress-bar';
 
 const ClientProvider = ({ children, token }: any) => {
     const dispatch = useDispatch<AppDispatch>()
-    const authState: authState = useSelector((state: any) => state.auth)
     useEffect(() => {
         if (token.accessToken) {
             dispatch(getTokenFromCookie(token))
@@ -19,16 +18,17 @@ const ClientProvider = ({ children, token }: any) => {
         } else {
             dispatch(getCartFromLocalStorage())
         }
-        // dispatch(makeCartFromLocalStorage(token.accessToken.value))
-        // localItem.forEach(item => {
-        //     dispatch(makeCartItem({ token: token.accessToken.value, variant: item.variant.id, quantity: item.quantity! }))
-        // })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
-
-    const cart = useSelector((state: { cart: cart }) => state.cart.cartItems)
 
     return (
         <React.Fragment>
+            <ProgressBar
+                height="3px"
+                color="#3D8361"
+                options={{ showSpinner: false }}
+                shallowRouting
+            />
             {children}
         </React.Fragment>
     )

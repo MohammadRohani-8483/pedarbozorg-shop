@@ -20,16 +20,16 @@ const Ordering = ({ activeOrder, setActiveOrder, orders }: props) => {
                 width={24}
                 height={24}
             />
-            <h2 className='text-xl text-base-300 font-bold whitespace-nowrap'>مرتب سازی</h2>
+            <h2 className='text-xl text-secondry-base font-bold whitespace-nowrap'>مرتب سازی</h2>
             {orders.map((order: any) => {
                 return (
                     activeOrder === order.value ?
-                        <div className='bg-base-300 text-sm text-white px-3 py-1.5 rounded-md cursor-pointer whitespace-nowrap' defaultValue={order.value} key={order.id}>
+                        <div className='bg-secondry-base text-sm text-white px-3 py-1.5 rounded-md cursor-pointer whitespace-nowrap' defaultValue={order.value} key={order.id}>
                             {order.name}
                         </div>
                         :
                         <div
-                            className='text-base-300 text-sm px-3 py-1.5 cursor-pointer whitespace-nowrap'
+                            className='text-secondry-base text-sm px-3 py-1.5 cursor-pointer whitespace-nowrap'
                             key={order.id}
                             onClick={() => {
                                 setActiveOrder(order.value)

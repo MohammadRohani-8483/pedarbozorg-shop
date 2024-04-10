@@ -47,7 +47,7 @@ export default function SpecialProductsSlider({ products }: prop) {
                     width={69}
                     height={69}
                 />
-                <h1 className='font-bold text-2xl text-base-300'>محصولات ویژه</h1>
+                <h1 className='font-bold text-2xl text-secondry-base'>محصولات ویژه</h1>
                 <Image
                     src="/Image/title-vecors/left.svg"
                     alt="left"
@@ -101,8 +101,8 @@ export default function SpecialProductsSlider({ products }: prop) {
                                         />
                                     </div>
                                     <div className='flex flex-col gap-8'>
-                                        <h1 className='text-base-300 text-2xl text-center font-bold'>{product.name}</h1>
-                                        <div className='flex flex-col gap-2 text-center text-base text-base-300 w-full'>
+                                        <h1 className='text-secondry-base text-2xl text-center font-bold'>{product.name}</h1>
+                                        <div className='flex flex-col gap-2 text-center text-base text-secondry-base w-full'>
                                             {product.advantages.map((advantage) => (
                                                 <motion.div
                                                     key={advantage.id}

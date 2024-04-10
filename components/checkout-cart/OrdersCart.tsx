@@ -16,14 +16,14 @@ const OrdersCart = ({ image, name, quantity }: props) => {
                 width={133}
                 height={133}
             />
-            <div className='w-full h-[1px] bg-[#EDEDED]' />
+            <div className='w-full h-[1px] bg-neutral-300' />
             <div className='flex flex-col w-full justify-center items-start gap-1'>
-                <h2 className='text-[#353535] text-sm leading-[18.2px]'>
+                <h2 className='text-neutral-800 text-sm leading-[18.2px]'>
                     {name}
                 </h2>
                 <div className='flex justify-center items-center gap-2'>
-                    <div className='rounded-full bg-[#626262] size-1.5' />
-                    <p className='text-[#626262] text-[10px] leading-[18px]'>
+                    <div className='rounded-full bg-neutral-700 size-1.5' />
+                    <p className='text-neutral-700 text-[10px] leading-[18px]'>
                         {quantity} عدد
                     </p>
                 </div>

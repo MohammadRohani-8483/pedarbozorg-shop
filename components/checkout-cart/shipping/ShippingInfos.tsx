@@ -88,7 +88,7 @@ const ShippingInfos = ({ addresses, setAddresses }: props) => {
   return (
     <div className='flex flex-col bg-white rounded-2xl p-4 md:p-8 items-center justify-center w-full gap-8'>
       <div className='w-full flex flex-col items-start justify-center gap-4'>
-        <h2 className='text-base font-bold text-base-300'>
+        <h2 className='text-base font-bold text-secondry-base'>
           انتخاب آدرس تحویل سفارش
         </h2>
         {addresses.length > 0 ?
@@ -100,12 +100,12 @@ const ShippingInfos = ({ addresses, setAddresses }: props) => {
                 width={24}
                 height={24}
               />
-              <p className='text-[#353535] leading-6 text-sm flex gap-1 items-center'>
+              <p className='text-neutral-800 leading-6 text-sm flex gap-1 items-center'>
                 <>
                   {city !== province && `${province}/`}{city}/{activeAddress?.address}/پلاک {activeAddress?.flatNum}{activeAddress?.unitNum && `/واحد ${activeAddress?.unitNum}`}
                 </>
               </p>
-              <p className='text-[#757575] text-sm'>
+              <p className='text-neutral-600 text-sm'>
                 {activeAddress?.firstName} {activeAddress?.lastName}
               </p>
             </div>
@@ -117,7 +117,7 @@ const ShippingInfos = ({ addresses, setAddresses }: props) => {
           </>
           :
           <>
-            <p className='text-[#626262] text-sm'>
+            <p className='text-neutral-700 text-sm'>
               تا کنون آدرسی اضافه نکرده اید
             </p>
             <button
@@ -142,11 +142,11 @@ const ShippingInfos = ({ addresses, setAddresses }: props) => {
         }
       </div>
       <div className='w-full flex flex-col items-start justify-center gap-4'>
-        <h2 className='text-base font-bold text-base-300'>
+        <h2 className='text-base font-bold text-secondry-base'>
           نحوه ارسال
         </h2>
         <div className='flex flex-col items-start justify-center gap-2'>
-          <div className='text-[#353535] leading-6 text-sm flex gap-4 items-center'>
+          <div className='text-neutral-800 leading-6 text-sm flex gap-4 items-center'>
             <span>ارسال با پست پیشتاز:</span>
             <span>۳ تا ۵ روز کاری</span>
             <span className='flex justify-center items-center gap-2'>
@@ -159,7 +159,7 @@ const ShippingInfos = ({ addresses, setAddresses }: props) => {
               />
             </span>
           </div>
-          <p className='text-[#626262] text-xs leading-5'>
+          <p className='text-neutral-700 text-xs leading-5'>
             ارسال رایگان برای مناطق ۲، ۵ و ۲۲ تهران
             <br />
             سفارش‌های بالای {700} هزار تومان سایر مناطق تهران

@@ -19,7 +19,7 @@ const AboutUsItem = ({ title, image = '/Image/logo-login.svg', desc, leftImage }
                 />
             </div>
             <div className='w-full flex flex-col justify-center items-center gap-2 md:gap-8'>
-                <h3 className='text-base md:text-2xl text-base-300 font-bold text-center'>
+                <h3 className='text-base md:text-2xl text-secondry-base font-bold text-center'>
                     {title}
                 </h3>
                 <p className='text-sm md:text-lg text-justify leading-6'>

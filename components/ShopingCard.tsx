@@ -6,6 +6,7 @@ import ShopingCardItem from './ShopingCardItem'
 import { motion } from 'framer-motion';
 import { useSelector } from 'react-redux';
 import { cart } from '@/public/types/productType'
+import Link from 'next/link'
 
 const ShopingCard = ({ isVisible }: any) => {
     const [totalFinalPrice, setTotalFinalPrice] = useState(0)
@@ -35,7 +36,7 @@ const ShopingCard = ({ isVisible }: any) => {
                                     <ShopingCardItem
                                         price={cartItem?.variant?.shatoot_info.sell_price!}
                                         priceWithOffer={cartItem?.variant?.shatoot_info.sell_price}
-                                        image={cartItem?.variant?.image||cartItem.variant.product.featured_image}
+                                        image={cartItem?.variant?.image || cartItem.variant.product.featured_image}
                                         link={cartItem?.variant?.product.slug}
                                         name={cartItem?.variant?.name}
                                         count={cartItem?.quantity!}
@@ -47,13 +48,13 @@ const ShopingCard = ({ isVisible }: any) => {
                         })}
                     </div>
                     <div className='w-full h-[56px] flex justify-between items-center pt-6'>
-                        <div className='flex justify-center items-center gap-1 text-[#626262] text-[10px]'>
+                        <div className='flex justify-center items-center gap-1 text-neutral-700 text-[10px]'>
                             مجموع قیمت
                             <span className='text-base font-bold'>
                                 {cart.length}
                             </span>
                             کالا:
-                            <span className='text-xl text-[#353535] font-bold'>
+                            <span className='text-xl text-neutral-800 font-bold'>
                                 {formatNumber(+totalFinalPrice)}
                             </span>
                             <Image
@@ -63,11 +64,11 @@ const ShopingCard = ({ isVisible }: any) => {
                                 height={15.1}
                             />
                         </div>
-                        <div
+                        <Link href={cart.length > 0 ? "/checkout-cart/shipping" : ""}
                             className='rectangle-btn solid-btn'
                         >
                             ثبت سفارش
-                        </div>
+                        </Link>
                     </div>
                 </>
                 :
