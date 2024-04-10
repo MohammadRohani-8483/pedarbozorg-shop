@@ -1,8 +1,5 @@
 import Image from 'next/image'
 import { IoIosClose } from "react-icons/io";
-import { useForm, SubmitHandler, FieldValues } from "react-hook-form"
-import * as yup from "yup"
-import { yupResolver } from "@hookform/resolvers/yup";
 import Input from '../Input';
 import toast from 'react-hot-toast';
 import axios from 'axios';
@@ -14,20 +11,19 @@ type props = {
     setIsEnterNumber: (val: boolean) => void
 }
 
-export const sendSMS = (phoneNumber: string) => {
-    axios.post(`/api/core-api/auth/send-sms/`, { phone_number: phoneNumber })
-        .then(res => toast.success(res.data.message))
+export const sendSMS = async (phoneNumber: string) => {
+    const res = await axios.post(`/api/core-api/auth/send-sms/`, { phone_number: phoneNumber })
+    toast.success(res.data.message)
+    return res
 }
 
 const EnterPhoneNumberForm = ({ handleClose, setInputValue, setIsEnterNumber }: props) => {
     const phoneNumberRegEx = new RegExp(/^09\d{9}$/)
     const [phoneNumber, setPhoneNumber] = useState<string>('')
-    const {
-        register,
-        watch,
-    } = useForm()
+    const [isLoading, setIsLoading] = useState(false)
 
-    const handleSubmit = (e: any) => {
+    const handleSubmit = async (e: any) => {
+        setIsLoading(true)
         e.preventDefault()
         if (phoneNumber.length === 0) {
             toast.error("تلفن تماس اجباری است.");
@@ -37,9 +33,12 @@ const EnterPhoneNumberForm = ({ handleClose, setInputValue, setIsEnterNumber }: 
             toast.error("لطفا شماره صحیح وارد کنید.");
             return
         }
-        sendSMS(phoneNumber)
-        setInputValue(phoneNumber)
-        setIsEnterNumber(true)
+        const { status } = await sendSMS(phoneNumber)
+        if (status === 200) {
+            setInputValue(phoneNumber)
+            setIsEnterNumber(true)
+            setIsLoading(false)
+        }
     }
 
     return (
@@ -66,12 +65,26 @@ const EnterPhoneNumberForm = ({ handleClose, setInputValue, setIsEnterNumber }: 
                             type='tel'
                             name='phone_number'
                             placeholder='شماره همراه*'
-                            register={register}
                             value={phoneNumber}
                             setValue={setPhoneNumber}
                         />
                     </div>
-                    <button onClick={handleSubmit} className='flex justify-center solid-btn rectangle-btn w-full'>ورود</button>
+                    {isLoading ?
+                        <button className='relative flex justify-center solid-btn rectangle-btn w-full h-10'>
+                            <div className="absolute right-1/2 bottom-1/2 transform translate-x-1/2 translate-y-1/2">
+                                <div className="relative border-t-transparent border-solid animate-[rereverse-spin_1s_ease-in-out_infinite] rounded-full border-white border-2 h-6 w-6">
+                                </div>
+                            </div>
+                            <div className="absolute right-1/2 bottom-1/2 transform translate-x-1/2 translate-y-1/2">
+                                <div className="right-1/2 bottom-1/2 transform translate-x-1/2 translate-y-1/2 border-t-transparent border-solid animate-[reverse-spin_1s_ease-in-out_infinite] rounded-full border-white border-2 h-3 w-3">
+                                </div>
+                            </div>
+                        </button>
+                        :
+                        <button onClick={handleSubmit} className='flex justify-center solid-btn rectangle-btn w-full'>
+                            ورود
+                        </button>
+                    }
                 </form>
             </div>
         </>

@@ -34,8 +34,8 @@ const CodeVerificationForm = ({ handleClose, phoneNumber }: props) => {
             login()
         } else if (error) {
             toast.error(error)
-
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isLoad])
 
     const [isTimerEnd, setIsTimerEnd] = useState(false)
