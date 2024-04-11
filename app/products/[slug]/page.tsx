@@ -4,6 +4,7 @@ import ImageGallery from '@/components/products/productSlug/ImageGallery'
 import InfosAndComments from '@/components/products/productSlug/InfosAndComments'
 import Notif from '@/components/products/productSlug/Notif'
 import ShortInfo from '@/components/products/productSlug/ShortInfo'
+import { productDetail } from '@/public/types/products'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
@@ -16,7 +17,7 @@ const fetchFunc = async (slug?: string) => {
 }
 
 const Page = async ({ params }: any) => {
-    const product = await fetchFunc(params.slug)
+    const product:productDetail = await fetchFunc(params.slug)
 
     return (
         <main className='w-full mx-auto max-w-[1136px] flex flex-col justify-center items-center gap-4 py-20 md:py-[117px] pb-48 lg:pb-[117px]'>
@@ -35,16 +36,16 @@ const Page = async ({ params }: any) => {
                         </Link>
                         /
                         <Link href='/products/' className='px-3 py-2 text-secondry-base'>
-                            {product.categories?.map((category: any) => category.title)}
+                            {product.categories.map((category: any) => category.title)}
                         </Link>
                         /
                         <Link href={`/products/${product.slug}`} className='px-3 py-2 text-secondry-base'>
-                            {product?.name}
+                            {product.name}
                         </Link>
                     </div>
                     <div className='w-[90%] lg:w-full mx-auto flex flex-col md:flex-row gap-4 justify-center items-center md:items-start'>
                         <Notif />
-                        <ImageGallery image={product?.featured_image} />
+                        <ImageGallery image={product.featured_image} />
                         <div className='flex flex-col w-full gap-4 justify-center items-center'>
                             <ShortInfo product={product} />
                             <Features />

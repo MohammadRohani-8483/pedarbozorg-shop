@@ -1,46 +1,53 @@
-export type OrderInterface = {
-    total_price: string;
-    created_at: string;
+import { GET_ADDRESS } from "./adress"
+
+export type orderType = {
+    id: string
+    total_price: string
+    description: string | null
+    created_at: string
+    order_items: orderItem[]
     status: {
-        level: number;
-        label: string;
-    };
-    address: {
-        city: string;
-        email: string;
-        phone_number: string;
-    };
-    order_id: number;
-    id: string;
-    order_items: ProductInOrderInterface[]
+        level: 0 | 1 | 2 | 3
+        label: string
+    },
+    order_id: number,
+    products_discount_amount: number
+    products_total_price: number
+    payment_method: {
+        fa_name: string
+        en_name: "ON" | "WA" | "IP"
+    },
+    shipment: {
+        id: number
+        address: GET_ADDRESS
+        shipment_method: "CO"
+        shipment_cost: number
+    },
+    wallet_payment: number
 }
 
-export interface ProductInOrderInterface {
-    id: number;
-    order: string;
-    is_gift: number,
-    quantity: number;
-    total_price: number;
+export type orderItem = {
+    id: number
+    order: string
     variant: {
-        id: number;
-        attribute: any;
-        image: string,
-        name: string,
-        product: {
-            description: string | null;
-            featured_image: string;
-            name: string;
-            id: number;
-            slug: string,
-        };
-        featured_image: string,
+        id: number
         shatoot_info: {
-            final_price: number;
-            discount: number;
-            sell_price: string;
-        };
-    };
-
+            sell_price: number
+            final_price: number
+            discount: number
+        },
+        product: {
+            id: number,
+            featured_image: string
+            name: string
+            slug: string
+        },
+        image: string | null
+        name: string
+    },
+    quantity: number
+    total_price: number
+    is_gift: boolean
 }
 
 type level = 1 | 2 | "completed" | "cancelled"

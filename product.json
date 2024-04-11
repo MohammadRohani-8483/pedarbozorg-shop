@@ -1,412 +1,71 @@
 {
-  "id": 12489,
-  "name": "روغن نارگیل",
-  "slug": "روغن-نارگیل",
-  "variants": [
+  "cart": [
     {
-      "id": 37152,
-      "shatoot_info": {
-        "shatoot_pk": 2000048,
-        "good_name": "روغن نارگیل یک لیتری",
-        "third_name": "",
-        "good_code": "10095",
-        "sell_price": 823000.0,
-        "inventory": "-17.0",
-        "discount": "0.0",
-        "percent_discount": "0.0",
-        "final_price": 823000.0
-      },
-      "is_available": true,
-      "image": "https://api.pedarbozorg.shop/media/products/coconut-oil-1000-cc-1_1.jpg",
-      "related_variant": null
-    },
-    {
-      "id": 37153,
-      "shatoot_info": {
-        "shatoot_pk": 2000047,
-        "good_name": "روغن نارگیل 500 سی سی",
-        "third_name": "",
-        "good_code": "10093",
-        "sell_price": 415000.0,
-        "inventory": "-50.0",
-        "discount": "0.0",
-        "percent_discount": "0.0",
-        "final_price": 415000.0
-      },
-      "is_available": true,
-      "image": "https://api.pedarbozorg.shop/media/products/coconut-oil-1000-cc-1_1.jpg",
-      "related_variant": null
-    },
-    {
-      "id": 37154,
-      "shatoot_info": {
-        "shatoot_pk": 2000046,
-        "good_name": "روغن نارگیل 250 سی سی",
-        "third_name": "",
-        "good_code": "10092",
-        "sell_price": 209000.0,
-        "inventory": "-233.0",
-        "discount": "0.0",
-        "percent_discount": "0.0",
-        "final_price": 209000.0
-      },
-      "is_available": true,
-      "image": "https://api.pedarbozorg.shop/media/products/coconut-oil-1000-cc-1_1.jpg",
-      "related_variant": null
-    },
-    {
-      "id": 37150,
-      "shatoot_info": {
-        "shatoot_pk": 2000050,
-        "good_name": "روغن نارگیل 120 سی سی پمپی ",
-        "third_name": "",
-        "good_code": "10098",
-        "sell_price": 169000.0,
-        "inventory": "0.0",
-        "discount": "0.0",
-        "percent_discount": "0.0",
-        "final_price": 169000.0
-      },
-      "is_available": true,
-      "image": "https://api.pedarbozorg.shop/media/products/coconut-oil-1000-cc-1_1.jpg",
-      "related_variant": null
-    },
-    {
-      "id": 37151,
-      "shatoot_info": {
-        "shatoot_pk": 2000049,
-        "good_name": "روغن نارگیل60 سی سی پمپی",
-        "third_name": "",
-        "good_code": "10097",
-        "sell_price": 85000.0,
-        "inventory": "-10.0",
-        "discount": "0.0",
-        "percent_discount": "0.0",
-        "final_price": 85000.0
-      },
-      "is_available": true,
-      "image": "https://api.pedarbozorg.shop/media/products/coconut-oil-1000-cc-1_1.jpg",
-      "related_variant": null
-    },
-    {
-      "id": 37155,
-      "shatoot_info": {
-        "shatoot_pk": 2000045,
-        "good_name": "روغن نارگیل 65 سی سی",
-        "third_name": "",
-        "good_code": "10091",
-        "sell_price": 66000.0,
-        "inventory": "-1583.0",
-        "discount": "0.0",
-        "percent_discount": "0.0",
-        "final_price": 66000.0
-      },
-      "is_available": true,
-      "image": "https://api.pedarbozorg.shop/media/products/coconut-oil-1000-cc-1_1.jpg",
-      "related_variant": null
+      "id": "dc4ae2e4-7830-4ebe-813b-da1781cacae0",
+      "cart_items": [
+        {
+          "id": 2108,
+          "cart": "dc4ae2e4-7830-4ebe-813b-da1781cacae0",
+          "variant": {
+            "id": 37428,
+            "shatoot_info": {
+              "sell_price": 104400.0,
+              "final_price": 104400.0,
+              "discount": 0.0
+            },
+            "product": {
+              "id": 12595,
+              "featured_image": "https://pedarbozorg-api.codintofuture.ir/media/products/advieh-poloyee-spices-large-1.jpg",
+              "name": "ادویه پلویی",
+              "slug": "ادویه-پلویی"
+            },
+            "image": "https://pedarbozorg-api.codintofuture.ir/media/variants/22-2.jpg",
+            "name": "ادویه پلویی کوچک 100 گرمی"
+          },
+          "quantity": 1,
+          "total_final_price": 104400.0,
+          "total_sale_price": 104400.0
+        }
+      ],
+      "total_final_price": 104400,
+      "total_sell_price": 104400,
+      "your_profit_percent": 0,
+      "your_profit_amount": 0
     }
   ],
-  "categories": [
+
+  "card": [
     {
-      "id": 1,
-      "title": "روغن"
+      "id": "dc4ae2e4-7830-4ebe-813b-da1781cacae0",
+      "cart_items": [
+        {
+          "id": 2108,
+          "cart": "dc4ae2e4-7830-4ebe-813b-da1781cacae0",
+          "variant": {
+            "id": 37428,
+            "shatoot_info": {
+              "sell_price": 104400.0,
+              "final_price": 104400.0,
+              "discount": 0.0
+            },
+            "product": {
+              "id": 12595,
+              "featured_image": "https://pedarbozorg-api.codintofuture.ir/media/products/advieh-poloyee-spices-large-1.jpg",
+              "name": "ادویه پلویی",
+              "slug": "ادویه-پلویی"
+            },
+            "image": "https://pedarbozorg-api.codintofuture.ir/media/variants/22-2.jpg",
+            "name": "ادویه پلویی کوچک 100 گرمی"
+          },
+          "quantity": 1,
+          "total_final_price": 104400.0,
+          "total_sale_price": 104400.0
+        }
+      ],
+      "total_final_price": 104400,
+      "total_sell_price": 104400,
+      "your_profit_percent": 0,
+      "your_profit_amount": 0
     }
-  ],
-  "featured_image": "https://api.pedarbozorg.shop/media/products/coconut-oil-1000-cc-1_1.jpg",
-  "galleries": [],
-  "specifications": [
-    {
-      "id": 74,
-      "key": "نوع بسته   :",
-      "value": "ظرف پلاستیکی"
-    },
-    {
-      "id": 75,
-      "key": "مورد استفاده   :",
-      "value": "در طب سنتی و آشپزی"
-    },
-    {
-      "id": 76,
-      "key": "حالت   :",
-      "value": "مایع"
-    }
-  ],
-  "short_description": "روغن نارگیل حاوی اسیدهای چرب اشباع و غیراشباع مفید برای سلامت قلب و عروق است. همچنین، این روغن دارای خواص ضد التهابی، ضد باکتریایی و آنتی‌اکسیدانی است که به حفظ سلامت پوست، مو و دندان‌ها کمک می‌کند. همچنین، مصرف منظم آن ممکن است به کاهش استرس و افزایش انرژی کمک کند.",
-  "is_in_cart": null,
-  "rate_count": 3,
-  "avg_rate": 4,
-  "comment_count": null,
-  "introduction": "روغن نارگیل یک ماده طبیعی است که از گوشت نارگیل استخراج می‌شود و دارای خواص بسیار زیادی است. این روغن دارای عطر و طعم خاصی است و در آشپزی، بهداشت و درمان استفاده می‌شود. با فواید بسیاری که دارد، روغن نارگیل به عنوان یک انتخاب سالم در تغذیه مطرح است.",
-  "advantages": [
-    {
-      "id": 345,
-      "title": "حفظ سلامت قلب و عروق"
-    },
-    {
-      "id": 346,
-      "title": "ضد التهاب و ضد باکتریایی"
-    },
-    {
-      "id": 347,
-      "title": "حفظ سلامت پوست و مو"
-    },
-    {
-      "id": 348,
-      "title": "کاهش استرس و افزایش انرژی"
-    }
-  ],
-  "related_products": [
-    {
-      "id": 12574,
-      "name": "روغن گل سرخ",
-      "slug": "روغن-گل-سرخ",
-      "categories": [
-        {
-          "id": 1,
-          "title": "روغن"
-        }
-      ],
-      "featured_image": "https://api.pedarbozorg.shop/media/products/Rose-oil-1000-cc-1.jpg",
-      "is_in_cart": false,
-      "advantages": [
-        {
-          "id": 341,
-          "title": "حفظ سلامت قلب"
-        },
-        {
-          "id": 342,
-          "title": "تقویت سیستم ایمنی"
-        },
-        {
-          "id": 343,
-          "title": "کاهش التهاب"
-        },
-        {
-          "id": 344,
-          "title": "حمایت از سلامت مغز"
-        }
-      ]
-    },
-    {
-      "id": 12556,
-      "name": "روغن خارمریم",
-      "slug": "روغن-خارمریم",
-      "categories": [
-        {
-          "id": 1,
-          "title": "روغن"
-        }
-      ],
-      "featured_image": "https://api.pedarbozorg.shop/media/products/mary-thistle-oil-1000-cc-1.jpg",
-      "is_in_cart": false,
-      "advantages": [
-        {
-          "id": 257,
-          "title": "ضد التهاب و آرامش بخش"
-        },
-        {
-          "id": 258,
-          "title": "پشتیبانی از سلامت قلب"
-        },
-        {
-          "id": 259,
-          "title": "ترمیم و تغذیه پوست"
-        },
-        {
-          "id": 260,
-          "title": "کاهش علائم پوستی"
-        }
-      ]
-    },
-    {
-      "id": 12565,
-      "name": "روغن زیتون اکسترا ورژن",
-      "slug": "روغن-زیتون-اکسترا-ورژن",
-      "categories": [
-        {
-          "id": 1,
-          "title": "روغن"
-        }
-      ],
-      "featured_image": "https://api.pedarbozorg.shop/media/products/olive-oil-1000-cc-1.jpg",
-      "is_in_cart": false,
-      "advantages": [
-        {
-          "id": 293,
-          "title": "سلامت قلبی"
-        },
-        {
-          "id": 294,
-          "title": "ضد التهاب و آنتی‌اکسیدان"
-        },
-        {
-          "id": 295,
-          "title": "پخت‌ترین طعم در آشپزی"
-        },
-        {
-          "id": 296,
-          "title": "مراقبت از پوست"
-        }
-      ]
-    },
-    {
-      "id": 12572,
-      "name": "روغن کندوش",
-      "slug": "روغن-کندوش",
-      "categories": [
-        {
-          "id": 1,
-          "title": "روغن"
-        }
-      ],
-      "featured_image": "https://api.pedarbozorg.shop/media/products/kondoosh-oil-1000-cc-with-label-1-1.jpg",
-      "is_in_cart": false,
-      "advantages": [
-        {
-          "id": 333,
-          "title": "تغذیه پوست و مو"
-        },
-        {
-          "id": 334,
-          "title": "افزایش انرژی"
-        },
-        {
-          "id": 335,
-          "title": "مقاومت بدن در برابر التهابات"
-        },
-        {
-          "id": 336,
-          "title": "کاهش علائم التهاب مفاصل"
-        }
-      ]
-    },
-    {
-      "id": 12575,
-      "name": "روغن نعناع",
-      "slug": "روغن-نعناع",
-      "categories": [
-        {
-          "id": 1,
-          "title": "روغن"
-        }
-      ],
-      "featured_image": "https://api.pedarbozorg.shop/media/products/peppermint-oil-1000-cc-1.jpg",
-      "is_in_cart": false,
-      "advantages": [
-        {
-          "id": 349,
-          "title": "آرامش بخش"
-        },
-        {
-          "id": 350,
-          "title": "تسکین مشکلات هضمی"
-        },
-        {
-          "id": 351,
-          "title": "ضد التهاب و ضد عفونی کننده"
-        },
-        {
-          "id": 352,
-          "title": "افزایش تمرکز"
-        }
-      ]
-    },
-    {
-      "id": 12549,
-      "name": "روغن بادام شیرین",
-      "slug": "روغن-بادام-شیرین",
-      "categories": [
-        {
-          "id": 1,
-          "title": "روغن"
-        }
-      ],
-      "featured_image": "https://api.pedarbozorg.shop/media/products/sweet-almond-oil-1000-cc-1.jpg",
-      "is_in_cart": false,
-      "advantages": [
-        {
-          "id": 229,
-          "title": "لطافت موها"
-        },
-        {
-          "id": 230,
-          "title": "ضد التهاب"
-        },
-        {
-          "id": 231,
-          "title": "تغذیه پوست"
-        },
-        {
-          "id": 232,
-          "title": "استفاده در آرایش"
-        }
-      ]
-    },
-    {
-      "id": 12552,
-      "name": "روغن پوست پرتقال",
-      "slug": "روغن-پوست-پرتقال",
-      "categories": [
-        {
-          "id": 1,
-          "title": "روغن"
-        }
-      ],
-      "featured_image": "https://api.pedarbozorg.shop/media/products/orange-peel-oil-1000-cc-with-label-1.jpg",
-      "is_in_cart": false,
-      "advantages": [
-        {
-          "id": 241,
-          "title": "مراقبت از پوست"
-        },
-        {
-          "id": 242,
-          "title": "ضد التهاب و ضد عفونی"
-        },
-        {
-          "id": 243,
-          "title": "بهبود جوانی پوست"
-        },
-        {
-          "id": 244,
-          "title": "بهبود جوانی پوست"
-        }
-      ]
-    },
-    {
-      "id": 12555,
-      "name": "روغن جوجوبا",
-      "slug": "روغن-جوجوبا",
-      "categories": [
-        {
-          "id": 1,
-          "title": "روغن"
-        }
-      ],
-      "featured_image": "https://api.pedarbozorg.shop/media/products/jojoba-oil-1000-cc-1.jpg",
-      "is_in_cart": false,
-      "advantages": [
-        {
-          "id": 253,
-          "title": "ترطیب عمیق"
-        },
-        {
-          "id": 254,
-          "title": "ضد التهاب"
-        },
-        {
-          "id": 255,
-          "title": "تقویت ساختار پوست"
-        },
-        {
-          "id": 256,
-          "title": "ضد آکنه"
-        }
-      ]
-    }
-  ],
-  "min_price": 66000,
-  "min_sell_price": 66000,
-  "max_price": 823000,
-  "is_available": true
+  ]
 }

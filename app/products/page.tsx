@@ -13,10 +13,11 @@ import { useDebounce } from '@/public/hooks/useDebounce'
 import SkeletonCard from '@/components/SkeletonCard'
 import { orders } from '@/public/data/pageProducts'
 import ProductCard from '@/components/ProductCard'
+import { productInList } from '@/public/types/products'
 
 const Products = () => {
   const [searchValue, setSearchValue] = useState('')
-  const [products, setProducts] = useState<any[]>()
+  const [products, setProducts] = useState<productInList[]>()
   const [productsCount, setproductsCount] = useState(0)
   const [activeOrder, setActiveOrder] = useState("-view_count")
   const [categories, setCategories] = useState<number[]>([])
