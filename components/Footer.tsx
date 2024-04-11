@@ -36,7 +36,7 @@ const Footer: React.FC = () => {
                                 <Link
                                     href={menu.link}
                                     key={menu.id}
-                                    className='bg-secondry-tint-7 text-secondry-base rounded-lg py-1.5 px-3 text-sm lg:text-base whitespace-nowrap'
+                                    className='bg-secondry-tint-7 text-secondry-base rounded-lg py-1.5 px-3 text-sm lg:text-base whitespace-nowrap hover:bg-secondry-tint-6 hover:text-secondry-shade-2 transition-all duration-300'
                                 >
                                     {menu.item}
                                 </Link>
