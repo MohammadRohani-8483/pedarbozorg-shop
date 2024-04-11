@@ -1,6 +1,5 @@
 import { logoutUser } from './../actions/authActions';
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { boolean } from "yup";
 import { getMeThunk, loginUser } from "../actions/authActions";
 
 export type authState = {
@@ -46,13 +45,12 @@ const authSlice = createSlice({
     extraReducers: builder => {
         builder.addCase(loginUser.fulfilled, (state, action) => {
             if (!action.payload.error) {
-                state.error = null
                 state.userToken.access = action.payload.access
                 state.userToken.refresh = action.payload.refresh
             } else {
                 state.error = action.payload.error
+                state.isLoad = false
             }
-            state.isLoad = false
             console.log('login fulfilled')
         })
         builder.addCase(loginUser.pending, (state) => {
@@ -72,13 +70,14 @@ const authSlice = createSlice({
                 state.isLogedIn = false
                 state.userInfo = {}
             }
+            console.log('me fulfilled')
         })
-        builder.addCase(logoutUser.fulfilled, (state,action) => {
+        builder.addCase(logoutUser.fulfilled, (state, action) => {
             console.log('logout fulfilled')
             console.log(action)
             return initialState
         })
-        builder.addCase(logoutUser.rejected, (state,action) => {
+        builder.addCase(logoutUser.rejected, (state, action) => {
             console.log('logout rejected')
             console.log(action)
         })
