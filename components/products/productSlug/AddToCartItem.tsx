@@ -9,6 +9,7 @@ import { cart, cartItem } from '@/public/types/productType'
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import SkeletonAddToCart from './SkeletonAddToCart'
 
 const AddToCartItem = ({ product, price, priceWithOffer, name, image, variant }: any) => {
     const [start, setStart] = useState(false)
@@ -39,7 +40,7 @@ const AddToCartItem = ({ product, price, priceWithOffer, name, image, variant }:
     }
 
     const cart = useSelector((state: { cart: cart }) => state.cart.cartItems)
-    const auth = useSelector((state: { auth: authState }) => state.auth)
+    const { isLogedIn, userToken } = useSelector((state: { auth: authState }) => state.auth)
 
     const productInCart = cart.find((item) => item.variant.id === cartItem.variant.id);
     const productIdForDelete: number | null = productInCart?.id || null
@@ -49,9 +50,9 @@ const AddToCartItem = ({ product, price, priceWithOffer, name, image, variant }:
     const dispatch = useDispatch<AppDispatch>()
 
     const handleAddToCart = async () => {
-        if (auth.isLogedIn) {
-            await dispatch(makeCartItem({ quantity: 1, token: auth.userToken.access!, variant: cartItem.variant.id }))
-            dispatch(getCartFromServer(auth.userToken.access!))
+        if (isLogedIn) {
+            await dispatch(makeCartItem({ quantity: 1, token: userToken.access!, variant: cartItem.variant.id }))
+            dispatch(getCartFromServer(userToken.access!))
         } else {
             dispatch(addToCart(cartItem))
             dispatch(setCartToLocalStorage())
@@ -59,9 +60,9 @@ const AddToCartItem = ({ product, price, priceWithOffer, name, image, variant }:
     }
 
     const handleIncrementQuantity = async () => {
-        if (auth.isLogedIn) {
-            await dispatch(makeCartItem({ quantity: 1, token: auth.userToken.access!, variant: cartItem.variant.id }))
-            dispatch(getCartFromServer(auth.userToken.access!))
+        if (isLogedIn) {
+            await dispatch(makeCartItem({ quantity: 1, token: userToken.access!, variant: cartItem.variant.id }))
+            dispatch(getCartFromServer(userToken.access!))
         } else {
             dispatch(incrementQuantity(cartItem))
             dispatch(setCartToLocalStorage())
@@ -69,8 +70,8 @@ const AddToCartItem = ({ product, price, priceWithOffer, name, image, variant }:
     }
 
     const handleDecrementQuantity = () => {
-        if (auth.isLogedIn) {
-            dispatch(makeCartItem({ quantity: -1, token: auth.userToken.access!, variant: product.variant.id }))
+        if (isLogedIn) {
+            dispatch(makeCartItem({ quantity: -1, token: userToken.access!, variant: product.variant.id }))
             dispatch(decrementQuantity(product))
         } else {
             dispatch(decrementQuantity(product))
@@ -79,9 +80,9 @@ const AddToCartItem = ({ product, price, priceWithOffer, name, image, variant }:
     }
 
     const handleDeleteFromCart = async () => {
-        if (auth.isLogedIn) {
-            await dispatch(deleteCartItem({ cartItemID: productIdForDelete!, token: auth.userToken.access! }))
-            dispatch(getCartFromServer(auth.userToken.access!))
+        if (isLogedIn) {
+            await dispatch(deleteCartItem({ cartItemID: productIdForDelete!, token: userToken.access! }))
+            dispatch(getCartFromServer(userToken.access!))
         } else {
             dispatch(removeFromCart(cartItem))
             dispatch(setCartToLocalStorage())
@@ -157,7 +158,7 @@ const AddToCartItem = ({ product, price, priceWithOffer, name, image, variant }:
                     </div>
                 </div>
                 :
-                <div className='h-[65px] w-full flex justify-between items-center gap-2'></div>
+                <SkeletonAddToCart />
             }
         </>
     )

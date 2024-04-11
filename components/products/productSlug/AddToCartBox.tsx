@@ -1,3 +1,4 @@
+import Icon from '@/components/Icon'
 import formatNumber from '@/public/Functions/formatNumber'
 import Image from 'next/image'
 import React from 'react'
@@ -14,7 +15,7 @@ const AddToCartBox = ({ product }: any) => {
                 className='hidden lg:flex'
             />
             {product.variants.length > 0 ?
-                <div id='scroll' className='ltr flex flex-col overflow-auto p-1 lg:p-0 w-full gap-1.5 lg:gap-4'>
+                <div id='scroll' className='ltr flex flex-col overflow-auto p-1 lg:p-0 lg:pr-1 w-full gap-3 lg:gap-8'>
                     <h2 className='text-neutral-700 font-bold text-base hidden lg:flex gap-1 justify-center items-center'>
                         از
                         {product.min_price &&
@@ -35,8 +36,7 @@ const AddToCartBox = ({ product }: any) => {
                             alt='تومان'
                         />
                     </h2>
-                    <div className='hidden lg:flex h-[1px] w-full bg-[#E3E3E3]' />
-                    {product.variants?.sort((a: any, b: any) => a.shatoot_info.final_price - b.shatoot_info.final_price).map((variant: any, i: number, array: Array<any>) => (
+                    {product.variants.sort((a: any, b: any) => a.shatoot_info.final_price - b.shatoot_info.final_price).map((variant: any, i: number, array: Array<any>) => (
                         <React.Fragment key={variant.id}>
                             <AddToCartItem
                                 variant={variant}
@@ -47,7 +47,6 @@ const AddToCartBox = ({ product }: any) => {
                                 priceWithOffer={variant.shatoot_info.final_price}
                                 slug={product.slug}
                             />
-                            {i < array.length - 1 && <div className='h-[1px] w-full bg-[#E3E3E3]' />}
                         </React.Fragment>
                     ))}
                 </div>
@@ -57,12 +56,7 @@ const AddToCartBox = ({ product }: any) => {
                         ناموجود
                     </h2>
                     <button className='w-full bg-secondry-tint-7 text-secondry-base text-base py-2 rounded-lg flex gap-2 justify-center items-center'>
-                        <Image
-                            src="/iconSax/alarm.svg"
-                            alt="logo"
-                            width={24}
-                            height={24}
-                        />
+                        <Icon size={24} nameIcon='alarm' />
                         موجود شد اطلاع بده
                     </button>
                 </>

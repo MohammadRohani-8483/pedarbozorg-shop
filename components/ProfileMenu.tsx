@@ -1,15 +1,9 @@
-'use client'
-import React, { MouseEventHandler, useState } from 'react'
+import React, { MouseEventHandler } from 'react'
 import { motion } from 'framer-motion';
 import Icon from 'components/Icon';
 import { useSelector } from 'react-redux';
 import { authState } from 'public/redux/store/auth';
 import Link from 'next/link';
-import Alert from 'components/Alert';
-import { useRouter } from 'next/navigation';
-import { useAppDispatch } from '@/public/redux/hooks';
-import { logoutUser } from '@/public/redux/actions/authActions';
-import { getCartFromLocalStorage } from '@/public/redux/store/cart';
 
 type menuProps = {
     isHover: boolean
@@ -37,7 +31,7 @@ const ProfileMenu = ({ isHover, setIsLogOut }: menuProps) => {
                     {userInfo.first_name ?
                         `${userInfo.first_name} ${userInfo.last_name}`
                         :
-                        userInfo.user.username
+                        userInfo.user?.username
                     }
                 </h3>
                 <Icon nameIcon='arrow-left' size={20} />
@@ -49,7 +43,7 @@ const ProfileMenu = ({ isHover, setIsLogOut }: menuProps) => {
     )
 }
 
-const ProfileMenuItem = ({ iconName, title, red, link = '', clickFunc = () => { } }: itemProps) => {
+const ProfileMenuItem = ({ iconName, title, red, link , clickFunc = () => { } }: itemProps) => {
     return (
         <div className='flex justify-start items-center w-full'>
             {link ?

@@ -1,23 +1,12 @@
 'use client'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Benefits from './Benefits'
 
 const LongInfo = ({ product, itemsInfo }: any) => {
     const [itemInfo, setItemInfo] = useState('معرفی')
 
-    const isBrowser = () => typeof window !== 'undefined';
-
-    const [scrollY, setScrollY] = useState<any>();
-
-    const [itemsScrollNumber, setitemsScrollNumber] = useState<any>([]);
-
     useEffect(() => {
         if (!window) return;
-        const handleScroll = () => {
-            setScrollY(window.scrollY);
-        };
-
-        window.addEventListener('scroll', handleScroll);
         let newItems: any = []
         itemsInfo.forEach((item: any, i: number, array: Array<any>) => {
             const rect = item.ref.current.getBoundingClientRect();
@@ -32,39 +21,26 @@ const LongInfo = ({ product, itemsInfo }: any) => {
                 scrollThere,
                 scrollTo,
             });
-        });
-        setitemsScrollNumber(newItems)
-
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-        };
+        })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
-
-    // useEffect(() => {
-    //     for (let item of itemsScrollNumber) {
-    //         if (scrollY >= item.scrollFrom && scrollY <= item.scrollTo) {
-    //             setItemInfo(item.name);
-    //             break;
-    //         }
-    //     }
-    // }, [scrollY]);
 
     return (
         <div className='w-full flex flex-col gap-7'>
-            <div className='w-full max-w-[490px] flex justify-between items-center'>
-                {itemsInfo.map((item: any) => (
-                    <div key={item.id}
-                        className={`w-full text-center p-2 border-b-2 ${item.name === itemInfo ? "border-secondry-base text-secondry-base" : "border-[#E3E3E3] text-neutral-500"} font-bold text-base cursor-pointer`}
-                        onClick={() => {
-                            setItemInfo(item.name)
-                            item.ref.current?.scrollIntoView({ behavior: 'smooth', block: 'center' })
-                            // if (!isBrowser()) return;
-                            // window.scrollTo({ top: item.scrollFrom + 100, behavior: 'smooth' });
-                        }}
-                    >
-                        {item.name}
-                    </div>
-                ))}
+            <div className='w-full sticky top-12 lg:top-20 bg-background pt-8 lg:pt-12'>
+                <div className='w-full max-w-[490px] flex justify-between items-center'>
+                    {itemsInfo.map((item: any) => (
+                        <div key={item.id}
+                            className={`w-full text-center p-2 border-b-2 ${item.name === itemInfo ? "border-secondry-base text-secondry-base" : "border-[#E3E3E3] text-neutral-500"} font-bold text-base cursor-pointer`}
+                            onClick={() => {
+                                setItemInfo(item.name)
+                                item.ref.current?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+                            }}
+                        >
+                            {item.name}
+                        </div>
+                    ))}
+                </div>
             </div>
             <div className='w-[90%] mx-auto flex flex-col gap-4 justify-center items-center'>
                 <div ref={itemsInfo[0].ref} className='w-full flex flex-col justify-center items-start gap-2 border-b-2 border-[#E3E3E3] py-2'>
