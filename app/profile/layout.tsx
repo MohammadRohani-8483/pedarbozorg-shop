@@ -8,13 +8,17 @@ import { useSelector } from 'react-redux'
 import Loading from './loading'
 
 const LayoutProfile = ({ children }: any) => {
-    const isLogedIn = useSelector((state: { auth: authState }) => state.auth.isLogedIn)
+    const { isLogedIn } = useSelector((state: { auth: authState }) => state.auth)
     const { replace } = useRouter()
     const [start, setStart] = useState(false)
 
     useEffect(() => {
         !isLogedIn &&
             replace('/')
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isLogedIn])
+
+    useEffect(() => {
         setStart(true)
     }, [])
     return (

@@ -6,6 +6,11 @@ import React, { MouseEventHandler, useState } from 'react'
 import Alert from '../Alert'
 import ProfileBox from './ProfileBox'
 import Icon from 'components/Icon'
+import { useAppDispatch } from '@/public/redux/hooks'
+import { useSelector } from 'react-redux'
+import { authState } from '@/public/redux/store/auth'
+import { logoutUser } from '@/public/redux/actions/authActions'
+import { getCartFromLocalStorage } from '@/public/redux/store/cart'
 
 type itemProps = {
     red?: boolean
@@ -18,11 +23,14 @@ type itemProps = {
 
 const Account = () => {
     const [isLogingOut, setIsLogingOut] = useState(false)
-
     const { replace } = useRouter()
+    const dispatch = useAppDispatch()
+    const { userToken } = useSelector((state: { auth: authState }) => state.auth)
 
-    const handleLogOut = () => {
+    const handleLogOut = async () => {
         replace('/')
+        await dispatch(logoutUser({ access: userToken.access!, refresh: userToken.refresh! }))
+        dispatch(getCartFromLocalStorage())
     }
 
     return (
