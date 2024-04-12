@@ -28,10 +28,10 @@ const ProfileMenu = ({ isHover, setIsLogOut }: menuProps) => {
         >
             <Link href='/profile' className='w-full flex justify-between items-center'>
                 <h3 className='text-secondry-base text-sm font-medium hover:drop-shadow-[0_0_24px_rgba(61,131,97,0.60)]'>
-                    {userInfo.first_name ?
-                        `${userInfo.first_name} ${userInfo.last_name}`
+                    {userInfo.first_name || userInfo.last_name ?
+                        `${userInfo?.first_name || ""} ${userInfo?.last_name || ""}`
                         :
-                        userInfo.user?.username
+                        userInfo?.user?.username
                     }
                 </h3>
                 <Icon nameIcon='arrow-left' size={20} />
@@ -43,7 +43,7 @@ const ProfileMenu = ({ isHover, setIsLogOut }: menuProps) => {
     )
 }
 
-const ProfileMenuItem = ({ iconName, title, red, link , clickFunc = () => { } }: itemProps) => {
+const ProfileMenuItem = ({ iconName, title, red, link, clickFunc = () => { } }: itemProps) => {
     return (
         <div className='flex justify-start items-center w-full'>
             {link ?

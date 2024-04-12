@@ -25,7 +25,7 @@ const Input = ({ name, type, placeholder, className, maxLength, pattern, value, 
             <input type={type}
                 pattern={pattern}
                 maxLength={maxLength}
-                className={`peer/name ${type === "number" ? "[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none" : ""} w-full h-10 p-2 outline-none focus:border-secondry-base border border-gray-400 rounded-lg ${disabled ? "text-gray-500 cursor-not-allowed" : "text-black hover:border-gray-700"}`}
+                className={`peer/name ${type === "number" ? "[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none" : ""} w-full h-10 p-2 outline-none focus:border-secondry-base border border-gray-400 rounded-lg ${disabled ? "text-gray-500 cursor-not-allowed" : "text-black hover:border-gray-700"} transition-all`}
                 id={name}
                 placeholder=''
                 value={value || ""}

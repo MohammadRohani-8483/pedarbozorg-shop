@@ -19,26 +19,26 @@ export type notification = {
 }
 
 export type userInfo = {
-    id: number
-    user: {
+    id?: number
+    user?: {
         id: string
         username: string
     }
-    first_name: string | null
-    last_name: string | null
-    email: string | null
-    national_code: any
-    gender: string
-    birth_date: any
-    completed_orders: number
-    preparing_orders: number
-    cancelled_orders: number
-    last_seen_products: lastSeenProduct[]
-    latest_notifications: notification[]
-    wallet_balance: number
-    cart: [
+    first_name?: string | null
+    last_name?: string | null
+    email?: string | null
+    national_code?: any
+    gender?: string
+    birth_date?: string | null
+    completed_orders?: number
+    preparing_orders?: number
+    cancelled_orders?: number
+    last_seen_products?: lastSeenProduct[]
+    latest_notifications?: notification[]
+    wallet_balance?: number
+    cart?: [
         cart
     ],
-    gift_products: any[]
+    gift_products?: any[]
 }
 

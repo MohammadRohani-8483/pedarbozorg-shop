@@ -1,6 +1,7 @@
 import formatNumber from '@/public/Functions/formatNumber'
 import { authState } from '@/public/redux/store/auth'
 import Image from 'next/image'
+import Link from 'next/link'
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import Alert from '../Alert'
@@ -24,15 +25,19 @@ const Info = () => {
                 <div className='flex justify-between items-center w-full'>
                     <div className='flex flex-col justify-center items-start gap-2'>
                         <h2 className='font-bold text-secondry-base text-base md:text-xl'>
-                            {userInfo?.first_name ? `${userInfo?.first_name} ${userInfo?.last_name}` : userInfo?.user?.username}
+                            {userInfo.first_name || userInfo.last_name ?
+                                `${userInfo?.first_name || ""} ${userInfo?.last_name || ""}`
+                                :
+                                userInfo?.user?.username
+                                }
                         </h2>
                         <p className='text-sm md:text-base text-neutral-700'>
-                            {userInfo?.first_name ? userInfo?.user?.username : null}
+                            {userInfo.first_name || userInfo.last_name ? userInfo?.user?.username : ''}
                         </p>
                     </div>
-                    <div className='p-1.5 cursor-pointer'>
+                    <Link href='/profile/user-account' className='p-1.5 cursor-pointer'>
                         <Icon nameIcon='edit' size={20} />
-                    </div>
+                    </Link>
                 </div>
                 <div className='flex justify-between items-center w-full'>
                     <div className='flex flex-col justify-center items-start gap-2'>

@@ -8,9 +8,8 @@ import { useSelector } from 'react-redux'
 import Loading from './loading'
 
 const LayoutProfile = ({ children }: any) => {
-    const { isLogedIn } = useSelector((state: { auth: authState }) => state.auth)
+    const { isLogedIn, userInfo } = useSelector((state: { auth: authState }) => state.auth)
     const { replace } = useRouter()
-    const [start, setStart] = useState(false)
 
     useEffect(() => {
         !isLogedIn &&
@@ -18,12 +17,9 @@ const LayoutProfile = ({ children }: any) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isLogedIn])
 
-    useEffect(() => {
-        setStart(true)
-    }, [])
     return (
         <>
-            {start ?
+            {userInfo.user?.username ?
                 <main className='grid grid-cols-1 md:grid-cols-3 justify-items-center justify-center w-[90%] max-w-[1136px] mx-auto gap-4 py-24 md:py-36'>
                     <div className='w-full flex flex-col gap-4'>
                         <Info />

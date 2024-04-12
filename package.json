@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
+    "@ijavad805/react-datepicker": "^2.2.13",
     "@reduxjs/toolkit": "^2.2.1",
     "@types/ol": "^5.3.8",
     "axios": "^1.6.7",
@@ -20,6 +21,7 @@
     "next-nprogress-bar": "^2.3.11",
     "ol": "^9.1.0",
     "react": "^18",
+    "react-advance-jalaali-datepicker": "^1.6.0",
     "react-dom": "^18",
     "react-hook-form": "^7.51.0",
     "react-hot-toast": "^2.4.1",

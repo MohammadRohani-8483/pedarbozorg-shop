@@ -1,10 +1,11 @@
-import { logoutUser } from './../actions/authActions';
+import { logoutUser, patchMe } from './../actions/authActions';
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { getMeThunk, loginUser } from "../actions/authActions";
+import { userInfo } from '@/public/types/auth';
 
 export type authState = {
     isLoad: boolean
-    userInfo: any
+    userInfo: userInfo
     userToken: {
         access: string | null
         refresh: string | null
@@ -80,6 +81,10 @@ const authSlice = createSlice({
         builder.addCase(logoutUser.rejected, (state, action) => {
             console.log('logout rejected')
             console.log(action)
+        })
+        builder.addCase(patchMe.fulfilled, (state, action) => {
+            console.log('patchMe fulfilled')
+            state.userInfo = action.payload.data
         })
     }
 })

@@ -10,6 +10,16 @@ type logoutParams = {
     access: string
     refresh: string
 }
+type patchMeParams = {
+    access: string
+    newInfo: {
+        first_name?: string | null
+        last_name?: string | null
+        email?: string | null
+        birth_date?: string | null
+        national_code?: string | null
+    }
+}
 
 export const loginUser = createAsyncThunk(
     'auth/loginUser',
@@ -41,17 +51,21 @@ export const getMeThunk = createAsyncThunk(
 export const logoutUser = createAsyncThunk(
     'auth/logoutUser',
     async ({ refresh, access }: logoutParams) => {
-        const config = {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `JWT ${access}`
-            },
-            body: JSON.stringify({refresh})
-        }
-        // const data = await fetch('/api/core-api/auth/logout/', config)
         const data = await axios.post('/api/core-api/auth/logout/',
-            {refresh},
+            { refresh },
+            {
+                headers: {
+                    Authorization: `JWT ${access}`
+                }
+            })
+        return data
+    }
+)
+export const patchMe = createAsyncThunk(
+    'auth/patchMe',
+    async ({ newInfo, access }: patchMeParams) => {
+        const data = await axios.patch('/api/core-api/user/customers/me/',
+            newInfo,
             {
                 headers: {
                     Authorization: `JWT ${access}`

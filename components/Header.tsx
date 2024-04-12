@@ -43,8 +43,7 @@ const Header: React.FC = () => {
     const [cartLength, setCartLength] = useState(0)
 
     const cart = useSelector((state: { cart: cart }) => state.cart.cartItems)
-    const isLogedIn = useSelector((state: { auth: authState }) => state.auth.isLogedIn)
-    const auth = useSelector((state: { auth: authState }) => state.auth)
+    const { userInfo, isLogedIn } = useSelector((state: { auth: authState }) => state.auth)
 
     const handleScroll = () => {
         if (window.scrollY > 80) {
@@ -148,7 +147,7 @@ const Header: React.FC = () => {
                 </div>
                 <div className="flex gap-4 items-center h-20 w-auto">
                     {start ?
-                        auth.isLogedIn ?
+                        isLogedIn ?
                             <>
                                 <motion.div className='py-3'
                                     onHoverStart={() => {
@@ -166,10 +165,14 @@ const Header: React.FC = () => {
                                                 height={24}
                                             />
                                             <p className='text-base text-secondry-base max-w-[98px] overflow-hidden text-ellipsis'>
-                                                {auth.userInfo.first_name ? `${auth.userInfo?.first_name} ${auth.userInfo?.last_name}` : auth.userInfo?.user?.username}
+                                                {userInfo.first_name || userInfo.last_name ?
+                                                    `${userInfo?.first_name || ""} ${userInfo?.last_name || ""}`
+                                                    :
+                                                    userInfo.user?.username
+                                                }
                                             </p>
                                         </Link>
-                                    {isProfileVisible && <ProfileMenu isHover={isProfileHover} setIsLogOut={setIsLogOut} />}
+                                        {isProfileVisible && <ProfileMenu isHover={isProfileHover} setIsLogOut={setIsLogOut} />}
                                     </div>
                                 </motion.div>
                                 {isLogOut &&
