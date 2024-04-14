@@ -15,7 +15,8 @@ import { WhyPedarBozorg } from "components/home/whyPedarbozorg/WhyPedarBozorg";
 
 const fetchFunc = async (api: string) => {
   const res = fetch(api, {
-    method: "GET"
+    method: "GET",
+    cache:'no-store'
   })
   return (await res).json()
 }

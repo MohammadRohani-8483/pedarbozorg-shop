@@ -22,8 +22,6 @@ const CheckoutItems = () => {
         setStart(true)
     }, [])
 
-    // console.log(cartID)
-
     const handleDeleteAllCart = async () => {
         if (auth.isLogedIn) {
             await dispatch(deleteCart({ token: auth.userToken.access!, cartID: cartID! }))

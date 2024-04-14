@@ -75,6 +75,7 @@ const AddressForm = ({ setAddress }: { setAddress: (address: address) => void })
 
   useEffect(() => {
     setAddress(state)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state])
 
   return (

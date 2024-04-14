@@ -12,9 +12,9 @@ const ProfilePage = () => {
     return (
         <>
             <OrdersList />
-            <LastMessages messages={userInfo.latest_notifications} />
+            <LastMessages messages={userInfo.latest_notifications || []} />
             {/* <FavoriteList products={data.results} /> */}
-            <LastSeenProducts products={userInfo.last_seen_products} />
+            <LastSeenProducts products={userInfo.last_seen_products || []} />
         </>
     )
 }

@@ -328,43 +328,45 @@ const Header: React.FC = () => {
                             />
                         </Link>
                         :
-                        <div
-                            onClick={() => {
-                                setIsFormOpen(true)
-                                document.documentElement.classList.add('overflow-hidden')
-                                setIsHoverLogin(true)
-                                setTimeout(() => setIsHoverLogin(false), 800)
-                            }}
-                            className='border-background hover:border-secondry-tint-7 flex items-center gap-3 bg-secondry-base hover:bg-secondry-shade-2 text-background text-sm md:text-base md:p-2 p-2 border-4 rounded-[10px]'
-                        >
-                            <div className='flex w-[20px] gap-1 h-[20px] overflow-hidden bg-[url("/iconSax/login-bg-btn.svg")] bg-contain bg-no-repeat bg-right'>
-                                <motion.img
-                                    animate={isHoverLogin ? { x: 24 } : { x: 0 }}
-                                    transition={{ duration: 0.2 }}
-                                    src="/iconSax/right-arrow.svg"
-                                    width={16}
-                                    height={24}
-                                    alt="login"
-                                    loading='lazy'
-                                    decoding='async'
-                                    data-nimg={1}
-                                    style={{ color: 'transparent' }}
-                                />
-                                <motion.img
-                                    animate={isHoverLogin ? { x: 20 } : { x: 0 }}
-                                    transition={{ duration: 0.2 }}
-                                    src="/iconSax/right-arrow.svg"
-                                    width={16}
-                                    height={24}
-                                    alt="login"
-                                    loading='lazy'
-                                    decoding='async'
-                                    data-nimg={1}
-                                    style={{ color: 'transparent' }}
-                                />
+                        <>
+                            <div
+                                onClick={() => {
+                                    setIsFormOpen(true)
+                                    document.documentElement.classList.add('overflow-hidden')
+                                    setIsHoverLogin(true)
+                                    setTimeout(() => setIsHoverLogin(false), 800)
+                                }}
+                                className='border-background hover:border-secondry-tint-7 flex items-center gap-3 bg-secondry-base hover:bg-secondry-shade-2 text-background text-sm md:text-base md:p-2 p-2 border-4 rounded-[10px]'
+                            >
+                                <div className='flex w-[20px] gap-1 h-[20px] overflow-hidden bg-[url("/iconSax/login-bg-btn.svg")] bg-contain bg-no-repeat bg-right'>
+                                    <motion.img
+                                        animate={isHoverLogin ? { x: 24 } : { x: 0 }}
+                                        transition={{ duration: 0.2 }}
+                                        src="/iconSax/right-arrow.svg"
+                                        width={16}
+                                        height={24}
+                                        alt="login"
+                                        loading='lazy'
+                                        decoding='async'
+                                        data-nimg={1}
+                                        style={{ color: 'transparent' }}
+                                    />
+                                    <motion.img
+                                        animate={isHoverLogin ? { x: 20 } : { x: 0 }}
+                                        transition={{ duration: 0.2 }}
+                                        src="/iconSax/right-arrow.svg"
+                                        width={16}
+                                        height={24}
+                                        alt="login"
+                                        loading='lazy'
+                                        decoding='async'
+                                        data-nimg={1}
+                                        style={{ color: 'transparent' }}
+                                    />
+                                </div>
                             </div>
                             {isFormOpen && <SignUpSignIn setIsFormOpen={setIsFormOpen} />}
-                        </div>
+                        </>
                     }
                     <Link href='/checkout-cart' className='square-btn outline-btn relative'>
                         <Image

@@ -16,9 +16,10 @@ import SliderBtn from 'components/SliderBtn';
 import ProductCard from 'components/ProductCard';
 import SkeletonCard from 'components/SkeletonCard';
 import EmptyList from './EmptyList';
+import { lastSeenProduct } from '@/public/types/auth';
 
 type props = {
-  products: any[]
+  products: lastSeenProduct[]
 }
 
 const LastSeenProducts = ({ products }: props) => {

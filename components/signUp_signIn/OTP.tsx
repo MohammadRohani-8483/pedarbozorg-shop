@@ -5,10 +5,11 @@ interface OTPInputGroupProps {
     inputValuesString: string
     inputValues: string[]
     handleSubmit: () => void
+    disableButtons:boolean
 }
 
 let currentOTPIndex: number = 0;
-const OTPInputGroup = ({ inputValues, inputValuesString, setInputValues, handleSubmit }: OTPInputGroupProps) => {
+const OTPInputGroup = ({ inputValues, inputValuesString, setInputValues, handleSubmit,disableButtons }: OTPInputGroupProps) => {
     const [activeOTPIndex, setActiveOTPIndex] = useState(0);
 
     const inputRef = useRef<HTMLInputElement>(null);
@@ -59,6 +60,7 @@ const OTPInputGroup = ({ inputValues, inputValuesString, setInputValues, handleS
                         onKeyDown={(e) => handleOnKeyDown(e, index)}
                         value={inputValues[index]}
                         onSubmit={(e) => e.preventDefault()}
+                        disabled={disableButtons}
                     />
                 );
             })}
@@ -67,4 +69,3 @@ const OTPInputGroup = ({ inputValues, inputValuesString, setInputValues, handleS
 };
 
 export default OTPInputGroup;
-

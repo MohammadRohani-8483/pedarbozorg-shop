@@ -82,7 +82,6 @@ export default UserAccount
 
 const InputDate = ({ setDate, date }: any) => {
     const [hoverIcon, setHoverIcon] = useState(false)
-    console.log(`${date}`)
     return (
         <motion.div onHoverStart={() => !date && setHoverIcon(true)} onHoverEnd={() => setHoverIcon(false)} className='relative'>
             <DatePicker

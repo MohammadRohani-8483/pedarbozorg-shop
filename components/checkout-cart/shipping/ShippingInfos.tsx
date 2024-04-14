@@ -38,7 +38,6 @@ const ShippingInfos = ({ addresses, setAddresses }: props) => {
 
   const [start, setStart] = useState(false)
   useEffect(() => {
-    console.log(cart)
     setStart(true)
   }, [])
 
@@ -62,7 +61,6 @@ const ShippingInfos = ({ addresses, setAddresses }: props) => {
 
 
   const handleAddAddress = () => {
-    console.log('address', address)
     const newActiveAddress: address = { ...address, isActive: true }
     const newAddressArray = [
       ...addresses, newActiveAddress

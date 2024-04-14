@@ -111,7 +111,7 @@ export default function SliderProduct() {
                             prevEl: '.prev-descript-btn',
                         }}
                         modules={[Pagination, Navigation, Autoplay]}
-                        className="mySwiper h-64 lg:h-[137px]"
+                        className="mySwiper h-64 lg:h-[160px]"
                     >
                         {
                             description.map((descript, i) => (

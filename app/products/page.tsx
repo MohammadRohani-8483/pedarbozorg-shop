@@ -33,6 +33,7 @@ const Products = () => {
   const debouncedSearch = useDebounce(searchValue)
 
   const api = '/api/store-api/products-public/'
+  
   useEffect(() => {
     setmaxPriceIpnut(maxPrice)
   }, [maxPrice])
@@ -40,13 +41,15 @@ const Products = () => {
   useEffect(() => {
     const categoryParams = categories?.map((category) => `categories=${category}`).join('&');
 
+    setCurrPage(1)
+
     axios.get(`${api}?${`page=${currPage}`}${searchValue ? `&search=${debouncedSearch}` : ''}&ordering=${activeOrder}${isAvailable ? '&available=true' : ''}${minPriceInput > 0 ? `&min_price=${minPriceInput}` : ""}${maxPriceInput < maxPrice ? `&max_price=${maxPriceInput}` : ''}${categoryParams.length > 0 ? `&${categoryParams}` : ''}`)
       .then(res => {
         setProducts(res.data.results)
         setproductsCount(res.data.count)
         setMaxPrice(res.data.max_price)
       })
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currPage, activeOrder, categories, isAvailable, minPriceInput, maxPriceInput, maxPrice, debouncedSearch]);
 
   useEffect(() => {

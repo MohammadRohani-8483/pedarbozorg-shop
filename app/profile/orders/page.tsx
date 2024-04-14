@@ -51,9 +51,9 @@ const OrdersPage = () => {
         <ProfileBox title='لیست سفارش ها'>
             <div className='flex flex-col justify-center w-full items-center gap-4'>
                 <div className='flex justify-center w-full items-center'>
-                    <OrderItem title="جاری" icon='/Image/orders-list/current-order.svg' count={userInfo.preparing_orders} activeList={activeList} nameList='preparing' setActiveList={setActiveList} />
-                    <OrderItem title="ارسال شده" icon='/Image/orders-list/posted-order.svg' count={userInfo.completed_orders} activeList={activeList} nameList='completed' setActiveList={setActiveList} />
-                    <OrderItem title="لغو شده" icon='/Image/orders-list/canceled-order.svg' count={userInfo.cancelled_orders} activeList={activeList} nameList='cancelled' setActiveList={setActiveList} />
+                    <OrderItem title="جاری" icon='/Image/orders-list/current-order.svg' count={userInfo.preparing_orders || 0} activeList={activeList} nameList='preparing' setActiveList={setActiveList} />
+                    <OrderItem title="ارسال شده" icon='/Image/orders-list/posted-order.svg' count={userInfo.completed_orders || 0} activeList={activeList} nameList='completed' setActiveList={setActiveList} />
+                    <OrderItem title="لغو شده" icon='/Image/orders-list/canceled-order.svg' count={userInfo.cancelled_orders || 0} activeList={activeList} nameList='cancelled' setActiveList={setActiveList} />
                 </div>
                 <ActiveOrderItems activeList={activeList} list={fakeOrders} />
             </div>
@@ -160,7 +160,7 @@ const ActiveOrderItems = ({ list, activeList }: orderItemsProps) => {
                                 modules={[FreeMode, Scrollbar]}
                                 className="mySwiper w-full !pb-2"
                             >
-                                {Array(3).fill(1).map((_,i) => (
+                                {Array(3).fill(1).map((_, i) => (
                                     <SwiperSlide key={i} className='!w-20'>
                                         <Image
                                             src='/Image/offer-products/ard-nokhodchi.png'

@@ -16,9 +16,10 @@ import { FreeMode, Navigation } from 'swiper/modules';
 import SliderBtn from '../SliderBtn';
 import MessageSkeleton from './MessageSkeleton';
 import EmptyList from './EmptyList';
+import { notification } from '@/public/types/auth';
 
 type props = {
-    messages: any[]
+    messages: notification[]
 }
 
 const LastMessages = ({ messages }: props) => {
@@ -29,7 +30,7 @@ const LastMessages = ({ messages }: props) => {
     }, [])
 
     return (
-        <ProfileBox title='آخرین پیغام ها' viewBtn>
+        <ProfileBox title='آخرین پیغام ها' linkBtn='/profile/notifications'>
             <div className='flex flex-col gap-4 justify-center items-center w-full md:hidden'>
                 {messages?.length > 0 ?
                     Array(10).fill(1).slice(0, 4).map((_, i, array) => (

@@ -16,8 +16,8 @@ export const medias = [
   {
     id: 3,
     name: "telegram",
-    icon: "/Image/footer/media/telegram.svg",
-    iconHover: "/Image/footer/media/telegram-hover.svg",
+    icon: "/Image/footer/media/Telegram.svg",
+    iconHover: "/Image/footer/media/Telegram-hover.svg",
     link: "/",
   },
 ];

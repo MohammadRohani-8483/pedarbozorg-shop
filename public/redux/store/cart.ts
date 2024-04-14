@@ -15,15 +15,15 @@ const slice = createSlice({
             });
         },
         removeFromCart: (state, action) => {
-            const cartWithoutItem = state.cartItems?.filter((item) => item.id !== action.payload.id);
+            const cartWithoutItem = state.cartItems.filter(item => item.variant.id !== action.payload.variant.id);
             state.cartItems = cartWithoutItem;
         },
         incrementQuantity: (state, action) => {
-            const item = state.cartItems?.find((item) => item.id === action.payload.id);
+            const item = state.cartItems?.find((item) => item.variant.id === action.payload.variant.id);
             item!.quantity!++;
         },
         decrementQuantity: (state, action) => {
-            const item = state.cartItems?.find((item) => item.id === action.payload.id);
+            const item = state.cartItems?.find((item) => item.variant.id === action.payload.variant.id);
             if (item!.quantity === 1) {
                 item!.quantity = 1
             } else {
@@ -41,9 +41,6 @@ const slice = createSlice({
         setCartToLocalStorage: (state) => localStorage.setItem('shoping_cart', JSON.stringify(state.cartItems))
     },
     extraReducers: builder => {
-        builder.addCase(makeCartItem.fulfilled, (state, action) => {
-            // console.log(action)
-        })
         builder.addCase(makeCartItem.rejected, (state, action) => {
             console.log(action)
         })
@@ -57,17 +54,17 @@ const slice = createSlice({
                 state.yourProfitAmount = action.payload.results[0].your_profit_amount
             }
         })
-        builder.addCase(deleteCart.fulfilled, (state, action) => {
+        builder.addCase(deleteCart.fulfilled, () => {
             return initialState
         })
-        builder.addCase(deleteCart.rejected, (state, action) => {
+        builder.addCase(deleteCart.rejected, () => {
             return initialState
         })
-        builder.addCase(makeCartFromLocalStorage.fulfilled, (state, action) => {
-            console.log(action)
+        builder.addCase(makeCartFromLocalStorage.fulfilled, () => {
+            console.log("multi cart item fulfilled")
         })
-        builder.addCase(makeCartFromLocalStorage.rejected, (state, action) => {
-            console.log(action)
+        builder.addCase(makeCartFromLocalStorage.rejected, () => {
+            console.log("multi cart item rejected")
         })
     }
 })

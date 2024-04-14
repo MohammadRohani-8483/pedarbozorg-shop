@@ -1,4 +1,3 @@
-'use client'
 import Communications from '@/components/contact-us/communications/Communications'
 import SendMessageToPedarbozorg from '@/components/contact-us/SendMessageToPedarbozorg'
 import Title from '@/components/Title'

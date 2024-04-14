@@ -74,6 +74,7 @@ const CodeVerificationForm = ({ handleClose, phoneNumber }: props) => {
                             inputValuesString={inputValuesString}
                             inputValues={inputValues}
                             handleSubmit={handleSubmit}
+                            disableButtons={isLoad}
                         />
                         <div className='flex justify-between items-center -mt-2 -mb-4 w-full'>
                             <h2 className='flex justify-start items-center text-sm text-gray-600'>

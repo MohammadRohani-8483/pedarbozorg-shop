@@ -33,7 +33,6 @@
       "your_profit_amount": 0
     }
   ],
-
   "card": [
     {
       "id": "dc4ae2e4-7830-4ebe-813b-da1781cacae0",
@@ -67,5 +66,21 @@
       "your_profit_percent": 0,
       "your_profit_amount": 0
     }
-  ]
+  ],
+  "cheapest_variant": {
+    "id": 37192,
+    "shatoot_info": {
+      "shatoot_pk": 2000008,
+      "good_name": "روغن کنجد ممتاز  65 سی سی",
+      "third_name": "",
+      "good_code": "10002",
+      "sell_price": 45600.0,
+      "inventory": "-155.1",
+      "discount": "0.0",
+      "percent_discount": "0.0",
+      "final_price": 45600.0
+    },
+    "is_available": true,
+    "image": "https://pedarbozorg-api.codintofuture.ir/media/products/sesame-oil-1000-cc-1.jpg"
+  }
 }

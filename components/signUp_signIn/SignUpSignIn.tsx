@@ -10,11 +10,6 @@ const SignUpSignIn = ({ setIsFormOpen }: { setIsFormOpen: (par: boolean) => void
     const [isEnterNumber, setIsEnterNumber] = useState(false)
     const [isAnimate, setIsAnimate] = useState(true)
 
-    const { replace } = useRouter()
-    const searchParams = useSearchParams()
-    const params = new URLSearchParams(searchParams)
-    const pathname = usePathname()
-
     const variants = {
         visible: {
             y: 0,
@@ -40,8 +35,6 @@ const SignUpSignIn = ({ setIsFormOpen }: { setIsFormOpen: (par: boolean) => void
             setIsFormOpen(false)
             document.documentElement.classList.remove('overflow-hidden')
         }, 200)
-        params.delete("sign_in")
-        replace(`${pathname}?${params.toString()}`)
     }
 
     return (

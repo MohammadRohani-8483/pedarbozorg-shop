@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react'
+import React from 'react'
 import './style.css'
 
 const DoubleRangeSlider = ({ max, inputFrom, setInputFrom, inputTo, setInputTo }: any) => {
@@ -26,8 +26,8 @@ const DoubleRangeSlider = ({ max, inputFrom, setInputFrom, inputTo, setInputTo }
 
     return (
         <div className='w-full'>
-            <div className='range_slider'>
-                <span className='range_selected'
+            <div className='relative bg-[#e0f1e9] rounded-sm h-[5px]'>
+                <span className='bg-secondry-base rounded-[5px] h-full absolute'
                     style={{
                         right: `${inputFrom / max * 100}%`,
                         left: `${(max - inputTo) / max * 100}%`
@@ -35,14 +35,13 @@ const DoubleRangeSlider = ({ max, inputFrom, setInputFrom, inputTo, setInputTo }
                 >
                 </span>
             </div>
-            <div className='range_input'>
+            <div className='relative range_input'>
                 <input
                     type="range"
                     name='min'
                     min={0}
                     max={max}
                     step={step}
-                    className=''
                     value={inputFrom}
                     onChange={handleChange}
                 />
@@ -52,7 +51,6 @@ const DoubleRangeSlider = ({ max, inputFrom, setInputFrom, inputTo, setInputTo }
                     min={0}
                     max={max}
                     step={inputTo > max - step * 2 ? step / 2 : step}
-                    className=''
                     value={inputTo}
                     onChange={handleChange}
                 />

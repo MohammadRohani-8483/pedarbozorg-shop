@@ -43,12 +43,6 @@ const ShareForm = ({ setIsFormOpen, link }: props) => {
         }, 200)
     }
 
-    const verificationCode = Math.floor((Math.random() * 89999) + 10000)
-
-    useEffect(() => {
-        console.log(verificationCode);
-    }, [])
-
     const copyLink = () => {
         navigator.clipboard.writeText(link)
         handleClose()

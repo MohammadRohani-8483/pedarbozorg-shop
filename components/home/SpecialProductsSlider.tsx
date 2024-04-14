@@ -34,6 +34,7 @@ export default function SpecialProductsSlider({ products }: prop) {
             await dispatch(makeCartItem({ quantity: 1, token: auth.userToken.access!, variant: product.variant.id }))
             dispatch(getCartFromServer(auth.userToken.access!))
         } else {
+            console.log(product)
             dispatch(addToCart(product))
             dispatch(setCartToLocalStorage())
         }
@@ -120,7 +121,10 @@ export default function SpecialProductsSlider({ products }: prop) {
                                                 </button>
                                             </Link>
                                             <button className='outline-btn square-btn'
-                                                onClick={() => handleAddToCart(cartItem)}
+                                                onClick={() => {
+                                                    handleAddToCart(cartItem)
+                                                    console.log(product)
+                                                }}
                                             >
                                                 <Image
                                                     src="/iconSax/shopping-cart.svg"

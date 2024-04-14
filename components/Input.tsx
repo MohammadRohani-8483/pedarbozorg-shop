@@ -32,7 +32,7 @@ const Input = ({ name, type, placeholder, className, maxLength, pattern, value, 
                 onChange={handleChange}
                 disabled={disabled}
             />
-            <label htmlFor={name} className='peer-focus/name:text-[10px] text-[10px] peer-focus/name:text-secondry-base text-gray-400 absolute peer-focus/name:-top-2.5 peer-focus/name:right-4 bg-white px-1 right-4 -top-[10px] transition-all pointer-events-none peer-placeholder-shown/name:text-base peer-placeholder-shown/name:right-2 peer-placeholder-shown/name:top-2'>
+            <label htmlFor={name} className='peer-focus/name:text-[10px] text-[10px] peer-focus/name:text-secondry-base text-gray-400 absolute peer-focus/name:-top-2.5 peer-focus/name:right-4 bg-white px-1 right-4 -top-[10px] transition-all pointer-events-none peer-placeholder-shown/name:text-base peer-placeholder-shown/name:right-2 peer-placeholder-shown/name:top-2 font-light'>
                 {placeholder}
             </label>
         </div>
