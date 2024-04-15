@@ -20,7 +20,6 @@ const Products = () => {
   const [products, setProducts] = useState<productInList[]>()
   const [productsCount, setproductsCount] = useState(0)
   const [activeOrder, setActiveOrder] = useState("-view_count")
-  const [categories, setCategories] = useState<number[]>([])
   const [isAvailable, setIsAvailable] = useState(false)
   const [maxPrice, setMaxPrice] = useState(7000000)
   const [maxPriceInput, setmaxPriceIpnut] = useState(maxPrice)
@@ -29,33 +28,39 @@ const Products = () => {
   const [isOrderingOpen, setIsOrderingOpen] = useState(false)
   const [currPage, setCurrPage] = useState(1)
   const searchParams = useSearchParams()
+  const [change, setChange] = useState(false)
 
   const debouncedSearch = useDebounce(searchValue)
 
-  const api = '/api/store-api/products-public/'
-  
   useEffect(() => {
     setmaxPriceIpnut(maxPrice)
   }, [maxPrice])
 
   useEffect(() => {
-    const categoryParams = categories?.map((category) => `categories=${category}`).join('&');
+    console.log('one');
+    currPage !== 1 && setCurrPage(1)
+    setChange(prev => !prev)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeOrder, searchParams, isAvailable, minPriceInput, maxPriceInput])
 
-    setCurrPage(1)
+  useEffect(() => {
+    console.log('two')
+    console.log(currPage);
+    const categoryParams = searchParams.getAll('categories').map((category) => `categories=${category}`).join('&');
 
-    axios.get(`${api}?${`page=${currPage}`}${searchValue ? `&search=${debouncedSearch}` : ''}&ordering=${activeOrder}${isAvailable ? '&available=true' : ''}${minPriceInput > 0 ? `&min_price=${minPriceInput}` : ""}${maxPriceInput < maxPrice ? `&max_price=${maxPriceInput}` : ''}${categoryParams.length > 0 ? `&${categoryParams}` : ''}`)
+    axios.get(`/api/store-api/products-public/?${`page=${currPage}`}${searchValue ? `&search=${debouncedSearch}` : ''}&ordering=${activeOrder}${isAvailable ? '&available=true' : ''}${minPriceInput > 0 ? `&min_price=${minPriceInput}` : ""}${maxPriceInput < maxPrice ? `&max_price=${maxPriceInput}` : ''}${categoryParams.length > 0 ? `&${categoryParams}` : ''}`)
       .then(res => {
         setProducts(res.data.results)
         setproductsCount(res.data.count)
         setMaxPrice(res.data.max_price)
       })
+      .catch(err => console.log(err))
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currPage, activeOrder, categories, isAvailable, minPriceInput, maxPriceInput, maxPrice, debouncedSearch]);
+  }, [currPage, change]);
 
   useEffect(() => {
     setSearchValue(searchParams.get("search") || "")
   }, [searchParams])
-
 
   const TITLE = "پدربزرگ - محصولات"
 
@@ -72,8 +77,7 @@ const Products = () => {
           setInputFrom={setMinPriceIpnut}
           inputTo={maxPriceInput}
           setInputTo={setmaxPriceIpnut}
-          categories={categories}
-          setCategory={setCategories}
+          categories={searchParams.getAll('categories')}
           setIsAvailable={setIsAvailable}
           isAvailable={isAvailable}
         />
@@ -110,8 +114,7 @@ const Products = () => {
                   setInputFrom={setMinPriceIpnut}
                   inputTo={maxPriceInput}
                   setInputTo={setmaxPriceIpnut}
-                  categories={categories}
-                  setCategory={setCategories}
+                  categories={searchParams.getAll('categories')}
                   setIsAvailable={setIsAvailable}
                   isAvailable={isAvailable}
                 />
@@ -160,10 +163,13 @@ const Products = () => {
               }
             </div>
           </div>
-          {Math.ceil(productsCount / 12) > 1 && <PaginationButtons
-            pageCount={Math.ceil(productsCount / 12)}
-            setCurrentPage={setCurrPage}
-          />}
+          {Math.ceil(productsCount / 12) > 1 &&
+            <PaginationButtons
+              pageCount={Math.ceil(productsCount / 12)}
+              setCurrentPage={setCurrPage}
+              activePage={currPage}
+            />
+          }
         </div>
       </main>
     </>

@@ -11,7 +11,7 @@ const Blog = () => {
     const [currPage, setCurrPage] = useState(1)
     const [blogsCount, setBlogsCount] = useState(12)
     const [searchValue, setSearchValue] = useState('')
-    const [category, setCategory] = useState<number[]>([])
+    const [category, setCategory] = useState<string[]>([])
     return (
         <main className='w-[90%] max-w-[1136px] mx-auto py-16 md:py-[117px] flex flex-col gap-2 lg:gap-4'>
             <div className='w-full grid grid-rows-2 md:grid-rows-1 md:grid-cols-[65%_33%] lg:grid-cols-[74.5%_24%] md:gap-3 lg:gap-4 ltr'>
@@ -20,7 +20,6 @@ const Blog = () => {
                     <div className='absolute w-full z-10'>
                         <Category
                             categoryState={category}
-                            setCategory={setCategory}
                             categories={[]}
                         />
                     </div>
@@ -64,6 +63,7 @@ const Blog = () => {
                 <PaginationButtons
                     pageCount={Math.ceil(blogsCount / 12)}
                     setCurrentPage={setCurrPage}
+                    activePage={1}
                 />
             }
         </main>

@@ -3,7 +3,13 @@ import ReactPaginate from "react-paginate";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 import { motion } from "framer-motion";
 
-const PaginationButtons = ({ pageCount, setCurrentPage }: { pageCount: number, setCurrentPage?: any }) => {
+type props = {
+    activePage: number
+    pageCount: number
+    setCurrentPage?: any
+}
+
+const PaginationButtons = ({ pageCount, setCurrentPage, activePage }: props) => {
     const handlePageClick = ({ selected }: any) => {
         setCurrentPage(selected + 1);
     };
@@ -31,6 +37,7 @@ const PaginationButtons = ({ pageCount, setCurrentPage }: { pageCount: number, s
             animate="visible"
         >
             <ReactPaginate
+                forcePage={activePage - 1}
                 breakLabel={<span className="mx-2">...</span>}
                 nextLabel={
                     <span className="w-10 h-10 flex items-center justify-center bg-lightGray rounded-md">
@@ -47,7 +54,7 @@ const PaginationButtons = ({ pageCount, setCurrentPage }: { pageCount: number, s
                     </span>
                 }
                 containerClassName="flex items-center justify-center gap-2 h-10 text-secondry-base"
-                pageClassName="block hover:bg-lightGray w-10 h-10 flex items-center justify-center rounded-md m w-7"
+                pageClassName="block w-10 h-10 flex items-center justify-center rounded-md m w-7"
                 activeClassName="bg-secondry-base text-white"
             />
         </motion.div>

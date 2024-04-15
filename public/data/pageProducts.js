@@ -19,26 +19,26 @@ export const orders = [
 export const categories = [
   {
     name: "عرقیجات",
-    value: 8,
+    value: '8',
   },
   {
     name: "محصولات ویژه",
-    value: 7,
+    value: '7',
   },
   {
     name: "قهوه",
-    value: 5,
+    value: '5',
   },
   {
     name: "ادویه",
-    value: 4,
+    value: '4',
   },
   {
     name: "دمنوش",
-    value: 3,
+    value: '3',
   },
   {
     name: "روغن",
-    value: 1,
+    value: '1',
   },
 ];

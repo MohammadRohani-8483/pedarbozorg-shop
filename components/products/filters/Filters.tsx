@@ -5,8 +5,13 @@ import AvailableProductsToggle from 'components/products/AvailableProductsToggle
 import Category from 'components/products/Category'
 import PriceRange from 'components/products/PriceRange'
 import { categories as categoriesArray } from 'public/data/pageProducts'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 
-const Filters = ({ categories, isAvailable, setCategory, setIsAvailable, max, inputFrom, setInputFrom, inputTo, setInputTo }: any) => {
+const Filters = ({ categories, isAvailable, setIsAvailable, max, inputFrom, setInputFrom, inputTo, setInputTo }: any) => {
+    const searchParams = useSearchParams()
+    const params = new URLSearchParams(searchParams.toString())
+    const { replace } = useRouter()
+    const pathname = usePathname()
     return (
         <div className='hidden max-w-[272px] lg:flex flex-col gap-4 justify-start items-center'>
             <div className='flex w-full justify-between items-center gap-8'>
@@ -23,7 +28,8 @@ const Filters = ({ categories, isAvailable, setCategory, setIsAvailable, max, in
                     <div
                         className='px-3 py-1.5 text-error-base text-sm whitespace-nowrap cursor-pointer'
                         onClick={() => {
-                            setCategory([])
+                            params.delete('categories')
+                            replace(`${pathname}?${params.toString()}`)
                             setIsAvailable(false)
                             setInputFrom(0)
                             setInputTo(max)
@@ -36,7 +42,6 @@ const Filters = ({ categories, isAvailable, setCategory, setIsAvailable, max, in
             <Category
                 categories={categoriesArray}
                 categoryState={categories}
-                setCategory={setCategory}
             />
             <PriceRange
                 max={max}

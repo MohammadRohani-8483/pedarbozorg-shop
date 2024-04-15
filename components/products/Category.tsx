@@ -2,25 +2,30 @@ import Image from 'next/image'
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 import { number } from 'yup'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 
 type props = {
-    categoryState: number[]
-    setCategory: (par: number[]) => void
+    categoryState: string[]
     categories: {
         name: string
-        value: number
+        value: string
     }[]
 }
 
-const Category = ({ categoryState, setCategory, categories }: props) => {
+const Category = ({ categoryState,  categories }: props) => {
     const [boxIsOpen, setBoxIsOpen] = useState(false)
+    const searchParams = useSearchParams()
+    const params = new URLSearchParams(searchParams.toString())
+    const { replace } = useRouter()
+    const pathname = usePathname()
 
-    const handleCheckboxChange = (value: number) => {
+    const handleCheckboxChange = (value: string) => {
         const isSelected = categoryState.includes(value);
-        const newSelectedValues = isSelected
-            ? categoryState.filter((v: any) => v !== value)
-            : [...categoryState, value];
-        setCategory(newSelectedValues);
+        console.log(isSelected)
+        isSelected
+            ? params.delete('categories',value)
+            : params.append('categories', value)
+        replace(`${pathname}?${params.toString()}`)
     };
     return (
         <motion.div
@@ -63,7 +68,7 @@ const Category = ({ categoryState, setCategory, categories }: props) => {
                             id={`my_option1${category.value}`}
                             style={{ accentColor: "#3D8361" }}
                             value={category.value}
-                            onChange={(e: any) => handleCheckboxChange(category.value)}
+                            onChange={() => handleCheckboxChange(category.value)}
                             checked={categoryState.includes(category.value)}
                             className='cursor-pointer'
                         />

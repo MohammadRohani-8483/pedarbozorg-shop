@@ -2,6 +2,7 @@ const API_URL = process.env.API;
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  reactStrictMode: false,
   images: {
     domains: ["pedarbozorg-api.codintofuture.ir"],
   },

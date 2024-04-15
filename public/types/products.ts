@@ -53,7 +53,7 @@ export type productDetail = {
     }[]
     categories: [
         {
-            id: 7,
+            id: number,
             title: string
         }
     ],

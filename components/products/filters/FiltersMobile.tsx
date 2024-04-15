@@ -5,10 +5,15 @@ import { IoClose } from 'react-icons/io5';
 import AvailableProductsToggle from '../AvailableProductsToggle';
 import Category from '../Category';
 import PriceRange from '../PriceRange';
-import { categories  } from '@/public/data/pageProducts'
+import { usePathname, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/router';
 
 
-const FiltersMobile = ({ setIsFiltersOpen, categories, isAvailable, setCategory, setIsAvailable, max, inputFrom, setInputFrom, inputTo, setInputTo }: any) => {
+const FiltersMobile = ({ setIsFiltersOpen, categories, isAvailable, setIsAvailable, max, inputFrom, setInputFrom, inputTo, setInputTo }: any) => {
+    const searchParams = useSearchParams()
+    const params = new URLSearchParams(searchParams.toString())
+    const { replace } = useRouter()
+    const pathname = usePathname()
     const [isVisible, setIsVisible] = useState(true)
 
     const variants = {
@@ -66,7 +71,8 @@ const FiltersMobile = ({ setIsFiltersOpen, categories, isAvailable, setCategory,
                     <div
                         className='px-3 py-1.5 text-error-base text-sm whitespace-nowrap cursor-pointer'
                         onClick={() => {
-                            setCategory([])
+                            params.delete('categories')
+                            replace(`${pathname}?${params.toString()}`)
                             setIsAvailable(false)
                             setInputFrom(0)
                             setInputTo(max)
@@ -75,7 +81,7 @@ const FiltersMobile = ({ setIsFiltersOpen, categories, isAvailable, setCategory,
                         حذف فیلترها
                     </div>
                 </div>
-                <Category categoryState={categories} setCategory={setCategory} categories={categories}  />
+                <Category categoryState={categories} categories={categories}  />
                 <PriceRange
                     max={max}
                     inputFrom={inputFrom}

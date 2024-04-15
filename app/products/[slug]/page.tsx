@@ -35,8 +35,8 @@ const Page = async ({ params }: any) => {
                             پدربزرگ
                         </Link>
                         /
-                        <Link href='/products/' className='px-3 py-2 text-secondry-base'>
-                            {product.categories.map((category: any) => category.title)}
+                        <Link href={`/products/?categories=${product.categories.map((category) => category.id)}`} className='px-3 py-2 text-secondry-base'>
+                            {product.categories.map((category) => category.title)}
                         </Link>
                         /
                         <Link href={`/products/${product.slug}`} className='px-3 py-2 text-secondry-base'>
