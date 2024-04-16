@@ -2,7 +2,7 @@ import { cart } from '@/public/types/productType'
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { address } from '@/public/types/adress'
+import { GET_ADDRESS, address } from '@/public/types/adress'
 import formatNumber from '@/public/Functions/formatNumber'
 import SkeletonCard from '@/components/SkeletonCard'
 
@@ -20,14 +20,16 @@ import OrdersCart from 'components/checkout-cart/OrdersCart'
 import Alert from '@/components/Alert'
 import AddressForm from '@/components/AddressForm'
 import axios from 'axios'
+import SelectAddress from '@/components/SelectAddress'
 
 type props = {
-  addresses: address[]
-  setAddresses: (address: address[]) => void
+  addresses: GET_ADDRESS[]
+  setAddresses: (address: any[]) => void
 }
 
 const ShippingInfos = ({ addresses, setAddresses }: props) => {
   const [addAddressIsOpen, setAddAddressIsOpen] = useState(false)
+  const [isSelectBoxOpen, setIsSelectBoxOpen] = useState(false)
 
   const [address, setAddress] = useState<address>()
   const [error, setError] = useState<string | null>()
@@ -41,7 +43,7 @@ const ShippingInfos = ({ addresses, setAddresses }: props) => {
     setStart(true)
   }, [])
 
-  const activeAddress = addresses.find(address => address.isActive)
+  const activeAddress = addresses.find(address => address.is_active)
 
   useEffect(() => {
     if (!(address?.address?.length! > 0 && address?.province && address.city && address.flatNum && address.zipCode!.length > 0 && address.firstName!.length > 0 && address.lastName!.length > 0 && address.phoneNumber!.length > 0) || (address?.city === 1508 && !address.strict)) {
@@ -58,7 +60,6 @@ const ShippingInfos = ({ addresses, setAddresses }: props) => {
       setError(null)
     }
   }, [address])
-
 
   const handleAddAddress = () => {
     const newActiveAddress: address = { ...address, isActive: true }
@@ -82,7 +83,6 @@ const ShippingInfos = ({ addresses, setAddresses }: props) => {
     }
   }, [activeAddress])
 
-
   return (
     <div className='flex flex-col bg-white rounded-2xl p-4 md:p-8 items-center justify-center w-full gap-8'>
       <div className='w-full flex flex-col items-start justify-center gap-4'>
@@ -100,18 +100,29 @@ const ShippingInfos = ({ addresses, setAddresses }: props) => {
               />
               <p className='text-neutral-800 leading-6 text-sm flex gap-1 items-center'>
                 <>
-                  {city !== province && `${province}/`}{city}/{activeAddress?.address}/پلاک {activeAddress?.flatNum}{activeAddress?.unitNum && `/واحد ${activeAddress?.unitNum}`}
+                  {city !== province && `${province}/`}{city}{activeAddress?.strict?`/منطقه ${activeAddress.strict}`:""}/{activeAddress?.address}/پلاک {activeAddress?.flat_no}{activeAddress?.unit_no && `/واحد ${activeAddress?.unit_no}`}
                 </>
               </p>
               <p className='text-neutral-600 text-sm'>
-                {activeAddress?.firstName} {activeAddress?.lastName}
+                {activeAddress?.first_name} {activeAddress?.last_name}
               </p>
             </div>
             <div className="flex justify-center items-center w-full">
-              <button className="solid-btn rectangle-btn">
+              <button
+                className="solid-btn rectangle-btn"
+                onClick={() => setIsSelectBoxOpen(true)}
+              >
                 تغییر آدرس
               </button>
             </div>
+            {isSelectBoxOpen &&
+              <Alert
+                title='انتخاب آدرس'
+                setIsAlertOpen={setIsSelectBoxOpen}
+              >
+                <SelectAddress addresses={addresses} />
+              </Alert>
+            }
           </>
           :
           <>

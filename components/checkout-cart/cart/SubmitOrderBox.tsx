@@ -7,7 +7,7 @@ import React from 'react'
 type props = {
     sellPrice: number
     finalPrice: number
-    shipmentPrice?: number | null
+    shipmentPrice?: number
     discountCode?: number | null
     discountCodePrecent?: number | null
     discountProducts: number
@@ -33,7 +33,7 @@ const SubmitOrderBox = ({
 }: props) => {
     const link = page === 'CART' ?
         "/checkout-cart/shipping" :
-        page === 'SHIPPING' && shipmentPrice ?
+        page === 'SHIPPING' && shipmentPrice !== undefined ?
             "/checkout-cart/pay"
             :
             ""
@@ -106,7 +106,7 @@ const SubmitOrderBox = ({
                         </div>
                     </div>
                 }
-                {shipmentPrice &&
+                {shipmentPrice !== undefined &&
                     (shipmentPrice !== 0 ?
                         <div className='text-neutral-700 text-base font-bold flex justify-between items-center'>
                             <p>
@@ -148,11 +148,23 @@ const SubmitOrderBox = ({
                     </div>
                 </div>
             </div>
-            <Link href={link} className='w-full'>
-                <button className={`solid-btn rectangle-btn ${page === 'SHIPPING' && !shipmentPrice ? "disable-btn" : ""} w-full`}>
-                    ثبت سفارش
-                </button>
-            </Link>
+            {(page === 'SHIPPING' && shipmentPrice !== undefined) || page === 'CART' ?
+                <Link href={link} className='w-full'>
+                    <button
+                        className={`solid-btn rectangle-btn ${page === 'SHIPPING' && shipmentPrice === undefined ? "disable-btn" : ""} w-full`}
+                    >
+                        ثبت سفارش
+                    </button>
+                </Link>
+                :
+                <div className='w-full'>
+                    <button
+                        className={`solid-btn rectangle-btn ${page === 'SHIPPING' && shipmentPrice === undefined ? "disable-btn" : ""} w-full`}
+                    >
+                        ثبت سفارش
+                    </button>
+                </div>
+            }
         </div>
     )
 }

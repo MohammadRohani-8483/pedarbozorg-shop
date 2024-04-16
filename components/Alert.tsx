@@ -6,11 +6,11 @@ import toast from 'react-hot-toast';
 type props = {
     title: string
     setIsAlertOpen: (par: boolean) => void
-    confirmFunc: (par?: any) => void
+    confirmFunc?: (par?: any) => void
     redBtn?: boolean
-    messageToast: string
+    messageToast?: string
     children: ReactNode
-    textBtn: string
+    textBtn?: string
     error?: string | null
 }
 
@@ -56,9 +56,9 @@ const Alert = ({ title, confirmFunc, redBtn, setIsAlertOpen, messageToast, child
         if (error) {
             toast.error(error)
         } else {
-            confirmFunc()
+            confirmFunc && confirmFunc()
             handleClose()
-            toast.success(messageToast)
+            messageToast && toast.success(messageToast)
         }
     }
 
@@ -86,20 +86,22 @@ const Alert = ({ title, confirmFunc, redBtn, setIsAlertOpen, messageToast, child
                         onClick={handleClose} />
                 </div>
                 {children}
-                <div className='flex w-full justify-end gap-3 md:gap-4'>
-                    <button
-                        onClick={handleClose}
-                        className='rectangle-btn outline-btn !border-red-600 !bg-white !text-red-600 hover:!bg-red-50'
-                    >
-                        انصراف
-                    </button>
-                    <button
-                        onClick={handleConfirm}
-                        className={`rectangle-btn solid-btn ${redBtn ? "!bg-red-600 hover:!bg-red-700" : ""}`}
-                    >
-                        {textBtn}
-                    </button>
-                </div>
+                {textBtn &&
+                    <div className='flex w-full justify-end gap-3 md:gap-4'>
+                        <button
+                            onClick={handleClose}
+                            className='rectangle-btn outline-btn !border-red-600 !bg-white !text-red-600 hover:!bg-red-50'
+                        >
+                            انصراف
+                        </button>
+                        <button
+                            onClick={handleConfirm}
+                            className={`rectangle-btn solid-btn ${redBtn ? "!bg-red-600 hover:!bg-red-700" : ""}`}
+                        >
+                            {textBtn}
+                        </button>
+                    </div>
+                }
             </motion.div>
         </motion.div>
     )

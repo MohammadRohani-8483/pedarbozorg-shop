@@ -80,3 +80,16 @@ export const createFakeOrder = () => {
     }
     return fakeOrder
 }
+
+export type submitCouponResponse = {
+    total_final_price: number
+    shipment_cost: number
+    your_profit_amount: number
+    your_profit_percent: number
+    discount_code_amount?: number
+    discount_code_percent?: number
+    discount_code_description?: string
+    product_discount_amount: number
+    product_discount_percent: number
+    total_sell_price: number
+}
