@@ -21,7 +21,7 @@ const Input = ({ name, type, placeholder, className, maxLength, pattern, value, 
             setValue(e.target.value)
     }
     return (
-        <div className={`relative ${className || ""}`}>
+        <div className={`relative w-full ${className || ""}`}>
             <input type={type}
                 pattern={pattern}
                 maxLength={maxLength}

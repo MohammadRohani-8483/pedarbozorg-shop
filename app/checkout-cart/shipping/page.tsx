@@ -39,7 +39,6 @@ const ShippingPage = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
-
     useEffect(() => {
         setTotalFinalPrice(cart.cartItems.reduce((previous, current) => previous + current?.variant.shatoot_info.final_price * current?.quantity!, 0))
         setTotalSellPrice(cart.cartItems.reduce((previous, current) => previous + current?.variant.shatoot_info.sell_price * current?.quantity!, 0))

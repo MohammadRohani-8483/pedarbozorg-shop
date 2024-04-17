@@ -53,6 +53,7 @@ const config: Config = {
         },
         "error": {
           'base': '#C62020',
+          'shade': '#B21E1E',
           'light': '#ED2E2E',
           'extraLight': '#FFF2F2',
         },

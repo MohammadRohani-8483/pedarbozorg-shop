@@ -16,6 +16,7 @@ type props = {
     yourProfitPercent: number
     page: 'CART' | "SHIPPING" | "PAY"
     countProduct: number
+    paymentFunc?: any
 }
 
 const SubmitOrderBox = ({
@@ -29,7 +30,8 @@ const SubmitOrderBox = ({
     yourProfit,
     yourProfitPercent,
     page,
-    countProduct
+    countProduct,
+    paymentFunc
 }: props) => {
     const link = page === 'CART' ?
         "/checkout-cart/shipping" :
@@ -37,6 +39,12 @@ const SubmitOrderBox = ({
             "/checkout-cart/pay"
             :
             ""
+
+    const handlePayment = () => {
+        if (page === 'PAY') {
+            paymentFunc()
+        }
+    }
 
     return (
         <div className='flex flex-col bg-white rounded-2xl p-4 md:p-8 items-center justify-center w-full md:w-2/3 gap-4 md:gap-8'>
@@ -159,6 +167,7 @@ const SubmitOrderBox = ({
                 :
                 <div className='w-full'>
                     <button
+                        onClick={handlePayment}
                         className={`solid-btn rectangle-btn ${page === 'SHIPPING' && shipmentPrice === undefined ? "disable-btn" : ""} w-full`}
                     >
                         ثبت سفارش

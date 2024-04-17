@@ -4,13 +4,18 @@ import Icon from './Icon'
 import { motion } from 'framer-motion'
 import axios from 'axios'
 import { array } from 'yup'
+import { useAppSelector } from '@/public/redux/hooks'
+import { authState } from '@/public/redux/store/auth'
 
 type props = {
     addresses: GET_ADDRESS[]
+    setAddresses: React.Dispatch<React.SetStateAction<GET_ADDRESS[]>>
 }
 
 type itemProps = {
     selectAddress: GET_ADDRESS
+    addresses: GET_ADDRESS[]
+    setAddresses: React.Dispatch<React.SetStateAction<GET_ADDRESS[]>>
 }
 
 type InfoItemProps = {
@@ -18,7 +23,7 @@ type InfoItemProps = {
     value: string
 }
 
-const SelectAddress = ({ addresses }: props) => {
+const SelectAddress = ({ addresses, setAddresses }: props) => {
     return (
         <div className='w-full md:w-[614px] flex flex-col gap-2 sm:gap-4 md:gap-6 justify-center items-center'>
             <button className="solid-btn rectangle-btn">
@@ -28,7 +33,7 @@ const SelectAddress = ({ addresses }: props) => {
             <div className='ltr flex flex-col overflow-y-auto p-2 w-full max-h-[354px] gap-2 sm:gap-4 md:gap-6 -m-2' id='scroll'>
                 {addresses.map((address, i, array) => (
                     <React.Fragment key={address.id}>
-                        <AddressItem selectAddress={address} />
+                        <AddressItem selectAddress={address} addresses={addresses} setAddresses={setAddresses} />
                         {i + 1 < array.length &&
                             <div className='w-full py-[0.5px] bg-neutral-E3E3E3' />
                         }
@@ -41,9 +46,15 @@ const SelectAddress = ({ addresses }: props) => {
 
 export default SelectAddress
 
-const AddressItem = ({ selectAddress }: itemProps) => {
+const AddressItem = ({ selectAddress, addresses, setAddresses }: itemProps) => {
+    const { userToken } = useAppSelector((state: { auth: authState }) => state.auth)
     const [province, setProvince] = useState<string>()
     const [city, setCity] = useState<string>()
+
+    const arrayNotActive = addresses.map(address => ({ ...address, is_active: false }))
+
+    const selectInArray = arrayNotActive.find(address => address.id === selectAddress.id)
+
     useEffect(() => {
         if (selectAddress) {
             axios(`/api/transaction-api/provinces/${selectAddress.province}/`)
@@ -56,11 +67,34 @@ const AddressItem = ({ selectAddress }: itemProps) => {
                 })
         }
     }, [selectAddress])
+
+    const changeIsActive = () => {
+        if (!selectAddress.is_active) {
+            axios.patch(`/api/transaction-api/address/${selectAddress.id}`,
+                { is_active: true },
+                {
+                    headers: {
+                        Authorization: `JWT ${userToken.access}`
+                    }
+                })
+                .then(({ data }) => {
+                    console.log(data)
+                })
+            setAddresses(prev => {
+                let activeIndex = prev.findIndex(address => address.is_active)
+                prev[activeIndex].is_active = false
+                let selectIndex = prev.findIndex(address => address.id === selectAddress.id)
+                prev[selectIndex].is_active = true
+                return [...prev]
+            })
+        }
+    }
     const { address, flat_no, first_name, last_name, phone_number, zip_code } = selectAddress
     return (
         <div className='flex w-full justify-between items-center'>
             <div className='flex justify-start items-start gap-4 md:gap-6'>
-                <div 
+                <div
+                    onClick={changeIsActive}
                     className={`size-5 border border-secondry-base rounded-full cursor-pointer hover:bg-secondry-tint-7 hover:shadow-[0_0_0_5px_rgba(224,241,233,1)] transition-all duration-300 p-1 ${selectAddress.is_active ? "border-secondry-base" : "border-neutral-500"}`}
                 >
                     {selectAddress.is_active &&

@@ -1,4 +1,4 @@
-import { deleteAllItems, removeFromCart } from '@/public/redux/store/cart'
+import { deleteAllItems } from '@/public/redux/store/cart'
 import { cart } from '@/public/types/productType'
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
@@ -50,6 +50,7 @@ const CheckoutItems = () => {
                             name={cartItem?.variant.name}
                             count={cartItem?.quantity!}
                             product={cartItem}
+                            setIsDeleting={setIsDeleting}
                         />
                         {i < array.length - 1 && <div className='w-full h-[1px] bg-gray-200' />}
                     </React.Fragment>

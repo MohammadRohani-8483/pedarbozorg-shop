@@ -8,9 +8,11 @@ import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import Loading from './loading'
+import { authState } from '@/public/redux/store/auth'
 
 const CheckoutCart = () => {
     const cart = useSelector((state: { cart: cart }) => state.cart.cartItems)
+    const { isLogedIn } = useSelector((state: { auth: authState }) => state.auth)
 
     const [totalFinalPrice, setTotalFinalPrice] = useState(0)
     const [totalSellPrice, setTotalSellPrice] = useState(0)
@@ -47,12 +49,12 @@ const CheckoutCart = () => {
                 height={192}
                 className='top-12 right-0 absolute hidden md:block z-[-1]'
             />
-            {start ?
+            {/* {start ? */}
+            {start && isLogedIn  ?
                 <>
                     <main className='w-[90%] mx-auto max-w-[1136px] flex flex-col justify-center items-center gap-16 md:gap-20 py-20 md:py-[117px]'>
                         <Title>سبد خرید</Title>
-                        {cart.length > 0
-                            ?
+                        {cart.length > 0 ?
                             <div className='flex flex-col md:flex-row w-full justify-center items-start gap-2 lg:gap-6'>
                                 <CheckoutItems />
                                 <SubmitOrderBox

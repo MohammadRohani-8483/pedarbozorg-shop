@@ -18,11 +18,12 @@ type props = {
     priceWithOffer: number
     count: number
     product: any
+    setIsDeleting: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const noImage = '/Image/offer-products/ard-nokhodchi.png'
 
-const CheckoutCartItem = ({ image, link, price, priceWithOffer, name, count, product }: props) => {
+const CheckoutCartItem = ({ image, link, price, priceWithOffer, name, count, product, setIsDeleting }: props) => {
     const offerPresent = (price - priceWithOffer) / price * 100
     const present = price * offerPresent / 100
 
@@ -53,15 +54,17 @@ const CheckoutCartItem = ({ image, link, price, priceWithOffer, name, count, pro
     }
 
     const handleDeleteFromCart = () => {
-        if (auth.isLogedIn) {
-            dispatch(deleteCartItem({ cartItemID: productIdForDelete!, token: auth.userToken.access! }))
-            dispatch(removeFromCart(product))
-        } else {
-            dispatch(removeFromCart(product))
-            if (cart?.length === 0) {
-                localStorage.removeItem('shoping_cart')
+        if (cart.length === 1) setIsDeleting(true); else {
+            if (auth.isLogedIn) {
+                dispatch(deleteCartItem({ cartItemID: productIdForDelete!, token: auth.userToken.access! }))
+                dispatch(removeFromCart(product))
             } else {
-                dispatch(setCartToLocalStorage())
+                dispatch(removeFromCart(product))
+                if (cart?.length === 0) {
+                    localStorage.removeItem('shoping_cart')
+                } else {
+                    dispatch(setCartToLocalStorage())
+                }
             }
         }
     }

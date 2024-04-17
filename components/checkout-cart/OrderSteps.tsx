@@ -8,7 +8,7 @@ type props = {
 const OrderSteps = ({ page }: props) => {
     return (
         <div className="relative flex w-full md:h-[290px] flex-col gap-4 justify-center items-center">
-            <div className='absolute'>
+            <div className='absolute hidden sm:block'>
                 <Image
                     src='/Image/Logo.svg'
                     alt="Logo"

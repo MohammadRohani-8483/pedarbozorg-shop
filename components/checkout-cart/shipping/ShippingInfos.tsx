@@ -24,7 +24,7 @@ import SelectAddress from '@/components/SelectAddress'
 
 type props = {
   addresses: GET_ADDRESS[]
-  setAddresses: (address: any[]) => void
+  setAddresses: React.Dispatch<React.SetStateAction<GET_ADDRESS[]>>
 }
 
 const ShippingInfos = ({ addresses, setAddresses }: props) => {
@@ -62,12 +62,12 @@ const ShippingInfos = ({ addresses, setAddresses }: props) => {
   }, [address])
 
   const handleAddAddress = () => {
-    const newActiveAddress: address = { ...address, isActive: true }
-    const newAddressArray = [
-      ...addresses, newActiveAddress
-    ]
-    setAddresses(newAddressArray)
-    setAddress({})
+    // const newActiveAddress: GET_ADDRESS = { ...address, is_active: true }
+    // const newAddressArray = [
+    //   ...addresses, newActiveAddress
+    // ]
+    // setAddresses(newAddressArray)
+    // setAddress({})
   }
 
   useEffect(() => {
@@ -120,7 +120,7 @@ const ShippingInfos = ({ addresses, setAddresses }: props) => {
                 title='انتخاب آدرس'
                 setIsAlertOpen={setIsSelectBoxOpen}
               >
-                <SelectAddress addresses={addresses} />
+                <SelectAddress addresses={addresses} setAddresses={setAddresses}/>
               </Alert>
             }
           </>
