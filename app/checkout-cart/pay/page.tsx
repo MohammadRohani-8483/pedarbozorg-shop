@@ -20,7 +20,7 @@ const PayPage = () => {
   const shipmentMethod = "CO"
   const { replace } = useRouter()
   const cart = useAppSelector((state: { cart: cart }) => state.cart)
-  const { userToken } = useAppSelector((state: { auth: authState }) => state.auth)
+  const { userToken, isLogedIn } = useAppSelector((state: { auth: authState }) => state.auth)
 
   const [totalFinalPrice, setTotalFinalPrice] = useState(0)
   const [totalSellPrice, setTotalSellPrice] = useState(0)
@@ -29,9 +29,8 @@ const PayPage = () => {
   const [coupon, setCoupon] = useState<string | null>(null)
   const [pendingCoupon, setPendingCoupon] = useState(false)
 
-  const [start, setStart] = useState(false)
-
   useEffect(() => {
+    !isLogedIn && replace('/checkout-cart')
     document.title = 'پدربزرگ - اطلاعات پرداخت'
     axios('/api/transaction-api/address/',
       {
@@ -43,7 +42,6 @@ const PayPage = () => {
       .then(res => {
         setActiveAddress(res.data.results.find((address: GET_ADDRESS) => address.is_active))
       })
-    !activeAddress && setStart(true)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 

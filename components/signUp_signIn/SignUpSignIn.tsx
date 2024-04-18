@@ -1,9 +1,8 @@
 'use client'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { motion } from "framer-motion";
 import EnterPhoneNumberForm from './EnterPhoneNumberForm';
 import CodeVerificationForm from './CodeVerificationForm';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 const SignUpSignIn = ({ setIsFormOpen }: { setIsFormOpen: (par: boolean) => void }) => {
     const [inputValue, setInputValue] = useState('')

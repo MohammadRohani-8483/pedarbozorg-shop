@@ -1,8 +1,10 @@
 'use client'
+import SignUpSignIn from '@/components/signUp_signIn/SignUpSignIn'
 import formatNumber from '@/public/Functions/formatNumber'
+import { useAppSelector } from '@/public/redux/hooks'
 import Image from 'next/image'
 import Link from 'next/link'
-import React from 'react'
+import React, { useState } from 'react'
 
 type props = {
     sellPrice: number
@@ -33,7 +35,9 @@ const SubmitOrderBox = ({
     countProduct,
     paymentFunc
 }: props) => {
-    const link = page === 'CART' ?
+    const [isLoginBoxOpen, setIsLoginBoxOpen] = useState(false)
+    const { isLogedIn } = useAppSelector(state => state.auth)
+    const link = page === 'CART' && isLogedIn ?
         "/checkout-cart/shipping" :
         page === 'SHIPPING' && shipmentPrice !== undefined ?
             "/checkout-cart/pay"
@@ -43,6 +47,8 @@ const SubmitOrderBox = ({
     const handlePayment = () => {
         if (page === 'PAY') {
             paymentFunc()
+        } else if (page === 'CART') {
+            setIsLoginBoxOpen(true)
         }
     }
 
@@ -156,7 +162,7 @@ const SubmitOrderBox = ({
                     </div>
                 </div>
             </div>
-            {(page === 'SHIPPING' && shipmentPrice !== undefined) || page === 'CART' ?
+            {(page === 'SHIPPING' && shipmentPrice !== undefined) || (page === 'CART' && isLogedIn) ?
                 <Link href={link} className='w-full'>
                     <button
                         className={`solid-btn rectangle-btn ${page === 'SHIPPING' && shipmentPrice === undefined ? "disable-btn" : ""} w-full`}
@@ -165,14 +171,17 @@ const SubmitOrderBox = ({
                     </button>
                 </Link>
                 :
-                <div className='w-full'>
-                    <button
-                        onClick={handlePayment}
-                        className={`solid-btn rectangle-btn ${page === 'SHIPPING' && shipmentPrice === undefined ? "disable-btn" : ""} w-full`}
-                    >
-                        ثبت سفارش
-                    </button>
-                </div>
+                <>
+                    <div className='w-full'>
+                        <button
+                            onClick={handlePayment}
+                            className={`solid-btn rectangle-btn ${page === 'SHIPPING' && shipmentPrice === undefined ? "disable-btn" : ""} w-full`}
+                        >
+                            ثبت سفارش
+                        </button>
+                    </div>
+                    {isLoginBoxOpen && <SignUpSignIn setIsFormOpen={setIsLoginBoxOpen} />}
+                </>
             }
         </div>
     )

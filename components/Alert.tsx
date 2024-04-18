@@ -12,9 +12,10 @@ type props = {
     children: ReactNode
     textBtn?: string
     error?: string | null
+    z_index?: number
 }
 
-const Alert = ({ title, confirmFunc, redBtn, setIsAlertOpen, messageToast, children, textBtn, error = null }: props) => {
+const Alert = ({ title, confirmFunc, redBtn, setIsAlertOpen, messageToast, children, textBtn, error = null, z_index = 50 }: props) => {
     const [isAnimate, setIsAnimate] = useState(true)
 
     const variants = {
@@ -69,7 +70,8 @@ const Alert = ({ title, confirmFunc, redBtn, setIsAlertOpen, messageToast, child
             animate={isAnimate ? "bgVisible" : "bgHidden"}
             initial={isAnimate ? "bgHidden" : "bgVisible"}
             variants={variants}
-            className='fixed inset-0 bg-black bg-opacity-50 w-screen h-screen z-50 flex justify-center items-center'
+            className='fixed inset-0 bg-black bg-opacity-50 w-screen h-screen flex justify-center items-center'
+            style={{ zIndex: z_index }}
         >
             <motion.div
                 className='flex flex-col justify-center items-center p-4 md:p-6 gap-4 md:gap-6 bg-white rounded-2xl w-[288px] md:w-auto'

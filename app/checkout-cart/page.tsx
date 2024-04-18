@@ -14,6 +14,7 @@ const CheckoutCart = () => {
 
     const [totalFinalPrice, setTotalFinalPrice] = useState(0)
     const [totalSellPrice, setTotalSellPrice] = useState(0)
+    const [start, setStart] = useState(false)
 
     useEffect(() => {
         setTotalFinalPrice(cartItems.reduce((previous, current) => previous + current?.variant.shatoot_info.final_price * current?.quantity!, 0))
@@ -22,6 +23,7 @@ const CheckoutCart = () => {
 
     useEffect(() => {
         document.title = 'پدربزرگ - سبد خرید'
+        setStart(true)
     }, [])
 
     return (
@@ -40,7 +42,7 @@ const CheckoutCart = () => {
                 height={192}
                 className='top-12 right-0 absolute hidden md:block z-[-1]'
             />
-            {successRedux ?
+            {start && successRedux ?
                 <main className='w-[90%] mx-auto max-w-[1136px] flex flex-col justify-center items-center gap-16 md:gap-20 py-20 md:py-[117px]'>
                     <Title>سبد خرید</Title>
                     {cartItems.length > 0 ?

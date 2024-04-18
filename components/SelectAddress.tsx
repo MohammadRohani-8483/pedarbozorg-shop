@@ -1,12 +1,15 @@
-import { GET_ADDRESS } from '@/public/types/adress'
+import { GET_ADDRESS, createAddress } from '@/public/types/adress'
 import React, { useEffect, useState } from 'react'
 import Icon from './Icon'
 import { motion } from 'framer-motion'
 import axios from 'axios'
 import { useAppSelector } from '@/public/redux/hooks'
 import { authState } from '@/public/redux/store/auth'
+import Alert from './Alert'
+import AddressForm from './AddressForm'
 
 type props = {
+    setAddAddressIsOpen: React.Dispatch<React.SetStateAction<boolean>>
     addresses: GET_ADDRESS[]
     setAddresses: React.Dispatch<React.SetStateAction<GET_ADDRESS[]>>
 }
@@ -21,10 +24,15 @@ type InfoItemProps = {
     value: string
 }
 
-const SelectAddress = ({ addresses, setAddresses }: props) => {
+const SelectAddress = ({ addresses, setAddresses, setAddAddressIsOpen }: props) => {
     return (
         <div className='w-full md:w-[614px] flex flex-col gap-2 sm:gap-4 md:gap-6 justify-center items-center'>
-            <button className="solid-btn rectangle-btn">
+            <button
+                onClick={() => {
+                    setAddAddressIsOpen(true)
+                }}
+                className="solid-btn rectangle-btn"
+            >
                 افزودن آدرس جدید
             </button>
             <div className='w-full h-[1px] bg-neutral-E3E3E3' />

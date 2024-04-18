@@ -2,11 +2,15 @@
 import React, { useEffect, useReducer, useState } from 'react'
 import Input from "components/Input"
 import Select from 'components/contact-us/Select'
-import { address, allStrict } from '@/public/types/adress'
-import { addressAction, addressActionKind, addressReducer, initialForm } from '@/public/types/addressReducer';
+import { allStrict, createAddress } from '@/public/types/adress'
+import { addressAction, addressActionKind, addressReducer, initAddress, initialForm } from '@/public/types/addressReducer';
 import axios from 'axios';
 
-const AddressForm = ({ setAddress }: { setAddress: (address: address) => void }) => {
+type props = {
+  setAddress: React.Dispatch<React.SetStateAction<createAddress | undefined>>
+}
+
+const AddressForm = ({ setAddress }: props) => {
   const [allProvince, setAllProvince] = useState<{ id: number, name: string }[]>([])
   const [province, setProvince] = useState('')
   const [provinceID, setProvinceID] = useState<number>()
@@ -18,7 +22,7 @@ const AddressForm = ({ setAddress }: { setAddress: (address: address) => void })
   const [strict, setStrict] = useState<string | null>()
   const [strictID, setStrictID] = useState<number>()
 
-  const [state, dispatch] = useReducer<(state: address, dispatch: addressAction) => address>(addressReducer, initialForm)
+  const [state, dispatch] = useReducer<(state: initAddress, dispatch: addressAction) => initAddress>(addressReducer, initialForm)
 
   useEffect(() => {
     axios("/api/transaction-api/provinces/?page_size=50")
@@ -74,8 +78,19 @@ const AddressForm = ({ setAddress }: { setAddress: (address: address) => void })
   }
 
   useEffect(() => {
-    setAddress(state)
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    setAddress({
+      address: state.address,
+      city: state.city,
+      first_name: state.first_name,
+      flat_no: state.flat_no,
+      last_name: state.last_name,
+      phone_number: state.phone_number,
+      province: state.province,
+      strict: state.strict,
+      unit_no: state.unit_no,
+      zip_code: state.zip_code
+    })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state])
 
   return (
@@ -134,7 +149,7 @@ const AddressForm = ({ setAddress }: { setAddress: (address: address) => void })
                 type='number'
                 name='flatNum'
                 placeholder='پلاک*'
-                value={state.flatNum}
+                value={state.flat_no}
                 setValue={(e) => handleChangeInputs(addressActionKind.FLAT, { num: +e })}
               />
             </div>
@@ -144,7 +159,7 @@ const AddressForm = ({ setAddress }: { setAddress: (address: address) => void })
                   type='number'
                   name='unitNum'
                   placeholder='واحد'
-                  value={state.unitNum}
+                  value={state.unit_no}
                   setValue={(e) => handleChangeInputs(addressActionKind.UNIT, { num: +e })}
                 />
               </div>
@@ -152,7 +167,7 @@ const AddressForm = ({ setAddress }: { setAddress: (address: address) => void })
                 type='number'
                 name='zipCode'
                 placeholder='کدپستی*'
-                value={state.zipCode}
+                value={state.zip_code}
                 setValue={(e) => handleChangeInputs(addressActionKind.ZIP_CODE, { str: String(e) })}
                 maxLength={10}
               />
@@ -182,7 +197,7 @@ const AddressForm = ({ setAddress }: { setAddress: (address: address) => void })
               type='text'
               name='firstName'
               placeholder='نام*'
-              value={state.firstName}
+              value={state.first_name}
               setValue={(e) => handleChangeInputs(addressActionKind.FIRST_NAME, { str: String(e) })}
               disabled={state.recipentMyself}
             />
@@ -191,7 +206,7 @@ const AddressForm = ({ setAddress }: { setAddress: (address: address) => void })
               type='text'
               name='lastName'
               placeholder='نام خانوادگی*'
-              value={state.lastName}
+              value={state.last_name}
               setValue={(e) => handleChangeInputs(addressActionKind.LAST_NAME, { str: String(e) })}
               disabled={state.recipentMyself}
             />
@@ -202,7 +217,7 @@ const AddressForm = ({ setAddress }: { setAddress: (address: address) => void })
               name='phoneNumber'
               placeholder='شماره همراه*'
               pattern='[0,9]'
-              value={state.phoneNumber}
+              value={state.phone_number}
               setValue={(e) => handleChangeInputs(addressActionKind.PHONE_NUMBER, { str: String(e) })}
               disabled={state.recipentMyself}
             />

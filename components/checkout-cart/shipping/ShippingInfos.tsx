@@ -1,8 +1,6 @@
-import { cart } from '@/public/types/productType'
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
-import { GET_ADDRESS, address } from '@/public/types/adress'
+import { GET_ADDRESS, createAddress } from '@/public/types/adress'
 import formatNumber from '@/public/Functions/formatNumber'
 import SkeletonCard from '@/components/SkeletonCard'
 
@@ -21,6 +19,7 @@ import Alert from '@/components/Alert'
 import AddressForm from '@/components/AddressForm'
 import axios from 'axios'
 import SelectAddress from '@/components/SelectAddress'
+import { useAppSelector } from '@/public/redux/hooks'
 
 type props = {
   addresses: GET_ADDRESS[]
@@ -31,12 +30,13 @@ const ShippingInfos = ({ addresses, setAddresses }: props) => {
   const [addAddressIsOpen, setAddAddressIsOpen] = useState(false)
   const [isSelectBoxOpen, setIsSelectBoxOpen] = useState(false)
 
-  const [address, setAddress] = useState<address>()
+  const [newAddress, setNewAddress] = useState<createAddress>()
   const [error, setError] = useState<string | null>()
   const [province, setProvince] = useState<string>()
   const [city, setCity] = useState<string>()
 
-  const cart = useSelector((state: { cart: cart }) => state.cart.cartItems)
+  const cart = useAppSelector(state => state.cart.cartItems)
+  const { userToken } = useAppSelector(state => state.auth)
 
   const [start, setStart] = useState(false)
   useEffect(() => {
@@ -46,28 +46,37 @@ const ShippingInfos = ({ addresses, setAddresses }: props) => {
   const activeAddress = addresses.find(address => address.is_active)
 
   useEffect(() => {
-    if (!(address?.address?.length! > 0 && address?.province && address.city && address.flatNum && address.zipCode!.length > 0 && address.firstName!.length > 0 && address.lastName!.length > 0 && address.phoneNumber!.length > 0) || (address?.city === 1508 && !address.strict)) {
+    if (!(newAddress?.address?.length! > 0 && newAddress?.province && newAddress.city && newAddress.flat_no && newAddress.zip_code!.length > 0 && newAddress.first_name!.length > 0 && newAddress.last_name!.length > 0 && newAddress.phone_number!.length > 0) || (newAddress?.city === 1508 && !newAddress.strict)) {
       setError('لطفا فیلد های ضروری را کامل نمایید')
-    } else if (!/^[\u0600-\u06FF\s]+$/.test(address.address!)) {
+    } else if (!/^[\u0600-\u06FF\s]+$/.test(newAddress.address!)) {
       setError('لطفا ادرس خود را به فارسی وارد کنید')
-    } else if (!/^[1-9]\d{9}$/.test(address.zipCode!)) {
+    } else if (!/^[1-9]\d{9}$/.test(newAddress.zip_code!)) {
       setError('لطفا کد پستی ادرس خود را صحیح وارد کنید')
-    } else if (!/^[\u0600-\u06FF\s]+$/.test(address.firstName!) || !/^[\u0600-\u06FF\s]+$/.test(address.lastName!)) {
+    } else if (!/^[\u0600-\u06FF\s]+$/.test(newAddress.first_name!) || !/^[\u0600-\u06FF\s]+$/.test(newAddress.last_name!)) {
       setError('لطفا نام و نام خانوادگی خود را به فارسی وارد کنید')
-    } else if (!/^09\d{9}$/.test(address.phoneNumber!)) {
+    } else if (!/^09\d{9}$/.test(newAddress.phone_number!)) {
       setError('لطفا شماره موبایل خود را صحیح وارد کنید')
     } else {
       setError(null)
     }
-  }, [address])
+  }, [newAddress])
 
   const handleAddAddress = () => {
-    // const newActiveAddress: GET_ADDRESS = { ...address, is_active: true }
-    // const newAddressArray = [
-    //   ...addresses, newActiveAddress
-    // ]
-    // setAddresses(newAddressArray)
-    // setAddress({})
+    axios.post('/api/transaction-api/address/',
+      {
+        ...newAddress,
+        is_active: true
+      },
+      {
+        headers: {
+          Authorization: `JWT ${userToken.access}`
+        }
+      })
+      .then(({ data }) => {
+        setAddresses(prev => {
+          return [...prev, data]
+        })
+      })
   }
 
   useEffect(() => {
@@ -89,6 +98,19 @@ const ShippingInfos = ({ addresses, setAddresses }: props) => {
         <h2 className='text-base font-bold text-secondry-base'>
           انتخاب آدرس تحویل سفارش
         </h2>
+        {addAddressIsOpen &&
+          <Alert
+            z_index={100}
+            confirmFunc={handleAddAddress}
+            messageToast='آدرس با موفقیت اضافه شد'
+            textBtn='افزودن'
+            title='افزودن آدرس جدید'
+            setIsAlertOpen={setAddAddressIsOpen}
+            error={error}
+          >
+            <AddressForm setAddress={setNewAddress} />
+          </Alert>
+        }
         {addresses.length > 0 ?
           <>
             <div className='flex justify-center items-center gap-4'>
@@ -100,7 +122,7 @@ const ShippingInfos = ({ addresses, setAddresses }: props) => {
               />
               <p className='text-neutral-800 leading-6 text-sm flex gap-1 items-center'>
                 <>
-                  {city !== province && `${province}/`}{city}{activeAddress?.strict?`/منطقه ${activeAddress.strict}`:""}/{activeAddress?.address}/پلاک {activeAddress?.flat_no}{activeAddress?.unit_no && `/واحد ${activeAddress?.unit_no}`}
+                  {city !== province && `${province}/`}{city}{activeAddress?.strict ? `/منطقه ${activeAddress.strict}` : ""}/{activeAddress?.address}/پلاک {activeAddress?.flat_no}{activeAddress?.unit_no && `/واحد ${activeAddress?.unit_no}`}
                 </>
               </p>
               <p className='text-neutral-600 text-sm'>
@@ -120,7 +142,7 @@ const ShippingInfos = ({ addresses, setAddresses }: props) => {
                 title='انتخاب آدرس'
                 setIsAlertOpen={setIsSelectBoxOpen}
               >
-                <SelectAddress addresses={addresses} setAddresses={setAddresses}/>
+                <SelectAddress addresses={addresses} setAddresses={setAddresses} setAddAddressIsOpen={setAddAddressIsOpen} />
               </Alert>
             }
           </>
@@ -135,18 +157,6 @@ const ShippingInfos = ({ addresses, setAddresses }: props) => {
             >
               افزودن آدرس
             </button>
-            {addAddressIsOpen &&
-              <Alert
-                confirmFunc={handleAddAddress}
-                messageToast='آدرس با موفقیت اضافه شد'
-                textBtn='افزودن'
-                title='افزودن آدرس جدید'
-                setIsAlertOpen={setAddAddressIsOpen}
-                error={error}
-              >
-                <AddressForm setAddress={setAddress} />
-              </Alert>
-            }
           </>
         }
       </div>

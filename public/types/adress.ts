@@ -40,12 +40,11 @@ export type createAddress = {
     phone_number: string
     first_name: string
     last_name: string
-    province: number
-    city: number
+    province: number | null
+    city: number | null
     address: string
     zip_code: string
-    type: "M" | "A" | "T"
-    flat_no: number
+    flat_no: number | null
     unit_no: number | null
     strict: number | null
 }

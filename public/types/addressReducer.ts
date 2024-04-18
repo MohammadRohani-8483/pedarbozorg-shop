@@ -1,4 +1,4 @@
-import { address } from "./adress";
+import { createAddress } from '@/public/types/adress';
 
 export enum addressActionKind {
     ADDRESS = 'ADDRESS',
@@ -20,22 +20,27 @@ export type addressAction = {
     payload?: { str?: string, num?: number | null };
 }
 
-export const initialForm: address = {
+export type initAddress = createAddress & {
+    recipentMyself: boolean
+    isActive: boolean
+}
+
+export const initialForm: initAddress = {
     address: '',
     province: null,
     city: null,
     strict: null,
-    flatNum: null,
-    unitNum: null,
-    zipCode: '',
+    flat_no: null,
+    unit_no: null,
+    zip_code: '',
     recipentMyself: false,
-    firstName: '',
-    lastName: '',
-    phoneNumber: '',
+    first_name: '',
+    last_name: '',
+    phone_number: '',
     isActive: false,
 }
 
-export const addressReducer = (state: address, action: addressAction) => {
+export const addressReducer = (state: initAddress, action: addressAction) => {
     const { type, payload } = action
     switch (type) {
         case addressActionKind.ADDRESS:
@@ -61,17 +66,17 @@ export const addressReducer = (state: address, action: addressAction) => {
         case addressActionKind.FLAT:
             return {
                 ...state,
-                flatNum: payload?.num!
+                flat_no: payload?.num!
             };
         case addressActionKind.UNIT:
             return {
                 ...state,
-                unitNum: payload?.num!
+                unit_no: payload?.num!
             };
         case addressActionKind.ZIP_CODE:
             return {
                 ...state,
-                zipCode: payload?.str!
+                zip_code: payload?.str!
             };
         case addressActionKind.MY_SELF:
             return {
@@ -81,17 +86,17 @@ export const addressReducer = (state: address, action: addressAction) => {
         case addressActionKind.FIRST_NAME:
             return {
                 ...state,
-                firstName: payload?.str!
+                first_name: payload?.str!
             };
         case addressActionKind.LAST_NAME:
             return {
                 ...state,
-                lastName: payload?.str!
+                last_name: payload?.str!
             };
         case addressActionKind.PHONE_NUMBER:
             return {
                 ...state,
-                phoneNumber: payload?.str!
+                phone_number: payload?.str!
             };
         case addressActionKind.IS_ACTIVE:
             return {

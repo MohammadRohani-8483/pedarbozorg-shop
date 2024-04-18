@@ -3,7 +3,7 @@ import Loading from '@/app/loading'
 import SubmitOrderBox from '@/components/checkout-cart/cart/SubmitOrderBox'
 import OrderSteps from '@/components/checkout-cart/OrderSteps'
 import ShippingInfos from '@/components/checkout-cart/shipping/ShippingInfos'
-import { GET_ADDRESS, address } from '@/public/types/adress'
+import { GET_ADDRESS } from '@/public/types/adress'
 import { cart } from '@/public/types/productType'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
@@ -17,8 +17,8 @@ import { submitCouponResponse } from '@/public/types/orders'
 
 const ShippingPage = () => {
     const shipmentMethod = "CO"
-    const { cartItems, id,successRedux } = useSelector((state: { cart: cart }) => state.cart)
-    const { userToken } = useSelector((state: { auth: authState }) => state.auth)
+    const { cartItems, id, successRedux } = useSelector((state: { cart: cart }) => state.cart)
+    const { userToken, isLogedIn } = useSelector((state: { auth: authState }) => state.auth)
     const [start, setStart] = useState(false)
     const { replace } = useRouter()
     const [totalFinalPrice, setTotalFinalPrice] = useState(0)
@@ -27,20 +27,19 @@ const ShippingPage = () => {
     const [submitCoupon, setsubmitCoupon] = useState<submitCouponResponse>()
 
     useEffect(() => {
+        !isLogedIn && replace('/checkout-cart')
         document.title = 'پدربزرگ - اطلاعات ارسال'
-        const getAddresses = async () => {
-            const { data } = await axios('/api/transaction-api/address/',
-                {
-                    headers: {
-                        Authorization: `JWT ${userToken.access}`
-                    }
+        axios('/api/transaction-api/address/',
+            {
+                headers: {
+                    Authorization: `JWT ${userToken.access}`
                 }
-            )
-            setAddresses(data.results)
-            data.results.length > 0 &&
+            }
+        )
+            .then(({ data }) => {
+                setAddresses(data.results)
                 setStart(true)
-        }
-        getAddresses()
+            })
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
