@@ -39,6 +39,7 @@ export type cart = {
     yourProfitPercent?: number
     totalFinallPrice?: number
     totalSellPrice?: number
+    successRedux: boolean
 }
 
 export type vipProducts = {

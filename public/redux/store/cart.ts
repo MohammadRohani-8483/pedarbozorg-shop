@@ -2,7 +2,7 @@ import { makeCartItem, getCartFromServer, deleteCart, makeCartFromLocalStorage }
 import { cart, cartItem } from '@/public/types/productType';
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState: cart = { cartItems: [] }
+const initialState: cart = { cartItems: [], successRedux: false }
 
 const slice = createSlice({
     name: 'cart',
@@ -37,6 +37,7 @@ const slice = createSlice({
         getCartFromLocalStorage: (state) => {
             const localItems: cartItem[] = typeof window !== 'undefined' && (localStorage?.getItem("shoping_cart") ? JSON.parse(localStorage?.getItem("shoping_cart")!) : [])
             state.cartItems = localItems
+            state.successRedux = true
         },
         setCartToLocalStorage: (state) => localStorage.setItem('shoping_cart', JSON.stringify(state.cartItems))
     },
@@ -52,6 +53,7 @@ const slice = createSlice({
                 state.totalSellPrice = action.payload.results[0].total_sell_price
                 state.yourProfitPercent = action.payload.results[0].your_profit_percent
                 state.yourProfitAmount = action.payload.results[0].your_profit_amount
+                state.successRedux = true
             }
         })
         builder.addCase(deleteCart.fulfilled, () => {

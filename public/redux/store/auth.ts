@@ -1,5 +1,5 @@
 import { logoutUser, patchMe } from './../actions/authActions';
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { getMeThunk, loginUser } from "../actions/authActions";
 import { userInfo } from '@/public/types/auth';
 
@@ -33,15 +33,10 @@ const authSlice = createSlice({
             if (action.payload.accessToken) {
                 state.userToken.access = action.payload.accessToken.value
                 state.userToken.refresh = action.payload.refreshToken.value
-                state.isLogedIn = true
+                // state.isLogedIn = true
                 state.error = null
             }
         },
-        getMe: (state, action) => {
-            if (action.payload.code !== "token_not_valid") {
-                state.userInfo = action.payload[0]
-            }
-        }
     },
     extraReducers: builder => {
         builder.addCase(loginUser.fulfilled, (state, action) => {
@@ -65,20 +60,18 @@ const authSlice = createSlice({
         })
         builder.addCase(getMeThunk.fulfilled, (state, action) => {
             if (action.payload.code !== "token_not_valid") {
-                state.userInfo = action.payload[0]
                 state.isLogedIn = true
+                state.userInfo = action.payload[0]
             } else {
                 state.isLogedIn = false
-                state.userInfo = {}
             }
             console.log('me fulfilled')
         })
-        builder.addCase(logoutUser.fulfilled, (state, action) => {
+        builder.addCase(logoutUser.fulfilled, () => {
             console.log('logout fulfilled')
-            console.log(action)
             return initialState
         })
-        builder.addCase(logoutUser.rejected, (state, action) => {
+        builder.addCase(logoutUser.rejected, (action) => {
             console.log('logout rejected')
             console.log(action)
         })
@@ -89,5 +82,5 @@ const authSlice = createSlice({
     }
 })
 export default authSlice.reducer
-export const { getTokenFromCookie, getMe } =
+export const { getTokenFromCookie } =
     authSlice.actions;

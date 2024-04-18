@@ -32,7 +32,7 @@ const PayPage = () => {
   const [start, setStart] = useState(false)
 
   useEffect(() => {
-    document.title = 'پدربزرگ - اطلاعات ارسال'
+    document.title = 'پدربزرگ - اطلاعات پرداخت'
     axios('/api/transaction-api/address/',
       {
         headers: {
@@ -58,7 +58,7 @@ const PayPage = () => {
     const couponInfo = coupon ? {
       address: activeAddress?.id,
       shipment_method: shipmentMethod,
-      coupon: coupon || ""
+      coupon
     }
       :
       {
@@ -86,13 +86,13 @@ const PayPage = () => {
         })
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [coupon])
+  }, [coupon, activeAddress])
 
   const paymentFunc = async () => {
     const couponInfo = coupon ? {
       address: activeAddress?.id,
       shipment_method: shipmentMethod,
-      coupon: coupon ,
+      coupon: coupon,
       payment_method: "ON"
     }
       :
@@ -108,7 +108,7 @@ const PayPage = () => {
           Authorization: `JWT ${userToken.access}`
         }
       })
-      replace(data.url)
+    replace(data.url)
   }
 
   return (
@@ -127,7 +127,7 @@ const PayPage = () => {
         height={192}
         className='top-12 right-0 absolute hidden md:block z-[-1]'
       />
-      {start ?
+      {submitCoupon ?
         <>
           <main className='w-[90%] mx-auto max-w-[1136px] flex flex-col justify-center items-center gap-8 py-20 md:py-[117px]'>
             <OrderSteps page='PAY' />

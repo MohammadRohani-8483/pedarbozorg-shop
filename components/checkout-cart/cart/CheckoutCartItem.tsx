@@ -54,7 +54,9 @@ const CheckoutCartItem = ({ image, link, price, priceWithOffer, name, count, pro
     }
 
     const handleDeleteFromCart = () => {
-        if (cart.length === 1) setIsDeleting(true); else {
+        if (cart.length === 1) {
+            setIsDeleting(true)
+        } else {
             if (auth.isLogedIn) {
                 dispatch(deleteCartItem({ cartItemID: productIdForDelete!, token: auth.userToken.access! }))
                 dispatch(removeFromCart(product))

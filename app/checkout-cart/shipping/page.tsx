@@ -17,37 +17,44 @@ import { submitCouponResponse } from '@/public/types/orders'
 
 const ShippingPage = () => {
     const shipmentMethod = "CO"
-    const cart = useSelector((state: { cart: cart }) => state.cart)
+    const { cartItems, id,successRedux } = useSelector((state: { cart: cart }) => state.cart)
     const { userToken } = useSelector((state: { auth: authState }) => state.auth)
-
+    const [start, setStart] = useState(false)
+    const { replace } = useRouter()
     const [totalFinalPrice, setTotalFinalPrice] = useState(0)
     const [totalSellPrice, setTotalSellPrice] = useState(0)
     const [addresses, setAddresses] = useState<GET_ADDRESS[]>([])
     const [submitCoupon, setsubmitCoupon] = useState<submitCouponResponse>()
 
     useEffect(() => {
-        axios('/api/transaction-api/address/',
-            {
-                headers: {
-                    Authorization: `JWT ${userToken.access}`
+        document.title = 'پدربزرگ - اطلاعات ارسال'
+        const getAddresses = async () => {
+            const { data } = await axios('/api/transaction-api/address/',
+                {
+                    headers: {
+                        Authorization: `JWT ${userToken.access}`
+                    }
                 }
-            }
-        )
-            .then(res => {
-                setAddresses(res.data.results)
-            })
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+            )
+            setAddresses(data.results)
+            data.results.length > 0 &&
+                setStart(true)
+        }
+        getAddresses()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     useEffect(() => {
-        setTotalFinalPrice(cart.cartItems.reduce((previous, current) => previous + current?.variant.shatoot_info.final_price * current?.quantity!, 0))
-        setTotalSellPrice(cart.cartItems.reduce((previous, current) => previous + current?.variant.shatoot_info.sell_price * current?.quantity!, 0))
-    }, [cart])
+        setTotalFinalPrice(cartItems.reduce((previous, current) => previous + current?.variant.shatoot_info.final_price * current?.quantity!, 0))
+        setTotalSellPrice(cartItems.reduce((previous, current) => previous + current?.variant.shatoot_info.sell_price * current?.quantity!, 0))
+        cartItems.length < 1 && replace('/checkout-cart')
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [cartItems])
 
     useEffect(() => {
         const activeAddressID = addresses.find(address => address.is_active)?.id
         activeAddressID &&
-            axios.post(`/api/transaction-api/cart/${cart?.id}/submit_coupon/`,
+            axios.post(`/api/transaction-api/cart/${id}/submit_coupon/`,
                 {
                     address: activeAddressID,
                     shipment_method: shipmentMethod
@@ -59,25 +66,10 @@ const ShippingPage = () => {
                 })
                 .then(res => {
                     setsubmitCoupon(res.data)
-                    console.log(submitCoupon);
+                    setStart(true)
                 })
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [addresses])
-
-    const { replace } = useRouter()
-
-    const [start, setStart] = useState(false)
-    useEffect(() => {
-        setStart(true)
-        cart.cartItems.length < 1 && replace('/checkout-cart')
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [cart])
-
-    const TITLE = 'پدربزرگ - اطلاعات ارسال'
-
-    useEffect(() => {
-        document.title = TITLE
-    }, [TITLE])
+    }, [addresses])
 
     return (
         <>
@@ -108,7 +100,7 @@ const ShippingPage = () => {
                                 </Link>
                             </div>
                             <SubmitOrderBox
-                                countProduct={cart?.cartItems.length}
+                                countProduct={cartItems.length}
                                 finalPrice={totalFinalPrice}
                                 sellPrice={totalSellPrice}
                                 discountProducts={totalSellPrice - totalFinalPrice}

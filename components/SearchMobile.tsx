@@ -27,7 +27,6 @@ const SearchMobile: React.FC<searchProps> = ({ setOpenSearchBar }) => {
 
     const api = '/api/store-api/products-public/'
     const [products, setProducts] = useState([])
-    const [productsCount, setProductsCount] = useState(0)
 
     const debouncedSearch = useDebounce(inputValue)
 
@@ -36,9 +35,8 @@ const SearchMobile: React.FC<searchProps> = ({ setOpenSearchBar }) => {
             axios.get(`${api}${inputValue.length > 0 ? `?search=${debouncedSearch}` : ""}`)
                 .then(res => {
                     setProducts(res.data.results)
-                    setProductsCount(res.data.count)
                 })
-    }, [debouncedSearch]);
+    }, [debouncedSearch, inputValue.length]);
 
     const handleCloseSearch = () => {
         setIsOpen(false)

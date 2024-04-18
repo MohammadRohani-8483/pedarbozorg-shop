@@ -18,9 +18,7 @@ import 'swiper/css/pagination';
 import { FreeMode, Scrollbar } from 'swiper/modules';
 
 import OrdersCart from 'components/checkout-cart/OrdersCart'
-import Alert from '@/components/Alert'
 import axios from 'axios'
-import SelectAddress from '@/components/SelectAddress'
 import Icon from '@/components/Icon'
 import Input from '@/components/Input'
 import { submitCouponResponse } from '@/public/types/orders'
@@ -68,7 +66,8 @@ const PayInfos = ({ address, coupon, setCoupon, submitCoupon, pendingCoupon }: p
         }
     }, [address])
 
-    const handleAddCoupon = () => {
+    const handleAddCoupon = (e?: any) => {
+        e.preventDefault()
         if (inputValue) {
             setCoupon(inputValue)
         }
@@ -109,7 +108,7 @@ const PayInfos = ({ address, coupon, setCoupon, submitCoupon, pendingCoupon }: p
                     وارد کردن کد تخفیف
                 </h2>
                 <div className='flex flex-col justify-start items-start w-full gap-2'>
-                    <div className="w-full flex justify-center items-center gap-4">
+                    <form onSubmit={handleAddCoupon} className="w-full flex justify-center items-center gap-4">
                         <Input name='coupon'
                             placeholder='کد تخفیف'
                             value={coupon || inputValue}
@@ -138,7 +137,7 @@ const PayInfos = ({ address, coupon, setCoupon, submitCoupon, pendingCoupon }: p
                                     اعمال
                                 </button>
                         }
-                    </div>
+                    </form>
                     {submitCoupon?.discount_code_amount && submitCoupon?.discount_code_amount > 0 &&
                         <div className='leading-[180%] text-xs'>
                             <h4 className='text-secondry-base'>

@@ -8,7 +8,7 @@ import { IoIosClose } from "react-icons/io";
 import { useDispatch, useSelector } from 'react-redux';
 import OTPInputGroup from './OTP';
 import { useTimer } from 'public/hooks/useTimer'
-import { authState, getMe } from '@/public/redux/store/auth';
+import { authState } from '@/public/redux/store/auth';
 import { sendSMS } from './EnterPhoneNumberForm';
 import { getCartFromServer, makeCartFromLocalStorage } from '@/public/redux/actions/cartActions';
 

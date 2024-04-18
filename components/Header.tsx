@@ -8,7 +8,7 @@ import SearchMobile from './SearchMobile';
 import MenuMobile from './MenuMobile';
 import { motion } from 'framer-motion';
 import ShopingCard from './ShopingCard';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { cart } from '@/public/types/productType';
 import { authState } from '@/public/redux/store/auth';
 import ProfileMenu from './ProfileMenu';
@@ -32,7 +32,6 @@ const Header: React.FC = () => {
     const [isFormOpen, setIsFormOpen] = useState(false)
     const [searchValue, setSearchValue] = useState("")
     const [focus, setFocus] = useState(false)
-    const [start, setStart] = useState(false)
 
     const [isProfileVisible, setIsProfileVisible] = useState(false)
     const [isProfileHover, setIsProfileHover] = useState(false)
@@ -40,9 +39,7 @@ const Header: React.FC = () => {
 
     const { replace } = useRouter()
 
-    const [cartLength, setCartLength] = useState(0)
-
-    const cart = useSelector((state: { cart: cart }) => state.cart.cartItems)
+    const { cartItems, successRedux } = useSelector((state: { cart: cart }) => state.cart)
     const { userInfo, isLogedIn } = useSelector((state: { auth: authState }) => state.auth)
 
     const handleScroll = () => {
@@ -54,12 +51,7 @@ const Header: React.FC = () => {
     }
 
     useEffect(() => {
-        setCartLength(cart?.length!)
-    }, [cart])
-
-    useEffect(() => {
         window.addEventListener('scroll', handleScroll);
-        setStart(true)
     }, []);
 
     useEffect(() => {
@@ -146,7 +138,7 @@ const Header: React.FC = () => {
                     </motion.div>
                 </div>
                 <div className="flex gap-4 items-center h-20 w-auto">
-                    {start ?
+                    {successRedux ?
                         isLogedIn ?
                             <>
                                 <motion.div className='py-3'
@@ -181,7 +173,8 @@ const Header: React.FC = () => {
                                         messageToast='با موفقیت از حساب خود خارج شدید'
                                         setIsAlertOpen={setIsLogOut}
                                         textBtn='خروج از حساب'
-                                        title='خروج از حساب کاربری' redBtn
+                                        title='خروج از حساب کاربری'
+                                        redBtn
                                     >
                                         <p className='text-neutral-800 w-full text-right'>
                                             برای سفارش و مشاهده سبد خرید بایستی وارد حساب خود باشید
@@ -228,7 +221,7 @@ const Header: React.FC = () => {
                         <SkeletonLoginBtn />
                     }
                     {isFormOpen && <SignUpSignIn setIsFormOpen={setIsFormOpen} />}
-                    {start ?
+                    {successRedux ?
                         <motion.div className='py-3'
                             onHoverStart={() => {
                                 setIsVisible(true)
@@ -246,9 +239,9 @@ const Header: React.FC = () => {
                                             alt="shoping cart"
                                             className='w-[22px] h-[22px] w-full'
                                         />
-                                        {cartLength !== 0 &&
+                                        {cartItems.length !== 0 &&
                                             <div className="absolute px-1.5 py-0 rounded-md bg-red-500 text-white text-xs flex justify-center items-center top-0.5 right-0.5">
-                                                {cartLength}
+                                                {cartItems.length}
                                             </div>
                                         }
                                     </button>
@@ -375,9 +368,9 @@ const Header: React.FC = () => {
                             height={22}
                             alt="shoping cart"
                         />
-                        {cartLength !== 0 &&
+                        {cartItems.length !== 0 &&
                             <div className="absolute px-1.5 py-0 rounded-md bg-red-500 text-white text-xs flex justify-center items-center top-0.5 right-0.5">
-                                {cart?.length}
+                                {cartItems?.length}
                             </div>
                         }
                     </Link>

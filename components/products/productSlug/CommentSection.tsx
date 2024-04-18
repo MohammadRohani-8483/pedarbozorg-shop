@@ -25,7 +25,8 @@ export type comment = {
 }
 
 const CommentSection = ({ itemsInfo, commentsID }: any) => {
-    const [commentsCount, setCommentsCount] = useState(0)
+    const [commentsCount, setCommentsCount] = useState(1)
+    const [page, setPage] = useState(0)
     const [comments, setComments] = useState<comment[]>([])
     const api = '/api/store-api/products-public/'
 
@@ -66,7 +67,7 @@ const CommentSection = ({ itemsInfo, commentsID }: any) => {
                                 </React.Fragment>
                             ))
                         }
-                        {Math.ceil(commentsCount / 5) > 1 && < PaginationButtons pageCount={Math.ceil((commentsCount - 5) / 10) + 1} />}
+                        {Math.ceil(commentsCount / 5) > 1 && < PaginationButtons pageCount={Math.ceil((commentsCount - 5) / 10) + 1} activePage={page} setCurrentPage={setPage} />}
                     </div>
                 </>
                 :
