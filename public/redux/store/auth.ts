@@ -12,6 +12,7 @@ export type authState = {
     },
     isLogedIn: boolean,
     error: string | null
+    success: boolean
 }
 
 const initialState: authState = {
@@ -22,7 +23,8 @@ const initialState: authState = {
         refresh: null
     },
     isLogedIn: false,
-    error: null
+    error: null,
+    success: false
 }
 
 const authSlice = createSlice({
@@ -37,6 +39,9 @@ const authSlice = createSlice({
                 state.error = null
             }
         },
+        successRedux: (state) => {
+            state.success = true
+        }
     },
     extraReducers: builder => {
         builder.addCase(loginUser.fulfilled, (state, action) => {
@@ -62,8 +67,6 @@ const authSlice = createSlice({
             if (action.payload.code !== "token_not_valid") {
                 state.isLogedIn = true
                 state.userInfo = action.payload[0]
-            } else {
-                state.isLogedIn = false
             }
             console.log('me fulfilled')
         })
@@ -82,5 +85,5 @@ const authSlice = createSlice({
     }
 })
 export default authSlice.reducer
-export const { getTokenFromCookie } =
+export const { getTokenFromCookie, successRedux } =
     authSlice.actions;

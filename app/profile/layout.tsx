@@ -3,19 +3,21 @@ import Account from '@/components/profile/Account'
 import Info from '@/components/profile/Info'
 import { authState } from '@/public/redux/store/auth'
 import { useRouter } from 'next/navigation'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import Loading from './loading'
 
 const LayoutProfile = ({ children }: any) => {
-    const { isLogedIn, userInfo } = useSelector((state: { auth: authState }) => state.auth)
+    const { isLogedIn, userInfo, success } = useSelector((state: { auth: authState }) => state.auth)
     const { replace } = useRouter()
 
     useEffect(() => {
-        !isLogedIn &&
-            replace('/')
+        success && !isLogedIn && 
+        replace('/')
+        // console.log('success', success);
+        // console.log('isLogedIn', isLogedIn);
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isLogedIn])
+    }, [isLogedIn, success])
 
     return (
         <>

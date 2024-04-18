@@ -2,7 +2,7 @@
 import { getMeThunk } from '@/public/redux/actions/authActions'
 import { getCartFromServer } from '@/public/redux/actions/cartActions'
 import { AppDispatch } from '@/public/redux/store'
-import { getTokenFromCookie } from '@/public/redux/store/auth'
+import { getTokenFromCookie, successRedux } from '@/public/redux/store/auth'
 import { getCartFromLocalStorage } from '@/public/redux/store/cart'
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
@@ -11,14 +11,18 @@ import { AppProgressBar as ProgressBar } from 'next-nprogress-bar';
 const ClientProvider = ({ children, token }: any) => {
     const dispatch = useDispatch<AppDispatch>()
     useEffect(() => {
-        if (token.accessToken) {
-            dispatch(getTokenFromCookie(token))
-            dispatch(getMeThunk(token.accessToken.value))
-            dispatch(getCartFromServer(token.accessToken.value))
-        } else {
-            dispatch(getCartFromLocalStorage())
+        const fillRedux = async () => {
+            if (token.accessToken) {
+                dispatch(getTokenFromCookie(token))
+                await dispatch(getMeThunk(token.accessToken.value))
+                await dispatch(getCartFromServer(token.accessToken.value))
+            } else {
+                dispatch(getCartFromLocalStorage())
+            }
+            dispatch(successRedux())
         }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        fillRedux()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (
