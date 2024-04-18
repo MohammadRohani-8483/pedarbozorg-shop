@@ -4,7 +4,6 @@ import Link from '@/node_modules/next/link';
 import Image from '@/node_modules/next/image';
 import { FiCameraOff } from "@/node_modules/react-icons/fi/index";
 import { FaStar } from "@/node_modules/react-icons/fa/index";
-import tooman from "@/public/Image/tooman.svg";
 import formatNumber from '@/public/Functions/formatNumber';
 import { motion } from 'framer-motion';
 import { useDispatch, useSelector } from 'react-redux';
@@ -188,7 +187,7 @@ const ProductCard = ({ price, link, image, name, priceWithOffer, score, product 
                                     </p>
                                     {priceWithOffer !== 0 &&
                                         <Image
-                                            src={tooman}
+                                            src='/Image/tooman.svg'
                                             alt='تومان'
                                             width={23}
                                             height={16}
