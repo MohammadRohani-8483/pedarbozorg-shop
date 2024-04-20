@@ -2,6 +2,9 @@ const API_URL = process.env.API;
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  compiler: {
+    styledComponents: true,
+  },
   reactStrictMode: false,
   eslint: {
     ignoreDuringBuilds: true,

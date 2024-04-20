@@ -3,9 +3,6 @@ import Image from 'next/image'
 import React, { useState } from 'react'
 import Select from 'components/contact-us/Select'
 import UploadFiles from 'components/contact-us/UploadFiles'
-import { useForm, SubmitHandler, FieldValues } from "react-hook-form"
-import * as yup from "yup"
-import { yupResolver } from "@hookform/resolvers/yup";
 import Input from "@/components/Input"
 
 export default function SendMessageToPedarbozorg() {
@@ -76,7 +73,7 @@ export default function SendMessageToPedarbozorg() {
                 </div>
                 <div className='relative w-full focus:border-secondry-base border border-gray-400 hover:border-gray-700 rounded-lg p-1 flex justify-center items-center h-40'>
                     <textarea
-                        className='peer/message w-full h-10 p-2 outline-none  text-black resize-none h-full '
+                        className='peer/message w-full p-2 outline-none  text-black resize-none h-full '
                         id='scroll'
                         placeholder=''
                     />

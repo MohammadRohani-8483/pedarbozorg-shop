@@ -6,7 +6,7 @@ import Icon from '../Icon'
 type props = {
     options: string[]
     activeOption?: string
-    setActiveOption: (option: string) => void
+    setActiveOption: React.Dispatch<React.SetStateAction<string | undefined>>
     defaultValue: string
     disabled?: boolean
 }
@@ -39,7 +39,7 @@ export default function Select({ options, activeOption, setActiveOption, default
         <div ref={dropdownRef} className='relative flex flex-col w-full justify-center items-center'>
             <div
                 onClick={toggling}
-                className={`flex justify-between items-center pl-2 pr-3 py-2.5 w-full h-10 bg-white border border-gray-400 rounded-lg text-black ${disabled ? "cursor-not-allowed" : "hover:border-gray-700 cursor-pointer"} ${activeOption ? "text-black" : "text-gray-400"}`}
+                className={`flex justify-between items-center pl-2 pr-3 py-2.5 w-full h-10 bg-white border border-gray-400 rounded-lg ${disabled ? "cursor-not-allowed" : "hover:border-gray-700 cursor-pointer"} ${activeOption ? "text-black" : "text-gray-400"}`}
             >
                 {activeOption || defaultValue}
                 {isOpen ?
@@ -49,7 +49,7 @@ export default function Select({ options, activeOption, setActiveOption, default
                 }
             </div>
             {isOpen &&
-                <div className='absolute top-11 left-0 right-0 bg-white w-full rounded-lg border border-gray-300 flex flex-col items-start justify-center overflow-auto z-10 max-h-[180px]' id='scroll'>
+                <div className='absolute top-11 left-0 right-0 bg-white w-full rounded-lg border border-gray-300 flex flex-col items-start justify-center z-10 max-h-[180px]' >
                     <div className='w-full overflow-auto ltr' id='scroll'>
                         {options.map((option, i) => (
                             <React.Fragment key={i}>

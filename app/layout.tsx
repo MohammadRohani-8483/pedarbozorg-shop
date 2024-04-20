@@ -6,6 +6,7 @@ import ScrollToTop from "@/components/ScrollToTop";
 import FooterParent from "@/components/FooterParent";
 import ClientProvider from "@/components/ClientProvider";
 import { cookies } from "next/headers";
+import StyledComponentRegistry from "@/lib/registry";
 
 export const metadata: Metadata = {
   title: "پدربزرگ",
@@ -31,7 +32,9 @@ export default async function RootLayout({
           <ClientProvider token={{ accessToken, refreshToken }} >
             <Header />
             <ScrollToTop />
-            {children}
+            <StyledComponentRegistry>
+              {children}
+            </StyledComponentRegistry>
             <FooterParent />
           </ClientProvider>
         </StoreProvider>
