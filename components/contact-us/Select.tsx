@@ -1,12 +1,10 @@
-'use client'
-import Image from 'next/image'
 import React, { useEffect, useRef, useState } from 'react'
 import Icon from '../Icon'
 
 type props = {
     options: string[]
     activeOption?: string
-    setActiveOption: React.Dispatch<React.SetStateAction<string | undefined>>
+    setActiveOption: React.Dispatch<React.SetStateAction<string>>
     defaultValue: string
     disabled?: boolean
 }

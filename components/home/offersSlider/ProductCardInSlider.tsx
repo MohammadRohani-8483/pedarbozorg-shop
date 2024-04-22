@@ -3,7 +3,6 @@ import { useState } from 'react';
 import Link from '@/node_modules/next/link';
 import Image from '@/node_modules/next/image';
 import { FaStar } from "@/node_modules/react-icons/fa/index";
-import tooman from "@/public/Image/tooman.svg";
 import formatNumber from '@/public/Functions/formatNumber';
 import { motion } from 'framer-motion';
 import { useDispatch, useSelector } from 'react-redux';
@@ -207,7 +206,7 @@ const ProductCardInSlider = ({ price, link, image, name, priceWithOffer, score, 
                                 </p>
                                 {priceWithOffer !== 0 &&
                                     <Image
-                                        src={tooman}
+                                        src='/Image/tooman.svg'
                                         alt='تومان'
                                         width={23}
                                         height={16}

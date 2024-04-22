@@ -19,7 +19,7 @@ const AddressForm = ({ setAddress }: props) => {
   const [cityID, setCityID] = useState<number>()
   const [city, setCity] = useState('')
 
-  const [strict, setStrict] = useState<string | null>()
+  const [strict, setStrict] = useState<string>('')
   const [strictID, setStrictID] = useState<number>()
 
   const [state, dispatch] = useReducer<(state: initAddress, dispatch: addressAction) => initAddress>(addressReducer, initialForm)
@@ -51,7 +51,7 @@ const AddressForm = ({ setAddress }: props) => {
   }, [provinceID])
   useEffect(() => {
     cityID ? dispatch({ type: addressActionKind.CITY, payload: { num: cityID } }) : dispatch({ type: addressActionKind.CITY, payload: { num: null } })
-    cityID !== 1508 && setStrict(null)
+    cityID !== 1508 && setStrict('')
   }, [cityID])
   useEffect(() => {
     strictID ? dispatch({ type: addressActionKind.STRICT, payload: { num: strictID } }) : dispatch({ type: addressActionKind.STRICT, payload: { num: null } })
@@ -139,7 +139,7 @@ const AddressForm = ({ setAddress }: props) => {
                 <label htmlFor="province">{cityID === 1508 ? "منطقه*:" : "منطقه:"}</label>
                 <Select
                   options={allStrict.map(province => province.name)}
-                  activeOption={strict!}
+                  activeOption={strict}
                   setActiveOption={setStrict}
                   defaultValue={'منطقه'}
                   disabled={cityID !== 1508}

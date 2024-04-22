@@ -19,7 +19,7 @@ export default function SendMessageToPedarbozorg() {
         'مدیریت',
         'سایر',
     ]
-    const [activeOption, setActiveOption] = useState<string>()
+    const [activeOption, setActiveOption] = useState<string>('')
 
     const defaultValue = "انتخاب موضوع"
 
