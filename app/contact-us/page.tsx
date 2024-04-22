@@ -28,7 +28,7 @@ export default function page() {
                     <SendMessageToPedarbozorg />
                     <Communications />
                 </div>
-                <Map />
+                {/* <Map /> */}
             </main>
         </>
     )
