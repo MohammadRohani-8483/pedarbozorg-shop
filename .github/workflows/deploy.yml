@@ -19,7 +19,7 @@ jobs:
       - name: pull changes
         run: git pull;
       - name: Install dependencies
-        run: bun install --legacy-peer-deps;
+        run: bun install;
       - name: Build with Next.js
         run: bun run build;
       - name: restart pm2
