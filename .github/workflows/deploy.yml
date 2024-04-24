@@ -19,9 +19,9 @@ jobs:
       - name: pull changes
         run: git pull;
       - name: Install dependencies
-        run: npm install --legacy-peer-deps;
+        run: bun install --legacy-peer-deps;
       - name: Build with Next.js
-        run: npm run build;
+        run: bun run build;
       - name: restart pm2
         run: pm2 restart pedarbozorg-shop;
       - name: save pm2
