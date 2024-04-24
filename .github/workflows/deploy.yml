@@ -1,0 +1,28 @@
+# Sample workflow for building and deploying a Next.js site to GitHub Pages
+#
+# To get started with Next.js see: https://nextjs.org/docs/getting-started
+#
+name: Deploy Next.js site to Pages
+
+on:
+  # Runs on pushes targeting the default branch
+  push:
+    branches: [ "main" ]
+
+jobs:
+  # Build job
+  build:
+    runs-on: self-hosted
+    steps:
+      - name: modify location
+        run: cd /var/www/pedarbozorg-shop/;
+      - name: pull changes
+        run: git pull;
+      - name: Install dependencies
+        run: npm install --legacy-peer-deps;
+      - name: Build with Next.js
+        run: npm run build;
+      - name: restart pm2
+        run: pm2 restart pedarbozorg-shop;
+      - name: save pm2
+        run: pm2 save;
