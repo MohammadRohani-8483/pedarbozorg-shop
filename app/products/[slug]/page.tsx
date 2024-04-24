@@ -10,7 +10,7 @@ import Link from 'next/link'
 import React from 'react'
 
 const fetchFunc = async (slug?: string) => {
-    const res = fetch(`${process.env.DOMAIN}/store-api/products-public/${slug}`, {
+    const res = fetch(`https://pedarbozorg-api.codintofuture.ir/store-api/products-public/${slug}`, {
         method: "GET"
     })
     return (await res).json()

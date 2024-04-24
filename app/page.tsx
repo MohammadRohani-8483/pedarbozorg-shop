@@ -22,8 +22,7 @@ const fetchFunc = async (api: string) => {
 }
 
 export default async function Home() {
-  console.log(process.env.DOMAIN);
-  const data = await fetchFunc(`${process.env.DOMAIN}/core-api/site/landing/`);
+  const data = await fetchFunc(`https://pedarbozorg-api.codintofuture.ir/core-api/site/landing/`);
 
   return (
     <main className="lg:pt-48 pt-16">
