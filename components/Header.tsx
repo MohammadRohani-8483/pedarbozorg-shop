@@ -156,7 +156,7 @@ const Header: React.FC = () => {
                                                 width={24}
                                                 height={24}
                                             />
-                                            <p className='text-base text-secondry-base max-w-[98px] overflow-hidden text-ellipsis'>
+                                            <p className='text-base text-secondry-base max-w-[98px] overflow-hidden text-ellipsis whitespace-nowrap'>
                                                 {userInfo.first_name || userInfo.last_name ?
                                                     `${userInfo?.first_name || ""} ${userInfo?.last_name || ""}`
                                                     :
