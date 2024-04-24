@@ -22,7 +22,7 @@ const fetchFunc = async (api: string) => {
 }
 
 export default async function Home() {
-  console.log(process.env.DOMAIN)
+  console.log(process.env.DOMAIN);
   const data = await fetchFunc(`${process.env.DOMAIN}/core-api/site/landing/`);
 
   return (
