@@ -1,4 +1,4 @@
-const API_URL = process.env.API;
+const API_URL = process.env.DOMAIN;
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {

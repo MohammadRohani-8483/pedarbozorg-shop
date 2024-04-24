@@ -22,8 +22,8 @@ const fetchFunc = async (api: string) => {
 }
 
 export default async function Home() {
-  console.log(process.env.API)
-  const data = await fetchFunc(`${process.env.API}/core-api/site/landing/`);
+  console.log(process.env.DOMAIN)
+  const data = await fetchFunc(`${process.env.DOMAIN}/core-api/site/landing/`);
 
   return (
     <main className="lg:pt-48 pt-16">
