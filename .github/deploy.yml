@@ -15,14 +15,14 @@ jobs:
     runs-on: self-hosted
     steps:
       - name: modify location
-        run: cd /var/www/pedarbozorg-shop;
+        run: cd /var/www/pedarbozorg-shop/;
       - name: pull changes
         run: git pull;
       - name: Install dependencies
-        run: bun install;
+        run: npm install --legacy-peer-deps;
       - name: Build with Next.js
-        run: bun run build;
+        run: npm run build;
       - name: restart pm2
-        run:  USE_BACKEND_PRODUCTION=true pm2 restart pedarbozorg-shop --update-env;
+        run: pm2 restart pedarbozorg-shop;
       - name: save pm2
         run: pm2 save;
