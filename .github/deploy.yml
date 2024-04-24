@@ -21,7 +21,7 @@ jobs:
       - name: Install dependencies
         run: bun install;
       - name: Build with Next.js
-        run: USE_BACKEND_PRODUCTION=true bun run build;
+        run: bun run build;
       - name: restart pm2
         run:  USE_BACKEND_PRODUCTION=true pm2 restart pedarbozorg-shop --update-env;
       - name: save pm2
