@@ -30,9 +30,9 @@ const ShopingCardItem = ({ image, link, price, priceWithOffer, name, count, prod
     const productInCart = cart.find((item) => item.variant.id === product.variant.id)
     const productIdForDelete: number | null = productInCart?.id || null
 
-    const handleIncrementQuantity = () => {
+    const handleIncrementQuantity = async () => {
         if (auth.isLogedIn) {
-            dispatch(makeCartItem({ quantity: 1, token: auth.userToken.access!, variant: product.variant.id }))
+            await dispatch(makeCartItem({ quantity: 1, token: auth.userToken.access!, variant: product.variant.id }))
             dispatch(incrementQuantity(product))
         } else {
             dispatch(incrementQuantity(product))
@@ -40,9 +40,9 @@ const ShopingCardItem = ({ image, link, price, priceWithOffer, name, count, prod
         }
     }
 
-    const handleDecrementQuantity = () => {
+    const handleDecrementQuantity = async () => {
         if (auth.isLogedIn) {
-            dispatch(makeCartItem({ quantity: -1, token: auth.userToken.access!, variant: product.variant.id }))
+            await dispatch(makeCartItem({ quantity: -1, token: auth.userToken.access!, variant: product.variant.id }))
             dispatch(decrementQuantity(product))
         } else {
             dispatch(decrementQuantity(product))
@@ -50,9 +50,9 @@ const ShopingCardItem = ({ image, link, price, priceWithOffer, name, count, prod
         }
     }
 
-    const handleDeleteFromCart = () => {
+    const handleDeleteFromCart = async () => {
         if (auth.isLogedIn) {
-            dispatch(deleteCartItem({ cartItemID: productIdForDelete!, token: auth.userToken.access! }))
+            await dispatch(deleteCartItem({ cartItemID: productIdForDelete!, token: auth.userToken.access! }))
             dispatch(removeFromCart(product))
         } else {
             dispatch(removeFromCart(product))

@@ -18,7 +18,7 @@ import { submitCouponResponse } from '@/public/types/orders'
 const ShippingPage = () => {
     const shipmentMethod = "CO"
     const { cartItems, id, successRedux } = useSelector((state: { cart: cart }) => state.cart)
-    const { userToken, isLogedIn } = useSelector((state: { auth: authState }) => state.auth)
+    const { userToken, isLogedIn, success } = useSelector((state: { auth: authState }) => state.auth)
     const [start, setStart] = useState(false)
     const { replace } = useRouter()
     const [totalFinalPrice, setTotalFinalPrice] = useState(0)
@@ -27,7 +27,7 @@ const ShippingPage = () => {
     const [submitCoupon, setsubmitCoupon] = useState<submitCouponResponse>()
 
     useEffect(() => {
-        !isLogedIn && replace('/checkout-cart')
+        (success && !isLogedIn) && replace('/checkout-cart')
         document.title = 'پدربزرگ - اطلاعات ارسال'
         axios('/api/transaction-api/address/',
             {
@@ -41,18 +41,18 @@ const ShippingPage = () => {
                 setStart(true)
             })
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    }, [success])
 
     useEffect(() => {
         setTotalFinalPrice(cartItems.reduce((previous, current) => previous + current?.variant.shatoot_info.final_price * current?.quantity!, 0))
         setTotalSellPrice(cartItems.reduce((previous, current) => previous + current?.variant.shatoot_info.sell_price * current?.quantity!, 0))
-        cartItems.length < 1 && replace('/checkout-cart')
+        success && cartItems.length < 1 && replace('/checkout-cart')
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [cartItems])
+    }, [success])
 
     useEffect(() => {
         const activeAddressID = addresses.find(address => address.is_active)?.id
-        activeAddressID &&
+        id && activeAddressID &&
             axios.post(`/api/transaction-api/cart/${id}/submit_coupon/`,
                 {
                     address: activeAddressID,

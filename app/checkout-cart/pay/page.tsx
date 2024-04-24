@@ -20,17 +20,17 @@ const PayPage = () => {
   const shipmentMethod = "CO"
   const { replace } = useRouter()
   const cart = useAppSelector((state: { cart: cart }) => state.cart)
-  const { userToken, isLogedIn } = useAppSelector((state: { auth: authState }) => state.auth)
+  const { userToken, isLogedIn, success } = useAppSelector((state: { auth: authState }) => state.auth)
 
   const [totalFinalPrice, setTotalFinalPrice] = useState(0)
   const [totalSellPrice, setTotalSellPrice] = useState(0)
   const [activeAddress, setActiveAddress] = useState<GET_ADDRESS>()
-  const [submitCoupon, setsubmitCoupon] = useState<submitCouponResponse>()
+  const [submitCoupon, setSubmitCoupon] = useState<submitCouponResponse>()
   const [coupon, setCoupon] = useState<string | null>(null)
   const [pendingCoupon, setPendingCoupon] = useState(false)
 
   useEffect(() => {
-    !isLogedIn && replace('/checkout-cart')
+    (success && !isLogedIn) && replace('/checkout-cart')
     document.title = 'پدربزرگ - اطلاعات پرداخت'
     axios('/api/transaction-api/address/',
       {
@@ -42,8 +42,7 @@ const PayPage = () => {
       .then(res => {
         setActiveAddress(res.data.results.find((address: GET_ADDRESS) => address.is_active))
       })
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [success])
 
   useEffect(() => {
     setTotalFinalPrice(cart.cartItems.reduce((previous, current) => previous + current?.variant.shatoot_info.final_price * current?.quantity!, 0))
@@ -51,13 +50,14 @@ const PayPage = () => {
   }, [cart])
 
   useEffect(() => {
-    cart.cartItems.length < 1 && replace('/checkout-cart')
+    success && cart.cartItems.length < 1 && replace('/checkout-cart')
 
-    const couponInfo = coupon ? {
-      address: activeAddress?.id,
-      shipment_method: shipmentMethod,
-      coupon
-    }
+    const couponInfo = coupon ?
+      {
+        address: activeAddress?.id,
+        shipment_method: shipmentMethod,
+        coupon
+      }
       :
       {
         address: activeAddress?.id,
@@ -66,7 +66,7 @@ const PayPage = () => {
 
     if (activeAddress?.id) {
       setPendingCoupon(true)
-      axios.post(`/api/transaction-api/cart/${cart?.id}/submit_coupon/`,
+      cart?.id && axios.post(`/api/transaction-api/cart/${cart?.id}/submit_coupon/`,
         couponInfo,
         {
           headers: {
@@ -74,7 +74,7 @@ const PayPage = () => {
           }
         })
         .then(({ data }) => {
-          setsubmitCoupon(data)
+          setSubmitCoupon(data)
           setPendingCoupon(false)
         })
         .catch(({ response }) => {
@@ -83,16 +83,16 @@ const PayPage = () => {
           setPendingCoupon(false)
         })
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [coupon, activeAddress])
+  }, [coupon, activeAddress, cart])
 
   const paymentFunc = async () => {
-    const couponInfo = coupon ? {
-      address: activeAddress?.id,
-      shipment_method: shipmentMethod,
-      coupon: coupon,
-      payment_method: "ON"
-    }
+    const couponInfo = coupon ?
+      {
+        address: activeAddress?.id,
+        shipment_method: shipmentMethod,
+        coupon: coupon,
+        payment_method: "ON"
+      }
       :
       {
         address: activeAddress?.id,
@@ -104,9 +104,9 @@ const PayPage = () => {
       {
         headers: {
           Authorization: `JWT ${userToken.access}`
-        }
+        },
       })
-    replace(data.url)
+    location.href = data.url
   }
 
   return (
