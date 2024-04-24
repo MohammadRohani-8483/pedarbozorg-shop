@@ -78,9 +78,6 @@ const page = () => {
                     <ContactUsFormStyled />
                     <CommunicationsStyled />
                 </PageContainer>
-                {/* {window &&
-                    <Map />
-                } */}
             </Container>
         </>
     )
