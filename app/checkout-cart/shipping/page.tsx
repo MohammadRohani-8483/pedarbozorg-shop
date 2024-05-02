@@ -40,14 +40,12 @@ const ShippingPage = () => {
                 setAddresses(data.results)
                 setStart(true)
             })
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [success])
 
     useEffect(() => {
         setTotalFinalPrice(cartItems.reduce((previous, current) => previous + current?.variant.shatoot_info.final_price * current?.quantity!, 0))
         setTotalSellPrice(cartItems.reduce((previous, current) => previous + current?.variant.shatoot_info.sell_price * current?.quantity!, 0))
         success && cartItems.length < 1 && replace('/checkout-cart')
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [success])
 
     useEffect(() => {
@@ -67,7 +65,6 @@ const ShippingPage = () => {
                     setsubmitCoupon(res.data)
                     setStart(true)
                 })
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [addresses])
 
     return (

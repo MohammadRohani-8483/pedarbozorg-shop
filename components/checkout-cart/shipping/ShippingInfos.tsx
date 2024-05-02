@@ -43,7 +43,23 @@ const ShippingInfos = ({ addresses, setAddresses }: props) => {
     setStart(true)
   }, [])
 
-  const activeAddress = addresses.find(address => address.is_active)
+  let activeAddress = addresses.find(address => address.is_active)
+  useEffect(() => {
+    if (!activeAddress) {
+      axios.patch(`/api/transaction-api/address/${addresses[0].id}`,
+        { is_active: true },
+        {
+          headers: {
+            Authorization: `JWT ${userToken.access}`
+          }
+        })
+        .then(({ data }) => {
+          console.log(data)
+        })
+        .catch(err => console.log(err))
+    }
+  }, [])
+
 
   useEffect(() => {
     if (!(newAddress?.address?.length! > 0 && newAddress?.province && newAddress.city && newAddress.flat_no && newAddress.zip_code!.length > 0 && newAddress.first_name!.length > 0 && newAddress.last_name!.length > 0 && newAddress.phone_number!.length > 0) || (newAddress?.city === 1508 && !newAddress.strict)) {
