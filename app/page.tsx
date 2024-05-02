@@ -22,7 +22,7 @@ const fetchFunc = async (api: string) => {
 }
 
 export default async function Home() {
-  const data = await fetchFunc(`https://pedarbozorg-api.codintofuture.ir/core-api/site/landing/`);
+  const data = await fetchFunc(`https://api.pedarbozorg.shop/core-api/site/landing/`);
 
   return (
     <main className="lg:pt-48 pt-16">

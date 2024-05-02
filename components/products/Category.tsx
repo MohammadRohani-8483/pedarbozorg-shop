@@ -21,7 +21,6 @@ const Category = ({ categoryState,  categories }: props) => {
 
     const handleCheckboxChange = (value: string) => {
         const isSelected = categoryState.includes(value);
-        console.log(isSelected)
         isSelected
             ? params.delete('categories',value)
             : params.append('categories', value)

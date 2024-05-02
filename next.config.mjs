@@ -8,13 +8,13 @@ const nextConfig = {
     ignoreDuringBuilds: true,
   },
   images: {
-    domains: ["pedarbozorg-api.codintofuture.ir"],
+    domains: ["api.pedarbozorg.shop"],
   },
   trailingSlash: true,
   rewrites: async () => [
     {
       source: "/api/:path*",
-      destination: `https://pedarbozorg-api.codintofuture.ir/:path*/`,
+      destination: `https://api.pedarbozorg.shop/:path*/`,
       basePath: false,
     },
   ],

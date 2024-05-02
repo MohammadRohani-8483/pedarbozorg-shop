@@ -37,15 +37,11 @@ const Products = () => {
   }, [maxPrice])
 
   useEffect(() => {
-    console.log('one');
     currPage !== 1 && setCurrPage(1)
     setChange(prev => !prev)
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeOrder, searchParams, isAvailable, minPriceInput, maxPriceInput])
 
   useEffect(() => {
-    console.log('two')
-    console.log(currPage);
     const categoryParams = searchParams.getAll('categories').map((category) => `categories=${category}`).join('&');
 
     axios.get(`/api/store-api/products-public/?${`page=${currPage}`}${searchValue ? `&search=${debouncedSearch}` : ''}&ordering=${activeOrder}${isAvailable ? '&available=true' : ''}${minPriceInput > 0 ? `&min_price=${minPriceInput}` : ""}${maxPriceInput < maxPrice ? `&max_price=${maxPriceInput}` : ''}${categoryParams.length > 0 ? `&${categoryParams}` : ''}`)

@@ -14,9 +14,6 @@ const LayoutProfile = ({ children }: any) => {
     useEffect(() => {
         success && !isLogedIn && 
         replace('/')
-        // console.log('success', success);
-        // console.log('isLogedIn', isLogedIn);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isLogedIn, success])
 
     return (

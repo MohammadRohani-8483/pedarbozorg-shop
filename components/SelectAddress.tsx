@@ -68,7 +68,6 @@ const AddressItem = ({ selectAddress, setAddresses }: itemProps) => {
                     setCity(res.data.name);
                 })
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const changeIsActive = () => {

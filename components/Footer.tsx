@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 'use client'
 import React, { useState } from 'react'
 import { menuItems } from '@/public/data/menuItems'
@@ -49,7 +48,7 @@ const Footer: React.FC = () => {
                                 companyProfile.map((item) => (
                                     <div
                                         key={item.id}
-                                        className='flex w-full justify-between items-center text-secondry-base rounded-2xl bg-secondry-tint-7 lg:w-[385px] h-auto py-2 px-4'
+                                        className={`flex w-full  ${item.title === "ایمیل" ? "justify-end sm:justify-between" : "justify-between"} items-center text-secondry-base rounded-2xl bg-secondry-tint-7 lg:w-[385px] h-auto py-2 px-4`}
                                     >
                                         <div className={`whitespace-nowrap text-xs ${item.title === "ایمیل" ? "hidden sm:block" : ""}`}>{item.title}</div>
                                         <div className='ltr flex items-center justify-center gap-2 lg:gap-4'>

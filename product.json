@@ -15,11 +15,11 @@
             },
             "product": {
               "id": 12595,
-              "featured_image": "https://pedarbozorg-api.codintofuture.ir/media/products/advieh-poloyee-spices-large-1.jpg",
+              "featured_image": "https://api.pedarbozorg.shop/media/products/advieh-poloyee-spices-large-1.jpg",
               "name": "ادویه پلویی",
               "slug": "ادویه-پلویی"
             },
-            "image": "https://pedarbozorg-api.codintofuture.ir/media/variants/22-2.jpg",
+            "image": "https://api.pedarbozorg.shop/media/variants/22-2.jpg",
             "name": "ادویه پلویی کوچک 100 گرمی"
           },
           "quantity": 1,
@@ -49,11 +49,11 @@
             },
             "product": {
               "id": 12595,
-              "featured_image": "https://pedarbozorg-api.codintofuture.ir/media/products/advieh-poloyee-spices-large-1.jpg",
+              "featured_image": "https://api.pedarbozorg.shop/media/products/advieh-poloyee-spices-large-1.jpg",
               "name": "ادویه پلویی",
               "slug": "ادویه-پلویی"
             },
-            "image": "https://pedarbozorg-api.codintofuture.ir/media/variants/22-2.jpg",
+            "image": "https://api.pedarbozorg.shop/media/variants/22-2.jpg",
             "name": "ادویه پلویی کوچک 100 گرمی"
           },
           "quantity": 1,
@@ -81,6 +81,6 @@
       "final_price": 45600.0
     },
     "is_available": true,
-    "image": "https://pedarbozorg-api.codintofuture.ir/media/products/sesame-oil-1000-cc-1.jpg"
+    "image": "https://api.pedarbozorg.shop/media/products/sesame-oil-1000-cc-1.jpg"
   }
 }

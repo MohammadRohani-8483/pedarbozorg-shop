@@ -1,5 +1,6 @@
 'use client'
 import Loading from '@/app/loading'
+import Alert from '@/components/Alert'
 import OrderSteps from '@/components/checkout-cart/OrderSteps'
 import SubmitOrderBox from '@/components/checkout-cart/cart/SubmitOrderBox'
 import PayInfos from '@/components/checkout-cart/pay/PayInfos'
@@ -28,6 +29,7 @@ const PayPage = () => {
   const [submitCoupon, setSubmitCoupon] = useState<submitCouponResponse>()
   const [coupon, setCoupon] = useState<string | null>(null)
   const [pendingCoupon, setPendingCoupon] = useState(false)
+  const [isGoToWeb, setIsGoToWeb] = useState(false)
 
   useEffect(() => {
     (success && !isLogedIn) && replace('/checkout-cart')
@@ -86,27 +88,31 @@ const PayPage = () => {
   }, [coupon, activeAddress, cart])
 
   const paymentFunc = async () => {
-    const couponInfo = coupon ?
-      {
-        address: activeAddress?.id,
-        shipment_method: shipmentMethod,
-        coupon: coupon,
-        payment_method: "ON"
-      }
-      :
-      {
-        address: activeAddress?.id,
-        shipment_method: shipmentMethod,
-        payment_method: "ON"
-      }
-    const { data } = await axios.post(`/api/transaction-api/cart/${cart?.id}/submit_order/`,
-      couponInfo,
-      {
-        headers: {
-          Authorization: `JWT ${userToken.access}`
-        },
-      })
-    location.href = data.url
+    if (false) {
+      const couponInfo = coupon ?
+        {
+          address: activeAddress?.id,
+          shipment_method: shipmentMethod,
+          coupon: coupon,
+          payment_method: "ON"
+        }
+        :
+        {
+          address: activeAddress?.id,
+          shipment_method: shipmentMethod,
+          payment_method: "ON"
+        }
+      const { data } = await axios.post(`/api/transaction-api/cart/${cart?.id}/submit_order/`,
+        couponInfo,
+        {
+          headers: {
+            Authorization: `JWT ${userToken.access}`
+          },
+        })
+      location.href = data.url
+    } else {
+      setIsGoToWeb(true)
+    }
   }
 
   return (
@@ -157,6 +163,18 @@ const PayPage = () => {
                 shipmentPrice={submitCoupon?.shipment_cost}
                 paymentFunc={paymentFunc}
               />
+              {isGoToWeb &&
+                <Alert
+                  setIsAlertOpen={setIsGoToWeb}
+                  confirmFunc={() => location.href = "https://pedarbozorg.shop"}
+                  title='انتقال به سایت اصلی' textBtn='انتقال'
+                  messageToast='با موفقیت منتقل شدید'
+                >
+                  <p className='text-neutral-800 w-full text-right'>
+                    برای ثبت سفارش به سایت اصلی مراجعه کنید
+                  </p>
+                </Alert>
+              }
             </div>
           </main>
         </>
