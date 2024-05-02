@@ -14,11 +14,15 @@ import VideoCategory from "components/home/VideoCategory";
 import { WhyPedarBozorg } from "components/home/whyPedarbozorg/WhyPedarBozorg";
 
 const fetchFunc = async (api: string) => {
-  const res = fetch(api, {
-    method: "GET",
-    cache:'no-store'
-  })
-  return (await res).json()
+  try {
+    const res = await fetch(api, {
+      method: "GET",
+      cache: 'no-store'
+    })
+    return await res.json()
+  } catch (error) {
+    return { error }
+  }
 }
 
 export default async function Home() {
@@ -30,15 +34,15 @@ export default async function Home() {
       <SliderProduct />
       <GroupProducts />
       <SpecialProducts />
-      <OffersSlider products={data.most_discount_products} />
-      <SpecialProductsSlider products={data.vip_products} />
+      {data.most_discount_products && <OffersSlider products={data.most_discount_products} />}
+      {data.vip_products && <SpecialProductsSlider products={data.vip_products} />}
       <VideoCategory />
       <WhyPedarBozorg />
       <BannerHomePage />
       {/* <SpecialOffers /> */}
       {/* <PedarBozorgInLife /> */}
       {/* <CommentsSlider /> */}
-      <BestSellingProducts products={data.best_seller_products} />
+      {data.best_seller_products && <BestSellingProducts products={data.best_seller_products} />}
       <Cooperations />
     </main>
   );

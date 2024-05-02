@@ -16,13 +16,16 @@ const ClientProvider = ({ children, token }: any) => {
                 dispatch(getTokenFromCookie(token))
                 await dispatch(getMeThunk(token.accessToken.value))
                 await dispatch(getCartFromServer(token.accessToken.value))
-            } else {
+            } else if (!token.accessToken && token.refreshToken) {
+                console.log("not access")
+                console.log(token.accessToken)
+            }
+            else {
                 dispatch(getCartFromLocalStorage())
             }
             dispatch(successRedux())
         }
         fillRedux()
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (

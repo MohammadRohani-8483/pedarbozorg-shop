@@ -16,14 +16,39 @@ export const metadata: Metadata = {
   },
 };
 
+const fetchRefreshToken = async (refresh: string) => {
+  const config = {
+    method: "POST",
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ refresh })
+  }
+  try {
+    const data = fetch('https://api.pedarbozorg.shop/core-api/auth/refresh/', config)
+    return (await data).json()
+  } catch {
+    (err: any) => console.log(err);
+  }
+}
+
 export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   const cookiesStore = cookies()
-  const accessToken = cookiesStore.get("access") || null
+  let accessToken = cookiesStore.get("access") || null
   const refreshToken = cookiesStore.get("refresh") || null
+  if (!accessToken && refreshToken) {
+    const data = await fetchRefreshToken(refreshToken.value)
+    if (data?.access) {
+      accessToken = {
+        name: 'access',
+        value: data.access
+      }
+    }
+  }
 
   return (
     <html lang="fa" className='bg-background overflow-x-hidden'>

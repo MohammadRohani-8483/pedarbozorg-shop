@@ -148,7 +148,7 @@ const PayPage = () => {
                   className="flex justify-center items-center py-1.5 px-3 gap-2 text-secondry-base text-sm"
                 >
                   <GoArrowRight size={20} />
-                  بازگشت به سبد خرید
+                  بازگشت به اطلاعات ارسال
                 </Link>
               </div>
               <SubmitOrderBox
